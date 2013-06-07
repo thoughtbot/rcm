@@ -1,0 +1,39 @@
+.TH mkrc "1" "June 2013" "rcm"
+
+.SH NAME
+mkrc \- bless files into a dotfile
+
+.SH SYNOPSIS
+.B mkrc [-v] [-q] [-t \fItag\fR] \fIfiles...\fR
+
+.SH DESCRIPTION
+
+This program adds files to your dotfiles directory then installs it
+back into your home directory. It can install files under a tag.
+
+It supports these options:
+
+.TP
+\fB-v\fR
+increase verbosity. This can be repeated for extra verbosity.
+
+.TP
+\fB-q\fR
+decrease verbosity
+
+.TP
+\fB-t\fR \fITAG\fR
+install dotfiles according to tag
+
+.SH AUTHOR
+
+Written by Mike Burns.
+
+.SH FILES
+
+.I ~/.dotfiles
+.I ~/.rcrc
+
+.SH SEE ALSO
+
+\&\fIrcrc\fR\|(5), \fIrcup\fR\|(1)
