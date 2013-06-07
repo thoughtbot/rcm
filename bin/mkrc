@@ -4,7 +4,7 @@ set -x
 
 DOTFILES=$HOME/.dotfiles
 MV=mv
-INSTALL=./install
+INSTALL=rcup
 ROOT_DIR=$HOME
 
 
@@ -55,6 +55,7 @@ files=$@
 
 for file in $files; do
   dotless=`echo $file | sed -e "s|$ROOT_DIR/||" | sed -e 's/^\.//'`
+  mkdir 
   $MV $file `destination $dotless $tag`
   install_dotfile $dotless $tag
 done
