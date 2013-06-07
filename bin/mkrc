@@ -1,0 +1,60 @@
+#!/bin/sh
+
+set -x
+
+DOTFILES=$HOME/.dotfiles
+MV=mv
+INSTALL=./install
+ROOT_DIR=$HOME
+
+
+destination() {
+  if [ $# -eq 1 ]; then
+    echo $DOTFILES/$1
+  else
+    echo $DOTFILES/tag-$2/$1
+  fi
+}
+
+install_dotfile() {
+  prior_wd=`pwd`
+  cd $DOTFILES
+  $INSTALL -t ${2:--} $1
+  cd $prior_wd
+}
+
+if [ $# -eq 0 ]; then
+  echo "Usage: dotfiles-add [-t tag] filename ..."
+  exit 1
+fi
+
+tag=
+verbosity=0
+while getopts vqt: opt; do
+  case "$opt" in
+    t) tag=$OPTARG;;
+    v) verbosity=$(($verbosity + 1));;
+    q) verbosity=$(($verbosity - 1));;
+  esac
+done
+shift $(($OPTIND-1))
+
+if [ $verbosity -ge 2 ]; then
+  MV="$MV -v"
+  INSTALL="$INSTALL -vv"
+elif [ $verbosity -eq 1 ]; then
+  MV="$MV -v"
+  INSTALL="$INSTALL -v"
+elif [ $verbosity -eq 0 ]; then
+  MV="$MV -v"
+else
+  INSTALL="$INSTALL -q"
+fi
+
+files=$@
+
+for file in $files; do
+  dotless=`echo $file | sed -e "s|$ROOT_DIR/||" | sed -e 's/^\.//'`
+  $MV $file `destination $dotless $tag`
+  install_dotfile $dotless $tag
+done

@@ -1,0 +1,210 @@
+#!/bin/sh
+
+#set -x
+
+REPLACE_ALL=0
+
+DEST_DIR=$HOME
+DOTFILES_DIR=$HOME/.dotfiles
+HOSTNAME=`hostname -s`
+HOST_FILES=$DOTFILES_DIR/host-$HOSTNAME
+DEBUG=:
+PRINT=echo
+VERBOSE=:
+PROMPT=echo
+DIRSTACK=":$DOTFILES_DIR"
+MKDIR=mkdir
+LN=ln
+RM=rm
+
+pushdir() {
+  DIRSTACK="$DIRSTACK:$PWD/$1"
+  $DEBUG "cd'ing to $1 from `pwd` with stack $DIRSTACK"
+  cd $1
+}
+
+popdir() {
+  current=`echo $DIRSTACK | sed -e 's/.*://g'`
+  prior=`echo $DIRSTACK | sed -e "s|:$current$||" | sed -e 's/.*://g'`
+  DIRSTACK=`echo $DIRSTACK | sed -e 's/:[^:]*$//'`
+  $DEBUG "cd'ing to $prior from `pwd` with stack $DIRSTACK"
+  cd $prior
+}
+
+build_path() {
+  local dest=$1
+  local file=$2
+  local dotted=$3
+
+  if [ $dotted -eq 1 ]; then
+    echo $dest/$file
+  else
+    echo $dest/.$file
+  fi
+}
+
+link_dir() {
+  local dir=$1
+  local dest_dir=$2
+  local dotfiles_dir=$3
+  local dotted=$4
+  local dest_path=`build_path $dest_dir $dir $dotted`
+
+  $VERBOSE "recurring on $dest_path"
+  $MKDIR -p $dest_path
+  pushdir $dir
+  for f in *; do
+    $DEBUG "handling the file $f"
+    handle_file $f $dest_path $3/$1 1
+  done
+  popdir
+}
+
+link_file() {
+  local file=$1
+  local dest_dir=$2
+  local dotfiles_dir=$3
+  local dotted=$4
+  local dest_file=`build_path $dest_dir $file $dotted`
+
+  $PRINT "linking $dest_file"
+  if [ -h $dest_file ]; then
+    rm -f $dest_file
+  fi
+  $LN -s $dotfiles_dir/$file $dest_file
+}
+
+replace_file() {
+  local file=$1
+  local dest_dir=$2
+  local dotfiles_dir=$3
+  local dotted=$4
+  local dest_file=`build_path $dest_dir $file $dotted`
+  
+  $RM -rf $dest_file
+  link_file $file $dest_dir $dotfiles_dir $dotted
+}
+
+is_identical() {
+  diff -q -s $1 $2 > /dev/null
+}
+
+handle_file() {
+  local file=$1
+  local dest_dir=$2
+  local dotfiles_dir=$3
+  local dotted=$4
+
+  $DEBUG handle_file $1 $2 $3 $4
+
+  if [ ! -e $file ]; then
+    $VERBOSE "skipping non-existent file $file"
+  elif [ -d $file ]; then
+    link_dir $file $dest_dir $dotfiles_dir $dotted
+  else
+    dest_file=`build_path $dest_dir $file $dotted`
+    if [ -e "$dest_file" ]; then
+      if is_identical $file $dest_file; then
+        $VERBOSE "identical $dest_file"
+      elif [ $REPLACE_ALL -eq 1 ]; then
+        replace_file $file $dest_dir $dotfiles_dir $dotted
+      else
+        $PROMPT "overwrite ${dest_file}? [ynaq]"
+        read overwrite
+        case $overwrite in
+          a)
+            REPLACE_ALL=1
+            replace_file $file $dest_dir $dotfiles_dir $dotted
+            ;;
+          y) replace_file $file $dest_dir $dotfiles_dir $dotted
+            ;;
+          q) exit 1
+            ;;
+          *) $VERBOSE "skipping $dest_file"
+            ;;
+        esac
+      fi
+    else
+      link_file $file $dest_dir $dotfiles_dir $dotted
+    fi
+  fi
+}
+
+metafile() {
+  [ x$2 = 'xhost-' -o x$3 = 'xtag-' -o x$1 = "xRakefile" -o x$1 = "xinstall" ]
+}
+
+handle_command_line() {
+  arg_tags=""
+  verbosity=0
+  while getopts qvt: opt; do
+    case "$opt" in
+      t) arg_tags="$arg_tags $OPTARG";;
+      v) verbosity=$(($verbosity + 1));;
+      q) verbosity=$(($verbosity - 1));;
+    esac
+  done
+  shift $(($OPTIND-1))
+
+  if [ $verbosity -ge 2 ]; then
+    DEBUG=echo
+    VERBOSE=echo
+    PRINT=echo
+  elif [ $verbosity -eq 1 ]; then
+    DEBUG=:
+    VERBOSE=echo
+    PRINT=echo
+  elif [ $verbosity -eq 0 ]; then
+    DEBUG=:
+    VERBOSE=:
+    PRINT=echo
+  else
+    DEBUG=:
+    VERBOSE=:
+    PRINT=:
+  fi
+
+  if [ "x$arg_tags" != "x" ]; then
+    TAGS=$arg_tags
+  fi
+
+  FILES=$@
+}
+
+if [ -e $HOME/.rcrc ]; then
+  . $HOME/.rcrc
+fi
+
+handle_command_line $*
+
+cd $DOTFILES_DIR
+
+for file in ${FILES:-*}; do
+  host_portion=`echo $file | sed -e 's/host-.*/host-/'`
+  tag_portion=`echo $file | sed -e 's/tag-.*/tag-/'`
+  if ! metafile $file $host_portion $tag_portion; then
+    handle_file $file $DEST_DIR $DOTFILES_DIR 0
+  fi
+done
+
+cd $DOTFILES_DIR
+
+if [ -d $HOST_FILES ]; then
+  pushdir `basename $HOST_FILES`
+  for file in ${FILES:-*}; do
+    handle_file $file $DEST_DIR $HOST_FILES 0
+  done
+  popdir
+fi
+
+cd $DOTFILES_DIR
+
+for tag in $TAGS; do
+  if [ -d tag-$tag ]; then
+    pushdir `basename tag-$tag`
+    for file in ${FILES:-*}; do
+      handle_file $file $DEST_DIR $DOTFILES_DIR/tag-$tag 0
+    done
+    popdir
+  fi
+done
