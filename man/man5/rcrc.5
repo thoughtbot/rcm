@@ -1,0 +1,34 @@
+.TH rcrc "5" "June 2013" "rcm"
+
+.SH NAME
+rcrc \- configuration for rcm
+
+
+.SH DESCRIPTION
+
+The rcm dotfile manager can be configured using a \fI.rcrc\fR file in
+your home directory. The format is POSIX shell, and it is sourced in by
+the \fBrcup\fR and \fBmkrc\fR programs.
+
+It supports these variables:
+
+.TP
+\fBTAGS\fR
+the default tags used by \fBrcup\fR\|.
+
+.SH EXAMPLES
+
+\&\fBTAGS="freebsd development email git laptop gmail notmuch"\fR
+
+.SH AUTHOR
+
+Written by Mike Burns.
+
+.SH FILES
+
+.I ~/.rcrc
+.I ~/.dotfiles
+
+.SH SEE ALSO
+
+\&\fImkrc\fR\|(5), \fIrcup\fR\|(1)
