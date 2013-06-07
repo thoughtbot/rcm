@@ -9,10 +9,10 @@ ROOT_DIR=$HOME
 
 
 destination() {
-  if [ $# -eq 1 ]; then
-    echo $DOTFILES/$1
+  if [ $# -eq 0 ]; then
+    echo $DOTFILES
   else
-    echo $DOTFILES/tag-$2/$1
+    echo $DOTFILES/tag-$2
   fi
 }
 
@@ -55,7 +55,8 @@ files=$@
 
 for file in $files; do
   dotless=`echo $file | sed -e "s|$ROOT_DIR/||" | sed -e 's/^\.//'`
-  mkdir 
-  $MV $file `destination $dotless $tag`
+  dest=`destination $dotless $tag`
+  mkdir -p $dest
+  $MV $file $dest/$dotless
   install_dotfile $dotless $tag
 done
