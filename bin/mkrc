@@ -56,7 +56,7 @@ files=$@
 for file in $files; do
   dotless=`echo $file | sed -e "s|$ROOT_DIR/||" | sed -e 's/^\.//'`
   dest=`destination $dotless $tag`
-  mkdir -p $dest
+  mkdir -p $dest/`dirname $dotless`
   $MV $file $dest/$dotless
   install_dotfile $dotless $tag
 done
