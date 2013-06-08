@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -x
+# set -x
 
 DOTFILES=$HOME/.dotfiles
 MV=mv
