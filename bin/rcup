@@ -12,22 +12,22 @@ DEBUG=:
 PRINT=echo
 VERBOSE=:
 PROMPT=echo
-DIRSTACK=":$DOTFILES_DIR"
+DIR_STACK=":$DOTFILES_DIR"
 MKDIR=mkdir
 LN=ln
 RM=rm
 
 pushdir() {
-  DIRSTACK="$DIRSTACK:$PWD/$1"
-  $DEBUG "cd'ing to $1 from `pwd` with stack $DIRSTACK"
+  DIR_STACK="$DIR_STACK:$PWD/$1"
+  $DEBUG "cd'ing to $1 from `pwd` with stack $DIR_STACK"
   cd $1
 }
 
 popdir() {
-  current=`echo $DIRSTACK | sed -e 's/.*://g'`
-  prior=`echo $DIRSTACK | sed -e "s|:$current$||" | sed -e 's/.*://g'`
-  DIRSTACK=`echo $DIRSTACK | sed -e 's/:[^:]*$//'`
-  $DEBUG "cd'ing to $prior from `pwd` with stack $DIRSTACK"
+  current=`echo $DIR_STACK | sed -e 's/.*://g'`
+  prior=`echo $DIR_STACK | sed -e "s|:$current$||" | sed -e 's/.*://g'`
+  DIR_STACK=`echo $DIR_STACK | sed -e 's/:[^:]*$//'`
+  $DEBUG "cd'ing to $prior from `pwd` with stack $DIR_STACK"
   cd $prior
 }
 
