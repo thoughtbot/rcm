@@ -137,16 +137,21 @@ metafile() {
 handle_command_line() {
   arg_tags=""
   verbosity=0
-  while getopts qvt: opt; do
+  version=0
+  while getopts Vqvt: opt; do
     case "$opt" in
       t) arg_tags="$arg_tags $OPTARG";;
       v) verbosity=$(($verbosity + 1));;
       q) verbosity=$(($verbosity - 1));;
+      V) version=1
     esac
   done
   shift $(($OPTIND-1))
 
-  if [ $verbosity -ge 2 ]; then
+  if [ $version -eq 1 ]; then
+    version rcup
+    exit 0
+  elif [ $verbosity -ge 2 ]; then
     DEBUG=echo
     VERBOSE=echo
     PRINT=echo
@@ -175,6 +180,7 @@ if [ -e $HOME/.rcrc ]; then
   . $HOME/.rcrc
 fi
 
+. `dirname $0`/../libexec/rcm/rcm.sh
 handle_command_line $*
 
 cd $DOTFILES_DIR
