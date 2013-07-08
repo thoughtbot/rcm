@@ -5,14 +5,12 @@
 REPLACE_ALL=0
 
 DEST_DIR=$HOME
-DOTFILES_DIR=$HOME/.dotfiles
+DEFAULT_DOTFILES_DIR=$HOME/.dotfiles
 HOSTNAME=`hostname -s`
-HOST_FILES=$DOTFILES_DIR/host-$HOSTNAME
 DEBUG=:
 PRINT=echo
 VERBOSE=:
 PROMPT=echo
-DIR_STACK=":$DOTFILES_DIR"
 MKDIR=mkdir
 LN=ln
 RM=rm
@@ -138,11 +136,13 @@ handle_command_line() {
   arg_tags=""
   verbosity=0
   version=0
-  while getopts Vqvt: opt; do
+  dotfiles_dirs=
+  while getopts Vqvt:d: opt; do
     case "$opt" in
       t) arg_tags="$arg_tags $OPTARG";;
       v) verbosity=$(($verbosity + 1));;
       q) verbosity=$(($verbosity - 1));;
+      d) dotfiles_dirs="$dotfiles_dirs $OPTARG";;
       V) version=1
     esac
   done
@@ -173,6 +173,10 @@ handle_command_line() {
     TAGS=$arg_tags
   fi
 
+  if [ "x$dotfiles_dirs" != "x" ]; then
+    DOTFILES_DIRS=$dotfiles_dirs
+  fi
+
   FILES=$@
 }
 
@@ -183,34 +187,49 @@ fi
 . `dirname $0`/../libexec/rcm/rcm.sh
 handle_command_line $*
 
-cd $DOTFILES_DIR
-
-for file in ${FILES:-*}; do
-  host_portion=`echo $file | sed -e 's/host-.*/host-/'`
-  tag_portion=`echo $file | sed -e 's/tag-.*/tag-/'`
-  if ! metafile $file $host_portion $tag_portion; then
-    handle_file $file $DEST_DIR $DOTFILES_DIR 0
-  fi
-done
-
-cd $DOTFILES_DIR
-
-if [ -d $HOST_FILES ]; then
-  pushdir `basename $HOST_FILES`
-  for file in ${FILES:-*}; do
-    handle_file $file $DEST_DIR $HOST_FILES 0
-  done
-  popdir
+if [ "x$DOTFILES_DIRS" = "x" ]; then
+  DOTFILES_DIRS="$DOTFILES_DIRS $DEFAULT_DOTFILES_DIR"
 fi
 
-cd $DOTFILES_DIR
+for DOTFILES_DIR in $DOTFILES_DIRS; do
 
-for tag in $TAGS; do
-  if [ -d tag-$tag ]; then
-    pushdir `basename tag-$tag`
+  if [ ! -d $DOTFILES_DIR ]; then
+    $VERBOSE "skipping non-existent directory: $DOTFILES_DIR" 
+    continue
+  fi
+
+  cd $DOTFILES_DIR
+  DIR_STACK=":$DOTFILES_DIR"
+
+  for file in ${FILES:-*}; do
+    host_portion=`echo $file | sed -e 's/host-.*/host-/'`
+    tag_portion=`echo $file | sed -e 's/tag-.*/tag-/'`
+    if ! metafile $file $host_portion $tag_portion; then
+      handle_file $file $DEST_DIR $DOTFILES_DIR 0
+    fi
+  done
+
+  cd $DOTFILES_DIR
+
+  host_files=$DOTFILES_DIR/host-$HOSTNAME
+  if [ -d $host_files ]; then
+    pushdir `basename $host_files`
     for file in ${FILES:-*}; do
-      handle_file $file $DEST_DIR $DOTFILES_DIR/tag-$tag 0
+      handle_file $file $DEST_DIR $host_files 0
     done
     popdir
   fi
+
+  cd $DOTFILES_DIR
+
+  for tag in $TAGS; do
+    if [ -d tag-$tag ]; then
+      pushdir `basename tag-$tag`
+      for file in ${FILES:-*}; do
+        handle_file $file $DEST_DIR $DOTFILES_DIR/tag-$tag 0
+      done
+      popdir
+    fi
+  done
+
 done

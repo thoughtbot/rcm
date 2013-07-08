@@ -2,42 +2,52 @@
 
 # set -x
 
-DOTFILES=$HOME/.dotfiles
+DEFAULT_DOTFILES_DIR=$HOME/.dotfiles
 MV=mv
 INSTALL=rcup
 ROOT_DIR=$HOME
 
 
 destination() {
-  if [ $# -eq 0 ]; then
-    echo $DOTFILES
+  if [ $# -eq 2 ]; then
+    echo $1
   else
-    echo $DOTFILES/tag-$2
+    echo $1/tag-$3
   fi
 }
 
 install_dotfile() {
   prior_wd=`pwd`
-  cd $DOTFILES
-  $INSTALL -t ${2:--} $1
+  cd $1
+  $INSTALL -t ${3:--} $2
   cd $prior_wd
 }
+
+if [ -e $HOME/.rcrc ]; then
+  . $HOME/.rcrc
+fi
 
 . `dirname $0`/../libexec/rcm/rcm.sh
 
 if [ $# -eq 0 ]; then
-  echo "Usage: dotfiles-add [-t tag] filename ..."
+  echo "Usage: dotfiles-add [-d dir] [-t tag] [-v] [-q] filename ..."
   exit 1
 fi
+
+for DOTFILES_DIR in $DOTFILES_DIRS $DEFAULT_DOTFILES_DIR; do
+  break
+done
 
 tag=
 verbosity=0
 version=0
-while getopts Vvqt: opt; do
+
+while getopts Vvqt:d: opt; do
   case "$opt" in
     t) tag=$OPTARG;;
     v) verbosity=$(($verbosity + 1));;
     q) verbosity=$(($verbosity - 1));;
+    d) DOTFILES_DIR=$OPTARG;;
     V) version=1
   esac
 done
@@ -62,8 +72,8 @@ files=$@
 
 for file in $files; do
   dotless=`echo $file | sed -e "s|$ROOT_DIR/||" | sed -e 's/^\.//'`
-  dest=`destination $dotless $tag`
+  dest=`destination $DOTFILES_DIR $dotless $tag`
   mkdir -p $dest/`dirname $dotless`
   $MV $file $dest/$dotless
-  install_dotfile $dotless $tag
+  install_dotfile $DOTFILES_DIR $dotless $tag
 done

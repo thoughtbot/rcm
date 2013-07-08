@@ -4,13 +4,13 @@
 rcup \- update and install dotfiles
 
 .SH SYNOPSIS
-.B rcup [-v] [-q] [-t \fItag\fR] [\fIfiles...\fR]
+.B rcup [-v] [-q] [-t \fItag\fR] [-d \fIdir\fR] [\fIfiles...\fR]
 
 .SH DESCRIPTION
 
 This is a program to update and install personal dotfiles. These
 dotfiles are managed in a separate directory. Use \fBrcup\fR to install
-files from your dotfiles directory or from host- or tag-specific
+files from your dotfiles directories or from host- or tag-specific
 directories within.
 
 See \fBDIRECTORY LAYOUT\fR for details on the directory layout.
@@ -27,7 +27,11 @@ decrease verbosity
 
 .TP
 \fB-t\fR \fITAG\fR
-install dotfiles according to tag
+install dotfiles according to TAG
+
+.TP
+\fB-d\fR \fIDIR\fR
+install dotfiles from the DIR. This can be specified multiple times.
 
 .TP
 \fIfiles...\fR

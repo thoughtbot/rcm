@@ -4,12 +4,13 @@
 mkrc \- bless files into a dotfile
 
 .SH SYNOPSIS
-.B mkrc [-v] [-q] [-t \fItag\fR] \fIfiles...\fR
+.B mkrc [-v] [-q] [-t \fItag\fR] [-d \fIdir\fR] \fIfiles...\fR
 
 .SH DESCRIPTION
 
 This program adds files to your dotfiles directory then installs it
-back into your home directory. It can install files under a tag.
+back into your home directory. It can install files under a tag or
+different source directory.
 
 It supports these options:
 
@@ -24,6 +25,11 @@ decrease verbosity
 .TP
 \fB-t\fR \fITAG\fR
 install dotfiles according to tag
+
+.TP
+\fB-d\fR \fIDIR\fR
+install dotfiles under the specified directory. This can be specified
+multiple times.
 
 .SH AUTHOR
 

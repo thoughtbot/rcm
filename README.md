@@ -23,9 +23,10 @@ Programs
 --------
 
 * `rcup` is the main program. It is used to install and update dotfiles,
-  with support for tags and host-specific files.
+  with support for tags, host-specific files, and multiple source
+  directories.
 * `mkrc` is for introducing a dotfile into your dotfiles directory, with
-  support for tags.
+  support for tags and multiple source directories.
 
 Support
 -------
