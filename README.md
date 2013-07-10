@@ -6,7 +6,7 @@ This is a management suite for dotfiles.
 It assumes that you have a separate dotfiles directory, or are
 interested in creating one.
 
-The programs provided are `rcup` and `mkrc`.
+The programs provided are `rcup`, `mkrc`, and `lsrc`.
 
 Installation
 ------------
@@ -27,6 +27,8 @@ Programs
   directories.
 * `mkrc` is for introducing a dotfile into your dotfiles directory, with
   support for tags and multiple source directories.
+* `lsrc` shows you all your dotfiles and where they would be symlinked
+  to. It is used by `rcup` but is provided for your own use, too.
 
 Support
 -------

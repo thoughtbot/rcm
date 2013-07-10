@@ -5,131 +5,83 @@
 REPLACE_ALL=0
 
 DEST_DIR=$HOME
-DEFAULT_DOTFILES_DIR=$HOME/.dotfiles
-HOSTNAME=`hostname -s`
 DEBUG=:
 PRINT=echo
+PROMPT=echo_n
 VERBOSE=:
-PROMPT=echo
 MKDIR=mkdir
 LN=ln
 RM=rm
 
-pushdir() {
-  DIR_STACK="$DIR_STACK:$PWD/$1"
-  $DEBUG "cd'ing to $1 from `pwd` with stack $DIR_STACK"
-  cd $1
-}
-
-popdir() {
-  current=`echo $DIR_STACK | sed -e 's/.*://g'`
-  prior=`echo $DIR_STACK | sed -e "s|:$current$||" | sed -e 's/.*://g'`
-  DIR_STACK=`echo $DIR_STACK | sed -e 's/:[^:]*$//'`
-  $DEBUG "cd'ing to $prior from `pwd` with stack $DIR_STACK"
-  cd $prior
-}
-
-build_path() {
-  local dest=$1
-  local file=$2
-  local dotted=$3
-
-  if [ $dotted -eq 1 ]; then
-    echo $dest/$file
-  else
-    echo $dest/.$file
-  fi
-}
-
-link_dir() {
-  local dir=$1
-  local dest_dir=$2
-  local dotfiles_dir=$3
-  local dotted=$4
-  local dest_path=`build_path $dest_dir $dir $dotted`
-
-  $VERBOSE "recurring on $dest_path"
-  $MKDIR -p $dest_path
-  pushdir $dir
-  for f in *; do
-    $DEBUG "handling the file $f"
-    handle_file $f $dest_path $3/$1 1
-  done
-  popdir
+echo_n() {
+  printf "%s " "$*"
 }
 
 link_file() {
-  local file=$1
-  local dest_dir=$2
-  local dotfiles_dir=$3
-  local dotted=$4
-  local dest_file=`build_path $dest_dir $file $dotted`
+  local src=$1
+  local dest=$2
 
-  $PRINT "linking $dest_file"
-  if [ -h $dest_file ]; then
-    rm -f $dest_file
+  $PRINT "linking $dest"
+  if [ -h $dest ]; then
+    rm -f $dest
   fi
-  $LN -s $dotfiles_dir/$file $dest_file
+
+  $LN -s $src $dest
 }
 
 replace_file() {
-  local file=$1
-  local dest_dir=$2
-  local dotfiles_dir=$3
-  local dotted=$4
-  local dest_file=`build_path $dest_dir $file $dotted`
+  local src=$1
+  local dest=$2
+
+  $DEBUG replace_file $1 $2
   
-  $RM -rf $dest_file
-  link_file $file $dest_dir $dotfiles_dir $dotted
+  $RM -rf $dest
+  link_file $src $dest
+}
+
+is_nested() {
+  echo $1 | sed "s:$DEST_DIR/::" | grep -q /
+  return $?
 }
 
 is_identical() {
   diff -q -s $1 $2 > /dev/null
 }
 
-handle_file() {
-  local file=$1
-  local dest_dir=$2
-  local dotfiles_dir=$3
-  local dotted=$4
+handle_dir() {
+  local dest=$1
 
-  $DEBUG handle_file $1 $2 $3 $4
+  $DEBUG handle_dir $1
 
-  if [ ! -e $file ]; then
-    $VERBOSE "skipping non-existent file $file"
-  elif [ -d $file ]; then
-    link_dir $file $dest_dir $dotfiles_dir $dotted
-  else
-    dest_file=`build_path $dest_dir $file $dotted`
-    if [ -e "$dest_file" ]; then
-      if is_identical $file $dest_file; then
-        $VERBOSE "identical $dest_file"
-      elif [ $REPLACE_ALL -eq 1 ]; then
-        replace_file $file $dest_dir $dotfiles_dir $dotted
-      else
-        $PROMPT "overwrite ${dest_file}? [ynaq]"
-        read overwrite
-        case $overwrite in
-          a)
-            REPLACE_ALL=1
-            replace_file $file $dest_dir $dotfiles_dir $dotted
-            ;;
-          y) replace_file $file $dest_dir $dotfiles_dir $dotted
-            ;;
-          q) exit 1
-            ;;
-          *) $VERBOSE "skipping $dest_file"
-            ;;
-        esac
-      fi
-    else
-      link_file $file $dest_dir $dotfiles_dir $dotted
-    fi
-  fi
+  dirname $dest | xargs $MKDIR -p
 }
 
-metafile() {
-  [ x$2 = 'xhost-' -o x$3 = 'xtag-' -o x$1 = "xRakefile" -o x$1 = "xinstall" ]
+handle_file() {
+  local src=$1
+  local dest=$2
+
+  $DEBUG handle_file $1 $2
+
+  if [ -e "$dest" ]; then
+    if is_identical $src $dest; then
+      $VERBOSE "identical $dest"
+    elif [ $REPLACE_ALL -eq 1 ]; then
+      replace_file $src $dest
+    else
+      $PROMPT "overwrite ${dest}? [ynaq]"
+      read overwrite
+      case $overwrite in
+        a) REPLACE_ALL=1
+           replace_file $src $dest
+           ;;
+        y) replace_file $src $dest ;;
+        q) exit 1 ;;
+        *) $VERBOSE "skipping $dest" ;;
+      esac
+    fi
+  else
+    link_file $src $dest
+  fi
 }
 
 handle_command_line() {
@@ -137,12 +89,19 @@ handle_command_line() {
   verbosity=0
   version=0
   dotfiles_dirs=
+  LS_ARGS=
   while getopts Vqvt:d: opt; do
     case "$opt" in
-      t) arg_tags="$arg_tags $OPTARG";;
+      t)
+        arg_tags="$arg_tags $OPTARG"
+        LS_ARGS="$LS_ARGS -t $OPTARG"
+        ;;
       v) verbosity=$(($verbosity + 1));;
       q) verbosity=$(($verbosity - 1));;
-      d) dotfiles_dirs="$dotfiles_dirs $OPTARG";;
+      d)
+        dotfiles_dirs="$dotfiles_dirs $OPTARG"
+        LS_ARGS="$LS_ARGS -d $OPTARG"
+        ;;
       V) version=1
     esac
   done
@@ -178,6 +137,7 @@ handle_command_line() {
   fi
 
   FILES=$@
+  LS_ARGS="$LS_ARGS $FILES"
 }
 
 if [ -e $HOME/.rcrc ]; then
@@ -187,49 +147,13 @@ fi
 . `dirname $0`/../libexec/rcm/rcm.sh
 handle_command_line $*
 
-if [ "x$DOTFILES_DIRS" = "x" ]; then
-  DOTFILES_DIRS="$DOTFILES_DIRS $DEFAULT_DOTFILES_DIR"
-fi
+for dest_and_src in `lsrc $LS_ARGS`; do
+  dest=`echo $dest_and_src | sed 's/:.*//'`
+  src=`echo $dest_and_src | sed 's/.*://'`
 
-for DOTFILES_DIR in $DOTFILES_DIRS; do
-
-  if [ ! -d $DOTFILES_DIR ]; then
-    $VERBOSE "skipping non-existent directory: $DOTFILES_DIR" 
-    continue
+  if is_nested $dest; then
+    handle_dir $dest
   fi
 
-  cd $DOTFILES_DIR
-  DIR_STACK=":$DOTFILES_DIR"
-
-  for file in ${FILES:-*}; do
-    host_portion=`echo $file | sed -e 's/host-.*/host-/'`
-    tag_portion=`echo $file | sed -e 's/tag-.*/tag-/'`
-    if ! metafile $file $host_portion $tag_portion; then
-      handle_file $file $DEST_DIR $DOTFILES_DIR 0
-    fi
-  done
-
-  cd $DOTFILES_DIR
-
-  host_files=$DOTFILES_DIR/host-$HOSTNAME
-  if [ -d $host_files ]; then
-    pushdir `basename $host_files`
-    for file in ${FILES:-*}; do
-      handle_file $file $DEST_DIR $host_files 0
-    done
-    popdir
-  fi
-
-  cd $DOTFILES_DIR
-
-  for tag in $TAGS; do
-    if [ -d tag-$tag ]; then
-      pushdir `basename tag-$tag`
-      for file in ${FILES:-*}; do
-        handle_file $file $DEST_DIR $DOTFILES_DIR/tag-$tag 0
-      done
-      popdir
-    fi
-  done
-
+  handle_file $src $dest
 done
