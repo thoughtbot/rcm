@@ -80,7 +80,7 @@ handle_file() {
 }
 
 metafile() {
-  [ x$2 = 'xhost-' -o x$3 = 'xtag-' -o x$1 = "xRakefile" -o x$1 = "xinstall" ]
+  [ x$2 = 'xhost-' -o x$3 = 'xtag-' ]
 }
 
 handle_command_line() {
