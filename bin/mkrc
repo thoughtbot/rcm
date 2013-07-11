@@ -30,7 +30,7 @@ fi
 . `dirname $0`/../libexec/rcm/rcm.sh
 
 if [ $# -eq 0 ]; then
-  echo "Usage: dotfiles-add [-d dir] [-t tag] [-v] [-q] filename ..."
+  echo "Usage: mkrc [-d dir] [-t tag] [-v] [-q] filename ..."
   exit 1
 fi
 
