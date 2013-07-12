@@ -58,7 +58,11 @@ link_file() {
   local dotted=$4
   local dest_file=`build_path $dest_dir $file $dotted`
 
-  $PRINT $dest_file:$dotfiles_dir/$file
+  if echo $DEST_STACK | grep -vq ":$dest_file"; then
+    DEST_STACK="$DEST_STACK:$dest_file"
+
+    $PRINT $dest_file:$dotfiles_dir/$file
+  fi
 }
 
 handle_file() {
@@ -130,6 +134,8 @@ handle_command_line() {
 
   FILES=$@
 }
+
+DEST_STACK=
 
 if [ -e $HOME/.rcrc ]; then
   . $HOME/.rcrc
