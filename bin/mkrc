@@ -27,7 +27,7 @@ if [ -e $HOME/.rcrc ]; then
   . $HOME/.rcrc
 fi
 
-. `dirname $0`/../libexec/rcm/rcm.sh
+. `dirname $0`/../share/rcm/rcm.sh
 
 if [ $# -eq 0 ]; then
   echo "Usage: mkrc [-d dir] [-t tag] [-v] [-q] filename ..."

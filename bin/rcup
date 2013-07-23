@@ -144,7 +144,7 @@ if [ -e $HOME/.rcrc ]; then
   . $HOME/.rcrc
 fi
 
-. `dirname $0`/../libexec/rcm/rcm.sh
+. `dirname $0`/../share/rcm/rcm.sh
 handle_command_line $*
 
 for dest_and_src in `lsrc $LS_ARGS`; do

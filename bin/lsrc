@@ -141,7 +141,7 @@ if [ -e $HOME/.rcrc ]; then
   . $HOME/.rcrc
 fi
 
-. `dirname $0`/../libexec/rcm/rcm.sh
+. `dirname $0`/../share/rcm/rcm.sh
 handle_command_line $*
 
 if [ "x$DOTFILES_DIRS" = "x" ]; then
