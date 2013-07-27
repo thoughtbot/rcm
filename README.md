@@ -11,13 +11,13 @@ The programs provided are `rcup`, `mkrc`, and `lsrc`.
 Installation
 ------------
 
-You can install into `/usr/local` using a normal `make install`:
+This uses the standard GNU autotools, so it's the normal dance:
 
-    sudo make install
+    ./configure && \
+    make && \
+    make install
 
-The `PREFIX` can be changed as needed:
-
-    make install PREFIX=$HOME/.local
+For more, see `INSTALL`.
 
 Programs
 --------
@@ -33,7 +33,7 @@ Programs
 Support
 -------
 
-Pull requests welcome.
+Pull requests welcome; see `DEVELOPERS.MD`.
 
 License
 -------
