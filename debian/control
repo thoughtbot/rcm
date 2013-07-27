@@ -1,0 +1,19 @@
+Source: rcm
+Section: utils
+Priority: extra
+Maintainer: Mike Burns <mburns@thoughtbot.com>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.3
+Homepage: http://github.com/mike-burns/rcm
+Vcs-Git: git://github.com/mike-burns/rcm.git
+Vcs-Browser: http://github.com/mike-burns/rcm
+
+Package: rcm
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: management suite for dotfiles
+ You have dotfiles. Maybe you have them in a repo that you share; maybe you
+ have them in a privately-backed up directory; or maybe you just have them
+ scattered about your homedir. Regardless, this package provides a suite of
+ programs that will help manage an existing dotfiles collection and also start
+ a new one.
