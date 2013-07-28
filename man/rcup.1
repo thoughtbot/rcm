@@ -1,70 +1,79 @@
-.TH rcup "1" "June 2013" "rcm"
-
-.SH NAME
-rcup \- update and install dotfiles
-
-.SH SYNOPSIS
-.B rcup [-v] [-q] [-t \fItag\fR] [-d \fIdir\fR] [\fIfiles...\fR]
-
-.SH DESCRIPTION
-
+.Dd July 28, 2013
+.Dt RCUP 1
+.Os
+.Sh NAME
+.Nm rcup
+.Nd update and install dotfiles
+.Sh SYNOPSIS
+.Nm rcup
+.Op Fl vq
+.Op Fl t Ar tag
+.Op Fl d Ar dir
+.Op Ar files ...
+.Sh DESCRIPTION
 This is a program to update and install personal dotfiles. These
-dotfiles are managed in a separate directory. Use \fBrcup\fR to install
-files from your dotfiles directories or from host- or tag-specific
-directories within.
-
-See \fBDIRECTORY LAYOUT\fR for details on the directory layout.
-
+dotfiles are managed in a separate directory. Use
+.Nm rcup
+to install files from your dotfiles directories or from host- or
+tag-specific directories within.
+.Pp
+See
+.Sx DIRECTORY LAYOUT
+for details on the directory layout.
+.Pp
 It supports these options:
-
-.TP
-\fB-v\fR
+.Bl -tag
+.It Fl v
 increase verbosity. This can be repeated for extra verbosity.
-
-.TP
-\fB-q\fR
+.It Fl q
 decrease verbosity
-
-.TP
-\fB-t\fR \fITAG\fR
-install dotfiles according to TAG
-
-.TP
-\fB-d\fR \fIDIR\fR
-install dotfiles from the DIR. This can be specified multiple times.
-
-.TP
-\fIfiles...\fR
+.It Fl t Ar TAG
+install dotfiles according to
+.Ar TAG
+.It Fl d Ar DIR
+install dotfiles from the
+.Ar DIR
+\&. This can be specified multiple times.
+.It Ar files
 only install the specified file(s)
-
-.SH DIRECTORY LAYOUT
-
+.El
+.Sh DIRECTORY LAYOUT
 Any non-dot non-meta file or directory under your dotfiles directory will be
-installed as a dotfile. For example, \fI.dotfiles/zshrc\fR will be
-installed into \fI~/.zshrc\fR\|.
-
+installed as a dotfile. For example,
+.Pa .dotfiles/zshrc
+will be installed into
+.Pa ~/.zshrc
+\&.
+.Pp
 Files are installed as symlinks. Directories are installed by making
 directories.
-
+.Pp
 Two meta files are supported: host-specific files and tagged files.
-
+.Pp
 Host-specific files go in a directory named for the host, prefixed with
-\fIhost-\fR\|. For example, \fI.dotfiles/host-scarlett\fR contains files
-specific to the computer with hostname \fIscarlett\fR\|, and these files
-will only be installed on the computer with hostname \fIscarlett\fR\|.
-
+.Pa host-
+\&. For example,
+.Pa .dotfiles/host-scarlett
+contains files specific to the computer with hostname
+.Pa scarlett
+, and these files will only be installed on the computer with hostname
+.Pa scarlett
+\&.
+.Pp
 Tagged files go in a directory named for the tag, prefixed with
-\fItag-\fR\|. Files under \fI.dotfiles/tag-git\fR are only installed
-when installing using the \fIgit\fR tag.
-
-.SH AUTHOR
-
-Written by Mike Burns.
-
-.SH FILES
-.I ~/.dotfiles
-.I ~/.rcrc
-
-.SH SEE ALSO
-
-\&\fIrcrc\fR\|(5), \fImkrc\fR\|(1), \fIlsrc\fR\|(1)
+.Li tag
+\&. Files under
+.Pa .dotfiles/tag-git
+are only installed when installing using the
+.Li git
+tag.
+.Sh FILES
+.Pa ~/.dotfiles
+.Pa ~/.rcrc
+.Sh SEE ALSO
+.Xr lsrc 1 ,
+.Xr mkrc 1 ,
+.Xr rcrc 5 ,
+.Xr rcm 7
+.Sh AUTHORS
+.An "Mike Burns" Aq mike@mike-burns.com

@@ -1,45 +1,43 @@
-.TH mkrc "1" "June 2013" "rcm"
-
-.SH NAME
-mkrc \- bless files into a dotfile
-
-.SH SYNOPSIS
-.B mkrc [-v] [-q] [-t \fItag\fR] [-d \fIdir\fR] \fIfiles...\fR
-
-.SH DESCRIPTION
-
+.Dd July 28, 2013
+.Dt MKRC 1
+.Os
+.Sh NAME
+.Nm mkrc
+.Nd bless files into a dotfile
+.Sh SYNOPSIS
+.Nm mkrc
+.Op Fl vq
+.Op Fl t Ar tag
+.Op Fl d Ar dir
+.Ar files ...
+.Sh DESCRIPTION
 This program adds files to your dotfiles directory then installs it
 back into your home directory. It can install files under a tag or
 different source directory.
-
+.
 It supports these options:
-
-.TP
-\fB-v\fR
+.
+.Bl -tag
+.It Fl v
 increase verbosity. This can be repeated for extra verbosity.
-
-.TP
-\fB-q\fR
+.It Fl q
 decrease verbosity
-
-.TP
-\fB-t\fR \fITAG\fR
+.It Fl t Ar TAG
 install dotfiles according to tag
-
-.TP
-\fB-d\fR \fIDIR\fR
+.It Fl d Ar DIR
 install dotfiles under the specified directory. This can be specified
 multiple times.
-
-.SH AUTHOR
-
-Written by Mike Burns.
-
-.SH FILES
-
-.I ~/.dotfiles
-.I ~/.rcrc
-
-.SH SEE ALSO
-
-\&\fIrcrc\fR\|(5), \fIrcup\fR\|(1), \fIlsrc\fR\|(1)
+.El
+.Sh FILES
+.Pa ~/.dotfiles
+.Pa ~/.rcrc
+.Sh EXAMPLES
+.Dl mkrc ~/.vimrc
+.Dl mkrc -t zsh -d company-dotfiles ~/.zshrc ~/.zlogin
+.Sh SEE ALSO
+.Xr lsrc 1 ,
+.Xr rcup 1 ,
+.Xr rcrc 5 ,
+.Xr rcm 7
+.Sh AUTHORS
+.An "Mike Burns" Aq mike@mike-burns.com

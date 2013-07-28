@@ -1,40 +1,50 @@
-.TH rcrc "5" "June 2013" "rcm"
-
-.SH NAME
-rcrc \- configuration for rcm
-
-
-.SH DESCRIPTION
-
-The rcm dotfile manager can be configured using a \fI.rcrc\fR file in
-your home directory. The format is POSIX shell, and it is sourced in by
-the \fBrcup\fR and \fBmkrc\fR programs.
-
+.Dd July 28, 2013
+.Dt RCRC 5
+.Os
+.Sh NAME
+.Nm rcrc
+.Nd configuration for rcm
+.Sh SYNOPSIS
+.Sm off
+.Ns Ev X
+.Ns =
+.Ns Qo
+.Va a\ \&
+.Va b\ \&
+.Va c
+.Qc
+.Sm on
+.Sh DESCRIPTION
+The rcm dotfile manager can be configured using a
+.Pa .rcrc
+file in your home directory. The format is POSIX shell, and it is
+sourced in by the
+.Xr lsrc 1 ,
+.Xr mkrc 1 ,
+and
+.Xr rcup 1
+programs.
+.Pp
 It supports these variables:
-
-.TP
-\fBTAGS\fR
-the default tags used by \fBrcup\fR\|.
-
-.TP
-\fBDOTFILES_DIRS\fR
+.Bl -tag
+.It Va TAGS
+the default tags used by
+.Nm rcup
+.It Va DOTFILES_DIRS
 the source directories for dotfiles. The first in the list is the
-canonical source. The default value is \fI~/.dotfiles\fR\|.
-
-.SH EXAMPLES
-
-\&\fBTAGS="freebsd development email git laptop gmail notmuch"\fR
-\&\fBDOTFILES_DIRS="/home/mike/.dotfiles /usr/share/dotfiles"\fR
-
-.SH AUTHOR
-
-Written by Mike Burns.
-
-.SH FILES
-
-.I ~/.rcrc
-.I ~/.dotfiles
-
-.SH SEE ALSO
-
-\&\fImkrc\fR\|(1), \fIrcup\fR\|(1), \fIlsrc\fR\|(1)
+canonical source. The default value is
+.Li ~/.dotfiles
+.El
+.Sh FILES
+.Pa ~/.dotfiles
+.Pa ~/.rcrc
+.Sh EXAMPLES
+.Dl TAGS="freebsd development email git laptop gmail notmuch"
+.Dl DOTFILES_DIRS="/home/mike/.dotfiles /usr/share/dotfiles"
+.Sh SEE ALSO
+.Xr lsrc 1 ,
+.Xr mkrc 1 ,
+.Xr rcup 1 ,
+.Xr rcm 7
+.Sh AUTHORS
+.An "Mike Burns" Aq mike@mike-burns.com

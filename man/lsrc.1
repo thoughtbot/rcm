@@ -1,50 +1,50 @@
-.TH lsrc "1" "July 2013" "rcm"
-
-.SH NAME
-lsrc \- show configuration files
-
-.SH SYNOPSIS
-.B lsrc [-v] [-q] [-t \fItag\fR] [-d \fIdir\fR] [\fIfiles...\fR]
-
-.SH DESCRIPTION
-
+.Dd July 28, 2013
+.Dt LSRC 1
+.Os
+.Sh NAME
+.Nm lsrc
+.Nd show configuration files
+.Sh SYNOPSIS
+.Nm lsrc
+.Op Fl vq
+.Op Fl t Ar tag
+.Op Fl d Ar dir
+.Op files ...
+.Sh DESCRIPTION
 This program lists all configuration files, both the sources in the
 dotfiles directories and the destinations in your home directory.
-
-See \fIrcup\fR\|(1), the \fBDIRECTORY LAYOUT\fR section, for details on
-the directory layout.
-
+.
+See
+.Xr rcup 1 ,
+the
+.Sx DIRECTORY LAYOUT
+section, for details on the directory layout.
+.
 It supports these options:
-
-.TP
-\fB-v\fR
+.
+.Bl -tag
+.It Fl v
 increase verbosity. This can be repeated for extra verbosity.
-
-.TP
-\fB-q\fR
+.
+.It Fl q
 decrease verbosity
-
-.TP
-\fB-t\fR \fITAG\fR
+.
+.It Fl t Ar TAG
 list dotfiles according to TAG
-
-.TP
-\fB-d\fR \fIDIR\fR
+.
+.It Fl d Ar DIR
 list dotfiles from the DIR. This can be specified multiple times.
-
-.TP
-\fIfiles...\fR
+.
+.It Ar files ...
 only list the specified file(s)
-
-
-.SH AUTHOR
-
-Written by Mike Burns.
-
-.SH FILES
-.I ~/.dotfiles
-.I ~/.rcrc
-
-.SH SEE ALSO
-
-\&\fIrcrc\fR\|(5), \fImkrc\fR\|(1), \fIrcup\fR\|(1)
+.El
+.Sh FILES
+.Pa ~/.dotfiles
+.Pa ~/.rcrc
+.Sh SEE ALSO
+.Xr mkrc 1 ,
+.Xr rcup 1 ,
+.Xr rcrc 5 ,
+.Xr rcm 7
+.Sh AUTHORS
+.An "Mike Burns" Aq mike@mike-burns.com
