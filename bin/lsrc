@@ -150,6 +150,10 @@ fi
 
 for DOTFILES_DIR in $DOTFILES_DIRS; do
 
+  if echo $DOTFILES_DIR | grep -vq '^/'; then
+    DOTFILES_DIR=$PWD/$DOTFILES_DIR
+  fi
+
   if [ ! -d $DOTFILES_DIR ]; then
     $VERBOSE "skipping non-existent directory: $DOTFILES_DIR" 
     continue
