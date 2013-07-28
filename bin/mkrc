@@ -16,13 +16,6 @@ destination() {
   fi
 }
 
-install_dotfile() {
-  prior_wd=`pwd`
-  cd $1
-  $INSTALL -t ${3:--} $2
-  cd $prior_wd
-}
-
 if [ -e $HOME/.rcrc ]; then
   . $HOME/.rcrc
 fi
@@ -75,5 +68,5 @@ for file in $files; do
   dest=`destination $DOTFILES_DIR $dotless $tag`
   mkdir -p $dest/`dirname $dotless`
   $MV $file $dest/$dotless
-  install_dotfile $DOTFILES_DIR $dotless $tag
+  $INSTALL -d $DOTFILES_DIR -t ${tag:--} $dotless
 done
