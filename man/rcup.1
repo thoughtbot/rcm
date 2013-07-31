@@ -51,8 +51,8 @@ directories.
 Two meta files are supported: host-specific files and tagged files.
 .Pp
 Host-specific files go in a directory named for the host, prefixed with
-.Pa host-
-\&. For example,
+.Pa host- .
+For example,
 .Pa .dotfiles/host-scarlett
 contains files specific to the computer with hostname
 .Pa scarlett
@@ -61,12 +61,53 @@ contains files specific to the computer with hostname
 \&.
 .Pp
 Tagged files go in a directory named for the tag, prefixed with
-.Li tag
-\&. Files under
+.Li tag- .
+Therefore, files under
 .Pa .dotfiles/tag-git
 are only installed when installing using the
 .Li git
 tag.
+.Sh ALGORITHM
+It is instructive to understand the process
+.Nm rcup
+uses when synchronizing your rc files:
+.Bl -enum
+.It
+All non-host, non-tag files without a dot prefix are symlinked to the
+dotted filename in your home directory. So,
+.Pa .dotfiles/tigrc
+is
+symlinked to
+.Pa ~/.tigrc .
+.It
+All non-host, non-tag directories have their structure copied to your
+home directory, then a non-dotted symlink is created within.  So for
+example,
+.Pa .dotfiles/vim/autoload/haskell.vim
+causes the
+.Pa ~/.vim/autoload
+directory to be created, then
+.Pa haskell.vim
+is symlinked within.
+.It
+Steps (1) and (2) are applied to host-specific files. These are files
+under a directory named
+.Sm off
+.Pa host- Va $HOSTNAME .
+.Sm on
+.It
+Steps (1) and (2) are applied to tag-specific files. These are files
+under directories named
+.Sm off
+.Pa tag- Va $TAG_NAME ,
+.Sm on
+where
+.Va $TAG_NAME
+is the name of each specified tag in turn, taken from the command line
+or from
+.Xr rcrc 5 .
+.El
+.
 .Sh FILES
 .Pa ~/.dotfiles
 .Pa ~/.rcrc
