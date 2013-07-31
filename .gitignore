@@ -5,3 +5,7 @@ config.status
 Makefile
 debian/rcm
 debian/rcm.debhelper.log
+share/rcm.sh
+*deb
+debian/changelog
+NEWS.md

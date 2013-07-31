@@ -1,5 +1,0 @@
-rcm (0.0.2-1) unstable; urgency=low
-
-  * Initial Debian release (Closes: #1)
-
- -- Mike Burns <mburns@thoughtbot.com>  Tue, 23 Jul 2013 16:43:33 +0200

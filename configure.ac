@@ -2,8 +2,8 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT(rcm, 0.0.2, mike@mike-burns.com)
-AM_INIT_AUTOMAKE(rcm, 0.0.2)
+AC_INIT(rcm, 0.0.3, mike@mike-burns.com)
+AM_INIT_AUTOMAKE(rcm, 0.0.3)
 
 # Checks for programs.
 
@@ -15,4 +15,4 @@ AM_INIT_AUTOMAKE(rcm, 0.0.2)
 
 # Checks for library functions.
 
-AC_OUTPUT(Makefile bin/Makefile man/Makefile share/Makefile)
+AC_OUTPUT(Makefile bin/Makefile man/Makefile share/Makefile share/rcm.sh NEWS.md)

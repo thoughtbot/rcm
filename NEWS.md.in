@@ -1,0 +1,12 @@
+rcm (@PACKAGE_VERSION@) unstable; urgency=low
+
+ * Improved Debian handling.
+ -- Mike Burns <mburns@thoughtbot.com>  Tue, 01 Aug 2013 16:43:33 +0200
+
+rcm (0.0.2) unstable; urgency=low
+
+ * Tutorial in rcm(7).
+ * mkrc supports -d .
+ * -d supports relative dotfile dirs.
+
+ -- Mike Burns <mburns@thoughtbot.com>  Tue, 23 Jul 2013 16:43:33 +0200

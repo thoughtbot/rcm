@@ -1,4 +1,4 @@
-VERSION="0.0.2"
+VERSION="@PACKAGE_VERSION@"
 
 version() {
   cat << EOV

@@ -6,11 +6,9 @@ GNU autoconf & automake
 
 This project uses GNU autoconf and automake for installation and
 building. To regenerate everything from first principles (`configure.ac`
-and `**/Makefile.am`), run these commands:
+and `**/Makefile.am`), run the command:
 
-    aclocal && \
-    automake --add-missing --copy && \
-    autoconf
+    ./autogen.sh
 
 Debian
 ------
@@ -33,13 +31,10 @@ Debian packaging tools, especially debuild:
 HTML documentation
 ------------------
 
-The HTML documentation can be generated using the mdocml suite,
-especially mandoc(1). This shell command will generate them all into a
-separate `rcm-gh-pages` directory:
+The HTML documentation is generated using the mdocml suite. Use the
+`upload-docs` make target to rebuild the HTML docs and upload them to
+GitHub Pages. The `build-docs` target will just build them.
 
-    for i in lsrc.1 mkrc.1 rcm.7 rcrc.5 rcup.1; do
-      mandoc -Thtml -Oman=%N.%S.html man/$i > ~/rcm-gh-pages/$i.html
-    done
-    cp ~/rcm-gh-pages/rcm.7.html ~/rcm-gh-pages/index.html
+    make upload-docs
 
 More information on mdocml can be found on http://mdocml.bsd.lv/ .
