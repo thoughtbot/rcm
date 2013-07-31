@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="resource-type" content="document">
+<title>
+RCUP(1)</title>
+</head>
+<body>
+<div class="mandoc">
+<table summary="Document Header" class="head" width="100%">
+<col width="30%">
+<col width="30%">
+<col width="30%">
+<tbody>
+<tr>
+<td class="head-ltitle">
+RCUP(1)</td>
+<td class="head-vol" align="center">
+General Commands Manual</td>
+<td class="head-rtitle" align="right">
+RCUP(1)</td>
+</tr>
+</tbody>
+</table>
+<div class="section">
+<h1 id="x4e414d45">NAME</h1> <b class="name">rcup</b> &#8212; <span class="desc">update and install dotfiles</span></div>
+<div class="section">
+<h1 id="x53594e4f50534953">SYNOPSIS</h1><table class="synopsis">
+<col style="width: 4.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+rcup</td>
+<td>
+&#91;<span class="opt"><b class="flag">&#45;vq</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;t</b> <i class="arg">tag</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;d</b> <i class="arg">dir</i></span>&#93; &#91;<span class="opt"><i class="arg">files ...</i></span>&#93;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section">
+<h1 id="x4445534352495054494f4e">DESCRIPTION</h1> This is a program to update and install personal dotfiles. These dotfiles are managed in a separate directory. Use <b class="name">rcup</b> to install files from your dotfiles directories or from host- or tag-specific directories within.<p>
+See <i class="link-sec"><a class="link-sec" href="#x4449524543544f5259204c41594f5554">DIRECTORY LAYOUT</a></i> for details on the directory layout.<p>
+It supports these options:<dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;v</b></dt>
+<dd class="list-tag" style="margin-left: 10.00ex;">
+increase verbosity. This can be repeated for extra verbosity.</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;q</b></dt>
+<dd class="list-tag" style="margin-left: 10.00ex;">
+decrease verbosity</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;t</b> <i class="arg">TAG</i></dt>
+<dd class="list-tag" style="margin-left: 10.00ex;">
+install dotfiles according to <i class="arg">TAG</i></dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;d</b> <i class="arg">DIR</i></dt>
+<dd class="list-tag" style="margin-left: 10.00ex;">
+install dotfiles from the <i class="arg">DIR</i> . This can be specified multiple times.</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<i class="arg">files</i></dt>
+<dd class="list-tag" style="margin-left: 10.00ex;">
+only install the specified file(s)</dd>
+</dl>
+</div>
+<div class="section">
+<h1 id="x4449524543544f5259204c41594f5554">DIRECTORY LAYOUT</h1> Any non-dot non-meta file or directory under your dotfiles directory will be installed as a dotfile. For example, <i class="file">.dotfiles/zshrc</i> will be installed into <i class="file">~/.zshrc</i> .<p>
+Files are installed as symlinks. Directories are installed by making directories.<p>
+Two meta files are supported: host-specific files and tagged files.<p>
+Host-specific files go in a directory named for the host, prefixed with <i class="file">host-</i> . For example, <i class="file">.dotfiles/host-scarlett</i> contains files specific to the computer with hostname <i class="file">scarlett</i> , and these files will only be installed on the computer with hostname <i class="file">scarlett</i> .<p>
+Tagged files go in a directory named for the tag, prefixed with <code class="lit">tag</code> . Files under <i class="file">.dotfiles/tag-git</i> are only installed when installing using the <code class="lit">git</code> tag.</div>
+<div class="section">
+<h1 id="x46494c4553">FILES</h1> <i class="file">~/.dotfiles</i> <i class="file">~/.rcrc</i></div>
+<div class="section">
+<h1 id="x53454520414c534f">SEE ALSO</h1> <a class="link-man" href="lsrc.1.html">lsrc(1)</a>, <a class="link-man" href="mkrc.1.html">mkrc(1)</a>, <a class="link-man" href="rcrc.5.html">rcrc(5)</a>, <a class="link-man" href="rcm.7.html">rcm(7)</a></div>
+<div class="section">
+<h1 id="x415554484f5253">AUTHORS</h1> <span class="author">Mike Burns</span> &#60;mike@mike-burns.com&#62;</div>
+<table summary="Document Footer" class="foot" width="100%">
+<col width="50%">
+<col width="50%">
+<tbody>
+<tr>
+<td class="foot-date">
+July 28, 2013</td>
+<td class="foot-os" align="right">
+Linux 3.2.0-4-amd64</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>
+

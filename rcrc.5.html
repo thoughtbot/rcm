@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="resource-type" content="document">
+<title>
+RCRC(5)</title>
+</head>
+<body>
+<div class="mandoc">
+<table summary="Document Header" class="head" width="100%">
+<col width="30%">
+<col width="30%">
+<col width="30%">
+<tbody>
+<tr>
+<td class="head-ltitle">
+RCRC(5)</td>
+<td class="head-vol" align="center">
+File Formats Manual</td>
+<td class="head-rtitle" align="right">
+RCRC(5)</td>
+</tr>
+</tbody>
+</table>
+<div class="section">
+<h1 id="x4e414d45">NAME</h1> <b class="name">rcrc</b> &#8212; <span class="desc">configuration for rcm</span></div>
+<div class="section">
+<h1 id="x53594e4f50534953">SYNOPSIS</h1> <span class="env">X</span>=&#8220;<b class="var">a&#160;</b><b class="var">b&#160;</b><b class="var">c</b>&#8221;</div>
+<div class="section">
+<h1 id="x4445534352495054494f4e">DESCRIPTION</h1> The rcm dotfile manager can be configured using a <i class="file">.rcrc</i> file in your home directory. The format is POSIX shell, and it is sourced in by the <a class="link-man" href="lsrc.1.html">lsrc(1)</a>, <a class="link-man" href="mkrc.1.html">mkrc(1)</a>, and <a class="link-man" href="rcup.1.html">rcup(1)</a> programs.<p>
+It supports these variables:<dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="var">TAGS</b></dt>
+<dd class="list-tag" style="margin-left: 12.00ex;">
+the default tags used by <b class="name">rcup</b></dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="var">DOTFILES_DIRS</b></dt>
+<dd class="list-tag" style="margin-left: 12.00ex;">
+the source directories for dotfiles. The first in the list is the canonical source. The default value is <code class="lit">~/.dotfiles</code></dd>
+</dl>
+</div>
+<div class="section">
+<h1 id="x46494c4553">FILES</h1> <i class="file">~/.dotfiles</i> <i class="file">~/.rcrc</i></div>
+<div class="section">
+<h1 id="x4558414d504c4553">EXAMPLES</h1><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">TAGS="freebsd development email git laptop gmail notmuch"</code></div>
+</blockquote>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">DOTFILES_DIRS="/home/mike/.dotfiles /usr/share/dotfiles"</code></div>
+</blockquote>
+</div>
+<div class="section">
+<h1 id="x53454520414c534f">SEE ALSO</h1> <a class="link-man" href="lsrc.1.html">lsrc(1)</a>, <a class="link-man" href="mkrc.1.html">mkrc(1)</a>, <a class="link-man" href="rcup.1.html">rcup(1)</a>, <a class="link-man" href="rcm.7.html">rcm(7)</a></div>
+<div class="section">
+<h1 id="x415554484f5253">AUTHORS</h1> <span class="author">Mike Burns</span> &#60;mike@mike-burns.com&#62;</div>
+<table summary="Document Footer" class="foot" width="100%">
+<col width="50%">
+<col width="50%">
+<tbody>
+<tr>
+<td class="foot-date">
+July 28, 2013</td>
+<td class="foot-os" align="right">
+Linux 3.2.0-4-amd64</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>
+

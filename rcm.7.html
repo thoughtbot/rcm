@@ -1,0 +1,185 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="resource-type" content="document">
+<title>
+RCM(7)</title>
+</head>
+<body>
+<div class="mandoc">
+<table summary="Document Header" class="head" width="100%">
+<col width="30%">
+<col width="30%">
+<col width="30%">
+<tbody>
+<tr>
+<td class="head-ltitle">
+RCM(7)</td>
+<td class="head-vol" align="center">
+Miscellaneous Information Manual</td>
+<td class="head-rtitle" align="right">
+RCM(7)</td>
+</tr>
+</tbody>
+</table>
+<div class="section">
+<h1 id="x4e414d45">NAME</h1> <b class="name">rcm</b> &#8212; <span class="desc">dotfile management</span></div>
+<div class="section">
+<h1 id="x53594e4f50534953">SYNOPSIS</h1><table class="synopsis">
+<col style="width: 3.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+lsrc</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<br>
+<table class="synopsis">
+<col style="width: 3.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+mkrc</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<br>
+<table class="synopsis">
+<col style="width: 3.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+rcup</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section">
+<h1 id="x4445534352495054494f4e">DESCRIPTION</h1> The rcm suite of tools is for managing dotfiles directories. This is a directory containing all the <code class="lit">.*rc</code> files in your home directory (<i class="file">.zshrc</i>, <i class="file">.vimrc</i>, and so on). These files have gone by many names in history, such as &#8220;rc files&#8221; because they typically end in <code class="lit">rc</code> or &#8220;dotfiles&#8221; because they begin with a period.<p>
+This suite is useful, for example, for commiting your rc files to a central repository to share on GitHub, but it also scales to a more complex situation such as mutliple source directories shared between computers with some host-specific or task-specific files.<p>
+This guide serves as a tutorial motivating the suite. For a list of quick reference documentation see the <i class="link-sec"><a class="link-sec" href="#x53454520414c534f">SEE ALSO</a></i> section below.</div>
+<div class="section">
+<h1 id="x515549434b205354415254">QUICK START</h1> If you do not already have a dotfiles directory then we can get started quickly. Use the <a class="link-man" href="mkrc.1.html">mkrc(1)</a> command to add files to the directory.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">mkrc .vimrc</code></div>
+</blockquote>
+<p>
+You can see the effects of this with <a class="link-man" href="lsrc.1.html">lsrc(1)</a>.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">lsrc</code></div>
+</blockquote>
+<p>
+The default dotfiles directory is <i class="file">$HOME/.dotfiles</i>. The <a class="link-man" href="mkrc.1.html">mkrc(1)</a> command will move <i class="file">.vimrc</i> to <i class="file">.dotfiles/vimrc</i>, then symlink <i class="file">.vimrc</i> to <i class="file">.dotfiles/vimrc</i>.<p>
+This suite becomes more powerful when you share your dotfiles directory between computers, either because mutliple people share the same directory or because you have mutliple computers. As a quick simulation, we can create a file in your new <i class="file">.dotfiles</i> directory.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">echo TAGS="zsh" &gt; ~/.dotfiles/rcrc</code></div>
+</blockquote>
+<p>
+We can update our home directory to have a new <i class="file">.rcrc</i> file (a symlink to <i class="file">.dotfiles/rcrc</i>) using the <a class="link-man" href="rcup.1.html">rcup(1)</a> command.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">rcup -v</code></div>
+</blockquote>
+<p>
+We passed the <b class="flag">&#45;v</b> option to see in more explicit detail what it does. All rcm commands take the <b class="flag">&#45;v</b> option, and mutliple <b class="flag">&#45;v</b> options can be given to give more explicit detail.<p>
+If you do share the dotfiles directory between people, you may end up with some irrelevant or even incorrect rc files. For example, you may have a <i class="file">.zshrc</i> while your other contributor has a <i class="file">.bashrc</i>. This situation can be handled with tags.<p>
+A tag is a directory under the dotfiles directory the starts with the letters <code class="lit">tag-</code>. We can handle the competing shell example by making a <i class="file">tag-zsh</i> directory and moving the <i class="file">.zshrc</i> into it.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">mkrc -t zsh .zshrc</code></div>
+</blockquote>
+<p>
+And likewise, your dotfiles partner would do the same for <i class="file">.bashrc</i>.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">mkrc -t bash .bashrc</code></div>
+</blockquote>
+<p>
+When updating with <a class="link-man" href="rcup.1.html">rcup(1)</a> you can pass the <b class="flag">&#45;t</b> option to include the tags you want. This can also be set in the <a class="link-man" href="rcrc.5.html">rcrc(5)</a> configuration file, as hinted at above.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">rcup -t zsh</code></div>
+</blockquote>
+<p>
+The tags are useful for sharing a single dotfiles directory between competers or people, but another common situation is combining multiple dotfiles directories that people have shared with you. For this we have the <b class="flag">&#45;d</b> flag or the <span class="env">DOTFILES_DIRS</span> option in <i class="file">.rcrc</i>.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">rcup -d .dotfiles -d marriage-dotfiles -d thoughtbot-dotfiles</code></div>
+</blockquote>
+<p>
+This rcup invocation will go in sequence through the three dotfiles directories, updating any symlinks as needed. Any overlapping rc files will use the first result, not the last; that is, <i class="file">.dotfiles/vimrc</i> will take precedence over <i class="file">marriage-dotfiles/vimrc</i>.<p>
+In a similar use case to tags you can also have host-specific files marked. This will go by the hostname. The <a class="link-man" href="rcrc.5.html">rcrc(5)</a> configuration file is a popular candidate for a host-specific file.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">mkdir .dotfiles/host-`hostname`</code></div>
+</blockquote>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">mv .rcrc .dotfiles/host-`hostname`/rcrc</code></div>
+</blockquote>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">rcup -v</code></div>
+</blockquote>
+</div>
+<div class="section">
+<h1 id="x4d4947524154494e47204558495354494e4720574f524b464c4f5753">MIGRATING EXISTING WORKFLOWS</h1> Many people have existing dotfiles directories, and have been managing them using custom scripts. The suite of tools in this package should be able to replace your custom scripts with little effort.<p>
+When converting an existing dotfiles directory you do need some knowledge of how rcm works and what it expects. Details can be found in <a class="link-man" href="rcup.1.html">rcup(1)</a>, but briefly:<ol style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-enum">
+<li class="list-enum" style="margin-top: 1.00em;">
+All non-host, non-tag files without a dot prefix are symlinked to the dotted filename in your home directory. So, <i class="file">.dotfiles/tigrc</i> is symlinked to <i class="file">~/.tigrc</i>.</li>
+<li class="list-enum" style="margin-top: 1.00em;">
+All non-host, non-tag directories have their structure copied to your home directory, then a non-dotted symlink is created within.  So for example, <i class="file">.dotfiles/vim/autoload/haskell.vim</i> causes the <i class="file">~/.vim/autoload</i> directory to be created, then <i class="file">haskell.vim</i> is symlinked within.</li>
+<li class="list-enum" style="margin-top: 1.00em;">
+Steps (1) and (2) are applied to host-specific files.</li>
+<li class="list-enum" style="margin-top: 1.00em;">
+Steps (1) and (2) are applied to tag-specific files.</li>
+</ol>
+<p>
+Two alternative conventions in dotfile directories can cause issue with this. The most common problem is to have a file named <i class="file">install</i> or <i class="file">Makefile</i> in your dotfiles directory. This will cause a <i class="file">~/.install</i> or <i class="file">~/.Makefile</i> symlink to be created in your home directory. The best option here is to move that file outside of your dotfiles directory, or remove it entirely.<p>
+A less common situation is for all the filenames in your dotfiles directory to be prefixed with a period. These files are skipped by the rcm suite, and thus would result in nothing happening. The only option in this case is to rename all the files, for example by using a shell command like the following. Note that this will break any existing symlinks.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">find ~/.dotfiles -name '.*' -exec echo mv {} `echo {} | sed 's/&#46;//'` ;</code></div>
+</blockquote>
+<p>
+The easiest way to see what the rcm suite will do is to run the <a class="link-man" href="lsrc.1.html">lsrc(1)</a> command. This shows all the symlinks that the suite intends to maintain.<p>
+Once you are satisfied and ready to try rcm, use the <a class="link-man" href="rcup.1.html">rcup(1)</a> command.</div>
+<div class="section">
+<h1 id="x5748592052434d">WHY RCM</h1> The rcm suite was built as an abstraction over the shell, Ruby, Python, and make scripts people were writing and sharing. It is intended to run on any unix system and support the range from simple to complex dotfile directories.<p>
+As such, this suite is useful as a common base. Through this we can share tools and develop this further as a first-class entity. It is also our hope that a common set of tools will encourage others to share their dotfiles, too.</div>
+<div class="section">
+<h1 id="x46494c4553">FILES</h1> <i class="file">~/.dotfiles</i> <i class="file">~/.rcrc</i></div>
+<div class="section">
+<h1 id="x53454520414c534f">SEE ALSO</h1> <a class="link-man" href="lsrc.1.html">lsrc(1)</a>, <a class="link-man" href="mkrc.1.html">mkrc(1)</a>, <a class="link-man" href="rcup.1.html">rcup(1)</a>, <a class="link-man" href="rcrc.5.html">rcrc(5)</a></div>
+<div class="section">
+<h1 id="x415554484f5253">AUTHORS</h1> <span class="author">Mike Burns</span> &#60;mike@mike-burns.com&#62;</div>
+<table summary="Document Footer" class="foot" width="100%">
+<col width="50%">
+<col width="50%">
+<tbody>
+<tr>
+<td class="foot-date">
+July 28, 2013</td>
+<td class="foot-os" align="right">
+Linux 3.2.0-4-amd64</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>
+
