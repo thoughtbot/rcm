@@ -1,0 +1,37 @@
+# Maintainer: Pat Brisbin <pbrisbin@gmail.com>
+_gitname=rcm
+pkgname=$_gitname-git
+pkgver=0.0.0
+pkgrel=1
+pkgdesc="rc file (dotfile) management"
+arch=('any')
+url="https://github.com/mike-burns/rcm"
+license=('GPL')
+makedepends=('git')
+source=('git://github.com/mike-burns/rcm')
+md5sums=('SKIP')
+
+pkgver() {
+  cd $_gitname
+
+  git describe --always | sed 's|-|.|g'
+}
+
+build() {
+  cd $_gitname
+
+  aclocal
+  automake --add-missing --copy
+  autoconf
+
+  ./configure --prefix=/usr
+  make
+}
+
+package() {
+  cd $_gitname
+
+  make DESTDIR="$pkgdir/" install
+}
+
+# vim:set ts=2 sw=2 et:
