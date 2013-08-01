@@ -4,10 +4,17 @@
 . $RCM_LIB/rcm.sh
 
 destination() {
-  if [ $# -eq 2 ]; then
-    echo $1
+  local dotfiles_dir=$1
+  local dotless=$2
+  local in_host=$3
+  local tag=$4
+
+  if [ "x$tag" != "x" ]; then
+    echo $dotfiles_dir/tag-$tag
+  elif [ $in_host = 1 ]; then
+    echo $dotfiles_dir/host-`hostname`
   else
-    echo $1/tag-$3
+    echo $dotfiles_dir
   fi
 }
 
@@ -16,7 +23,7 @@ if [ -e $HOME/.rcrc ]; then
 fi
 
 if [ $# -eq 0 ]; then
-  echo "Usage: mkrc [-d dir] [-t tag] [-v] [-q] filename ..."
+  echo "Usage: mkrc [-d dir] [-t tag] [-o] [-v] [-q] filename ..."
   exit 1
 fi
 
@@ -26,13 +33,15 @@ done
 
 tag=
 verbosity=0
+in_host=0
 version=0
 
-while getopts Vvqt:d: opt; do
+while getopts Vvqot:d: opt; do
   case "$opt" in
     t) tag=$OPTARG;;
     v) verbosity=$(($verbosity + 1));;
     q) verbosity=$(($verbosity - 1));;
+    o) in_host=1;;
     d) DOTFILES_DIR=$OPTARG;;
     V) version=1
   esac
@@ -41,11 +50,15 @@ shift $(($OPTIND-1))
 
 handle_common_flags mkrc $version $verbosity
 
+if [ $in_host -eq 1 -a "x$tag" != "x" ]; then
+  $ERROR 1 "Cannot specify both -o and -t"
+fi
+
 files=$@
 
 for file in $files; do
   dotless=`echo $file | sed -e "s|$DEST_DIR/||" | sed -e 's/^\.//'`
-  dest=`destination $DOTFILES_DIR $dotless $tag`
+  dest=`destination $DOTFILES_DIR $dotless $in_host $tag`
   mkdir -p $dest/`dirname $dotless`
   $MV $file $dest/$dotless
   $INSTALL -d $DOTFILES_DIR -t ${tag:--} $dotless

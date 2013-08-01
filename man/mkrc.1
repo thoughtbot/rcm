@@ -6,7 +6,7 @@
 .Nd bless files into a dotfile
 .Sh SYNOPSIS
 .Nm mkrc
-.Op Fl vq
+.Op Fl vqo
 .Op Fl t Ar tag
 .Op Fl d Ar dir
 .Ar files ...
@@ -27,6 +27,8 @@ install dotfiles according to tag
 .It Fl d Ar DIR
 install dotfiles under the specified directory. This can be specified
 multiple times.
+.It Fl o
+install dotfiles into the host-specific directory
 .El
 .Sh FILES
 .Pa ~/.dotfiles
@@ -34,6 +36,7 @@ multiple times.
 .Sh EXAMPLES
 .Dl mkrc ~/.vimrc
 .Dl mkrc -t zsh -d company-dotfiles ~/.zshrc ~/.zlogin
+.Dl mkrc -o ~/.rcrc
 .Sh SEE ALSO
 .Xr lsrc 1 ,
 .Xr rcup 1 ,

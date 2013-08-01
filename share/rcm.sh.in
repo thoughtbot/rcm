@@ -6,6 +6,7 @@ DEBUG=:
 DEST_DIR=$HOME
 PRINT=echo
 PROMPT=echo_n
+ERROR=echo_error
 VERBOSE=:
 MKDIR=mkdir
 LN=ln
@@ -18,6 +19,13 @@ HOSTNAME=`hostname -s`
 
 echo_n() {
   printf "%s " "$*"
+}
+
+echo_error() {
+  local exit_status=$1
+  shift
+  echo $* >&2
+  exit $exit_status
 }
 
 version() {

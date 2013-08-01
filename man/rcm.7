@@ -203,9 +203,7 @@ file is a popular candidate for a host-specific file, since the tags and
 dotfile directories listed in there are often specific to a single
 machine.
 .Pp
-.Dl mkdir .dotfiles/host-`hostname`
-.Dl mv .rcrc .dotfiles/host-`hostname`/rcrc
-.Dl rcup
+.Dl mkrc -o .rcrc
 .
 .Sh RATIONALE
 .Pp
