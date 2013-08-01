@@ -34,50 +34,45 @@ dotfiles
 because they begin with a period.
 .Pp
 This suite is useful for commiting your rc files to a central repository
-to share on GitHub, but it also scales to a more complex situation such
-as mutliple source directories shared between computers with some
+to share, but it also scales to a more complex situation such as
+mutliple source directories shared between computers with some
 host-specific or task-specific files.
 .Pp
 This guide serves as a tutorial motivating the suite. For a list of
 quick reference documentation see the
 .Sx SEE ALSO
 section below.
-.Pp
-The rcm suite was built as an abstraction over the shell, Ruby, Python,
-and make scripts people were writing and sharing. It is intended to run
-on any unix system and support the range from simple to complex dotfile
-directories.
-.Pp
-As such, this suite is useful as a common base. Through this we can
-share tools and develop this further as a first-class entity. It is also
-our hope that a common set of tools will encourage others to share their
-dotfiles, too.
 .
 .Sh QUICK START FOR EXISTING DOTFILES DIRECTORIES
 This section is for those who already have an existing dotfiles
 directory; this directory is
 .Pa ~/.dotfiles ;
 the directory only contains rc files; and these rc filenames do not
-begin with a period. See the caveats below if this description is close
-but not quite right.
+begin with a period. See the caveats below if this is not you.
 .Bl -enum
 .It
 Dryrun with
 .Xr lsrc 1 .
+Look for anything unexpected in here, such as
+.Pa ~/.install
+or
+.Pa ~/.Makefile ,
+or an empty list of dotfiles.
 .Pp
 .Dl lsrc
 .It
 Update any symlinks with
 .Xr rcup 1 .
+This is likely to do nothing, since your dotfiles already exist.
 .Pp
 .Dl rcup -v
 .It
-Add new rc files with
+When necessary, add new rc files with
 .Xr mkrc 1 .
 .Pp
 .Dl mkrc ~/.tigrc
 .El
-.Ss CAVEAT: EXISTING INSTALL SCRIPTS
+.Ss COMMON PROBLEM: EXISTING INSTALL SCRIPTS
 Many existing dotfile directories have scripts named
 .Pa install
 or
@@ -91,7 +86,7 @@ directory. The best option here is to move that file outside of your
 dotfiles directory or remove it entirely.
 .Pp
 .Dl rm -f install Rakefile Makefile install.sh
-.Ss CAVEAT: DOTTED FILENAMES IN DOTFILES DIRECTORY
+.Ss COMMON PROBLEM: DOTTED FILENAMES IN DOTFILES DIRECTORY
 A less common situation is for all the filenames in your dotfiles
 directory to be prefixed with a period. These files are skipped by the
 rcm suite, and thus would result in nothing happening. The only option
@@ -100,7 +95,7 @@ command like the following. Note that this will break any existing
 symlinks.
 .Pp
 .Dl find ~/.dotfiles -name '.*' -exec echo mv {} `echo {} | sed 's/\.//'` \;
-.Ss CAVEAT: DOTFILES DIRECTORY NOT IN Pa ~/.dotfiles
+.Ss COMMON PROBLEM: DOTFILES DIRECTORY NOT IN Pa ~/.dotfiles
 This all assumes that your dotfiles directory is
 .Pa ~/.dotfiles .
 If it is elsewhere and you do not want to move it you can use the
@@ -116,7 +111,7 @@ in
 .
 .Sh QUICK START FOR BLANK DOTFILES DIRECTORIES
 This section is for those who dot not have an existing dotfiles
-directory and whose dotfiles and normal and just as they were created.
+directory and whose dotfiles are standard.
 .Bl -enum
 .It
 Add your rc files to a dotfiles directory with
@@ -149,7 +144,8 @@ some irrelevant or even incorrect rc files. For example, you may have a
 while your other contributor has a
 .Pa .bashrc .
 This situation can be handled with tags.
-.Pp
+.Bl -enum
+.It
 A tag is a directory under the dotfiles directory the starts with the
 letters
 .Li tag- .
@@ -158,15 +154,14 @@ making a
 .Pa tag-zsh
 directory and moving the
 .Pa .zshrc
-file into it.
+file into it using
+.Xr mkrc 1
+and passing the
+.Fl t
+option.
 .Pp
 .Dl mkrc -t zsh .zshrc
-.Pp
-And likewise, your dotfiles partner would do the same for
-.Pa .bashrc .
-.Pp
-.Dl mkrc -t bash .bashrc
-.Pp
+.It
 When updating with
 .Xr rcup 1
 you can pass the
@@ -179,6 +174,7 @@ configuration file with the
 variable.
 .Pp
 .Dl rcup -t zsh
+.El
 .
 .Sh MULTIPLE DOTFILE DIRECTORIES
 Another common situation is combining multiple dotfiles directories that
@@ -189,26 +185,39 @@ flag or the
 option in
 .Pa .rcrc .
 .Pp
-.Dl rcup -d .dotfiles -d marriage-dotfiles -d thoughtbot-dotfiles
-.Pp
-This rcup invocation will go in sequence through the three dotfiles
+The following rcup invocation will go in sequence through the three dotfiles
 directories, updating any symlinks as needed. Any overlapping rc files
 will use the first result, not the last; that is,
 .Pa .dotfiles/vimrc
 will take precedence over
 .Pa marriage-dotfiles/vimrc .
+.Pp
+.Dl rcup -d .dotfiles -d marriage-dotfiles -d thoughtbot-dotfiles
+.Pp
 .
 .Sh HOST-SPECIFIC DOTFILES
-In a similar use case to tags you can also have host-specific files
-marked. This will go by the hostname. The
+You can also mark host-specific files. This will go by the hostname. The
 .Xr rcrc 5
 configuration
-file is a popular candidate for a host-specific file.
+file is a popular candidate for a host-specific file, since the tags and
+dotfile directories listed in there are often specific to a single
+machine.
 .Pp
 .Dl mkdir .dotfiles/host-`hostname`
 .Dl mv .rcrc .dotfiles/host-`hostname`/rcrc
-.Dl rcup -v
+.Dl rcup
 .
+.Sh RATIONALE
+.Pp
+The rcm suite was built as an abstraction over the shell, Ruby, Python,
+and make scripts people were writing and sharing. It is intended to run
+on any unix system and support the range from simple to complex dotfile
+directories.
+.Pp
+As such, this suite is useful as a common base. Through this we can
+share tools and develop this further as a first-class entity. It is also
+our hope that a common set of tools will encourage others to share their
+dotfiles, too.
 .Sh FILES
 .Pa ~/.dotfiles
 .Pa ~/.rcrc
