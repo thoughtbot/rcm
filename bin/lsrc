@@ -2,12 +2,17 @@
 
 #set -x
 
+EXCLUDE=''
 DEST_DIR=$HOME
 DEFAULT_DOTFILES_DIR=$HOME/.dotfiles
 HOSTNAME=`hostname -s`
 DEBUG=:
 PRINT=echo
 VERBOSE=:
+
+is_excluded() {
+  echo $EXCLUDE | grep -qw `basename $1`
+}
 
 pushdir() {
   DIR_STACK="$DIR_STACK:$PWD/$1"
@@ -75,6 +80,8 @@ handle_file() {
 
   if [ ! -e $file ]; then
     $VERBOSE "skipping non-existent file $file"
+  elif is_excluded $file; then
+    $VERBOSE "skipping excluded file $file"
   elif [ -d $file ]; then
     link_dir $file $dest_dir $dotfiles_dir $dotted
   else
@@ -92,12 +99,13 @@ handle_command_line() {
   verbosity=0
   version=0
   dotfiles_dirs=
-  while getopts Vqvt:d: opt; do
+  while getopts Vqvt:d:e: opt; do
     case "$opt" in
       t) arg_tags="$arg_tags $OPTARG";;
       v) verbosity=$(($verbosity + 1));;
       q) verbosity=$(($verbosity - 1));;
       d) dotfiles_dirs="$dotfiles_dirs $OPTARG";;
+      e) EXCLUDE+=" $OPTARG" ;;
       V) version=1
     esac
   done

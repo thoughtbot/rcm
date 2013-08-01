@@ -4,6 +4,7 @@
 
 REPLACE_ALL=0
 
+EXCLUDE=''
 DEST_DIR=$HOME
 DEBUG=:
 PRINT=echo
@@ -48,6 +49,10 @@ is_identical() {
   diff -q -s $1 $2 > /dev/null
 }
 
+is_excluded() {
+  echo $EXCLUDE | grep -qw `basename $1`
+}
+
 handle_dir() {
   local dest=$1
 
@@ -80,7 +85,11 @@ handle_file() {
       esac
     fi
   else
-    link_file $src $dest
+    if is_excluded $src; then
+      $VERBOSE "excluded $src"
+    else
+      link_file $src $dest
+    fi
   fi
 }
 
@@ -90,7 +99,7 @@ handle_command_line() {
   version=0
   dotfiles_dirs=
   LS_ARGS=
-  while getopts Vqvt:d: opt; do
+  while getopts Vqvt:d:e: opt; do
     case "$opt" in
       t)
         arg_tags="$arg_tags $OPTARG"
@@ -102,6 +111,7 @@ handle_command_line() {
         dotfiles_dirs="$dotfiles_dirs $OPTARG"
         LS_ARGS="$LS_ARGS -d $OPTARG"
         ;;
+      e) EXCLUDE+=" $OPTARG" ;;
       V) version=1
     esac
   done
