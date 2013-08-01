@@ -11,6 +11,13 @@ The programs provided are `rcup`, `mkrc`, and `lsrc`.
 Installation
 ------------
 
+On OS X:
+
+    brew tap mike-burns/rcm
+    brew install rcm
+
+Elsewhere:
+
 This uses the standard GNU autotools, so it's the normal dance:
 
     ./configure && \
