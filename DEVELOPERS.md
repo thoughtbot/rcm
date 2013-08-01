@@ -22,7 +22,7 @@ First, everything must be set up just right:
     cd ~/debian/rcm && \
     rm -f rcm_0.0.2.orig.tar.gz && \
     rm -f rcm-0.0.2/tags && \
-    tar --exclude=*swp --exclude-backups --exclude-vcs --exclude=debian -zcf rcm_0.0.2.orig.tar.gz rcm-0.0.2
+    tar --exclude=*swp --exclude-backups --exclude-vcs --exclude=debian --exclude=config.status --exclude=config.log -zcf rcm_0.0.2.orig.tar.gz rcm-0.0.2
 
 Given that, now you can generate the Debian package. This requires the
 Debian packaging tools, especially debuild:

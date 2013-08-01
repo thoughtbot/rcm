@@ -15,7 +15,12 @@ Arch Linux:
 
   https://aur.archlinux.org/packages/rcm-git/
 
-On OS X:
+Debian-based (including Ubuntu):
+
+    wget http://mike-burns.com/project/rcm/rcm_0.0.2-1_all.deb
+    sudo dpkg -i rcm_0.0.2-1_all.deb
+
+OS X:
 
     brew tap mike-burns/rcm
     brew install rcm
