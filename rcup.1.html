@@ -69,8 +69,20 @@ only install the specified file(s)</dd>
 <h1 id="x4449524543544f5259204c41594f5554">DIRECTORY LAYOUT</h1> Any non-dot non-meta file or directory under your dotfiles directory will be installed as a dotfile. For example, <i class="file">.dotfiles/zshrc</i> will be installed into <i class="file">~/.zshrc</i> .<p>
 Files are installed as symlinks. Directories are installed by making directories.<p>
 Two meta files are supported: host-specific files and tagged files.<p>
-Host-specific files go in a directory named for the host, prefixed with <i class="file">host-</i> . For example, <i class="file">.dotfiles/host-scarlett</i> contains files specific to the computer with hostname <i class="file">scarlett</i> , and these files will only be installed on the computer with hostname <i class="file">scarlett</i> .<p>
-Tagged files go in a directory named for the tag, prefixed with <code class="lit">tag</code> . Files under <i class="file">.dotfiles/tag-git</i> are only installed when installing using the <code class="lit">git</code> tag.</div>
+Host-specific files go in a directory named for the host, prefixed with <i class="file">host-</i>. For example, <i class="file">.dotfiles/host-scarlett</i> contains files specific to the computer with hostname <i class="file">scarlett</i> , and these files will only be installed on the computer with hostname <i class="file">scarlett</i> .<p>
+Tagged files go in a directory named for the tag, prefixed with <code class="lit">tag-</code>. Therefore, files under <i class="file">.dotfiles/tag-git</i> are only installed when installing using the <code class="lit">git</code> tag.</div>
+<div class="section">
+<h1 id="x414c474f524954484d">ALGORITHM</h1> It is instructive to understand the process <b class="name">rcup</b> uses when synchronizing your rc files:<ol style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-enum">
+<li class="list-enum" style="margin-top: 1.00em;">
+All non-host, non-tag files without a dot prefix are symlinked to the dotted filename in your home directory. So, <i class="file">.dotfiles/tigrc</i> is symlinked to <i class="file">~/.tigrc</i>.</li>
+<li class="list-enum" style="margin-top: 1.00em;">
+All non-host, non-tag directories have their structure copied to your home directory, then a non-dotted symlink is created within.  So for example, <i class="file">.dotfiles/vim/autoload/haskell.vim</i> causes the <i class="file">~/.vim/autoload</i> directory to be created, then <i class="file">haskell.vim</i> is symlinked within.</li>
+<li class="list-enum" style="margin-top: 1.00em;">
+Steps (1) and (2) are applied to host-specific files. These are files under a directory named <i class="file">host-</i><b class="var">$HOSTNAME</b>.</li>
+<li class="list-enum" style="margin-top: 1.00em;">
+Steps (1) and (2) are applied to tag-specific files. These are files under directories named <i class="file">tag-</i><b class="var">$TAG_NAME</b>, where <b class="var">$TAG_NAME</b> is the name of each specified tag in turn, taken from the command line or from <a class="link-man" href="rcrc.5.html">rcrc(5)</a>.</li>
+</ol>
+</div>
 <div class="section">
 <h1 id="x46494c4553">FILES</h1> <i class="file">~/.dotfiles</i> <i class="file">~/.rcrc</i></div>
 <div class="section">
