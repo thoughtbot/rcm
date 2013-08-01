@@ -11,6 +11,10 @@ The programs provided are `rcup`, `mkrc`, and `lsrc`.
 Installation
 ------------
 
+Arch Linux:
+
+  https://aur.archlinux.org/packages/rcm-git/
+
 On OS X:
 
     brew tap mike-burns/rcm
