@@ -1,12 +1,7 @@
 #!/bin/sh
 
-# set -x
-
-DEFAULT_DOTFILES_DIR=$HOME/.dotfiles
-MV=mv
-INSTALL=rcup
-ROOT_DIR=$HOME
-
+: ${RCM_LIB:=`dirname $0`/../share/rcm}
+. $RCM_LIB/rcm.sh
 
 destination() {
   if [ $# -eq 2 ]; then
@@ -19,8 +14,6 @@ destination() {
 if [ -e $HOME/.rcrc ]; then
   . $HOME/.rcrc
 fi
-
-. `dirname $0`/../share/rcm/rcm.sh
 
 if [ $# -eq 0 ]; then
   echo "Usage: mkrc [-d dir] [-t tag] [-v] [-q] filename ..."
@@ -46,25 +39,12 @@ while getopts Vvqt:d: opt; do
 done
 shift $(($OPTIND-1))
 
-if [ $version -eq 1 ]; then
-  version mkrc
-  exit 0
-elif [ $verbosity -ge 2 ]; then
-  MV="$MV -v"
-  INSTALL="$INSTALL -vv"
-elif [ $verbosity -eq 1 ]; then
-  MV="$MV -v"
-  INSTALL="$INSTALL -v"
-elif [ $verbosity -eq 0 ]; then
-  MV="$MV -v"
-else
-  INSTALL="$INSTALL -q"
-fi
+handle_common_flags mkrc $version $verbosity
 
 files=$@
 
 for file in $files; do
-  dotless=`echo $file | sed -e "s|$ROOT_DIR/||" | sed -e 's/^\.//'`
+  dotless=`echo $file | sed -e "s|$DEST_DIR/||" | sed -e 's/^\.//'`
   dest=`destination $DOTFILES_DIR $dotless $tag`
   mkdir -p $dest/`dirname $dotless`
   $MV $file $dest/$dotless

@@ -1,13 +1,7 @@
 #!/bin/sh
 
-#set -x
-
-DEST_DIR=$HOME
-DEFAULT_DOTFILES_DIR=$HOME/.dotfiles
-HOSTNAME=`hostname -s`
-DEBUG=:
-PRINT=echo
-VERBOSE=:
+: ${RCM_LIB:=`dirname $0`/../share/rcm}
+. $RCM_LIB/rcm.sh
 
 pushdir() {
   DIR_STACK="$DIR_STACK:$PWD/$1"
@@ -91,7 +85,8 @@ handle_command_line() {
   arg_tags=""
   verbosity=0
   version=0
-  dotfiles_dirs=
+  dotfiles_dirs=""
+
   while getopts Vqvt:d: opt; do
     case "$opt" in
       t) arg_tags="$arg_tags $OPTARG";;
@@ -103,35 +98,8 @@ handle_command_line() {
   done
   shift $(($OPTIND-1))
 
-  if [ $version -eq 1 ]; then
-    version rcup
-    exit 0
-  elif [ $verbosity -ge 2 ]; then
-    DEBUG=echo
-    VERBOSE=echo
-    PRINT=echo
-  elif [ $verbosity -eq 1 ]; then
-    DEBUG=:
-    VERBOSE=echo
-    PRINT=echo
-  elif [ $verbosity -eq 0 ]; then
-    DEBUG=:
-    VERBOSE=:
-    PRINT=echo
-  else
-    DEBUG=:
-    VERBOSE=:
-    PRINT=:
-  fi
-
-  if [ "x$arg_tags" != "x" ]; then
-    TAGS=$arg_tags
-  fi
-
-  if [ "x$dotfiles_dirs" != "x" ]; then
-    DOTFILES_DIRS=$dotfiles_dirs
-  fi
-
+  handle_common_flags lsrc $version $verbosity
+  handle_metadata_flags $arg_tags $dotfiles_dirs
   FILES=$@
 }
 
@@ -141,7 +109,6 @@ if [ -e $HOME/.rcrc ]; then
   . $HOME/.rcrc
 fi
 
-. `dirname $0`/../share/rcm/rcm.sh
 handle_command_line $*
 
 if [ "x$DOTFILES_DIRS" = "x" ]; then

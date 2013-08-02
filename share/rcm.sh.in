@@ -1,5 +1,25 @@
 VERSION="@PACKAGE_VERSION@"
 
+#set -x
+
+DEBUG=:
+DEST_DIR=$HOME
+PRINT=echo
+PROMPT=echo_n
+VERBOSE=:
+MKDIR=mkdir
+LN=ln
+RM=rm
+DEFAULT_DOTFILES_DIR=$HOME/.dotfiles
+MV=mv
+INSTALL=rcup
+ROOT_DIR=$HOME
+HOSTNAME=`hostname -s`
+
+echo_n() {
+  printf "%s " "$*"
+}
+
 version() {
   cat << EOV
 $1 (rcm) $VERSION
@@ -8,4 +28,48 @@ License BSD: BSD 3-clause license
 
 Written by Mike Burns.
 EOV
+}
+
+handle_common_flags() {
+  local prog_name=$1
+  local version=$2
+  local verbosity=$3
+
+  if [ $version -eq 1 ]; then
+    version $prog_name
+    exit 0
+  elif [ $verbosity -ge 2 ]; then
+    DEBUG=echo
+    VERBOSE=echo
+    PRINT=echo
+    MV="$MV -v"
+    INSTALL="$INSTALL -vv"
+  elif [ $verbosity -eq 1 ]; then
+    DEBUG=:
+    VERBOSE=echo
+    PRINT=echo
+    MV="$MV -v"
+    INSTALL="$INSTALL -v"
+  elif [ $verbosity -eq 0 ]; then
+    DEBUG=:
+    VERBOSE=:
+    PRINT=echo
+    MV="$MV -v"
+  else
+    DEBUG=:
+    VERBOSE=:
+    PRINT=:
+    INSTALL="$INSTALL -q"
+  fi
+}
+
+handle_metadata_flags() {
+  local arg_tags=$1
+  local dotfiles_dirs=$2
+
+  : ${TAGS:=$arg_tags}
+  : ${DOTFILES_DIRS:=$dotfiles_dirs}
+
+  $DEBUG "TAGS: $TAGS"
+  $DEBUG "DOTFILES_DIRS: $DOTFILES_DIRS"
 }
