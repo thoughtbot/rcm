@@ -171,7 +171,7 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-man_MANS = lsrc.1  mkrc.1  rcrc.5  rcup.1  rcm.7
+man_MANS = lsrc.1 mkrc.1 rcdn.1 rcup.1 rcrc.5 rcm.7
 all: all-am
 
 .SUFFIXES:

@@ -7,6 +7,7 @@
 .Sh SYNOPSIS
 .Nm lsrc
 .Nm mkrc
+.Nm rcdn
 .Nm rcup
 .Sh DESCRIPTION
 The rcm suite of tools is for managing dotfiles directories. This is a
@@ -91,10 +92,16 @@ A less common situation is for all the filenames in your dotfiles
 directory to be prefixed with a period. These files are skipped by the
 rcm suite, and thus would result in nothing happening. The only option
 in this case is to rename all the files, for example by using a shell
-command like the following. Note that this will break any existing
-symlinks.
+command like the following.
 .Pp
 .Dl find ~/.dotfiles -name '.*' -exec echo mv {} `echo {} | sed 's/\.//'` \;
+.Pp
+Note that this will break any existing symlinks. Those can be safely
+removed using the
+.Xr rcdn 1
+command.
+.Pp
+.Dl rcdn -v
 .Ss COMMON PROBLEM: DOTFILES DIRECTORY NOT IN Pa ~/.dotfiles
 This all assumes that your dotfiles directory is
 .Pa ~/.dotfiles .
@@ -222,6 +229,7 @@ dotfiles, too.
 .Sh SEE ALSO
 .Xr lsrc 1 ,
 .Xr mkrc 1 ,
+.Xr rcdn 1 ,
 .Xr rcup 1 ,
 .Xr rcrc 5
 .Sh AUTHORS

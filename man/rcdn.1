@@ -1,0 +1,52 @@
+.Dd August 2, 2013
+.Dt RCDN 1
+.Os
+.Sh NAME
+.Nm rcdn
+.Nd remove dotfiles
+.Sh SYNOPSIS
+.Nm rcdn
+.Op Fl vq
+.Op Fl t Ar tag
+.Op Fl d Ar dir
+.Op Ar files ...
+.Sh DESCRIPTION
+This program will remove all the rc files that the
+.Xr rcm 7
+suite knows about. This can be further controlled with the
+.Fl t
+and
+.Fl d
+flags.
+.Bl -tag
+.It Fl v
+increase verbosity. This can be repeated for extra verbosity.
+.It Fl q
+decrease verbosity
+.It Fl t Ar TAG
+remove dotfiles according to
+.Ar TAG
+.It Fl d Ar DIR
+remove dotfiles from the
+.Ar DIR .
+This can be specified multiple times.
+.It Ar files
+only remove the specified file(s)
+.El
+.
+.Sh EXAMPLES
+.Dl rcdn -v
+.Dl rcdn zshrc
+.Dl rcdn -t python
+.Dl rcdn -d ~/corporate-dotfiles
+.Sh FILES
+.Pa ~/.dotfiles
+.Pa ~/.rcrc
+.Sh SEE ALSO
+.Xr lsrc 1 ,
+.Xr mkrc 1 ,
+.Xr rcup 1 ,
+.Xr rcrc 5 ,
+.Xr rcm 7
+.Sh AUTHORS
+.An "Mike Burns" Aq mike@mike-burns.com

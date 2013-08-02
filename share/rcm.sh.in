@@ -51,18 +51,21 @@ handle_common_flags() {
     VERBOSE=echo
     PRINT=echo
     MV="$MV -v"
+    RM="$RM -v"
     INSTALL="$INSTALL -vv"
   elif [ $verbosity -eq 1 ]; then
     DEBUG=:
     VERBOSE=echo
     PRINT=echo
     MV="$MV -v"
+    RM="$RM -v"
     INSTALL="$INSTALL -v"
   elif [ $verbosity -eq 0 ]; then
     DEBUG=:
     VERBOSE=:
     PRINT=echo
     MV="$MV -v"
+    RM="$RM -v"
   else
     DEBUG=:
     VERBOSE=:
