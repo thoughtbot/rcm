@@ -73,33 +73,37 @@ handle_file() {
 }
 
 handle_command_line() {
-  arg_tags=""
-  verbosity=0
-  version=0
-  dotfiles_dirs=""
-  LS_ARGS=
+  local arg_tags=
+  local verbosity=0
+  local version=0
+  local dotfiles_dirs=
+  local files=
 
   while getopts Vqvt:d: opt; do
     case "$opt" in
-      t)
-        arg_tags="$arg_tags $OPTARG"
-        LS_ARGS="$LS_ARGS -t $OPTARG"
-        ;;
+      t) arg_tags="$arg_tags $OPTARG" ;;
       v) verbosity=$(($verbosity + 1));;
       q) verbosity=$(($verbosity - 1));;
-      d)
-        dotfiles_dirs="$dotfiles_dirs $OPTARG"
-        LS_ARGS="$LS_ARGS -d $OPTARG"
-        ;;
+      d) dotfiles_dirs="$dotfiles_dirs $OPTARG" ;;
       V) version=1
     esac
   done
   shift $(($OPTIND-1))
 
   handle_common_flags rcup $version $verbosity
-  handle_metadata_flags $arg_tags $dotfiles_dirs
-  FILES=$@
-  LS_ARGS="$LS_ARGS $FILES"
+
+  tags=${arg_tags:-$TAGS}
+  dotfiles_dirs=${dotfiles_dirs:-$DOTFILES_DIRS}
+  files=$@
+
+  for tag in $tags; do
+    LS_ARGS="$LS_ARGS -t $tag"
+  done
+  for dotfiles_dir in $dotfiles_dirs; do
+    LS_ARGS="$LS_ARGS -d $dotfiles_dir"
+  done
+  LS_ARGS="$LS_ARGS $files"
+
   $DEBUG "LS_ARGS: $LS_ARGS"
 }
 

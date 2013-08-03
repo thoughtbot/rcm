@@ -82,10 +82,10 @@ metafile() {
 }
 
 handle_command_line() {
-  arg_tags=""
-  verbosity=0
-  version=0
-  dotfiles_dirs=""
+  local arg_tags=
+  local verbosity=0
+  local version=0
+  local dotfiles_dirs=
 
   while getopts Vqvt:d: opt; do
     case "$opt" in
@@ -99,8 +99,12 @@ handle_command_line() {
   shift $(($OPTIND-1))
 
   handle_common_flags lsrc $version $verbosity
-  handle_metadata_flags $arg_tags $dotfiles_dirs
+  TAGS=${arg_tags:-$TAGS}
+  DOTFILES_DIRS=${dotfiles_dirs:-$DOTFILES_DIRS}
   FILES=$@
+
+  $DEBUG "TAGS: $TAGS"
+  $DEBUG "DOTFILES_DIRS: $DOTFILES_DIRS"
 }
 
 DEST_STACK=
@@ -111,9 +115,8 @@ fi
 
 handle_command_line $*
 
-if [ "x$DOTFILES_DIRS" = "x" ]; then
-  DOTFILES_DIRS="$DOTFILES_DIRS $DEFAULT_DOTFILES_DIR"
-fi
+: ${DOTFILES_DIRS:=$DOTFILES_DIRS $DEFAULT_DOTFILES_DIR}
+$DEBUG "DOTFILES_DIRS: $DOTFILES_DIRS"
 
 for DOTFILES_DIR in $DOTFILES_DIRS; do
 
