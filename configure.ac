@@ -2,8 +2,8 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT(rcm, 0.0.3, mike@mike-burns.com)
-AM_INIT_AUTOMAKE(rcm, 0.0.3)
+AC_INIT(rcm, 1.0.0, mike@mike-burns.com)
+AM_INIT_AUTOMAKE(rcm, 1.0.0)
 
 # Checks for programs.
 
