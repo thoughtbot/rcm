@@ -37,6 +37,6 @@ build-docs:
 upload-docs: build-docs
 	cd gh-pages ; \
 	git commit -am "update pages" ; \
-	git push $(ORIGIN_URL) gh-pages ; \
+	git push -f $(ORIGIN_URL) gh-pages ; \
 	cd .. && \
 	rm -rf gh-pages

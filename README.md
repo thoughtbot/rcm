@@ -17,8 +17,8 @@ Arch Linux:
 
 Debian-based (including Ubuntu):
 
-    wget http://mike-burns.com/project/rcm/rcm_0.0.2-1_all.deb
-    sudo dpkg -i rcm_0.0.2-1_all.deb
+    wget http://mike-burns.com/project/rcm/rcm_1.0.0_all.deb
+    sudo dpkg -i rcm_1.0.0_all.deb
 
 OS X:
 
