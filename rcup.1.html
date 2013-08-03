@@ -34,7 +34,7 @@ RCUP(1)</td>
 <td>
 rcup</td>
 <td>
-&#91;<span class="opt"><b class="flag">&#45;vq</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;t</b> <i class="arg">tag</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;d</b> <i class="arg">dir</i></span>&#93; &#91;<span class="opt"><i class="arg">files ...</i></span>&#93;</td>
+&#91;<span class="opt"><b class="flag">&#45;vqfi</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;t</b> <i class="arg">tag</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;d</b> <i class="arg">dir</i></span>&#93; &#91;<span class="opt"><i class="arg">files ...</i></span>&#93;</td>
 </tr>
 </tbody>
 </table>
@@ -44,24 +44,32 @@ rcup</td>
 See <i class="link-sec"><a class="link-sec" href="#x4449524543544f5259204c41594f5554">DIRECTORY LAYOUT</a></i> for details on the directory layout.<p>
 It supports these options:<dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
 <dt class="list-tag" style="margin-top: 1.00em;">
-<b class="flag">&#45;v</b></dt>
-<dd class="list-tag" style="margin-left: 10.00ex;">
-increase verbosity. This can be repeated for extra verbosity.</dd>
+f</dt>
+<dd class="list-tag" style="margin-left: 2.00ex;">
+If the rc file already exists in your home directory but does not match the file in your dotfiles directory, remove the rc file then create the symlink</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
-<b class="flag">&#45;q</b></dt>
-<dd class="list-tag" style="margin-left: 10.00ex;">
-decrease verbosity</dd>
+i</dt>
+<dd class="list-tag" style="margin-left: 2.00ex;">
+If the rc file already exists in your home directory but does not match the file in your dotfiles directory, prompt for how to handle it. This is the default</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;t</b> <i class="arg">TAG</i></dt>
-<dd class="list-tag" style="margin-left: 10.00ex;">
+<dd class="list-tag" style="margin-left: 2.00ex;">
 install dotfiles according to <i class="arg">TAG</i></dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;d</b> <i class="arg">DIR</i></dt>
-<dd class="list-tag" style="margin-left: 10.00ex;">
+<dd class="list-tag" style="margin-left: 2.00ex;">
 install dotfiles from the <i class="arg">DIR</i> . This can be specified multiple times.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;v</b></dt>
+<dd class="list-tag" style="margin-left: 2.00ex;">
+increase verbosity. This can be repeated for extra verbosity.</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;q</b></dt>
+<dd class="list-tag" style="margin-left: 2.00ex;">
+decrease verbosity</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
 <i class="arg">files</i></dt>
-<dd class="list-tag" style="margin-left: 10.00ex;">
+<dd class="list-tag" style="margin-left: 2.00ex;">
 only install the specified file(s)</dd>
 </dl>
 </div>
@@ -86,7 +94,7 @@ Steps (1) and (2) are applied to tag-specific files. These are files under direc
 <div class="section">
 <h1 id="x46494c4553">FILES</h1> <i class="file">~/.dotfiles</i> <i class="file">~/.rcrc</i></div>
 <div class="section">
-<h1 id="x53454520414c534f">SEE ALSO</h1> <a class="link-man" href="lsrc.1.html">lsrc(1)</a>, <a class="link-man" href="mkrc.1.html">mkrc(1)</a>, <a class="link-man" href="rcrc.5.html">rcrc(5)</a>, <a class="link-man" href="rcm.7.html">rcm(7)</a></div>
+<h1 id="x53454520414c534f">SEE ALSO</h1> <a class="link-man" href="lsrc.1.html">lsrc(1)</a>, <a class="link-man" href="mkrc.1.html">mkrc(1)</a>, <a class="link-man" href="rcdn.1.html">rcdn(1)</a>, <a class="link-man" href="rcrc.5.html">rcrc(5)</a>, <a class="link-man" href="rcm.7.html">rcm(7)</a></div>
 <div class="section">
 <h1 id="x415554484f5253">AUTHORS</h1> <span class="author">Mike Burns</span> &#60;mike@mike-burns.com&#62;</div>
 <table summary="Document Footer" class="foot" width="100%">

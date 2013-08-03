@@ -34,7 +34,7 @@ MKRC(1)</td>
 <td>
 mkrc</td>
 <td>
-&#91;<span class="opt"><b class="flag">&#45;vq</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;t</b> <i class="arg">tag</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;d</b> <i class="arg">dir</i></span>&#93; <i class="arg">files ...</i></td>
+&#91;<span class="opt"><b class="flag">&#45;vqo</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;t</b> <i class="arg">tag</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;d</b> <i class="arg">dir</i></span>&#93; <i class="arg">files ...</i></td>
 </tr>
 </tbody>
 </table>
@@ -57,6 +57,10 @@ install dotfiles according to tag</dd>
 <b class="flag">&#45;d</b> <i class="arg">DIR</i></dt>
 <dd class="list-tag" style="margin-left: 10.00ex;">
 install dotfiles under the specified directory. This can be specified multiple times.</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;o</b></dt>
+<dd class="list-tag" style="margin-left: 10.00ex;">
+install dotfiles into the host-specific directory</dd>
 </dl>
 </div>
 <div class="section">
@@ -70,9 +74,13 @@ install dotfiles under the specified directory. This can be specified multiple t
 <div class="display">
 <code class="lit">mkrc -t zsh -d company-dotfiles ~/.zshrc ~/.zlogin</code></div>
 </blockquote>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">mkrc -o ~/.rcrc</code></div>
+</blockquote>
 </div>
 <div class="section">
-<h1 id="x53454520414c534f">SEE ALSO</h1> <a class="link-man" href="lsrc.1.html">lsrc(1)</a>, <a class="link-man" href="rcup.1.html">rcup(1)</a>, <a class="link-man" href="rcrc.5.html">rcrc(5)</a>, <a class="link-man" href="rcm.7.html">rcm(7)</a></div>
+<h1 id="x53454520414c534f">SEE ALSO</h1> <a class="link-man" href="lsrc.1.html">lsrc(1)</a>, <a class="link-man" href="rcdn.1.html">rcdn(1)</a>, <a class="link-man" href="rcup.1.html">rcup(1)</a>, <a class="link-man" href="rcrc.5.html">rcrc(5)</a>, <a class="link-man" href="rcm.7.html">rcm(7)</a></div>
 <div class="section">
 <h1 id="x415554484f5253">AUTHORS</h1> <span class="author">Mike Burns</span> &#60;mike@mike-burns.com&#62;</div>
 <table summary="Document Footer" class="foot" width="100%">
