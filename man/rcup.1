@@ -6,7 +6,7 @@
 .Nd update and install dotfiles
 .Sh SYNOPSIS
 .Nm rcup
-.Op Fl vq
+.Op Fl vqfi
 .Op Fl t Ar tag
 .Op Fl d Ar dir
 .Op Ar files ...
@@ -23,10 +23,14 @@ for details on the directory layout.
 .Pp
 It supports these options:
 .Bl -tag
-.It Fl v
-increase verbosity. This can be repeated for extra verbosity.
-.It Fl q
-decrease verbosity
+.It f
+If the rc file already exists in your home directory but does not match
+the file in your dotfiles directory, remove the rc file then create the
+symlink
+.It i
+If the rc file already exists in your home directory but does not match
+the file in your dotfiles directory, prompt for how to handle it. This
+is the default
 .It Fl t Ar TAG
 install dotfiles according to
 .Ar TAG
@@ -34,6 +38,10 @@ install dotfiles according to
 install dotfiles from the
 .Ar DIR
 \&. This can be specified multiple times.
+.It Fl v
+increase verbosity. This can be repeated for extra verbosity.
+.It Fl q
+decrease verbosity
 .It Ar files
 only install the specified file(s)
 .El

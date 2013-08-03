@@ -3,8 +3,6 @@
 : ${RCM_LIB:=`dirname $0`/../share/rcm}
 . $RCM_LIB/rcm.sh
 
-REPLACE_ALL=0
-
 link_file() {
   local src=$1
   local dest=$2
@@ -78,12 +76,16 @@ handle_command_line() {
   local version=0
   local dotfiles_dirs=
   local files=
+  REPLACE_ALL=0
 
-  while getopts Vqvt:d: opt; do
+
+  while getopts Vqvfit:d: opt; do
     case "$opt" in
+      f) REPLACE_ALL=1 ;;
+      i) REPLACE_ALL=0 ;;
       t) arg_tags="$arg_tags $OPTARG" ;;
-      v) verbosity=$(($verbosity + 1));;
-      q) verbosity=$(($verbosity - 1));;
+      v) verbosity=$(($verbosity + 1)) ;;
+      q) verbosity=$(($verbosity - 1)) ;;
       d) dotfiles_dirs="$dotfiles_dirs $OPTARG" ;;
       V) version=1
     esac

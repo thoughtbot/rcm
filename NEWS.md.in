@@ -3,6 +3,7 @@ rcm (@PACKAGE_VERSION@) unstable; urgency=low
  * Improved Debian handling.
  * Introduce mkrc -o to install host-specific dotfiles.
  * Add rcdn(1) to remove rc files.
+ * Add rcup -f and -i to force overwrites/prompt for overwrites.
 
  -- Mike Burns <mburns@thoughtbot.com>  Tue, 01 Aug 2013 16:43:33 +0200
 
