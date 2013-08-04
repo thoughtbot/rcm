@@ -9,9 +9,11 @@ handle_command_line() {
   local version=0
   local dotfiles_dirs=
   local files=
+  local excludes=
 
-  while getopts Vqvt:d: opt; do
+  while getopts Vqve:t:d: opt; do
     case "$opt" in
+      e) excludes="$excludes $OPTARG";;
       t) arg_tags="$arg_tags $OPTARG" ;;
       v) verbosity=$(($verbosity + 1));;
       q) verbosity=$(($verbosity - 1));;
@@ -32,6 +34,9 @@ handle_command_line() {
   done
   for dotfiles_dir in $dotfiles_dirs; do
     LS_ARGS="$LS_ARGS -d $dotfiles_dir"
+  done
+  for exclude in $excludes; do
+    LS_ARGS="$LS_ARGS -e $exclude"
   done
   LS_ARGS="$LS_ARGS $files"
 

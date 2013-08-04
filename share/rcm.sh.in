@@ -28,6 +28,14 @@ echo_error() {
   exit $exit_status
 }
 
+echo_stderr() {
+  echo $* >&2
+}
+
+is_relative() {
+  echo $1 | grep -vq '^/'
+}
+
 version() {
   cat << EOV
 $1 (rcm) $VERSION
@@ -47,7 +55,7 @@ handle_common_flags() {
     version $prog_name
     exit 0
   elif [ $verbosity -ge 2 ]; then
-    DEBUG=echo
+    DEBUG=echo_stderr
     VERBOSE=echo
     PRINT=echo
     MV="$MV -v"

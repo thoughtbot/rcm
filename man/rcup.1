@@ -6,9 +6,9 @@
 .Nd update and install dotfiles
 .Sh SYNOPSIS
 .Nm rcup
-.Op Fl vqfi
-.Op Fl t Ar tag
+.Op Fl fiqv
 .Op Fl d Ar dir
+.Op Fl t Ar tag
 .Op Ar files ...
 .Sh DESCRIPTION
 This is a program to update and install personal dotfiles. These
@@ -23,25 +23,32 @@ for details on the directory layout.
 .Pp
 It supports these options:
 .Bl -tag
-.It f
+.It Fl d Ar DIR
+install dotfiles from the
+.Ar DIR
+\&. This can be specified multiple times.
+.It Fl e Ar EXCL_PAT
+do not install rc files that match
+.Ar EXCL_PAT .
+This can be repeated with additional patterns. See
+.Xr lsrc 1 ,
+.Sx EXCLUDE PATTERN ,
+for more details.
+.It Fl f
 If the rc file already exists in your home directory but does not match
 the file in your dotfiles directory, remove the rc file then create the
 symlink
-.It i
+.It Fl i
 If the rc file already exists in your home directory but does not match
 the file in your dotfiles directory, prompt for how to handle it. This
 is the default
 .It Fl t Ar TAG
 install dotfiles according to
 .Ar TAG
-.It Fl d Ar DIR
-install dotfiles from the
-.Ar DIR
-\&. This can be specified multiple times.
-.It Fl v
-increase verbosity. This can be repeated for extra verbosity.
 .It Fl q
 decrease verbosity
+.It Fl v
+increase verbosity. This can be repeated for extra verbosity.
 .It Ar files
 only install the specified file(s)
 .El

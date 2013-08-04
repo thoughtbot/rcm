@@ -19,17 +19,24 @@ and
 .Fl d
 flags.
 .Bl -tag
-.It Fl v
-increase verbosity. This can be repeated for extra verbosity.
+.It Fl d Ar DIR
+remove rc files from the
+.Ar DIR .
+This can be specified multiple times.
+.It Fl e Ar EXCL_PAT
+do not remove rc files that match
+.Ar EXCL_PAT .
+This can be repeated with additional patterns. See
+.Xr lsrc 1 ,
+.Sx EXCLUDE PATTERN ,
+for more details.
 .It Fl q
 decrease verbosity
 .It Fl t Ar TAG
 remove dotfiles according to
 .Ar TAG
-.It Fl d Ar DIR
-remove dotfiles from the
-.Ar DIR .
-This can be specified multiple times.
+.It Fl v
+increase verbosity. This can be repeated for extra verbosity.
 .It Ar files
 only remove the specified file(s)
 .El
@@ -39,8 +46,8 @@ only remove the specified file(s)
 .Dl rcdn zshrc
 .Dl rcdn -t python
 .Dl rcdn -d ~/corporate-dotfiles
+.Dl rcdn -e '*:.zshrc'
 .Sh FILES
-.Pa ~/.dotfiles
 .Pa ~/.rcrc
 .Sh SEE ALSO
 .Xr lsrc 1 ,

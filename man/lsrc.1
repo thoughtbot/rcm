@@ -9,6 +9,7 @@
 .Op Fl vq
 .Op Fl t Ar tag
 .Op Fl d Ar dir
+.Op Fl e Ar excl_pat
 .Op files ...
 .Sh DESCRIPTION
 This program lists all configuration files, both the sources in the
@@ -23,21 +24,52 @@ section, for details on the directory layout.
 It supports these options:
 .
 .Bl -tag
-.It Fl v
-increase verbosity. This can be repeated for extra verbosity.
-.
-.It Fl q
-decrease verbosity
-.
 .It Fl t Ar TAG
 list dotfiles according to TAG
 .
 .It Fl d Ar DIR
 list dotfiles from the DIR. This can be specified multiple times.
 .
+.It Fl e Ar excl_pat
+Exclude the files that matches the given pattern. See
+.Sx EXCLUDE PATTERN
+for more details. This option can be repeated.
+.
+.It Fl v
+increase verbosity. This can be repeated for extra verbosity.
+.
+.It Fl q
+decrease verbosity
+.
 .It Ar files ...
 only list the specified file(s)
 .El
+.Sh EXCLUDE PATTERN
+The exclude pattern specifies a colon-separated pair of dotfiles
+directory and file glob. The dotfiles directory is optional and, if
+omitted, defaults to
+.Li * ,
+which is a special token that matches any dotfiles directory. The file
+glob is relative to the dotfiles directory, ignoring meta directories. A
+colon combines them.
+.
+.Pp
+For example, to ignore all emacs-related items from the
+.Pa thoughtbot-dotfiles
+directory, use the exclude pattern:
+.Pp
+.Dl thoughtbot-dotfiles:*emacs*
+.Pp
+To ignore any
+.Pa bash_profile
+file, use the pattern:
+.Pp
+.Dl *:bash_profile
+.Pp
+Or more simply:
+.Pp
+.Dl bash_profile
+.Pp
 .Sh FILES
 .Pa ~/.dotfiles
 .Pa ~/.rcrc
