@@ -12,7 +12,7 @@ destination() {
   if [ "x$tag" != "x" ]; then
     echo $dotfiles_dir/tag-$tag
   elif [ $in_host = 1 ]; then
-    echo $dotfiles_dir/host-`hostname`
+    echo $dotfiles_dir/host-$HOSTNAME
   else
     echo $dotfiles_dir
   fi
