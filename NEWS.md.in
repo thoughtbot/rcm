@@ -1,6 +1,7 @@
 rcm (@PACKAGE_VERSION@) unstable; urgency=low
 
- * Exclusion and inclusion with -e and -I
+ * Exclusion and inclusion with -e and -I.
+ * Copy instead of symlink with -C.
 
  -- Mike Burns <mburns@thoughtbot.com>  Mon, 05 Aug 2013 16:43:33 +0200
 

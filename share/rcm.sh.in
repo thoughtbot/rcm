@@ -9,7 +9,7 @@ PROMPT=echo_n
 ERROR=echo_error
 VERBOSE=:
 MKDIR=mkdir
-LN=ln
+LN="ln -s"
 RM=rm
 DEFAULT_DOTFILES_DIR=$HOME/.dotfiles
 MV=mv
@@ -60,6 +60,7 @@ handle_common_flags() {
     PRINT=echo
     MV="$MV -v"
     RM="$RM -v"
+    LN="$LN -v"
     INSTALL="$INSTALL -vv"
   elif [ $verbosity -eq 1 ]; then
     DEBUG=:
@@ -67,6 +68,7 @@ handle_common_flags() {
     PRINT=echo
     MV="$MV -v"
     RM="$RM -v"
+    LN="$LN -v"
     INSTALL="$INSTALL -v"
   elif [ $verbosity -eq 0 ]; then
     DEBUG=:
@@ -74,6 +76,7 @@ handle_common_flags() {
     PRINT=echo
     MV="$MV -v"
     RM="$RM -v"
+    LN="$LN -v"
   else
     DEBUG=:
     VERBOSE=:

@@ -35,15 +35,17 @@ tag=
 verbosity=0
 in_host=0
 version=0
+always_copy=0
 
-while getopts Vvqot:d: opt; do
+while getopts CVvqot:d: opt; do
   case "$opt" in
-    t) tag=$OPTARG;;
-    v) verbosity=$(($verbosity + 1));;
-    q) verbosity=$(($verbosity - 1));;
-    o) in_host=1;;
-    d) DOTFILES_DIR=$OPTARG;;
-    V) version=1
+    C) always_copy=1 ;;
+    t) tag=$OPTARG ;;
+    v) verbosity=$(($verbosity + 1)) ;;
+    q) verbosity=$(($verbosity - 1)) ;;
+    o) in_host=1 ;;
+    d) DOTFILES_DIR=$OPTARG ;;
+    V) version=1 ;;
   esac
 done
 shift $(($OPTIND-1))
@@ -52,6 +54,10 @@ handle_common_flags mkrc $version $verbosity
 
 if [ $in_host -eq 1 -a "x$tag" != "x" ]; then
   $ERROR 1 "Cannot specify both -o and -t"
+fi
+
+if [ $always_copy -eq 1 ]; then
+  INSTALL="$INSTALL -C"
 fi
 
 files=$@

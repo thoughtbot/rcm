@@ -6,7 +6,7 @@
 .Nd update and install dotfiles
 .Sh SYNOPSIS
 .Nm rcup
-.Op Fl fiqv
+.Op Fl Cfiqv
 .Op Fl d Ar dir
 .Op Fl e Ar excl_pat
 .Op Fl I Ar excl_pat
@@ -25,10 +25,12 @@ for details on the directory layout.
 .Pp
 It supports these options:
 .Bl -tag
+.It Fl C
+copy the files instead of symlinking them
 .It Fl d Ar DIR
 install dotfiles from the
-.Ar DIR
-\&. This can be specified multiple times.
+.Ar DIR .
+This can be specified multiple times.
 .It Fl e Ar EXCL_PAT
 do not install rc files that match
 .Ar EXCL_PAT .

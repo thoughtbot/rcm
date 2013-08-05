@@ -7,12 +7,11 @@ link_file() {
   local src=$1
   local dest=$2
 
-  $PRINT "linking $dest"
   if [ -h $dest ]; then
-    rm -f $dest
+    $RM -f $dest
   fi
 
-  $LN -s $src $dest
+  $LN $src $dest
 }
 
 replace_file() {
@@ -78,23 +77,28 @@ handle_command_line() {
   local files=
   local excludes=
   local includes=
+  local always_copy=0
   REPLACE_ALL=0
 
-
-  while getopts VqvfiI:e:t:d: opt; do
+  while getopts CVqvfiI:e:t:d: opt; do
     case "$opt" in
-      e) excludes="$excludes $OPTARG";;
+      C) always_copy=1 ;;
+      d) dotfiles_dirs="$dotfiles_dirs $OPTARG" ;;
+      e) excludes="$excludes $OPTARG" ;;
       f) REPLACE_ALL=1 ;;
       i) REPLACE_ALL=0 ;;
-      I) includes="$includes $OPTARG";;
+      I) includes="$includes $OPTARG" ;;
+      q) verbosity=$(($verbosity - 1)) ;;
       t) arg_tags="$arg_tags $OPTARG" ;;
       v) verbosity=$(($verbosity + 1)) ;;
-      q) verbosity=$(($verbosity - 1)) ;;
-      d) dotfiles_dirs="$dotfiles_dirs $OPTARG" ;;
       V) version=1
     esac
   done
   shift $(($OPTIND-1))
+
+  if [ $always_copy -eq 1 ]; then
+    LN=cp
+  fi
 
   handle_common_flags rcup $version $verbosity
 

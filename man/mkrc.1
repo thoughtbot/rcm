@@ -6,7 +6,7 @@
 .Nd bless files into a dotfile
 .Sh SYNOPSIS
 .Nm mkrc
-.Op Fl vqo
+.Op Fl Cvqo
 .Op Fl t Ar tag
 .Op Fl d Ar dir
 .Ar files ...
@@ -18,17 +18,20 @@ different source directory.
 It supports these options:
 .
 .Bl -tag
-.It Fl v
-increase verbosity. This can be repeated for extra verbosity.
-.It Fl q
-decrease verbosity
-.It Fl t Ar TAG
-install dotfiles according to tag
+.It Fl C
+copy instead of symlinking when installing the rc file back into your
+home directory
 .It Fl d Ar DIR
 install dotfiles under the specified directory. This can be specified
 multiple times.
 .It Fl o
 install dotfiles into the host-specific directory
+.It Fl q
+decrease verbosity
+.It Fl t Ar TAG
+install dotfiles according to tag
+.It Fl v
+increase verbosity. This can be repeated for extra verbosity.
 .El
 .Sh FILES
 .Pa ~/.dotfiles
@@ -37,6 +40,7 @@ install dotfiles into the host-specific directory
 .Dl mkrc ~/.vimrc
 .Dl mkrc -t zsh -d company-dotfiles ~/.zshrc ~/.zlogin
 .Dl mkrc -o ~/.rcrc
+.Dl mkrc -C .ssh
 .Sh SEE ALSO
 .Xr lsrc 1 ,
 .Xr rcdn 1 ,
