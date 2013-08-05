@@ -7,9 +7,10 @@
 .Sh SYNOPSIS
 .Nm lsrc
 .Op Fl vq
-.Op Fl t Ar tag
 .Op Fl d Ar dir
 .Op Fl e Ar excl_pat
+.Op Fl I Ar excl_pat
+.Op Fl t Ar tag
 .Op files ...
 .Sh DESCRIPTION
 This program lists all configuration files, both the sources in the
@@ -31,10 +32,19 @@ list dotfiles according to TAG
 list dotfiles from the DIR. This can be specified multiple times.
 .
 .It Fl e Ar excl_pat
-Exclude the files that matches the given pattern. See
+exclude the files that match the given pattern. See
 .Sx EXCLUDE PATTERN
 for more details. This option can be repeated.
 .
+.It Fl I Ar excl_pat
+include the files that match the given pattern. This is applied after
+any
+.Fl e
+options. It uses the same pattern language as
+.Fl e ;
+more details are in the
+.Sx EXCLUDE PATTERN
+section.
 .It Fl v
 increase verbosity. This can be repeated for extra verbosity.
 .

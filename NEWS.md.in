@@ -1,5 +1,11 @@
 rcm (@PACKAGE_VERSION@) unstable; urgency=low
 
+ * Exclusion and inclusion with -e and -I
+
+ -- Mike Burns <mburns@thoughtbot.com>  Mon, 05 Aug 2013 16:43:33 +0200
+
+rcm (1.0.0) unstable; urgency=low
+
  * Improved Debian handling.
  * Introduce mkrc -o to install host-specific dotfiles.
  * Add rcdn(1) to remove rc files.

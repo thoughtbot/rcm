@@ -23,7 +23,7 @@ if [ -e $HOME/.rcrc ]; then
 fi
 
 if [ $# -eq 0 ]; then
-  echo "Usage: mkrc [-d dir] [-t tag] [-o] [-v] [-q] filename ..."
+  echo "Usage: mkrc [-vqo] [-t tag] [-d dir] files ..."
   exit 1
 fi
 

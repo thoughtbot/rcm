@@ -8,6 +8,8 @@
 .Nm rcup
 .Op Fl fiqv
 .Op Fl d Ar dir
+.Op Fl e Ar excl_pat
+.Op Fl I Ar excl_pat
 .Op Fl t Ar tag
 .Op Ar files ...
 .Sh DESCRIPTION
@@ -42,6 +44,17 @@ symlink
 If the rc file already exists in your home directory but does not match
 the file in your dotfiles directory, prompt for how to handle it. This
 is the default
+.It Fl I Ar EXCL_PAT
+install rc files that match
+.Ar EXCL_PAT
+despite being excluded by the
+.Fl e
+flag or a setting in
+.Xr rcrc 5 .
+This can be repeated with additional patterns. See
+.Xr lsrc 1 ,
+.Sx EXCLUDE PATTERN ,
+for more details.
 .It Fl t Ar TAG
 install dotfiles according to
 .Ar TAG

@@ -35,15 +35,16 @@ link_dir() {
   local dotfiles_dir=$3
   local dotted=$4
   local exclude_file_globs="$5"
+  local include_file_globs="$6"
   local dest_path=`build_path $dest_dir $dir $dotted`
 
-  $DEBUG "link_dir $1 $2 $3 $4 $5"
+  $DEBUG "link_dir $1 $2 $3 $4 $5 $6"
 
   $VERBOSE "recurring on $dest_path"
   pushdir $dir
   for f in *; do
     $DEBUG "handling the file $f"
-    handle_file $f $dest_path $dotfiles_dir/$dir 1 "$exclude_file_globs"
+    handle_file $f $dest_path $dotfiles_dir/$dir 1 "$exclude_file_globs" "$include_file_globs"
   done
   popdir
 }
@@ -68,15 +69,16 @@ handle_file() {
   local dotfiles_dir=$3
   local dotted=$4
   local exclude_file_globs="$5"
+  local include_file_globs="$6"
 
-  $DEBUG "handle_file $1 $2 $3 $4 $5"
+  $DEBUG "handle_file $1 $2 $3 $4 $5 $6"
 
   if [ ! -e $file ]; then
     $VERBOSE "skipping non-existent file $file"
-  elif is_excluded $file "$exclude_file_globs"; then
+  elif is_excluded $file "$exclude_file_globs" "$include_file_globs"; then
     $VERBOSE "skipping excluded file $file"
   elif [ -d $file ]; then
-    link_dir $file $dest_dir $dotfiles_dir $dotted "$exclude_file_globs"
+    link_dir $file $dest_dir $dotfiles_dir $dotted "$exclude_file_globs" "$include_file_globs"
   else
     link_file $file $dest_dir $dotfiles_dir $dotted
   fi
@@ -91,11 +93,12 @@ is_metafile() {
 
 dotfiles_dir_excludes() {
   local dotfiles_dir=$1
+  local excludes="$2"
 
   $DEBUG "dotfiles_dir_excludes $dotfiles_dir"
-  $DEBUG "  with EXCLUDES: $EXCLUDES"
+  $DEBUG "  with excludes: $excludes"
 
-  for exclude in $EXCLUDES; do
+  for exclude in $excludes; do
     if echo $exclude | grep -q :; then
       dotfiles_dir_pat=`echo $exclude | sed 's/:.*//'`
       file_glob=`echo $exclude | sed 's/.*://'`
@@ -116,15 +119,24 @@ dotfiles_dir_excludes() {
 is_excluded() {
   local file=$1
   local exclude_file_globs="$2"
+  local include_file_globs="$3"
 
-  $DEBUG "is_excluded $file $exclude_file_globs"
+  $DEBUG "is_excluded $file $exclude_file_globs $include_file_globs"
 
-  for file_glob in $exclude_file_globs; do
-    $DEBUG "file_glob: $file_glob"
+  for exclude_file_glob in $exclude_file_globs; do
     $DEBUG "file: $file"
+    $DEBUG "exclude_file_glob: $exclude_file_glob"
 
     case $file in
-      $file_glob) return 0;;
+      $exclude_file_glob)
+        for include_file_glob in $include_file_globs; do
+          case $file in
+            $include_file_glob) return 1;;
+          esac
+        done
+
+        return 0
+        ;;
     esac
   done
 
@@ -137,10 +149,12 @@ handle_command_line() {
   local version=0
   local dotfiles_dirs=
   local excludes=
+  local includes=
 
-  while getopts Vqve:t:d: opt; do
+  while getopts VqvI:e:t:d: opt; do
     case "$opt" in
       e) excludes="$excludes $OPTARG";;
+      I) includes="$includes $OPTARG";;
       t) arg_tags="$arg_tags $OPTARG";;
       v) verbosity=$(($verbosity + 1));;
       q) verbosity=$(($verbosity - 1));;
@@ -154,6 +168,7 @@ handle_command_line() {
   TAGS=${arg_tags:-$TAGS}
   DOTFILES_DIRS=${dotfiles_dirs:-$DOTFILES_DIRS}
   EXCLUDES=${excludes:-$EXCLUDES}
+  INCLUDES=${includes:-$INCLUDES}
   FILES=$@
 
   $DEBUG "TAGS: $TAGS"
@@ -181,8 +196,9 @@ for DOTFILES_DIR in $DOTFILES_DIRS; do
     continue
   fi
 
-  exclude_file_globs=`dotfiles_dir_excludes $DOTFILES_DIR`
+  exclude_file_globs=`dotfiles_dir_excludes $DOTFILES_DIR "$EXCLUDES"`
   $DEBUG "exclude_file_globs: $exclude_file_globs"
+  include_file_globs=`dotfiles_dir_excludes $DOTFILES_DIR "$INCLUDES"`
 
   cd $DOTFILES_DIR
   DIR_STACK=":$DOTFILES_DIR"
@@ -192,7 +208,7 @@ for DOTFILES_DIR in $DOTFILES_DIRS; do
       continue
     fi
 
-    handle_file $file $DEST_DIR $DOTFILES_DIR 0 "$exclude_file_globs"
+    handle_file $file $DEST_DIR $DOTFILES_DIR 0 "$exclude_file_globs" "$include_file_globs"
   done
 
   cd $DOTFILES_DIR
@@ -201,7 +217,7 @@ for DOTFILES_DIR in $DOTFILES_DIRS; do
   if [ -d $host_files ]; then
     pushdir `basename $host_files`
     for file in ${FILES:-*}; do
-      handle_file $file $DEST_DIR $host_files 0 "$exclude_file_globs"
+      handle_file $file $DEST_DIR $host_files 0 "$exclude_file_globs" "$include_file_globs"
     done
     popdir
   fi
@@ -213,7 +229,7 @@ for DOTFILES_DIR in $DOTFILES_DIRS; do
       pushdir `basename tag-$tag`
       for file in ${FILES:-*}; do
         $DEBUG "TAG: $tag, exclude_file_globs: $exclude_file_globs"
-        handle_file $file $DEST_DIR $DOTFILES_DIR/tag-$tag 0 "$exclude_file_globs"
+        handle_file $file $DEST_DIR $DOTFILES_DIR/tag-$tag 0 "$exclude_file_globs" "$include_file_globs"
       done
       popdir
     fi
