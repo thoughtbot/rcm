@@ -28,22 +28,29 @@ programs.
 .Pp
 It supports these variables:
 .Bl -tag
+.It Va COPY_ALWAYS
+always copy files that match the listed globs, never symlink them.
+.
 .It Va DOTFILES_DIRS
 the source directories for dotfiles. The first in the list is the
 canonical source. The default value is
 .Li ~/.dotfiles
+.
 .It Va EXCLUDES
 a space-separated list of exclude patterns. Exclude patterns are
 explained in detail in
 .Xr lsrc 1
 under the section
 .Sx EXCLUDE PATTERN .
+.
 .It Va TAGS
 the default tags.
 .El
 .Sh FILES
 .Pa ~/.rcrc
 .Sh EXAMPLES
+.Dl COPY_ALWAYS="ssh/id_* weechat/* netrc"
+.Dl COPY_ALWAYS="*"
 .Dl DOTFILES_DIRS="/home/mike/.dotfiles /usr/share/dotfiles"
 .Dl EXCLUDES="irbrc *:*emacs* dotfiles:python*"
 .Dl TAGS="freebsd development email git laptop gmail notmuch"

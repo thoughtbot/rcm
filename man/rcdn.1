@@ -13,13 +13,24 @@
 .Op Fl x Ar excl_pat
 .Op Ar files ...
 .Sh DESCRIPTION
-This program will remove all the rc file symlinks that the
+This program will remove all the rc files that the
 .Xr rcm 7
 suite knows about. This can be further controlled with the
 .Fl t
 and
 .Fl d
 flags.
+.Pp
+The files that are removed are symlinks. However, the
+.Va COPY_ALWAYS
+setting in
+.Xr rcrc 5
+modifies this. If a rc file is not a symlink but an ancestor directory
+is, that directory is removed. If a rc file is not a symlink but is
+listed in
+.Va COPY_ALWAYS
+the file is removed.
+.
 .Bl -tag
 .It Fl d Ar DIR
 remove rc files from the

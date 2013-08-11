@@ -29,37 +29,88 @@ build_path() {
   fi
 }
 
-link_dir() {
+file_join() {
+  local result=
+
+  for file; do
+    if [ "x$file" != "x." ]; then
+      if [ "x$result" = "x" ]; then
+        result=$file
+      else
+        result="$result/$file"
+      fi
+    fi
+  done
+
+  echo $result
+}
+
+show_dir() {
   local dir=$1
   local dest_dir=$2
   local dotfiles_dir=$3
-  local dotted=$4
-  local exclude_file_globs="$5"
-  local include_file_globs="$6"
+  local dotfiles_subdir=$4
+  local dotted=$5
+  local exclude_file_globs="$6"
+  local include_file_globs="$7"
   local dest_path=`build_path $dest_dir $dir $dotted`
 
-  $DEBUG "link_dir $1 $2 $3 $4 $5 $6"
+  $DEBUG "show_dir $1 $2 $3 $4 $5 $6 $7"
 
   $VERBOSE "recurring on $dest_path"
   pushdir $dir
   for f in *; do
     $DEBUG "handling the file $f"
-    handle_file $f $dest_path $dotfiles_dir/$dir 1 "$exclude_file_globs" "$include_file_globs"
+    next_dir=`file_join $dotfiles_subdir $dir`
+    handle_file $f $dest_path $dotfiles_dir $next_dir 1 "$exclude_file_globs" "$include_file_globs"
   done
   popdir
 }
 
-link_file() {
+sigil_for() {
+  local file=$1
+  local copy_always=0
+
+  for copy_file in $COPY_ALWAYS; do
+    $DEBUG "copy_file: $copy_file"
+    $DEBUG "file: $file"
+
+    case $file in
+      $copy_file)
+        copy_always=1
+        break
+        ;;
+    esac
+  done
+
+  if [ $copy_always -eq 1 ]; then
+    echo 'X'
+  else
+    echo '@'
+  fi
+}
+
+show_file() {
   local file=$1
   local dest_dir=$2
   local dotfiles_dir=$3
-  local dotted=$4
+  local dotfiles_subdir=$4
+  local dotted=$5
   local dest_file=`build_path $dest_dir $file $dotted`
 
   if echo $DEST_STACK | grep -vq ":$dest_file"; then
     DEST_STACK="$DEST_STACK:$dest_file"
 
-    $PRINT $dest_file:$dotfiles_dir/$file
+    src_file=`file_join $dotfiles_subdir $file`
+    abs_src_file=`file_join $dotfiles_dir $src_file`
+    output=$dest_file:$abs_src_file
+
+    if [ $SHOW_SIGILS -eq 1 ]; then
+      sigil=`sigil_for $src_file`
+      output="$output:$sigil"
+    fi
+
+    $PRINT $output
   fi
 }
 
@@ -67,20 +118,21 @@ handle_file() {
   local file=$1
   local dest_dir=$2
   local dotfiles_dir=$3
-  local dotted=$4
-  local exclude_file_globs="$5"
-  local include_file_globs="$6"
+  local dotfiles_subdir=$4
+  local dotted=$5
+  local exclude_file_globs="$6"
+  local include_file_globs="$7"
 
-  $DEBUG "handle_file $1 $2 $3 $4 $5 $6"
+  $DEBUG "handle_file $1 $2 $3 $4 $5 $6 $7"
 
   if [ ! -e $file ]; then
     $VERBOSE "skipping non-existent file $file"
   elif is_excluded $file "$exclude_file_globs" "$include_file_globs"; then
     $VERBOSE "skipping excluded file $file"
   elif [ -d $file ]; then
-    link_dir $file $dest_dir $dotfiles_dir $dotted "$exclude_file_globs" "$include_file_globs"
+    show_dir $file $dest_dir $dotfiles_dir $dotfiles_subdir $dotted "$exclude_file_globs" "$include_file_globs"
   else
-    link_file $file $dest_dir $dotfiles_dir $dotted
+    show_file $file $dest_dir $dotfiles_dir $dotfiles_subdir $dotted
   fi
 }
 
@@ -147,12 +199,14 @@ handle_command_line() {
   local arg_tags=
   local verbosity=0
   local version=0
+  local show_sigils=0
   local dotfiles_dirs=
   local excludes=
   local includes=
 
-  while getopts VqvI:x:t:d: opt; do
+  while getopts FVqvI:x:t:d: opt; do
     case "$opt" in
+      F) show_sigils=1;;
       I) includes="$includes $OPTARG";;
       t) arg_tags="$arg_tags $OPTARG";;
       v) verbosity=$(($verbosity + 1));;
@@ -165,6 +219,7 @@ handle_command_line() {
   shift $(($OPTIND-1))
 
   handle_common_flags lsrc $version $verbosity
+  SHOW_SIGILS=$show_sigils
   TAGS=${arg_tags:-$TAGS}
   DOTFILES_DIRS=${dotfiles_dirs:-$DOTFILES_DIRS}
   EXCLUDES=${excludes:-$EXCLUDES}
@@ -185,6 +240,9 @@ handle_command_line $*
 
 : ${DOTFILES_DIRS:=$DOTFILES_DIRS $DEFAULT_DOTFILES_DIR}
 $DEBUG "DOTFILES_DIRS: $DOTFILES_DIRS"
+
+: ${COPY_ALWAYS:=""}
+$DEBUG "COPY_ALWAYS: $COPY_ALWAYS"
 
 for DOTFILES_DIR in $DOTFILES_DIRS; do
   if is_relative $DOTFILES_DIR; then
@@ -208,7 +266,7 @@ for DOTFILES_DIR in $DOTFILES_DIRS; do
       continue
     fi
 
-    handle_file $file $DEST_DIR $DOTFILES_DIR 0 "$exclude_file_globs" "$include_file_globs"
+    handle_file $file $DEST_DIR $DOTFILES_DIR . 0 "$exclude_file_globs" "$include_file_globs"
   done
 
   cd $DOTFILES_DIR
@@ -217,7 +275,7 @@ for DOTFILES_DIR in $DOTFILES_DIRS; do
   if [ -d $host_files ]; then
     pushdir `basename $host_files`
     for file in ${FILES:-*}; do
-      handle_file $file $DEST_DIR $host_files 0 "$exclude_file_globs" "$include_file_globs"
+      handle_file $file $DEST_DIR $host_files . 0 "$exclude_file_globs" "$include_file_globs"
     done
     popdir
   fi
@@ -229,7 +287,7 @@ for DOTFILES_DIR in $DOTFILES_DIRS; do
       pushdir `basename tag-$tag`
       for file in ${FILES:-*}; do
         $DEBUG "TAG: $tag, exclude_file_globs: $exclude_file_globs"
-        handle_file $file $DEST_DIR $DOTFILES_DIR/tag-$tag 0 "$exclude_file_globs" "$include_file_globs"
+        handle_file $file $DEST_DIR $DOTFILES_DIR/tag-$tag . 0 "$exclude_file_globs" "$include_file_globs"
       done
       popdir
     fi

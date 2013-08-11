@@ -6,10 +6,11 @@
 remove_link() {
   local dest=$1
   local original=$2
+  local sigil=$3
 
   if [ x$dest = "x/" ]; then
     $VERBOSE "not a symlink, skipping: $original"
-  elif [ -L $dest ]; then
+  elif [ -L $dest -o "x$sigil" = "xX" ]; then
     $RM -rf $dest
     rmdir -p `dirname $original` 2>/dev/null
   else
@@ -62,6 +63,8 @@ handle_command_line() {
   $DEBUG "LS_ARGS: $LS_ARGS"
 }
 
+LS_ARGS=-F
+
 if [ -e $HOME/.rcrc ]; then
   . $HOME/.rcrc
 fi
@@ -69,8 +72,12 @@ fi
 handle_command_line $*
 
 for dest_and_src in `lsrc $LS_ARGS`; do
-  dest=`echo $dest_and_src | sed 's/:.*//'`
-  src=`echo $dest_and_src | sed 's/.*://'`
+  saved_ifs=$IFS
+  IFS=:
+  set $dest_and_src
+  IFS=$saved_ifs
+  dest=$1
+  sigil=$3
 
-  remove_link $dest $dest
+  remove_link $dest $dest $sigil
 done

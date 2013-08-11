@@ -3,25 +3,40 @@
 : ${RCM_LIB:=`dirname $0`/../share/rcm}
 . $RCM_LIB/rcm.sh
 
+link_or_copy() {
+  $DEBUG "link_or_copy $1"
+  local sigil=$1
+
+  if [ "x$sigil" = "xX" ]; then
+    echo $CP
+  else
+    echo $LN
+  fi
+}
+
 link_file() {
   local src=$1
   local dest=$2
+  local sigil=$3
 
   if [ -h $dest ]; then
     $RM -f $dest
   fi
 
-  $LN $src $dest
+  action=`link_or_copy $sigil`
+  $DEBUG "$action $src $dest"
+  $action $src $dest
 }
 
 replace_file() {
   local src=$1
   local dest=$2
+  local sigil=$3
 
-  $DEBUG replace_file $1 $2
+  $DEBUG replace_file $1 $2 $3
   
   $RM -rf $dest
-  link_file $src $dest
+  link_file $src $dest $sigil
 }
 
 is_nested() {
@@ -44,28 +59,29 @@ handle_dir() {
 handle_file() {
   local src=$1
   local dest=$2
+  local sigil=$3
 
-  $DEBUG handle_file $1 $2
+  $DEBUG handle_file $1 $2 $3
 
   if [ -e "$dest" ]; then
     if is_identical $src $dest; then
       $VERBOSE "identical $dest"
     elif [ $REPLACE_ALL -eq 1 ]; then
-      replace_file $src $dest
+      replace_file $src $dest $sigil
     else
       $PROMPT "overwrite ${dest}? [ynaq]"
       read overwrite
       case $overwrite in
         a) REPLACE_ALL=1
-           replace_file $src $dest
+           replace_file $src $dest $sigil
            ;;
-        y) replace_file $src $dest ;;
+        y) replace_file $src $dest $sigil ;;
         q) exit 1 ;;
         *) $VERBOSE "skipping $dest" ;;
       esac
     fi
   else
-    link_file $src $dest
+    link_file $src $dest $sigil
   fi
 }
 
@@ -97,7 +113,7 @@ handle_command_line() {
   shift $(($OPTIND-1))
 
   if [ $always_copy -eq 1 ]; then
-    LN=cp
+    LN=$CP
   fi
 
   handle_common_flags rcup $version $verbosity
@@ -123,6 +139,8 @@ handle_command_line() {
   $DEBUG "LS_ARGS: $LS_ARGS"
 }
 
+LS_ARGS=-F
+
 if [ -e $HOME/.rcrc ]; then
   . $HOME/.rcrc
 fi
@@ -130,12 +148,17 @@ fi
 handle_command_line $*
 
 for dest_and_src in `lsrc $LS_ARGS`; do
-  dest=`echo $dest_and_src | sed 's/:.*//'`
-  src=`echo $dest_and_src | sed 's/.*://'`
+  saved_ifs=$IFS
+  IFS=:
+  set $dest_and_src
+  IFS=$saved_ifs
+  dest=$1
+  src=$2
+  sigil=$3
 
   if is_nested $dest; then
     handle_dir $dest
   fi
 
-  handle_file $src $dest
+  handle_file $src $dest $sigil
 done

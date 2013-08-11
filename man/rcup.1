@@ -76,7 +76,13 @@ will be installed into
 \&.
 .Pp
 Files are installed as symlinks. Directories are installed by making
-directories.
+directories. The
+.Fl C
+flag causes files to be installed as copies instead of symlinks. The
+.Va COPY_ALWAYS
+option in
+.Xr rcrc 5
+can be used to list files that must only be copied.
 .Pp
 Two meta files are supported: host-specific files and tagged files.
 .Pp

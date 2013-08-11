@@ -6,7 +6,7 @@
 .Nd show configuration files
 .Sh SYNOPSIS
 .Nm lsrc
-.Op Fl vq
+.Op Fl Fvq
 .Op Fl d Ar dir
 .Op Fl I Ar excl_pat
 .Op Fl t Ar tag
@@ -25,11 +25,20 @@ section, for details on the directory layout.
 It supports these options:
 .
 .Bl -tag
-.It Fl t Ar TAG
-list dotfiles according to TAG
-.
 .It Fl d Ar DIR
 list dotfiles from the DIR. This can be specified multiple times.
+.
+.It Fl F
+show symbols next to each file indicating status information. Supported
+symbols are
+.Li @
+which indicates that the file is a symlink, and
+.Li X
+to indicate that the file is a copy. More details on copied files can be
+found in
+.Xr rcrc 5 ,
+under the documentation about
+.Va COPY_ALWAYS .
 .
 .It Fl I Ar excl_pat
 include the files that match the given pattern. This is applied after
@@ -40,6 +49,10 @@ options. It uses the same pattern language as
 more details are in the
 .Sx EXCLUDE PATTERN
 section.
+.
+.It Fl t Ar TAG
+list dotfiles according to TAG
+.
 .It Fl v
 increase verbosity. This can be repeated for extra verbosity.
 .
