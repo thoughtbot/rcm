@@ -1,5 +1,7 @@
 rcm (@PACKAGE_VERSION@) unstable; urgency=low
 
+ * BUGFIX: use a consistent method for computing hostname everywhere.
+   Thanks to George Brocklehurst.
  * Exclusion and inclusion with -x and -I.
  * Copy instead of symlink with -C.
  * Always copy the files listed in COPY_ALWAYS.
