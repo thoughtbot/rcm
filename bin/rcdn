@@ -26,15 +26,15 @@ handle_command_line() {
   local excludes=
   local includes=
 
-  while getopts VqvI:e:t:d: opt; do
+  while getopts VqvI:x:t:d: opt; do
     case "$opt" in
-      e) excludes="$excludes $OPTARG";;
       I) includes="$includes $OPTARG";;
       t) arg_tags="$arg_tags $OPTARG" ;;
       v) verbosity=$(($verbosity + 1));;
       q) verbosity=$(($verbosity - 1));;
       d) dotfiles_dirs="$dotfiles_dirs $OPTARG" ;;
-      V) version=1
+      V) version=1 ;;
+      x) excludes="$excludes $OPTARG" ;;
     esac
   done
   shift $(($OPTIND-1))
@@ -52,7 +52,7 @@ handle_command_line() {
     LS_ARGS="$LS_ARGS -d $dotfiles_dir"
   done
   for exclude in $excludes; do
-    LS_ARGS="$LS_ARGS -e $exclude"
+    LS_ARGS="$LS_ARGS -x $exclude"
   done
   for include in $includes; do
     LS_ARGS="$LS_ARGS -I $include"

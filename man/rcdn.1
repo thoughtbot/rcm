@@ -8,9 +8,9 @@
 .Nm rcdn
 .Op Fl vq
 .Op Fl d Ar dir
-.Op Fl e Ar excl_pat
 .Op Fl I Ar excl_pat
 .Op Fl t Ar tag
+.Op Fl x Ar excl_pat
 .Op Ar files ...
 .Sh DESCRIPTION
 This program will remove all the rc file symlinks that the
@@ -25,18 +25,11 @@ flags.
 remove rc files from the
 .Ar DIR .
 This can be specified multiple times.
-.It Fl e Ar EXCL_PAT
-do not remove rc files that match
-.Ar EXCL_PAT .
-This can be repeated with additional patterns. See
-.Xr lsrc 1 ,
-.Sx EXCLUDE PATTERN ,
-for more details.
 .It Fl I Ar EXCL_PAT
 remove rc files that match
 .Ar EXCL_PAT
 despite being excluded by the
-.Fl e
+.Fl x
 flag or a setting in
 .Xr rcrc 5 .
 This can be repeated with additional patterns. See
@@ -50,6 +43,13 @@ remove dotfiles according to
 .Ar TAG
 .It Fl v
 increase verbosity. This can be repeated for extra verbosity.
+.It Fl x Ar EXCL_PAT
+do not remove rc files that match
+.Ar EXCL_PAT .
+This can be repeated with additional patterns. See
+.Xr lsrc 1 ,
+.Sx EXCLUDE PATTERN ,
+for more details.
 .It Ar files
 only remove the specified file(s)
 .El

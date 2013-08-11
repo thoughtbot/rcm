@@ -85,7 +85,7 @@ or
 symlink to be created in your home
 directory. Use an exclusion pattern to ignore these.
 .Pp
-.Dl rcup -e install -e Rakefile -e Makefile -e install.sh
+.Dl rcup -x install -x Rakefile -x Makefile -x install.sh
 .Ss COMMON PROBLEM: DOTTED FILENAMES IN DOTFILES DIRECTORY
 A less common situation is for all the filenames in your dotfiles
 directory to be prefixed with a period. These files are skipped by the
@@ -202,7 +202,7 @@ will take precedence over
 .Pp
 An exclusion pattern can be tied to a specific dotfiles directory.
 .Pp
-.Dl rcup -d .dotfiles -d work-dotfiles -e 'work-dotfiles:powrc'
+.Dl rcup -d .dotfiles -d work-dotfiles -x 'work-dotfiles:powrc'
 .
 .Sh HOST-SPECIFIC DOTFILES
 You can also mark host-specific files. This will go by the hostname. The
