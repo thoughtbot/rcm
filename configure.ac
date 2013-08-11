@@ -3,7 +3,7 @@
 
 AC_PREREQ([2.69])
 AC_INIT(rcm, 1.0.0, mike@mike-burns.com)
-AM_INIT_AUTOMAKE(rcm, 1.0.0)
+AM_INIT_AUTOMAKE
 
 # Checks for programs.
 
