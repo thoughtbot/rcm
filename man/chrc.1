@@ -1,0 +1,82 @@
+.Dd August 12, 2013
+.Dt CHRC 1
+.Os
+.Sh NAME
+.Nm chrc
+.Nd modify tags for existing dotfiles
+.Sh SYNOPSIS
+.Nm chrc
+.Op Fl vqoOU
+.Op Fl t Ar TAG
+.Op Fl T Ar NEW-TAG
+.Op Fl d Ar DIR
+.Op Fl D Ar NEW-DIR
+.Ar FILES ...
+.Sh DESCRIPTION
+Change the tag, host-specificity, or dotfiles directory for an existing
+list of
+.Va FILES
+already in a dotfiles directory.
+.
+It supports two sets of flags: one for finding the files, and another set
+for moving them.
+.
+.Ss Finding a dotfile
+.Bl -tag
+.It Fl d Ar DIR
+find dotfiles under
+.Va DIR
+.It Fl o
+find dotfiles in the host-specific directory. This cannot be specified
+if
+.Fl t
+is also specified.
+.It Fl t Ar TAG
+find dotfiles under
+.Va TAG .
+This cannot be specified if
+.Fl o
+is also specified.
+.El
+.Ss Relocating a dotfile
+.Bl -tag
+.It Fl O
+move the dotfiles into the host-specific directory. Note that
+.Fl oO
+may be useful for moving a dotfile between two dotfile directories.
+.It Fl U
+strip the dotfile of all tags
+.It Fl T Ar NEW-TAG
+assign a new tag to the dotfile
+.It Fl D Ar NEW-DIR
+move the dotfile into
+.Va NEW-DIR .
+This may require the use of
+.Fl oO
+or
+.Fl tT .
+.El
+.Ss Common flags
+.Bl -tag
+.It Fl q
+decrease verbosity
+.It Fl v
+increase verbosity. This can be repeated for extra verbosity.
+.Sh FILES
+.Pa ~/.dotfiles
+.Pa ~/.rcrc
+.Sh EXAMPLES
+.Dl chrc -O rcrc
+.Dl chrc -D work-dotfiles tigrc
+.Dl chrc -oO -d temp-dotfiles -D public-dotfiles gitconfig
+.Dl chrc -U pythonrc bpython
+.Dl chrc -t java -T scala -D community-dotfiles sbt
+.Sh SEE ALSO
+.Xr lsrc 1 ,
+.Xr mkrc 1 ,
+.Xr rcdn 1 ,
+.Xr rcup 1 ,
+.Xr rcrc 5 ,
+.Xr rcm 7
+.Sh AUTHORS
+.An "Mike Burns" Aq mike@mike-burns.com
