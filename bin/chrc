@@ -1,0 +1,36 @@
+#!/bin/sh
+
+remove_file() {
+  $DEBUG "remove_file $1"
+  local file=$1
+
+  $VERBOSE "removing $file"
+  $RM $file
+}
+
+move_file() {
+  $DEBUG "move_file $1 $2"
+  local $prior_path=$1
+  local $new_path=$2
+
+  $VERBOSE "moving $prior_path to $new_path"
+  $MV $prior_path $new_path
+}
+
+resync_file() {
+
+}
+
+for dest_and_src in find_files; do
+  saved_ifs=$IFS
+  IFS=:
+  set $dest_and_src
+  IFS=$saved_ifs
+  dest=$1
+  src=$2
+
+  remove_file $dest
+  new_src=`build_path $src ...`
+  move_file $src $new_src
+  resync_file $dest $new_src
+done
