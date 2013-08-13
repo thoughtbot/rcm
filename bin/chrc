@@ -18,7 +18,22 @@ move_file() {
 }
 
 resync_file() {
+  $DEBUG "resync_file $1 $2"
+  local dest=$1
+  local src=$2
 
+  $VERBOSE "relinking $dest"
+  $LN $src $dest
+}
+
+build_path() {
+  $DEBUG "build_path $1 $2 $3 $4"
+  local src=$1
+  local hostname=$2
+  local tagname=$3
+  local dotfiles_dir=$4
+
+  echo IMPOSSIBLE!
 }
 
 for dest_and_src in find_files; do
@@ -30,7 +45,7 @@ for dest_and_src in find_files; do
   src=$2
 
   remove_file $dest
-  new_src=`build_path $src ...`
+  new_src=`build_path $src $hostname $tagname $dotfiles_dir`
   move_file $src $new_src
   resync_file $dest $new_src
 done
