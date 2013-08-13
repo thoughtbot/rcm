@@ -6,7 +6,7 @@
 .Nd show configuration files
 .Sh SYNOPSIS
 .Nm lsrc
-.Op Fl Fvq
+.Op Fl Flvq
 .Op Fl d Ar dir
 .Op Fl I Ar excl_pat
 .Op Fl t Ar tag
@@ -49,6 +49,13 @@ options. It uses the same pattern language as
 more details are in the
 .Sx EXCLUDE PATTERN
 section.
+.
+.It Fl l
+show a detailed breakdown of the files. In order: home directory, rc
+file name, dotfiles directory, dotfile name, tag name, hostname. The tag
+name and host name may be blank; this is indicated with
+.Li -
+.
 .
 .It Fl t Ar TAG
 list dotfiles according to TAG

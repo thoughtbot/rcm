@@ -90,6 +90,15 @@ sigil_for() {
   fi
 }
 
+show_detailed_file() {
+  $PRINT $HOME
+  $PRINT $dest_file
+  $PRINT $dotfiles_dir
+  $PRINT $src_file
+  $PRINT $tag_name
+  $PRINT $hostname
+}
+
 show_file() {
   local file=$1
   local dest_dir=$2
@@ -131,6 +140,8 @@ handle_file() {
     $VERBOSE "skipping excluded file $file"
   elif [ -d $file ]; then
     show_dir $file $dest_dir $dotfiles_dir $dotfiles_subdir $dotted "$exclude_file_globs" "$include_file_globs"
+  elif [ $SHOW_DETAILS -eq 1 ]; then
+    show_detailed_file
   else
     show_file $file $dest_dir $dotfiles_dir $dotfiles_subdir $dotted
   fi
@@ -209,15 +220,17 @@ handle_command_line() {
   local verbosity=0
   local version=0
   local show_sigils=0
+  local show_details=0
   local dotfiles_dirs=
   local excludes=
   local includes=
 
-  while getopts FVqvhI:x:t:d: opt; do
+  while getopts FlVqvhI:x:t:d: opt; do
     case "$opt" in
       F) show_sigils=1;;
       h) show_help ;;
       I) includes="$includes $OPTARG";;
+      l) show_details=1;;
       t) arg_tags="$arg_tags $OPTARG";;
       v) verbosity=$(($verbosity + 1));;
       q) verbosity=$(($verbosity - 1));;
@@ -230,6 +243,7 @@ handle_command_line() {
 
   handle_common_flags lsrc $version $verbosity
   SHOW_SIGILS=$show_sigils
+  SHOW_DETAILS=$show_details
   TAGS=${arg_tags:-$TAGS}
   DOTFILES_DIRS=${dotfiles_dirs:-$DOTFILES_DIRS}
   EXCLUDES=${excludes:-$EXCLUDES}
