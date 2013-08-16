@@ -84,7 +84,8 @@ option in
 .Xr rcrc 5
 can be used to list files that must only be copied.
 .Pp
-Two meta files are supported: host-specific files and tagged files.
+Three meta files are supported: host-specific files, tagged files,
+hooks.
 .Pp
 Host-specific files go in a directory named for the host, prefixed with
 .Pa host- .
@@ -93,8 +94,7 @@ For example,
 contains files specific to the computer with hostname
 .Pa scarlett
 , and these files will only be installed on the computer with hostname
-.Pa scarlett
-\&.
+.Pa scarlett .
 .Pp
 Tagged files go in a directory named for the tag, prefixed with
 .Li tag- .
@@ -103,11 +103,25 @@ Therefore, files under
 are only installed when installing using the
 .Li git
 tag.
+.Pp
+Hooks go in a directory named
+.Pa hooks .
+Two hooks are supported by
+.Nm rcup :
+pre-up and post-up . These go in files with predictable filenames:
+.Pa .dotfiles/hooks/pre-up and
+.Pa .dotfiles/hooks/post-up .
+These files must be executable. They are run every time
+.Nm
+is run, and therefore must be idempotent.
 .Sh ALGORITHM
 It is instructive to understand the process
 .Nm rcup
 uses when synchronizing your rc files:
 .Bl -enum
+.It
+The pre-up hook is run.
+.
 .It
 All non-host, non-tag files without a dot prefix are symlinked to the
 dotted filename in your home directory. So,
@@ -115,6 +129,7 @@ dotted filename in your home directory. So,
 is
 symlinked to
 .Pa ~/.tigrc .
+.
 .It
 All non-host, non-tag directories have their structure copied to your
 home directory, then a non-dotted symlink is created within.  So for
@@ -125,12 +140,14 @@ causes the
 directory to be created, then
 .Pa haskell.vim
 is symlinked within.
+.
 .It
 Steps (1) and (2) are applied to host-specific files. These are files
 under a directory named
 .Sm off
 .Pa host- Va $HOSTNAME .
 .Sm on
+.
 .It
 Steps (1) and (2) are applied to tag-specific files. These are files
 under directories named
@@ -142,6 +159,9 @@ where
 is the name of each specified tag in turn, taken from the command line
 or from
 .Xr rcrc 5 .
+.
+.It
+The post-up hook is run.
 .El
 .
 .Sh FILES

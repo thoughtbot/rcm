@@ -30,6 +30,17 @@ is, that directory is removed. If a rc file is not a symlink but is
 listed in
 .Va COPY_ALWAYS
 the file is removed.
+.Pp
+The
+.Nm
+program will run hooks before and after removing files, if these hooks
+exist. Hooks are executable programs inside the dotfiles directory, with
+the following names:
+.Pa hooks/pre-down and
+.Pa hooks/post-down .
+These hooks are run each time
+.Nm
+is run and therefore must be idempotent.
 .
 .Bl -tag
 .It Fl d Ar DIR

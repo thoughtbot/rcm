@@ -70,6 +70,9 @@ if [ -e $HOME/.rcrc ]; then
 fi
 
 handle_command_line $*
+: ${DOTFILES_DIRS:=$DOTFILES_DIRS $DEFAULT_DOTFILES_DIR}
+
+run_hooks pre down
 
 for dest_and_src in `lsrc $LS_ARGS`; do
   saved_ifs=$IFS
@@ -81,3 +84,5 @@ for dest_and_src in `lsrc $LS_ARGS`; do
 
   remove_link $dest $dest $sigil
 done
+
+run_hooks post down

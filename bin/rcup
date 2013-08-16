@@ -119,13 +119,13 @@ handle_command_line() {
   handle_common_flags rcup $version $verbosity
 
   tags=${arg_tags:-$TAGS}
-  dotfiles_dirs=${dotfiles_dirs:-$DOTFILES_DIRS}
+  DOTFILES_DIRS=${dotfiles_dirs:-$DOTFILES_DIRS}
   files=$@
 
   for tag in $tags; do
     LS_ARGS="$LS_ARGS -t $tag"
   done
-  for dotfiles_dir in $dotfiles_dirs; do
+  for dotfiles_dir in $DOTFILES_DIRS; do
     LS_ARGS="$LS_ARGS -d $dotfiles_dir"
   done
   for exclude in $excludes; do
@@ -146,6 +146,9 @@ if [ -e $HOME/.rcrc ]; then
 fi
 
 handle_command_line $*
+: ${DOTFILES_DIRS:=$DOTFILES_DIRS $DEFAULT_DOTFILES_DIR}
+
+run_hooks pre up
 
 for dest_and_src in `lsrc $LS_ARGS`; do
   saved_ifs=$IFS
@@ -162,3 +165,5 @@ for dest_and_src in `lsrc $LS_ARGS`; do
 
   handle_file $src $dest $sigil
 done
+
+run_hooks post up

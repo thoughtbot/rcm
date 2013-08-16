@@ -6,6 +6,7 @@ rcm (@PACKAGE_VERSION@) unstable; urgency=low
  * Copy instead of symlink with -C.
  * Always copy the files listed in COPY_ALWAYS.
  * Show whether the file is a copy or symlink using lsrc -F.
+ * Add hooks for pre-up, post-up, pre-down, and post-down.
 
  -- Mike Burns <mburns@thoughtbot.com>  Mon, 05 Aug 2013 16:43:33 +0200
 

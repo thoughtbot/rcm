@@ -140,7 +140,7 @@ is_metafile() {
   host_portion=`echo $1 | sed -e 's/host-.*/host-/'`
   tag_portion=`echo $1 | sed -e 's/tag-.*/tag-/'`
 
-  [ x$host_portion = 'xhost-' -o x$tag_portion = 'xtag-' ]
+  [ x$host_portion = 'xhost-' -o x$tag_portion = 'xtag-' -o "x$1" = "xhooks" ]
 }
 
 dotfiles_dir_excludes() {
