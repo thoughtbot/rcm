@@ -89,6 +89,7 @@ handle_command_line() {
   local arg_tags=
   local verbosity=0
   local version=0
+  local run_hooks=0
   local dotfiles_dirs=
   local files=
   local excludes=
@@ -96,13 +97,15 @@ handle_command_line() {
   local always_copy=0
   REPLACE_ALL=0
 
-  while getopts CVqvfiI:x:t:d: opt; do
+  while getopts CVqvfikKI:x:t:d: opt; do
     case "$opt" in
       C) always_copy=1 ;;
       d) dotfiles_dirs="$dotfiles_dirs $OPTARG" ;;
       f) REPLACE_ALL=1 ;;
       i) REPLACE_ALL=0 ;;
       I) includes="$includes $OPTARG" ;;
+      k) run_hooks=1 ;;
+      K) run_hooks=0 ;;
       q) verbosity=$(($verbosity - 1)) ;;
       t) arg_tags="$arg_tags $OPTARG" ;;
       v) verbosity=$(($verbosity + 1)) ;;
@@ -120,6 +123,7 @@ handle_command_line() {
 
   tags=${arg_tags:-$TAGS}
   DOTFILES_DIRS=${dotfiles_dirs:-$DOTFILES_DIRS}
+  RUN_HOOKS=$run_hooks
   files=$@
 
   for tag in $tags; do

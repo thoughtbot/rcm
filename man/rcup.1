@@ -6,7 +6,7 @@
 .Nd update and install dotfiles
 .Sh SYNOPSIS
 .Nm rcup
-.Op Fl Cfiqv
+.Op Fl CfikKqv
 .Op Fl d Ar dir
 .Op Fl I Ar excl_pat
 .Op Fl t Ar tag
@@ -32,11 +32,11 @@ install dotfiles from the
 .Ar DIR .
 This can be specified multiple times.
 .It Fl f
-If the rc file already exists in your home directory but does not match
+if the rc file already exists in your home directory but does not match
 the file in your dotfiles directory, remove the rc file then create the
 symlink
 .It Fl i
-If the rc file already exists in your home directory but does not match
+if the rc file already exists in your home directory but does not match
 the file in your dotfiles directory, prompt for how to handle it. This
 is the default
 .It Fl I Ar EXCL_PAT
@@ -50,6 +50,12 @@ This can be repeated with additional patterns. See
 .Xr lsrc 1 ,
 .Sx EXCLUDE PATTERN ,
 for more details.
+.It Fl k
+run pre- and post-hooks (see
+.Sx DIRECTORY LAYOUT
+for more details on hooks). This is the default.
+.It Fl K
+skip pre- and post-hooks
 .It Fl t Ar TAG
 install dotfiles according to
 .Ar TAG

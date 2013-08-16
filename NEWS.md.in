@@ -7,6 +7,7 @@ rcm (@PACKAGE_VERSION@) unstable; urgency=low
  * Always copy the files listed in COPY_ALWAYS.
  * Show whether the file is a copy or symlink using lsrc -F.
  * Add hooks for pre-up, post-up, pre-down, and post-down.
+ * rcup -K and rcdn -K to ignore these hooks.
 
  -- Mike Burns <mburns@thoughtbot.com>  Mon, 05 Aug 2013 16:43:33 +0200
 
