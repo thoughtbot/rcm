@@ -263,10 +263,70 @@ fi
 handle_command_line $*
 
 : ${DOTFILES_DIRS:=$DOTFILES_DIRS $DEFAULT_DOTFILES_DIR}
-$DEBUG "DOTFILES_DIRS: $DOTFILES_DIRS"
-
 : ${COPY_ALWAYS:=""}
-$DEBUG "COPY_ALWAYS: $COPY_ALWAYS"
+
+for dotfiles_dir in $DOTFILES_DIRS; do
+  dotfiles_dir=`absolutize $dotfiles_dir`
+
+  if skip_directory $dotfiles_dir; then
+    continue
+  fi
+
+  exclude_file_globs=`dotfiles_dir_excludes $dotfiles_dir "$EXCLUDES"`
+  include_file_globs=`dotfiles_dir_excludes $dotfiles_dir "$INCLUDES"`
+
+  handle_normal_files $dotfiles_dir "$exclude_file_globs" "$include_file_globs"
+  handle_tagged_files $dotfiles_dir "$TAGS" "$exclude_file_globs" "$include_file_globs"
+  handle_hosted_files $dotfiles_dir "$HOSTNAME" "$exclude_file_globs" "$include_file_globs"
+done
+
+build_output() {
+}
+
+handle_normal_files() {
+  local dotfiles_dir="$1"
+  local dotfiles_subdir="$2"
+  local exclude_file_globs="$3"
+  local include_file_globs="$4"
+  local src_root=`...`
+
+  for file in ${FILES:-$src_root/*}; do
+    if is_metafile $file; then
+      continue
+    fi
+
+  done
+}
+
+handle_tagged_files() {
+  local dotfiles_dir="$1"
+  local tags="$tags"
+  local exclude_file_globs="$3"
+  local include_file_globs="$4"
+
+  for tag in $tags; do
+    if skip_directory "$dotfiles_dir/tag-$tag"
+      continue
+    fi
+
+    handle_normal_files "$dotfiles_dir" "tag-$tag" "$exclude_file_globs" "$include_file_globs"
+  done
+}
+
+handle_hosted_files() {
+  local dotfiles_dir="$1"
+  local hostname="$hostname"
+  local exclude_file_globs="$3"
+  local include_file_globs="$4"
+
+  if skip_directory "$dotfiles_dir/host-$hostname"
+    return
+  fi
+
+  handle_normal_files "$dotfiles_dir" "host-$hostname" "$exclude_file_globs" "$include_file_globs"
+}
+
+# Prior:
 
 for DOTFILES_DIR in $DOTFILES_DIRS; do
   if is_relative $DOTFILES_DIR; then
