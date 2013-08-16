@@ -195,6 +195,15 @@ is_excluded() {
   return 1
 }
 
+show_help() {
+  local exit_code=${1:-0}
+
+  $PRINT "Usage: lsrc [-FVqvh] [-I EXCL_PAT] [-x EXCL_PAT] [-t TAG] [-d DOT_DIR]"
+  $PRINT "see lsrc(1) and rcm(5) for more details"
+
+  exit $exit_code
+}
+
 handle_command_line() {
   local arg_tags=
   local verbosity=0
@@ -204,9 +213,10 @@ handle_command_line() {
   local excludes=
   local includes=
 
-  while getopts FVqvI:x:t:d: opt; do
+  while getopts FVqvhI:x:t:d: opt; do
     case "$opt" in
       F) show_sigils=1;;
+      h) show_help ;;
       I) includes="$includes $OPTARG";;
       t) arg_tags="$arg_tags $OPTARG";;
       v) verbosity=$(($verbosity + 1));;

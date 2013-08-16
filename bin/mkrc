@@ -22,9 +22,17 @@ if [ -e $HOME/.rcrc ]; then
   . $HOME/.rcrc
 fi
 
+show_help() {
+  local exit_code=${1:-0}
+
+  $PRINT "Usage: mkrc [-hvqo] [-t TAG] [-d DIR] FILES ..."
+  $PRINT "see mkrc(1) and rcm(5) for more details"
+
+  exit $exit_code
+}
+
 if [ $# -eq 0 ]; then
-  echo "Usage: mkrc [-vqo] [-t tag] [-d dir] files ..."
-  exit 1
+  show_help 1
 fi
 
 for DOTFILES_DIR in $DOTFILES_DIRS $DEFAULT_DOTFILES_DIR; do
@@ -37,9 +45,10 @@ in_host=0
 version=0
 always_copy=0
 
-while getopts CVvqot:d: opt; do
+while getopts ChVvqot:d: opt; do
   case "$opt" in
     C) always_copy=1 ;;
+    h) show_help ;;
     t) tag=$OPTARG ;;
     v) verbosity=$(($verbosity + 1)) ;;
     q) verbosity=$(($verbosity - 1)) ;;
