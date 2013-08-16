@@ -17,21 +17,15 @@ assert_stdout() {
   cat > expected_stdout
 
   if ! diff -q -s expected_stdout stdout.log > /dev/null; then
-    output "$failure: /dev/stdout mismatch"
-    output "Expected:"
-    cat expected_stdout
-    output
-    output "Actual:"
-    cat stdout.log
-    output
-    output '---'
-    output
+    failure_message="/dev/stdout mismatch
 
-    output "Stderr:"
-    cat stderr.log
-    output
-    output '---'
-    output
+Expected:
+  `cat expected_stdout`
+
+Actual:
+  `cat stdout.log`
+
+"
 
     return 1
   fi
@@ -43,7 +37,7 @@ assert_linked() {
   local src=$1 dest=$2 abs resolved
 
   if [ ! -h $dest ]; then
-    output "$failure: $dest is not a symlink"
+    failure_message="$dest is not a symlink"
     return 1
   fi
 
@@ -51,7 +45,16 @@ assert_linked() {
   resolved=`readlink -f $dest`
 
   if [ $abs != $resolved ]; then
-    output "$failure: expected $dest to resolve to $abs (actually $resolved)"
+    failure_message="expected $dest to resolve to $abs (actually $resolved)"
+    return 1
+  fi
+
+  return 0
+}
+
+assert_present() {
+  if [ ! -e $1 ]; then
+    failure_message="Expected $1 to exist"
     return 1
   fi
 
@@ -60,7 +63,7 @@ assert_linked() {
 
 assert_not_present() {
   if [ -e $1 ]; then
-    output "$failure: expected $1 to not exist"
+    failure_message="Expected $1 to not exist"
     return 1
   fi
 
@@ -73,9 +76,15 @@ run() {
   mkdir "$run_directory"
   cd "$run_directory"
 
-  HOME=$PWD $1 \
-    && output "$1 - $success" \
-    || output "$1 - $failure"
+  if HOME=$PWD $1; then
+    output "$success - $1"
+  else
+    output "[*] $failure - $1"
+    output
+    output 'Message:'
+    output "$failure_message"
+    output
+  fi
 
   cd - > /dev/null
   rm -r "$run_directory"
@@ -86,7 +95,7 @@ SRC_DIR=$PWD
 clear
 
 if ! make >/dev/null; then
-  echo 'failed to make rcm.sh'
+  echo 'Failed to run make'
   exit 1
 fi
 
