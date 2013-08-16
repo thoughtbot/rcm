@@ -20,10 +20,12 @@ assert_stdout() {
     failure_message="/dev/stdout mismatch
 
 Expected:
-  `cat expected_stdout`
+
+`cat expected_stdout`
 
 Actual:
-  `cat stdout.log`
+
+`cat stdout.log`
 
 "
 
