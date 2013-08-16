@@ -66,7 +66,51 @@ $HOME/.included:$PWD/.dotfiles/host-`hostname`/included
 EOF
 }
 
+test_lsrc_sigils() {
+  mkdir .dotfiles
+  touch .dotfiles/example
+
+  call lsrc -F
+
+  assert_stdout <<EOF
+$HOME/.example:$PWD/.dotfiles/example:@
+EOF
+}
+
+test_lsrc_sigils_copy() {
+  mkdir .dotfiles
+  touch .dotfiles/example
+  touch .dotfiles/example_copy
+
+  COPY_ALWAYS='example_copy' call lsrc -F
+
+  assert_stdout <<EOF
+$HOME/.example:$PWD/.dotfiles/example:@
+$HOME/.example_copy:$PWD/.dotfiles/example_copy:X
+EOF
+}
+
+test_lsrc_includes() {
+  : # TODO: I don't know how this feature behaves
+}
+
+test_lsrc_excludes() {
+  mkdir .dotfiles
+  touch .dotfiles/example
+  touch .dotfiles/example_excluded
+
+  call lsrc -x 'example_excluded'
+
+  assert_stdout <<EOF
+$HOME/.example:$PWD/.dotfiles/example
+EOF
+}
+
 run 'test_lsrc_nested'
 run 'test_lsrc_tag_excluded'
 run 'test_lsrc_tag_included'
 run 'test_lsrc_hostname'
+run 'test_lsrc_sigils'
+run 'test_lsrc_sigils_copy'
+run 'test_lsrc_includes'
+run 'test_lsrc_excludes'
