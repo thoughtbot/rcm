@@ -283,18 +283,61 @@ done
 build_output() {
 }
 
+simple_print() {
+  local dotfiles_dir=$1
+  local dotfiles_subdir=$2
+  local sub_dir=$3
+  local sub_filename=$4
+
+  local dest_dir=$dotfiles_dir/$dotfiles_subdir/$sub_dir/$sub_filename
+  if [ x$sub_dir
+  $PRINT ".$sub_dir/$sub_filename:$dest_dir"
+}
+
+printer_chooser() {
+  if [ $SHOW_DETAILS -eq 1 ]; then
+    echo detail_print
+  else
+    echo simple_print
+  fi
+}
+
 handle_normal_files() {
   local dotfiles_dir="$1"
   local dotfiles_subdir="$2"
   local exclude_file_globs="$3"
   local include_file_globs="$4"
-  local src_root=`...`
+  local src_root=`file_join $dotfiles_dir $dotfiles_subdir`
+  local printer=`printer_chooser`
 
   for file in ${FILES:-$src_root/*}; do
     if is_metafile $file; then
       continue
     fi
 
+    if [ -d $file ]; then
+      for sub_file in `find_subfiles $dotfiles_dir $dotfiles_subdir $file`; do
+        savedIFS=$IFS
+        IFS=:
+        set $sub_file
+        IFS=$savedIFS
+
+        local $sub_dir=$3
+        local $sub_filename=$4
+        
+        if skip_file $sub_dir $sub_filename "$exclude_file_globs" "$include_file_globs"; then
+          continue
+        fi
+
+        $printer $dotfiles_dir $dotfiles_subdir $sub_dir $sub_filename
+      done
+    else
+      if skip_file $sub_dir $file "$exclude_file_globs" "$include_file_globs"; then
+        continue
+      fi
+
+      $printer $dotfiles_dir $dotfiles_subdir $sub_dir $sub_filename
+    fi
   done
 }
 
