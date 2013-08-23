@@ -3,20 +3,6 @@
 : ${RCM_LIB:=`dirname $0`/../share/rcm}
 . $RCM_LIB/rcm.sh
 
-pushdir() {
-  DIR_STACK="$DIR_STACK:$PWD/$1"
-  $DEBUG "cd'ing to $1 from `pwd` with stack $DIR_STACK"
-  cd $1
-}
-
-popdir() {
-  current=`echo $DIR_STACK | sed -e 's/.*://g'`
-  prior=`echo $DIR_STACK | sed -e "s|:$current$||" | sed -e 's/.*://g'`
-  DIR_STACK=`echo $DIR_STACK | sed -e 's/:[^:]*$//'`
-  $DEBUG "cd'ing to $prior from `pwd` with stack $DIR_STACK"
-  cd $prior
-}
-
 build_path() {
   local dest=$1
   local file=$2
@@ -58,13 +44,13 @@ show_dir() {
   $DEBUG "show_dir $1 $2 $3 $4 $5 $6 $7"
 
   $VERBOSE "recurring on $dest_path"
-  pushdir $dir
+  cd $dir
   for f in *; do
     $DEBUG "handling the file $f"
     next_dir=`file_join $dotfiles_subdir $dir`
     handle_file $f $dest_path $dotfiles_dir $next_dir 1 "$exclude_file_globs" "$include_file_globs"
   done
-  popdir
+  cd $OLDPWD
 }
 
 sigil_for() {
@@ -134,6 +120,35 @@ handle_file() {
   else
     show_file $file $dest_dir $dotfiles_dir $dotfiles_subdir $dotted
   fi
+}
+
+handle_directory() {
+  local directory="$1"
+  local exclude_file_globs="$2"
+  local include_file_globs="$3"
+
+  $DEBUG "handling directory $directory..."
+
+  if [ ! -d "$directory" ]; then
+    $DEBUG 'skipping, non-existent.'
+    return
+  fi
+
+  cd "$directory"
+
+  for file in ${FILES:-*}; do
+    $DEBUG "handling file $file..."
+
+    if is_metafile "$file"; then
+      $DEBUG 'skipping, metafile.'
+      continue
+    fi
+
+    handle_file "$file" "$DEST_DIR" "$directory" . 0 \
+      "$exclude_file_globs" "$include_file_globs"
+  done
+
+  cd $OLDPWD
 }
 
 is_metafile() {
@@ -259,48 +274,22 @@ for DOTFILES_DIR in $DOTFILES_DIRS; do
     DOTFILES_DIR=$PWD/$DOTFILES_DIR
   fi
 
-  if [ ! -d $DOTFILES_DIR ]; then
-    $VERBOSE "skipping non-existent directory: $DOTFILES_DIR" 
-    continue
-  fi
+  $DEBUG "processing $DOTFILES_DIR..."
 
   exclude_file_globs=`dotfiles_dir_excludes $DOTFILES_DIR "$EXCLUDES"`
-  $DEBUG "exclude_file_globs: $exclude_file_globs"
   include_file_globs=`dotfiles_dir_excludes $DOTFILES_DIR "$INCLUDES"`
 
-  cd $DOTFILES_DIR
-  DIR_STACK=":$DOTFILES_DIR"
+  $DEBUG "exclude_file_globs: $exclude_file_globs"
+  $DEBUG "include_file_globs: $include_file_globs"
 
-  for file in ${FILES:-*}; do
-    if is_metafile $file; then
-      continue
-    fi
+  handle_directory "$DOTFILES_DIR" \
+    "$exclude_file_globs" "$include_file_globs"
 
-    handle_file $file $DEST_DIR $DOTFILES_DIR . 0 "$exclude_file_globs" "$include_file_globs"
-  done
-
-  cd $DOTFILES_DIR
-
-  host_files=$DOTFILES_DIR/host-$HOSTNAME
-  if [ -d $host_files ]; then
-    pushdir `basename $host_files`
-    for file in ${FILES:-*}; do
-      handle_file $file $DEST_DIR $host_files . 0 "$exclude_file_globs" "$include_file_globs"
-    done
-    popdir
-  fi
-
-  cd $DOTFILES_DIR
+  handle_directory "$DOTFILES_DIR/host-$HOSTNAME" \
+    "$exclude_file_globs" "$include_file_globs"
 
   for tag in $TAGS; do
-    if [ -d tag-$tag ]; then
-      pushdir `basename tag-$tag`
-      for file in ${FILES:-*}; do
-        $DEBUG "TAG: $tag, exclude_file_globs: $exclude_file_globs"
-        handle_file $file $DEST_DIR $DOTFILES_DIR/tag-$tag . 0 "$exclude_file_globs" "$include_file_globs"
-      done
-      popdir
-    fi
+    handle_directory "$DOTFILES_DIR/tag-$tag" \
+      "$exclude_file_globs" "$include_file_globs"
   done
-
 done
