@@ -34,7 +34,7 @@ MKRC(1)</td>
 <td>
 mkrc</td>
 <td>
-&#91;<span class="opt"><b class="flag">&#45;vqo</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;t</b> <i class="arg">tag</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;d</b> <i class="arg">dir</i></span>&#93; <i class="arg">files ...</i></td>
+&#91;<span class="opt"><b class="flag">&#45;Cvqo</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;t</b> <i class="arg">tag</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;d</b> <i class="arg">dir</i></span>&#93; <i class="arg">files ...</i></td>
 </tr>
 </tbody>
 </table>
@@ -42,9 +42,17 @@ mkrc</td>
 <div class="section">
 <h1 id="x4445534352495054494f4e">DESCRIPTION</h1> This program adds files to your dotfiles directory then installs it back into your home directory. It can install files under a tag or different source directory. It supports these options:<dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
 <dt class="list-tag" style="margin-top: 1.00em;">
-<b class="flag">&#45;v</b></dt>
+<b class="flag">&#45;C</b></dt>
 <dd class="list-tag" style="margin-left: 10.00ex;">
-increase verbosity. This can be repeated for extra verbosity.</dd>
+copy instead of symlinking when installing the rc file back into your home directory</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;d</b> <i class="arg">DIR</i></dt>
+<dd class="list-tag" style="margin-left: 10.00ex;">
+install dotfiles under the specified directory. This can be specified multiple times.</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;o</b></dt>
+<dd class="list-tag" style="margin-left: 10.00ex;">
+install dotfiles into the host-specific directory</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;q</b></dt>
 <dd class="list-tag" style="margin-left: 10.00ex;">
@@ -54,13 +62,9 @@ decrease verbosity</dd>
 <dd class="list-tag" style="margin-left: 10.00ex;">
 install dotfiles according to tag</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
-<b class="flag">&#45;d</b> <i class="arg">DIR</i></dt>
+<b class="flag">&#45;v</b></dt>
 <dd class="list-tag" style="margin-left: 10.00ex;">
-install dotfiles under the specified directory. This can be specified multiple times.</dd>
-<dt class="list-tag" style="margin-top: 1.00em;">
-<b class="flag">&#45;o</b></dt>
-<dd class="list-tag" style="margin-left: 10.00ex;">
-install dotfiles into the host-specific directory</dd>
+increase verbosity. This can be repeated for extra verbosity.</dd>
 </dl>
 </div>
 <div class="section">
@@ -78,6 +82,10 @@ install dotfiles into the host-specific directory</dd>
 <div class="display">
 <code class="lit">mkrc -o ~/.rcrc</code></div>
 </blockquote>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">mkrc -C .ssh</code></div>
+</blockquote>
 </div>
 <div class="section">
 <h1 id="x53454520414c534f">SEE ALSO</h1> <a class="link-man" href="lsrc.1.html">lsrc(1)</a>, <a class="link-man" href="rcdn.1.html">rcdn(1)</a>, <a class="link-man" href="rcup.1.html">rcup(1)</a>, <a class="link-man" href="rcrc.5.html">rcrc(5)</a>, <a class="link-man" href="rcm.7.html">rcm(7)</a></div>
@@ -91,7 +99,7 @@ install dotfiles into the host-specific directory</dd>
 <td class="foot-date">
 July 28, 2013</td>
 <td class="foot-os" align="right">
-Linux 3.2.0-4-amd64</td>
+Linux 3.10-2-amd64</td>
 </tr>
 </tbody>
 </table>

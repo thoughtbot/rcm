@@ -107,10 +107,10 @@ When necessary, add new rc files with <a class="link-man" href="mkrc.1.html">mkr
 </li>
 </ol>
 <div class="subsection">
-<h2 id="x434f4d4d4f4e2050524f424c454d3a204558495354494e4720494e5354414c4c2053435249505453">COMMON PROBLEM: EXISTING INSTALL SCRIPTS</h2> Many existing dotfile directories have scripts named <i class="file">install</i> or <i class="file">Makefile</i> in the directory directory. This will cause a <i class="file">~/.install</i> or <i class="file">~/.Makefile</i> symlink to be created in your home directory. The best option here is to move that file outside of your dotfiles directory or remove it entirely.<p>
+<h2 id="x434f4d4d4f4e2050524f424c454d3a204558495354494e4720494e5354414c4c2053435249505453">COMMON PROBLEM: EXISTING INSTALL SCRIPTS</h2> Many existing dotfile directories have scripts named <i class="file">install</i> or <i class="file">Makefile</i> in the directory directory. This will cause a <i class="file">~/.install</i> or <i class="file">~/.Makefile</i> symlink to be created in your home directory. Use an exclusion pattern to ignore these.<p>
 <blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
 <div class="display">
-<code class="lit">rm -f install Rakefile Makefile install.sh</code></div>
+<code class="lit">rcup -x install -x Rakefile -x Makefile -x install.sh</code></div>
 </blockquote>
 </div>
 <div class="subsection">
@@ -179,6 +179,12 @@ The following rcup invocation will go in sequence through the three dotfiles dir
 <div class="display">
 <code class="lit">rcup -d .dotfiles -d marriage-dotfiles -d thoughtbot-dotfiles</code></div>
 </blockquote>
+<p>
+An exclusion pattern can be tied to a specific dotfiles directory.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">rcup -d .dotfiles -d work-dotfiles -x 'work-dotfiles:powrc'</code></div>
+</blockquote>
 </div>
 <div class="section">
 <h1 id="x484f53542d535045434946494320444f5446494c4553">HOST-SPECIFIC DOTFILES</h1> You can also mark host-specific files. This will go by the hostname. The <a class="link-man" href="rcrc.5.html">rcrc(5)</a> configuration file is a popular candidate for a host-specific file, since the tags and dotfile directories listed in there are often specific to a single machine.<p>
@@ -204,7 +210,7 @@ As such, this suite is useful as a common base. Through this we can share tools 
 <td class="foot-date">
 July 28, 2013</td>
 <td class="foot-os" align="right">
-Linux 3.2.0-4-amd64</td>
+Linux 3.10-2-amd64</td>
 </tr>
 </tbody>
 </table>

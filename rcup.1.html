@@ -34,7 +34,7 @@ RCUP(1)</td>
 <td>
 rcup</td>
 <td>
-&#91;<span class="opt"><b class="flag">&#45;vqfi</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;t</b> <i class="arg">tag</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;d</b> <i class="arg">dir</i></span>&#93; &#91;<span class="opt"><i class="arg">files ...</i></span>&#93;</td>
+&#91;<span class="opt"><b class="flag">&#45;CfikKqv</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;d</b> <i class="arg">dir</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;I</b> <i class="arg">excl_pat</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;t</b> <i class="arg">tag</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;x</b> <i class="arg">excl_pat</i></span>&#93; &#91;<span class="opt"><i class="arg">files ...</i></span>&#93;</td>
 </tr>
 </tbody>
 </table>
@@ -44,43 +44,66 @@ rcup</td>
 See <i class="link-sec"><a class="link-sec" href="#x4449524543544f5259204c41594f5554">DIRECTORY LAYOUT</a></i> for details on the directory layout.<p>
 It supports these options:<dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
 <dt class="list-tag" style="margin-top: 1.00em;">
-f</dt>
-<dd class="list-tag" style="margin-left: 2.00ex;">
-If the rc file already exists in your home directory but does not match the file in your dotfiles directory, remove the rc file then create the symlink</dd>
-<dt class="list-tag" style="margin-top: 1.00em;">
-i</dt>
-<dd class="list-tag" style="margin-left: 2.00ex;">
-If the rc file already exists in your home directory but does not match the file in your dotfiles directory, prompt for how to handle it. This is the default</dd>
-<dt class="list-tag" style="margin-top: 1.00em;">
-<b class="flag">&#45;t</b> <i class="arg">TAG</i></dt>
-<dd class="list-tag" style="margin-left: 2.00ex;">
-install dotfiles according to <i class="arg">TAG</i></dd>
+<b class="flag">&#45;C</b></dt>
+<dd class="list-tag" style="margin-left: 10.00ex;">
+copy the files instead of symlinking them</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;d</b> <i class="arg">DIR</i></dt>
-<dd class="list-tag" style="margin-left: 2.00ex;">
-install dotfiles from the <i class="arg">DIR</i> . This can be specified multiple times.</dd>
+<dd class="list-tag" style="margin-left: 10.00ex;">
+install dotfiles from the <i class="arg">DIR</i>. This can be specified multiple times.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
-<b class="flag">&#45;v</b></dt>
-<dd class="list-tag" style="margin-left: 2.00ex;">
-increase verbosity. This can be repeated for extra verbosity.</dd>
+<b class="flag">&#45;f</b></dt>
+<dd class="list-tag" style="margin-left: 10.00ex;">
+if the rc file already exists in your home directory but does not match the file in your dotfiles directory, remove the rc file then create the symlink</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;i</b></dt>
+<dd class="list-tag" style="margin-left: 10.00ex;">
+if the rc file already exists in your home directory but does not match the file in your dotfiles directory, prompt for how to handle it. This is the default</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;I</b> <i class="arg">EXCL_PAT</i></dt>
+<dd class="list-tag" style="margin-left: 10.00ex;">
+install rc files that match <i class="arg">EXCL_PAT</i> despite being excluded by the <b class="flag">&#45;x</b> flag or a setting in <a class="link-man" href="rcrc.5.html">rcrc(5)</a>. This can be repeated with additional patterns. See <a class="link-man" href="lsrc.1.html">lsrc(1)</a>, <i class="link-sec"><a class="link-sec" href="#x4558434c554445205041545445524e">EXCLUDE PATTERN</a></i>, for more details.</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;k</b></dt>
+<dd class="list-tag" style="margin-left: 10.00ex;">
+run pre- and post-hooks (see <i class="link-sec"><a class="link-sec" href="#x4449524543544f5259204c41594f5554">DIRECTORY LAYOUT</a></i> for more details on hooks). This is the default.</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;K</b></dt>
+<dd class="list-tag" style="margin-left: 10.00ex;">
+skip pre- and post-hooks</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;t</b> <i class="arg">TAG</i></dt>
+<dd class="list-tag" style="margin-left: 10.00ex;">
+install dotfiles according to <i class="arg">TAG</i></dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;q</b></dt>
-<dd class="list-tag" style="margin-left: 2.00ex;">
+<dd class="list-tag" style="margin-left: 10.00ex;">
 decrease verbosity</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;v</b></dt>
+<dd class="list-tag" style="margin-left: 10.00ex;">
+increase verbosity. This can be repeated for extra verbosity.</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;x</b> <i class="arg">EXCL_PAT</i></dt>
+<dd class="list-tag" style="margin-left: 10.00ex;">
+do not install rc files that match <i class="arg">EXCL_PAT</i>. This can be repeated with additional patterns. See <a class="link-man" href="lsrc.1.html">lsrc(1)</a>, <i class="link-sec"><a class="link-sec" href="#x4558434c554445205041545445524e">EXCLUDE PATTERN</a></i>, for more details.</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
 <i class="arg">files</i></dt>
-<dd class="list-tag" style="margin-left: 2.00ex;">
+<dd class="list-tag" style="margin-left: 10.00ex;">
 only install the specified file(s)</dd>
 </dl>
 </div>
 <div class="section">
 <h1 id="x4449524543544f5259204c41594f5554">DIRECTORY LAYOUT</h1> Any non-dot non-meta file or directory under your dotfiles directory will be installed as a dotfile. For example, <i class="file">.dotfiles/zshrc</i> will be installed into <i class="file">~/.zshrc</i> .<p>
-Files are installed as symlinks. Directories are installed by making directories.<p>
-Two meta files are supported: host-specific files and tagged files.<p>
-Host-specific files go in a directory named for the host, prefixed with <i class="file">host-</i>. For example, <i class="file">.dotfiles/host-scarlett</i> contains files specific to the computer with hostname <i class="file">scarlett</i> , and these files will only be installed on the computer with hostname <i class="file">scarlett</i> .<p>
-Tagged files go in a directory named for the tag, prefixed with <code class="lit">tag-</code>. Therefore, files under <i class="file">.dotfiles/tag-git</i> are only installed when installing using the <code class="lit">git</code> tag.</div>
+Files are installed as symlinks. Directories are installed by making directories. The <b class="flag">&#45;C</b> flag causes files to be installed as copies instead of symlinks. The <b class="var">COPY_ALWAYS</b> option in <a class="link-man" href="rcrc.5.html">rcrc(5)</a> can be used to list files that must only be copied.<p>
+Three meta files are supported: host-specific files, tagged files, hooks.<p>
+Host-specific files go in a directory named for the host, prefixed with <i class="file">host-</i>. For example, <i class="file">.dotfiles/host-scarlett</i> contains files specific to the computer with hostname <i class="file">scarlett</i> , and these files will only be installed on the computer with hostname <i class="file">scarlett</i>.<p>
+Tagged files go in a directory named for the tag, prefixed with <code class="lit">tag-</code>. Therefore, files under <i class="file">.dotfiles/tag-git</i> are only installed when installing using the <code class="lit">git</code> tag.<p>
+Hooks go in a directory named <i class="file">hooks</i>. Two hooks are supported by <b class="name">rcup</b>: pre-up and post-up . These go in files with predictable filenames: <i class="file">.dotfiles/hooks/pre-up and</i> <i class="file">.dotfiles/hooks/post-up</i>. These files must be executable. They are run every time <b class="name">rcup</b> is run, and therefore must be idempotent.</div>
 <div class="section">
 <h1 id="x414c474f524954484d">ALGORITHM</h1> It is instructive to understand the process <b class="name">rcup</b> uses when synchronizing your rc files:<ol style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-enum">
+<li class="list-enum" style="margin-top: 1.00em;">
+The pre-up hook is run.</li>
 <li class="list-enum" style="margin-top: 1.00em;">
 All non-host, non-tag files without a dot prefix are symlinked to the dotted filename in your home directory. So, <i class="file">.dotfiles/tigrc</i> is symlinked to <i class="file">~/.tigrc</i>.</li>
 <li class="list-enum" style="margin-top: 1.00em;">
@@ -89,6 +112,8 @@ All non-host, non-tag directories have their structure copied to your home direc
 Steps (1) and (2) are applied to host-specific files. These are files under a directory named <i class="file">host-</i><b class="var">$HOSTNAME</b>.</li>
 <li class="list-enum" style="margin-top: 1.00em;">
 Steps (1) and (2) are applied to tag-specific files. These are files under directories named <i class="file">tag-</i><b class="var">$TAG_NAME</b>, where <b class="var">$TAG_NAME</b> is the name of each specified tag in turn, taken from the command line or from <a class="link-man" href="rcrc.5.html">rcrc(5)</a>.</li>
+<li class="list-enum" style="margin-top: 1.00em;">
+The post-up hook is run.</li>
 </ol>
 </div>
 <div class="section">
@@ -105,7 +130,7 @@ Steps (1) and (2) are applied to tag-specific files. These are files under direc
 <td class="foot-date">
 July 28, 2013</td>
 <td class="foot-os" align="right">
-Linux 3.2.0-4-amd64</td>
+Linux 3.10-2-amd64</td>
 </tr>
 </tbody>
 </table>
