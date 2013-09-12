@@ -29,7 +29,7 @@ push-tag: build-tag
 
 build-docs:
 	git clone --branch gh-pages --single-branch . gh-pages && \
-	for i in lsrc.1 mkrc.1 rcm.7 rcrc.5 rcup.1; do \
+	for i in lsrc.1 mkrc.1 rcm.7 rcrc.5 rcup.1 rcdn.1; do \
 	  mandoc -Thtml -Oman=%N.%S.html man/$$i > gh-pages/$$i.html ; \
 	done ; \
 	cp gh-pages/rcm.7.html gh-pages/index.html
