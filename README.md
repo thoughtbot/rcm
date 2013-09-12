@@ -6,7 +6,7 @@ This is a management suite for dotfiles.
 It assumes that you have a separate dotfiles directory, or are
 interested in creating one.
 
-The programs provided are `rcup`, `mkrc`, and `lsrc`.
+The programs provided are `rcup`, `mkrc`, `rcdn`, and `lsrc`.
 
 Installation
 ------------
@@ -17,8 +17,8 @@ Arch Linux:
 
 Debian-based (including Ubuntu):
 
-    wget http://mike-burns.com/project/rcm/rcm_1.0.0_all.deb
-    sudo dpkg -i rcm_1.0.0_all.deb
+    wget http://mike-burns.com/project/rcm/rcm_1.1.0_all.deb
+    sudo dpkg -i rcm_1.1.0_all.deb
 
 OS X:
 
