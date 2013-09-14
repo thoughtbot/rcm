@@ -1,0 +1,28 @@
+#!/bin/sh
+
+if [ -z $1 -o -z $2 ]; then
+  echo Usage: pkgng VERSION INSTALL_DIR 1>&2
+  exit 1
+fi
+
+pkg_version=$1
+pkg_installed_dir=$2
+
+cat <<MANIFEST
+---
+name: rcm
+version: $1
+origin: sysutils/rcm
+comment: dotfile management for the unix generation
+arch: freebsd:9:x86:64
+www: http://mike-burns.github.io/rcm/
+maintainer: mike@mike-burns.com
+prefix: /usr/local
+licenselogic: single
+desc: |
+  The rcm suite of tools is for managing dotfiles directories. This
+  suite is useful for commiting your rc files to a central repository to
+  share, but it also scales to a more complex situation such as mutliple
+  source directories shared between computers with some host-specific or
+  task-specific files.
+MANIFEST

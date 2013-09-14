@@ -5,7 +5,7 @@ SUBDIRS = man share bin
 
 ORIGIN_URL=$(shell git config --get remote.origin.url)
 
-release: deb push-tag upload-docs
+release: deb freebsd push-tag upload-docs
 
 deb-changelog: NEWS.md
 	cp -f NEWS.md debian/changelog
@@ -20,6 +20,17 @@ deb: deb-changelog
 	cd rcm-$(PACKAGE_VERSION) && \
 	debuild -us -uc
 	cp /tmp/deb/rcm_$(PACKAGE_VERSION)*.deb $(abs_srcdir)
+
+freebsd:
+	mkdir -p /tmp/freebsd/rcm && \
+	./autogen.sh && \
+	./configure --prefix=/tmp/freebsd/rcm/usr/local && \
+	make install && \
+	./scripts/pkgng_compact $(PACKAGE_VERSION) /tmp/freebsd/rcm > /tmp/freebsd/+COMPACT_MANIFEST && \
+	./scripts/pkgng $(PACKAGE_VERSION) /tmp/freebsd/rcm > /tmp/freebsd/+MANIFEST && \
+	cp -- /tmp/freebsd/+MANIFEST /tmp/freebsd/rcm && \
+	cp -- /tmp/freebsd/+COMPACT_MANIFEST /tmp/freebsd/rcm && \
+	tar -cJPps -C /tmp/freebsd/rcm -f rcm-$(PACKAGE_VERSION).txz .
 
 build-tag:
 	git tag -f -a v$(PACKAGE_VERSION) -m "Release $(PACKAGE_VERSION)"

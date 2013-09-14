@@ -1,0 +1,23 @@
+#!/bin/sh
+
+if [ -z $1 -o -z $2 ]; then
+  echo Usage: pkgng VERSION INSTALL_DIR 1>&2
+  exit 1
+fi
+
+pkg_version=$1
+pkg_installed_dir=$2
+
+./scripts/pkgng_compact $pkg_version $pkg_installed_dir
+echo 'scripts: {}'
+
+flatsize=0
+echo files:
+for file in `find $pkg_installed_dir -type f -print`; do
+  installed_name=`echo $file | sed -e "s|$pkg_installed_dir||"`
+  size=`stat -c '%s' $file`
+
+  flatsize=`expr $flatsize + $size`
+  echo "  $installed_name: `sha256sum $file | cut -f1 -d' '`"
+done
+echo flatsize: $flatsize
