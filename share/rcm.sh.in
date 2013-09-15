@@ -105,13 +105,22 @@ run_hooks() {
   $DEBUG "  with DOTFILES_DIRS: $DOTFILES_DIRS"
   local when=$1
   local direction=$2
+  local hook_file="$dotfiles_dir/hooks/$when-$direction"
 
   if [ $RUN_HOOKS -eq 1 ]; then
     for dotfiles_dir in $DOTFILES_DIRS; do
       $DEBUG "hook: $dotfiles_dir/hooks/$when-$direction"
-      if [ -x "$dotfiles_dir/hooks/$when-$direction" ]; then
+      if [ -f $hook_file ] && [ -x $hook_file ]; then
         $VERBOSE "running $when-$direction hooks for $dotfiles_dir"
-        $dotfiles_dir/hooks/$when-$direction
+        $hook_file
+      elif [ -d $hook_file ]; then
+        $VERBOSE "running $when-$direction hooks for $dotfiles_dir"
+        for hook in $hook_file/*; do
+          if [ -x "$hook" ]; then
+            $VERBOSE "running $when-$direction `basename $hook`"
+            $hook
+          fi
+        done
       fi
     done
   fi
