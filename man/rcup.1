@@ -114,9 +114,14 @@ Hooks go in a directory named
 .Pa hooks .
 Two hooks are supported by
 .Nm rcup :
-pre-up and post-up . These go in files with predictable filenames:
-.Pa .dotfiles/hooks/pre-up and
-.Pa .dotfiles/hooks/post-up .
+pre-up and post-up. These go in files or directories with predictable filenames:
+.Pa .dotfiles/hooks/pre-up
+and
+.Pa .dotfiles/hooks/post-up ,
+or
+.Pa .dotfiles/hooks/pre-up/*
+and
+.Pa .dotfiles/hooks/post-up/* .
 These files must be executable. They are run every time
 .Nm
 is run, and therefore must be idempotent.
