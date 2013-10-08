@@ -75,6 +75,6 @@ for file in $files; do
   dotless=`echo $file | sed -e "s|$DEST_DIR/||" | sed -e 's/^\.//'`
   dest=`destination $DOTFILES_DIR $dotless $in_host $tag`
   mkdir -p $dest/`dirname $dotless`
-  $MV $file $dest/$dotless
-  $INSTALL -d $DOTFILES_DIR -t ${tag:--} $dotless
+  echo -n "Moving... "; $MV $file $dest/$dotless
+  echo -n "Linking... "; $INSTALL -d $DOTFILES_DIR -t ${tag:--} $dotless
 done
