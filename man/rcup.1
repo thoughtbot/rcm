@@ -56,6 +56,11 @@ run pre- and post-hooks (see
 for more details on hooks). This is the default.
 .It Fl K
 skip pre- and post-hooks
+.It Fl S Ar EXCL_PAT
+any rc file that matches
+.Ar EXCL_PAT
+is installed as if it were a file (using a symlink) instead of as if it
+were a directory (by making a directory). This option can be repeated.
 .It Fl t Ar TAG
 install dotfiles according to
 .Ar TAG

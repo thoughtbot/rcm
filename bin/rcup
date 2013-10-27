@@ -104,9 +104,10 @@ handle_command_line() {
   local excludes=
   local includes=
   local always_copy=0
+  local symlink_dirs=
   REPLACE_ALL=0
 
-  while getopts CVqvfhikKI:x:t:d: opt; do
+  while getopts CVqvfhikKI:x:S:t:d: opt; do
     case "$opt" in
       C) always_copy=1 ;;
       d) dotfiles_dirs="$dotfiles_dirs $OPTARG" ;;
@@ -118,6 +119,7 @@ handle_command_line() {
       K) run_hooks=0 ;;
       q) verbosity=$(($verbosity - 1)) ;;
       t) arg_tags="$arg_tags $OPTARG" ;;
+      S) symlink_dirs="$symlink_dirs $OPTARG";;
       v) verbosity=$(($verbosity + 1)) ;;
       V) version=1 ;;
       x) excludes="$excludes $OPTARG" ;;
@@ -147,6 +149,9 @@ handle_command_line() {
   done
   for include in $includes; do
     LS_ARGS="$LS_ARGS -I $include"
+  done
+  for symlink_dir in $symlink_dirs; do
+    LS_ARGS="$LS_ARGS -S $symlink_dir"
   done
   LS_ARGS="$LS_ARGS $files"
 

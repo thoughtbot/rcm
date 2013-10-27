@@ -10,7 +10,7 @@ ERROR=echo_error
 VERBOSE=:
 MKDIR=mkdir
 LN="ln -s"
-CP=cp
+CP="cp -R"
 RM=rm
 DEFAULT_DOTFILES_DIR=$HOME/.dotfiles
 MV=mv
@@ -115,6 +115,12 @@ run_hooks() {
       find "$dotfiles_dir/hooks/$when-$direction" -type f -perm +111 -print -exec {} \;
     done
   fi
+}
+
+de_dot() {
+  $DEBUG "de_dot $1"
+  $DEBUG "  with DEST_DIR: $DEST_DIR"
+  echo $1 | sed -e "s|$DEST_DIR/||" | sed -e 's/^\.//'
 }
 
 : ${RCRC:=$HOME/.rcrc}

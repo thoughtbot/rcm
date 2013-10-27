@@ -53,16 +53,18 @@ show_dir() {
   local dotted=$5
   local exclude_file_globs="$6"
   local include_file_globs="$7"
+  local symlink_dirs_file_globs="$8"
   local dest_path=`build_path $dest_dir $dir $dotted`
 
-  $DEBUG "show_dir $1 $2 $3 $4 $5 $6 $7"
+  $DEBUG "show_dir $1 $2 $3 $4 $5 $6 $7 $8"
 
   $VERBOSE "recurring on $dest_path"
+
   pushdir $dir
   for f in *; do
     $DEBUG "handling the file $f"
     next_dir=`file_join $dotfiles_subdir $dir`
-    handle_file $f $dest_path $dotfiles_dir $next_dir 1 "$exclude_file_globs" "$include_file_globs"
+    handle_file $f $dest_path $dotfiles_dir $next_dir 1 "$exclude_file_globs" "$include_file_globs" "$symlink_dirs_file_globs"
   done
   popdir
 }
@@ -96,6 +98,7 @@ show_file() {
   local dotfiles_dir=$3
   local dotfiles_subdir=$4
   local dotted=$5
+  local symlink_dirs_file_globs=$6
   local dest_file=`build_path $dest_dir $file $dotted`
 
   if echo $DEST_STACK | grep -vq ":$dest_file"; then
@@ -122,15 +125,18 @@ handle_file() {
   local dotted=$5
   local exclude_file_globs="$6"
   local include_file_globs="$7"
+  local symlink_dirs_file_globs="$8"
 
-  $DEBUG "handle_file $1 $2 $3 $4 $5 $6 $7"
+  $DEBUG "handle_file $1 $2 $3 $4 $5 $6 $7 $8"
 
   if [ ! -e $file ]; then
     $VERBOSE "skipping non-existent file $file"
   elif is_excluded $file "$exclude_file_globs" "$include_file_globs"; then
     $VERBOSE "skipping excluded file $file"
+  elif [ -d $file ] && is_excluded $file "$symlink_dirs_file_globs"; then
+    show_file $file $dest_dir $dotfiles_dir $dotfiles_subdir $dotted "$symlink_dirs_file_globs"
   elif [ -d $file ]; then
-    show_dir $file $dest_dir $dotfiles_dir $dotfiles_subdir $dotted "$exclude_file_globs" "$include_file_globs"
+    show_dir $file $dest_dir $dotfiles_dir $dotfiles_subdir $dotted "$exclude_file_globs" "$include_file_globs" "$symlink_dirs_file_globs"
   else
     show_file $file $dest_dir $dotfiles_dir $dotfiles_subdir $dotted
   fi
@@ -198,7 +204,7 @@ is_excluded() {
 show_help() {
   local exit_code=${1:-0}
 
-  $PRINT "Usage: lsrc [-FVqvh] [-I EXCL_PAT] [-x EXCL_PAT] [-t TAG] [-d DOT_DIR]"
+  $PRINT "Usage: lsrc [-FVqvh] [-I EXCL_PAT] [-x EXCL_PAT] [-N EXCL_PAT ] [-t TAG] [-d DOT_DIR]"
   $PRINT "see lsrc(1) and rcm(5) for more details"
 
   exit $exit_code
@@ -212,8 +218,9 @@ handle_command_line() {
   local dotfiles_dirs=
   local excludes=
   local includes=
+  local symlink_dirs=
 
-  while getopts FVqvhI:x:t:d: opt; do
+  while getopts FVqvhI:x:S:t:d: opt; do
     case "$opt" in
       F) show_sigils=1;;
       h) show_help ;;
@@ -224,6 +231,7 @@ handle_command_line() {
       d) dotfiles_dirs="$dotfiles_dirs $OPTARG";;
       V) version=1;;
       x) excludes="$excludes $OPTARG";;
+      S) symlink_dirs="$symlink_dirs $OPTARG";;
     esac
   done
   shift $(($OPTIND-1))
@@ -234,6 +242,7 @@ handle_command_line() {
   DOTFILES_DIRS=${dotfiles_dirs:-$DOTFILES_DIRS}
   EXCLUDES=${excludes:-$EXCLUDES}
   INCLUDES=${includes:-$INCLUDES}
+  SYMLINK_DIRS=${symlink_dirs:-$SYMLINK_DIRS}
   FILES=$@
 
   $DEBUG "TAGS: $TAGS"
@@ -250,19 +259,24 @@ $DEBUG "DOTFILES_DIRS: $DOTFILES_DIRS"
 : ${COPY_ALWAYS:=""}
 $DEBUG "COPY_ALWAYS: $COPY_ALWAYS"
 
+: ${SYMLINK_DIRS:=""}
+$DEBUG "SYMLINK_DIRS: $SYMLINK_DIRS"
+
 for DOTFILES_DIR in $DOTFILES_DIRS; do
   if is_relative $DOTFILES_DIR; then
     DOTFILES_DIR=$PWD/$DOTFILES_DIR
   fi
 
   if [ ! -d $DOTFILES_DIR ]; then
-    $VERBOSE "skipping non-existent directory: $DOTFILES_DIR" 
+    $VERBOSE "skipping non-existent directory: $DOTFILES_DIR"
     continue
   fi
 
   exclude_file_globs=`dotfiles_dir_excludes $DOTFILES_DIR "$EXCLUDES"`
   $DEBUG "exclude_file_globs: $exclude_file_globs"
   include_file_globs=`dotfiles_dir_excludes $DOTFILES_DIR "$INCLUDES"`
+  symlink_dirs_file_globs=`dotfiles_dir_excludes $DOTFILES_DIR "$SYMLINK_DIRS"`
+  $DEBUG "symlink_dirs_file_globs: $symlink_dirs_file_globs"
 
   cd $DOTFILES_DIR
   DIR_STACK=":$DOTFILES_DIR"
@@ -272,7 +286,7 @@ for DOTFILES_DIR in $DOTFILES_DIRS; do
       continue
     fi
 
-    handle_file $file $DEST_DIR $DOTFILES_DIR . 0 "$exclude_file_globs" "$include_file_globs"
+    handle_file $file $DEST_DIR $DOTFILES_DIR . 0 "$exclude_file_globs" "$include_file_globs" "$symlink_dirs_file_globs"
   done
 
   cd $DOTFILES_DIR

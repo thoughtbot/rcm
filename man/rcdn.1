@@ -64,6 +64,11 @@ run pre- and post-hooks. This is the default.
 skip pre- and post-hooks
 .It Fl q
 decrease verbosity
+.It Fl S Ar EXCL_PAT
+when removing dotfiles, any file that matches
+.Ar EXCL_PAT
+should be treated as a file that was symlinked, even if it is a
+directory. This can be repeated.
 .It Fl t Ar TAG
 remove dotfiles according to
 .Ar TAG

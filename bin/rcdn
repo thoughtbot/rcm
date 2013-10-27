@@ -36,14 +36,16 @@ handle_command_line() {
   local files=
   local excludes=
   local includes=
+  local symlink_dirs=
 
-  while getopts VqvhI:x:t:d: opt; do
+  while getopts VqvhI:x:S:t:d: opt; do
     case "$opt" in
       h) show_help ;;
       I) includes="$includes $OPTARG";;
       k) run_hooks=1 ;;
       K) run_hooks=0 ;;
       t) arg_tags="$arg_tags $OPTARG" ;;
+      S) symlink_dirs="$symlink_dirs $OPTARG";;
       v) verbosity=$(($verbosity + 1));;
       q) verbosity=$(($verbosity - 1));;
       d) dotfiles_dirs="$dotfiles_dirs $OPTARG" ;;
@@ -71,6 +73,9 @@ handle_command_line() {
   done
   for include in $includes; do
     LS_ARGS="$LS_ARGS -I $include"
+  done
+  for symlink_dir in $symlink_dirs; do
+    LS_ARGS="$LS_ARGS -S $symlink_dir"
   done
   LS_ARGS="$LS_ARGS $files"
 
