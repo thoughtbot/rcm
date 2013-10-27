@@ -53,11 +53,18 @@ show_dir() {
   local dotted=$5
   local exclude_file_globs="$6"
   local include_file_globs="$7"
+  local never_descend_file_globs="$8"
   local dest_path=`build_path $dest_dir $dir $dotted`
 
-  $DEBUG "show_dir $1 $2 $3 $4 $5 $6 $7"
+  $DEBUG "show_dir $1 $2 $3 $4 $5 $6 $7 $8"
 
-  $VERBOSE "recurring on $dest_path"
+  if [ -z "$never_descend_file_globs" ]; then
+    $VERBOSE "recurring on $dest_path"
+  else
+    $VERBOSE "not descending on $dest_path"
+    return 1
+  fi
+
   pushdir $dir
   for f in *; do
     $DEBUG "handling the file $f"
@@ -131,7 +138,7 @@ handle_file() {
   elif is_excluded $file "$exclude_file_globs" "$include_file_globs"; then
     $VERBOSE "skipping excluded file $file"
   elif [ -d $file ] && is_excluded $file "$never_descend_file_globs"; then
-    :
+    show_dir $file $dest_dir $dotfiles_dir $dotfiles_subdir $dotted "$exclude_file_globs" "$include_file_globs" "$never_descend_file_globs"
   elif [ -d $file ]; then
     show_dir $file $dest_dir $dotfiles_dir $dotfiles_subdir $dotted "$exclude_file_globs" "$include_file_globs"
   else
