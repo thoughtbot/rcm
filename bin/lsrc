@@ -103,6 +103,7 @@ show_file() {
   local dotfiles_dir=$3
   local dotfiles_subdir=$4
   local dotted=$5
+  local never_descend_file_globs=$6
   local dest_file=`build_path $dest_dir $file $dotted`
 
   if echo $DEST_STACK | grep -vq ":$dest_file"; then
@@ -115,6 +116,10 @@ show_file() {
     if [ $SHOW_SIGILS -eq 1 ]; then
       sigil=`sigil_for $src_file`
       output="$output:$sigil"
+    fi
+
+    if [ -n "$never_descend_file_globs" ]; then
+      output="$output (not descending)"
     fi
 
     $PRINT $output
@@ -138,7 +143,8 @@ handle_file() {
   elif is_excluded $file "$exclude_file_globs" "$include_file_globs"; then
     $VERBOSE "skipping excluded file $file"
   elif [ -d $file ] && is_excluded $file "$never_descend_file_globs"; then
-    show_dir $file $dest_dir $dotfiles_dir $dotfiles_subdir $dotted "$exclude_file_globs" "$include_file_globs" "$never_descend_file_globs"
+    # show_dir $file $dest_dir $dotfiles_dir $dotfiles_subdir $dotted "$exclude_file_globs" "$include_file_globs" "$never_descend_file_globs"
+    show_file $file $dest_dir $dotfiles_dir $dotfiles_subdir $dotted "$never_descend_file_globs"
   elif [ -d $file ]; then
     show_dir $file $dest_dir $dotfiles_dir $dotfiles_subdir $dotted "$exclude_file_globs" "$include_file_globs"
   else
