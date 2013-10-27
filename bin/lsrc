@@ -214,7 +214,7 @@ is_excluded() {
 show_help() {
   local exit_code=${1:-0}
 
-  $PRINT "Usage: lsrc [-FVqvh] [-I EXCL_PAT] [-x EXCL_PAT] [-t TAG] [-d DOT_DIR]"
+  $PRINT "Usage: lsrc [-FVqvh] [-I EXCL_PAT] [-x EXCL_PAT] [-N EXCL_PAT ] [-t TAG] [-d DOT_DIR]"
   $PRINT "see lsrc(1) and rcm(5) for more details"
 
   exit $exit_code
@@ -228,8 +228,9 @@ handle_command_line() {
   local dotfiles_dirs=
   local excludes=
   local includes=
+  local never_descend=
 
-  while getopts FVqvhI:x:t:d: opt; do
+  while getopts FVqvhI:x:N:t:d: opt; do
     case "$opt" in
       F) show_sigils=1;;
       h) show_help ;;
@@ -240,6 +241,7 @@ handle_command_line() {
       d) dotfiles_dirs="$dotfiles_dirs $OPTARG";;
       V) version=1;;
       x) excludes="$excludes $OPTARG";;
+      N) never_descend="$never_descend $OPTARG";;
     esac
   done
   shift $(($OPTIND-1))
@@ -250,6 +252,7 @@ handle_command_line() {
   DOTFILES_DIRS=${dotfiles_dirs:-$DOTFILES_DIRS}
   EXCLUDES=${excludes:-$EXCLUDES}
   INCLUDES=${includes:-$INCLUDES}
+  NEVER_DESCEND=${never_descend:-$NEVER_DESCEND}
   FILES=$@
 
   $DEBUG "TAGS: $TAGS"
