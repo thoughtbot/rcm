@@ -122,13 +122,16 @@ handle_file() {
   local dotted=$5
   local exclude_file_globs="$6"
   local include_file_globs="$7"
+  local never_descend_file_globs="$8"
 
-  $DEBUG "handle_file $1 $2 $3 $4 $5 $6 $7"
+  $DEBUG "handle_file $1 $2 $3 $4 $5 $6 $7 $8"
 
   if [ ! -e $file ]; then
     $VERBOSE "skipping non-existent file $file"
   elif is_excluded $file "$exclude_file_globs" "$include_file_globs"; then
     $VERBOSE "skipping excluded file $file"
+  elif [ -d $file ] && is_excluded $file "$never_descend_file_globs"; then
+    :
   elif [ -d $file ]; then
     show_dir $file $dest_dir $dotfiles_dir $dotfiles_subdir $dotted "$exclude_file_globs" "$include_file_globs"
   else
@@ -254,19 +257,24 @@ $DEBUG "DOTFILES_DIRS: $DOTFILES_DIRS"
 : ${COPY_ALWAYS:=""}
 $DEBUG "COPY_ALWAYS: $COPY_ALWAYS"
 
+: ${NEVER_DESCEND:=""}
+$DEBUG "NEVER_DESCEND: $NEVER_DESCEND"
+
 for DOTFILES_DIR in $DOTFILES_DIRS; do
   if is_relative $DOTFILES_DIR; then
     DOTFILES_DIR=$PWD/$DOTFILES_DIR
   fi
 
   if [ ! -d $DOTFILES_DIR ]; then
-    $VERBOSE "skipping non-existent directory: $DOTFILES_DIR" 
+    $VERBOSE "skipping non-existent directory: $DOTFILES_DIR"
     continue
   fi
 
   exclude_file_globs=`dotfiles_dir_excludes $DOTFILES_DIR "$EXCLUDES"`
   $DEBUG "exclude_file_globs: $exclude_file_globs"
   include_file_globs=`dotfiles_dir_excludes $DOTFILES_DIR "$INCLUDES"`
+  never_descend_file_globs=`dotfiles_dir_excludes $DOTFILES_DIR "$NEVER_DESCEND"`
+  $DEBUG "never_descend_file_globs: $never_descend_file_globs"
 
   cd $DOTFILES_DIR
   DIR_STACK=":$DOTFILES_DIR"
@@ -276,7 +284,7 @@ for DOTFILES_DIR in $DOTFILES_DIRS; do
       continue
     fi
 
-    handle_file $file $DEST_DIR $DOTFILES_DIR . 0 "$exclude_file_globs" "$include_file_globs"
+    handle_file $file $DEST_DIR $DOTFILES_DIR . 0 "$exclude_file_globs" "$include_file_globs" "$never_descend_file_globs"
   done
 
   cd $DOTFILES_DIR
