@@ -3,9 +3,13 @@ autom4te.cache
 config.log
 config.status
 Makefile
+Makefile.in
 debian/rcm
 debian/rcm.debhelper.log
 share/rcm.sh
 *deb
 debian/changelog
 NEWS.md
+missing
+install-sh
+configure
