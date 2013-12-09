@@ -116,3 +116,9 @@ run_hooks() {
     done
   fi
 }
+
+: ${RCRC:=$HOME/.rcrc}
+
+if [ -r "$RCRC" ]; then
+  . "$RCRC"
+fi

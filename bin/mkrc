@@ -18,10 +18,6 @@ destination() {
   fi
 }
 
-if [ -e $HOME/.rcrc ]; then
-  . $HOME/.rcrc
-fi
-
 show_help() {
   local exit_code=${1:-0}
 
