@@ -38,3 +38,20 @@ GitHub Pages. The `build-docs` target will just build them.
     make upload-docs
 
 More information on mdocml can be found on http://mdocml.bsd.lv/ .
+
+Testing
+-------
+
+Acceptance tests can be executed by [cram][]:
+
+~~~
+$ make
+$ SRC=$PWD cram test
+...
+# Ran 3 tests, 0 skipped, 0 failed.
+~~~
+
+It is encouraged that any new feature come with tests and that 
+additional coverage should be added as time allows.
+
+[cram]: https://bitheap.org/cram/
