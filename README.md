@@ -17,12 +17,12 @@ Arch Linux:
 
 Debian-based (including Ubuntu):
 
-    wget http://mike-burns.com/project/rcm/rcm_1.1.0_all.deb
+    wget http://thoughtbot.github.io/rcm/debs/rcm_1.1.0_all.deb
     sudo dpkg -i rcm_1.1.0_all.deb
 
 OS X:
 
-    brew tap mike-burns/rcm
+    brew tap thoughtbot/rcm
     brew install rcm
 
 Elsewhere:
