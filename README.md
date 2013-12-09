@@ -41,6 +41,7 @@ Programs
 * `rcup` is the main program. It is used to install and update dotfiles,
   with support for tags, host-specific files, and multiple source
   directories.
+* `rcdn` is the opposite of `rcup`.
 * `mkrc` is for introducing a dotfile into your dotfiles directory, with
   support for tags and multiple source directories.
 * `lsrc` shows you all your dotfiles and where they would be symlinked
