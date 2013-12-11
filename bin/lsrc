@@ -242,10 +242,6 @@ handle_command_line() {
 
 DEST_STACK=
 
-if [ -e $HOME/.rcrc ]; then
-  . $HOME/.rcrc
-fi
-
 handle_command_line $*
 
 : ${DOTFILES_DIRS:=$DOTFILES_DIRS $DEFAULT_DOTFILES_DIR}
