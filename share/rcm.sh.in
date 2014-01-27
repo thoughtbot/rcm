@@ -18,6 +18,8 @@ INSTALL=rcup
 ROOT_DIR=$HOME
 HOSTNAME=`hostname -s`
 
+unset CDPATH
+
 echo_n() {
   printf "%s " "$*"
 }
