@@ -22,7 +22,7 @@ Debian-based (including Ubuntu):
 
 OS X:
 
-    brew tap thoughtbot/rcm
+    brew tap thoughtbot/formulae
     brew install rcm
 
 Elsewhere:
