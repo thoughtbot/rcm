@@ -1,5 +1,19 @@
 rcm (@PACKAGE_VERSION@) unstable; urgency=low
 
+ * Transfer ownership to thoughtbot.
+ * BUGFIX: Run hooks by default. Thanks to Patrick Brisbin.
+ * BUGFIX: Unset CDPATH when starting. Thanks to Geoff Harcourt.
+ * Override .rcrc location using RCRC environment variable. Thanks to
+   Patrick Brisbin.
+ * Upgrade to automake 1.14.
+ * Improve mkrc verbose mode. Thanks to Pablo Olmos de Aguilera
+   Corradini.
+ * Use the thoughtbot/formulae Homebrew tap. Thanks to George
+   Brocklehurst.
+ * Manpage fixes thanks to Dan Croak and Roberto Pedroso.
+
+rcm (1.1.0) unstable; urgency=low
+
  * BUGFIX: use a consistent method for computing hostname everywhere.
    Thanks to George Brocklehurst.
  * Exclusion and inclusion with -x and -I.
