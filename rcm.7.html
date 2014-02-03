@@ -80,7 +80,7 @@ rcup</td>
 </div>
 <div class="section">
 <h1 id="x4445534352495054494f4e">DESCRIPTION</h1> The rcm suite of tools is for managing dotfiles directories. This is a directory containing all the <code class="lit">.*rc</code> files in your home directory (<i class="file">.zshrc</i>, <i class="file">.vimrc</i>, and so on). These files have gone by many names in history, such as &#8220;rc files&#8221; because they typically end in <code class="lit">rc</code> or &#8220;dotfiles&#8221; because they begin with a period.<p>
-This suite is useful for commiting your rc files to a central repository to share, but it also scales to a more complex situation such as mutliple source directories shared between computers with some host-specific or task-specific files.<p>
+This suite is useful for committing your rc files to a central repository to share, but it also scales to a more complex situation such as multiple source directories shared between computers with some host-specific or task-specific files.<p>
 This guide serves as a tutorial motivating the suite. For a list of quick reference documentation see the <i class="link-sec"><a class="link-sec" href="#x53454520414c534f">SEE ALSO</a></i> section below.</div>
 <div class="section">
 <h1 id="x515549434b20535441525420464f52204558495354494e4720444f5446494c4553204449524543544f52494553">QUICK START FOR EXISTING DOTFILES DIRECTORIES</h1> This section is for those who already have an existing dotfiles directory; this directory is <i class="file">~/.dotfiles</i>; the directory only contains rc files; and these rc filenames do not begin with a period. See the caveats below if this is not you.<ol style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-enum">
@@ -154,7 +154,7 @@ Synchronize your home directory with <a class="link-man" href="rcup.1.html">rcup
 <p>
 This will give you a directory named <i class="file">~/.dotfiles</i> with your dotfiles in it. Your original dotfiles will be symlinks into this directory. For example, <i class="file">~/.zshrc</i> will be a symlink to <i class="file">~/.dotfiles/zshrc</i>.</div>
 <div class="section">
-<h1 id="x54414747454420444f5446494c4553">TAGGED DOTFILES</h1> This suite becomes more powerful if you share your dotfiles directory between computers, either because multiple people share the same directory or because you have mutliple computers.<p>
+<h1 id="x54414747454420444f5446494c4553">TAGGED DOTFILES</h1> This suite becomes more powerful if you share your dotfiles directory between computers, either because multiple people share the same directory or because you have multiple computers.<p>
 If you share the dotfiles directory between people, you may end up with some irrelevant or even incorrect rc files. For example, you may have a <i class="file">.zshrc</i> while your other contributor has a <i class="file">.bashrc</i>. This situation can be handled with tags.<ol style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-enum">
 <li class="list-enum" style="margin-top: 1.00em;">
 A tag is a directory under the dotfiles directory the starts with the letters <code class="lit">tag-</code>. We can handle the competing shell example by making a <i class="file">tag-zsh</i> directory and moving the <i class="file">.zshrc</i> file into it using <a class="link-man" href="mkrc.1.html">mkrc(1)</a> and passing the <b class="flag">&#45;t</b> option.<p>
@@ -210,7 +210,7 @@ As such, this suite is useful as a common base. Through this we can share tools 
 <td class="foot-date">
 July 28, 2013</td>
 <td class="foot-os" align="right">
-Linux 3.10-2-amd64</td>
+Linux 3.2.0-4-amd64</td>
 </tr>
 </tbody>
 </table>
