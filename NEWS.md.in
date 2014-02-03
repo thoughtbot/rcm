@@ -1,43 +1,45 @@
 rcm (@PACKAGE_VERSION@) unstable; urgency=low
 
- * Transfer ownership to thoughtbot.
- * BUGFIX: Run hooks by default. Thanks to Patrick Brisbin.
- * BUGFIX: Unset CDPATH when starting. Thanks to Geoff Harcourt.
- * Override .rcrc location using RCRC environment variable. Thanks to
-   Patrick Brisbin.
- * Upgrade to automake 1.14.
- * Improve mkrc verbose mode. Thanks to Pablo Olmos de Aguilera
-   Corradini.
- * Use the thoughtbot/formulae Homebrew tap. Thanks to George
-   Brocklehurst.
- * Manpage fixes thanks to Dan Croak and Roberto Pedroso.
+  * Transfer ownership to thoughtbot.
+  * BUGFIX: Run hooks by default. Thanks to Patrick Brisbin.
+  * BUGFIX: Unset CDPATH when starting. Thanks to Geoff Harcourt.
+  * Override .rcrc location using RCRC environment variable. Thanks to
+    Patrick Brisbin.
+  * Upgrade to automake 1.14.
+  * Improve mkrc verbose mode. Thanks to Pablo Olmos de Aguilera
+    Corradini.
+  * Use the thoughtbot/formulae Homebrew tap. Thanks to George
+    Brocklehurst.
+  * Manpage fixes thanks to Dan Croak and Roberto Pedroso.
+
+ -- Mike Burns <mburns@thoughtbot.com>  Mon, 03 Feb 2014 16:58:33 +0200
 
 rcm (1.1.0) unstable; urgency=low
 
- * BUGFIX: use a consistent method for computing hostname everywhere.
-   Thanks to George Brocklehurst.
- * Exclusion and inclusion with -x and -I.
- * Copy instead of symlink with -C.
- * Always copy the files listed in COPY_ALWAYS.
- * Show whether the file is a copy or symlink using lsrc -F.
- * Add hooks for pre-up, post-up, pre-down, and post-down.
- * rcup -K and rcdn -K to ignore these hooks.
+  * BUGFIX: use a consistent method for computing hostname everywhere.
+    Thanks to George Brocklehurst.
+  * Exclusion and inclusion with -x and -I.
+  * Copy instead of symlink with -C.
+  * Always copy the files listed in COPY_ALWAYS.
+  * Show whether the file is a copy or symlink using lsrc -F.
+  * Add hooks for pre-up, post-up, pre-down, and post-down.
+  * rcup -K and rcdn -K to ignore these hooks.
 
  -- Mike Burns <mburns@thoughtbot.com>  Mon, 05 Aug 2013 16:43:33 +0200
 
 rcm (1.0.0) unstable; urgency=low
 
- * Improved Debian handling.
- * Introduce mkrc -o to install host-specific dotfiles.
- * Add rcdn(1) to remove rc files.
- * Add rcup -f and -i to force overwrites/prompt for overwrites.
+  * Improved Debian handling.
+  * Introduce mkrc -o to install host-specific dotfiles.
+  * Add rcdn(1) to remove rc files.
+  * Add rcup -f and -i to force overwrites/prompt for overwrites.
 
  -- Mike Burns <mburns@thoughtbot.com>  Tue, 01 Aug 2013 16:43:33 +0200
 
 rcm (0.0.2) unstable; urgency=low
 
- * Tutorial in rcm(7).
- * mkrc supports -d .
- * -d supports relative dotfile dirs.
+  * Tutorial in rcm(7).
+  * mkrc supports -d .
+  * -d supports relative dotfile dirs.
 
  -- Mike Burns <mburns@thoughtbot.com>  Tue, 23 Jul 2013 16:43:33 +0200
