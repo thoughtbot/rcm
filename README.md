@@ -17,8 +17,8 @@ Arch Linux:
 
 Debian-based (including Ubuntu):
 
-    wget http://thoughtbot.github.io/rcm/debs/rcm_1.1.0_all.deb
-    sudo dpkg -i rcm_1.1.0_all.deb
+    wget http://thoughtbot.github.io/rcm/debs/rcm_1.2.0_all.deb
+    sudo dpkg -i rcm_1.2.0_all.deb
 
 OS X:
 
