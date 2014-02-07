@@ -64,7 +64,7 @@ show_dir() {
   for f in *; do
     $DEBUG "handling the file $f"
     next_dir=`file_join $dotfiles_subdir $dir`
-    handle_file $f $dest_path $dotfiles_dir $next_dir 1 "$exclude_file_globs" "$include_file_globs"
+    handle_file $f $dest_path $dotfiles_dir $next_dir 1 "$exclude_file_globs" "$include_file_globs" "$never_descend_file_globs"
   done
   popdir
 }
@@ -140,7 +140,7 @@ handle_file() {
   elif [ -d $file ] && is_excluded $file "$never_descend_file_globs"; then
     show_file $file $dest_dir $dotfiles_dir $dotfiles_subdir $dotted "$never_descend_file_globs"
   elif [ -d $file ]; then
-    show_dir $file $dest_dir $dotfiles_dir $dotfiles_subdir $dotted "$exclude_file_globs" "$include_file_globs"
+    show_dir $file $dest_dir $dotfiles_dir $dotfiles_subdir $dotted "$exclude_file_globs" "$include_file_globs" "$never_descend_file_globs"
   else
     show_file $file $dest_dir $dotfiles_dir $dotfiles_subdir $dotted
   fi
