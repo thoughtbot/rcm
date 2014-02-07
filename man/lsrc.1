@@ -1,4 +1,4 @@
-.Dd July 28, 2013
+.Dd February 7, 2014
 .Dt LSRC 1
 .Os
 .Sh NAME
@@ -11,6 +11,7 @@
 .Op Fl I Ar excl_pat
 .Op Fl t Ar tag
 .Op Fl x Ar excl_pat
+.Op Fl N Ar excl_pat
 .Op files ...
 .Sh DESCRIPTION
 This program lists all configuration files, both the sources in the
@@ -63,6 +64,11 @@ decrease verbosity
 exclude the files that match the given pattern. See
 .Sx EXCLUDE PATTERN
 for more details. This option can be repeated.
+.
+.It Fl N Ar excl_pat
+don't recur on the directory that match the given pattern. See
+.Sx EXCLUDE PATTERN
+for more details.
 .
 .It Ar files ...
 only list the specified file(s)

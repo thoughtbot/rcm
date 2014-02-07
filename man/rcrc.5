@@ -46,6 +46,16 @@ under the section
 .
 .It Va TAGS
 the default tags.
+.
+.It Va NEVER_DESCEND
+a space-separated list of patterns that
+.Xr lsrc 1
+does not recurse. Useful for managing external dependencies like
+git submodules. Exclude patterns are explained in detail in
+.Xr lsrc 1
+under the section
+.Sx EXCLUDE PATTERN .
+.
 .El
 .Sh FILES
 .Pa ~/.rcrc
@@ -55,6 +65,7 @@ the default tags.
 .Dl DOTFILES_DIRS="/home/mike/.dotfiles /usr/share/dotfiles"
 .Dl EXCLUDES="irbrc *:*emacs* dotfiles:python*"
 .Dl TAGS="freebsd development email git laptop gmail notmuch"
+.Dl NEVER_DESCEND="zprezto"
 .Sh SEE ALSO
 .Xr lsrc 1 ,
 .Xr mkrc 1 ,
