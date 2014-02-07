@@ -58,12 +58,7 @@ show_dir() {
 
   $DEBUG "show_dir $1 $2 $3 $4 $5 $6 $7 $8"
 
-  if [ -z "$never_descend_file_globs" ]; then
-    $VERBOSE "recurring on $dest_path"
-  else
-    $VERBOSE "not descending on $dest_path"
-    return 1
-  fi
+  $VERBOSE "recurring on $dest_path"
 
   pushdir $dir
   for f in *; do
@@ -143,7 +138,6 @@ handle_file() {
   elif is_excluded $file "$exclude_file_globs" "$include_file_globs"; then
     $VERBOSE "skipping excluded file $file"
   elif [ -d $file ] && is_excluded $file "$never_descend_file_globs"; then
-    # show_dir $file $dest_dir $dotfiles_dir $dotfiles_subdir $dotted "$exclude_file_globs" "$include_file_globs" "$never_descend_file_globs"
     show_file $file $dest_dir $dotfiles_dir $dotfiles_subdir $dotted "$never_descend_file_globs"
   elif [ -d $file ]; then
     show_dir $file $dest_dir $dotfiles_dir $dotfiles_subdir $dotted "$exclude_file_globs" "$include_file_globs"
