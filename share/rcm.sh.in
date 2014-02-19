@@ -16,7 +16,7 @@ DEFAULT_DOTFILES_DIR=$HOME/.dotfiles
 MV=mv
 INSTALL=rcup
 ROOT_DIR=$HOME
-HOSTNAME=`hostname -s`
+HOSTNAME=`hostname | sed -e 's/\..*//'`
 
 unset CDPATH
 
