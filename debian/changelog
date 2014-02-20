@@ -1,0 +1,29 @@
+rcm (1.2.1-1) UNRELEASED; urgency=medium
+
+  * Re-visit the Debian packaging.
+
+ -- Mike Burns <mburns@thoughtbot.com>  Sat, 22 Feb 2014 00:49:32 +0100
+
+rcm (1.2.0-1) unstable; urgency=medium
+
+  * New upstream release
+
+ -- Mike Burns <mburns@thoughtbot.com>  Mon, 03 Feb 2014 16:58:33 +0200
+
+rcm (1.1.0-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Mike Burns <mburns@thoughtbot.com>  Mon, 05 Aug 2013 16:43:33 +0200
+
+rcm (1.0.0-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Mike Burns <mburns@thoughtbot.com>  Tue, 01 Aug 2013 16:43:33 +0200
+
+rcm (0.0.2-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Mike Burns <mburns@thoughtbot.com>  Tue, 23 Jul 2013 16:43:33 +0200

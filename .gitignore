@@ -1,15 +1,30 @@
-aclocal.m4
-autom4te.cache
-config.log
-config.status
+# autotools related files
 Makefile
 Makefile.in
+*/Makefile
+*/Makefile.in
+aclocal.m4
+autom4te.cache
+autoscan.log
+config.log
+config.status
+configure
+configure.scan
+install-sh
+missing
+depcomp
+
+# Make targets
 debian/rcm
 debian/rcm.debhelper.log
 share/rcm.sh
 *deb
-debian/changelog
 NEWS.md
-missing
-install-sh
-configure
+rcm-*.tar.gz
+
+# Sub-repositories for release
+gh-pages
+homebrew-formulae
+release-arch
+deb-build
+rcm-*

@@ -1,1 +1,1 @@
-bin_SCRIPTS = lsrc mkrc rcup rcdn
+dist_bin_SCRIPTS = lsrc mkrc rcup rcdn

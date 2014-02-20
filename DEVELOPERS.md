@@ -1,40 +1,60 @@
 Developers
 ==========
 
-GNU autoconf & automake
------------------------
+Making a release
+----------------
 
-This project uses GNU autoconf and automake for installation and
-building. To regenerate everything from first principles (`configure.ac`
-and `**/Makefile.am`), run the command:
+1. Bump the version in `configure.ac`, in `AC_INIT`.
+
+2. Update the build system. This depends on GNU autoconf and GNU automake.
 
     ./autogen.sh
 
-Debian
-------
+3. Build the packages:
 
-First, everything must be set up just right:
+This all depends on a `gh-pages` branch:
 
-    mkdir -p ~/debian/rcm && \
-    cp -a rcm ~/debian/rcm/rcm-0.0.2 && \
-    cd ~/debian/rcm && \
-    rm -f rcm_0.0.2.orig.tar.gz && \
-    rm -f rcm-0.0.2/tags && \
-    tar --exclude=*swp --exclude-backups --exclude-vcs --exclude=debian --exclude=config.status --exclude=config.log -zcf rcm_0.0.2.orig.tar.gz rcm-0.0.2
+    git branch gh-pages origin/gh-pages
 
-Given that, now you can generate the Debian package. This requires the
-Debian packaging tools, especially debuild:
+On any system you can build the tarball, Homebrew package, Arch
+PKGBUILD, and tag:
 
-    cd ~/debian/rcm/rcm-0.0.2 && \
-    debuild -us -uc
+    make release_build_tarball release_build_homebrew release_build_arch \
+	    release_build_tag
 
-HTML documentation
-------------------
+You need mdocml to tranform the manpages into HTML:
 
-The HTML documentation is generated using the mdocml suite. Use the
-`upload-docs` make target to rebuild the HTML docs and upload them to
-GitHub Pages. The `build-docs` target will just build them.
+    make release_build_man_html
 
-    make upload-docs
+Only on Debian systems can you build the Debian package:
 
-More information on mdocml can be found on http://mdocml.bsd.lv/ .
+    make release_build_deb
+
+If you are on a Debian system with mdocml, here is a shortcut:
+
+    make release_build
+
+From here you can push these:
+
+    make release_push_tarball release_push_homebrew release_push_arch \
+	    release_push_tag release_push_man_html
+    make release_push_deb
+
+Or, all at once:
+
+    make release_push
+
+You can clean individual steps:
+
+    make release_clean_tarball release_clean_homebrew release_clean_arch \
+      release_clean_deb release_clean_tag release_clean_man_html
+
+Or, again, everything at once:
+
+    make release_clean
+
+If you are on a Debian system, have mdocml installed, have an absurd
+amount of trust in the system, and know how to debug it intimately, give
+everything a go:
+
+    make release
