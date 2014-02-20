@@ -1,12 +1,12 @@
 Source: rcm
 Section: utils
-Priority: extra
+Priority: optional
 Maintainer: Mike Burns <mburns@thoughtbot.com>
-Build-Depends: debhelper (>= 8.0.0)
-Standards-Version: 3.9.3
-Homepage: http://github.com/mike-burns/rcm
-Vcs-Git: git://github.com/mike-burns/rcm.git
-Vcs-Browser: http://github.com/mike-burns/rcm
+Build-Depends: debhelper (>= 9)
+Standards-Version: 3.9.4
+Homepage: http://thoughtbot.github.io/rcm
+Vcs-Git: git://github.com/thoughtbot/rcm.git
+Vcs-Browser: http://github.com/thoughtbot/rcm
 
 Package: rcm
 Architecture: all
