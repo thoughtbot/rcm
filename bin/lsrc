@@ -71,7 +71,9 @@ show_dir() {
 
 sigil_for() {
   local file=$1
+  local symlink_dirs_file_globs=$2
   local copy_always=0
+  local symlink_dirs=0
 
   for copy_file in $COPY_ALWAYS; do
     $DEBUG "copy_file: $copy_file"
@@ -85,8 +87,14 @@ sigil_for() {
     esac
   done
 
+  if [ -n "$symlink_dirs_file_globs" ]; then
+    symlink_dirs=1
+  fi
+
   if [ $copy_always -eq 1 ]; then
     echo 'X'
+  elif [ $symlink_dirs -eq 1 ]; then
+    echo '$'
   else
     echo '@'
   fi
@@ -109,7 +117,7 @@ show_file() {
     output=$dest_file:$abs_src_file
 
     if [ $SHOW_SIGILS -eq 1 ]; then
-      sigil=`sigil_for $src_file`
+      sigil=`sigil_for $src_file "$symlink_dirs_file_globs"`
       output="$output:$sigil"
     fi
 
