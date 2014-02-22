@@ -33,13 +33,18 @@ list dotfiles from the DIR. This can be specified multiple times.
 show symbols next to each file indicating status information. Supported
 symbols are
 .Li @
-which indicates that the file is a symlink, and
+which indicates that the file is a symlink,
+.Li $
+which indicates it's a symlinked directory, and
 .Li X
-to indicate that the file is a copy. More details on copied files can be
-found in
+to indicate that the file is a copy. More details on copied files and
+symlinked directories can be found in
 .Xr rcrc 5 ,
 under the documentation about
-.Va COPY_ALWAYS .
+.Va COPY_ALWAYS
+and
+.Va SYMLINK_DIRS
+respectively.
 .
 .It Fl I Ar excl_pat
 include the files that match the given pattern. This is applied after
