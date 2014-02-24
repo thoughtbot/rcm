@@ -20,6 +20,12 @@ Debian-based (including Ubuntu):
     wget http://thoughtbot.github.io/rcm/debs/rcm_1.2.0_all.deb
     sudo dpkg -i rcm_1.2.0_all.deb
 
+Gentoo-based (including Funtoo):
+
+    sudo emerge layman
+    sudo layman -f --overlays http://github.com/bronislav/overlays/raw/master/layman.xml --add bronislav
+    sudo emerge rcm
+
 OS X:
 
     brew tap thoughtbot/formulae
