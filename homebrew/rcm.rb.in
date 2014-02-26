@@ -1,0 +1,17 @@
+require 'formula'
+
+class Rcm < Formula
+  homepage 'http://thoughtbot.github.io/rcm'
+  url 'http://thoughtbot.github.io/@PACKAGE@/dist/@DIST_ARCHIVES@'
+  sha1 '@DIST_SHA@'
+
+  def install
+    system "./configure", "--disable-debug", "--disable-dependency-tracking",
+                          "--prefix=#{prefix}"
+    system "make", "install"
+  end
+
+  test do
+    system "lsrc"
+  end
+end
