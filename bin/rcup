@@ -19,8 +19,8 @@ link_file() {
   local dest="$2"
   local sigil=$3
 
-  if [ -h $dest ]; then
-    $RM -f $dest
+  if [ -h "$dest" ]; then
+    $RM -f "$dest"
   fi
 
   action=`link_or_copy $sigil`
