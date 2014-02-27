@@ -270,16 +270,16 @@ $DEBUG "COPY_ALWAYS: $COPY_ALWAYS"
 : ${SYMLINK_DIRS:=""}
 $DEBUG "SYMLINK_DIRS: $SYMLINK_DIRS"
 
-relative_root_dir=$PWD
+relative_root_dir="$PWD"
 
 for DOTFILES_DIR in $DOTFILES_DIRS; do
-  cd $relative_root_dir
+  cd "$relative_root_dir"
 
   if is_relative $DOTFILES_DIR; then
     DOTFILES_DIR=$PWD/$DOTFILES_DIR
   fi
 
-  if [ ! -d $DOTFILES_DIR ]; then
+  if [ ! -d "$DOTFILES_DIR" ]; then
     $VERBOSE "skipping non-existent directory: $DOTFILES_DIR"
     continue
   fi
@@ -290,7 +290,7 @@ for DOTFILES_DIR in $DOTFILES_DIRS; do
   symlink_dirs_file_globs=`dotfiles_dir_excludes $DOTFILES_DIR "$SYMLINK_DIRS"`
   $DEBUG "symlink_dirs_file_globs: $symlink_dirs_file_globs"
 
-  cd $DOTFILES_DIR
+  cd "$DOTFILES_DIR"
   DIR_STACK=":$DOTFILES_DIR"
 
   for file in ${FILES:-*}; do
@@ -301,7 +301,7 @@ for DOTFILES_DIR in $DOTFILES_DIRS; do
     handle_file $file $DEST_DIR $DOTFILES_DIR . 0 "$exclude_file_globs" "$include_file_globs" "$symlink_dirs_file_globs"
   done
 
-  cd $DOTFILES_DIR
+  cd "$DOTFILES_DIR"
 
   host_files=$DOTFILES_DIR/host-$HOSTNAME
   if [ -d $host_files ]; then
@@ -312,7 +312,7 @@ for DOTFILES_DIR in $DOTFILES_DIRS; do
     popdir
   fi
 
-  cd $DOTFILES_DIR
+  cd "$DOTFILES_DIR"
 
   for tag in $TAGS; do
     if [ -d tag-$tag ]; then
