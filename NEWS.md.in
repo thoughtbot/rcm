@@ -1,5 +1,9 @@
 rcm (@PACKAGE_VERSION@) unstable; urgency=low
 
+ -- Mike Burns <mburns@thoughtbot.com>  Mon, 03 Feb 2014 16:58:33 +0200
+
+rcm (1.2.0) unstable; urgency=low
+
   * Transfer ownership to thoughtbot.
   * BUGFIX: Run hooks by default. Thanks to Patrick Brisbin.
   * BUGFIX: Unset CDPATH when starting. Thanks to Geoff Harcourt.
