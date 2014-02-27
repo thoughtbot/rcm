@@ -3,7 +3,7 @@ VERSION="@PACKAGE_VERSION@"
 #set -x
 
 DEBUG=:
-DEST_DIR=$HOME
+DEST_DIR="$HOME"
 PRINT=echo
 PROMPT=echo_n
 ERROR=echo_error
@@ -12,11 +12,11 @@ MKDIR=mkdir
 LN="ln -s"
 CP="cp -R"
 RM=rm
-DEFAULT_DOTFILES_DIR=$HOME/.dotfiles
+DEFAULT_DOTFILES_DIR="$HOME/.dotfiles"
 MV=mv
 INSTALL=rcup
-ROOT_DIR=$HOME
-HOSTNAME=`hostname | sed -e 's/\..*//'`
+ROOT_DIR="$HOME"
+HOSTNAME="$(hostname | sed -e 's/\..*//')"
 
 unset CDPATH
 
@@ -27,16 +27,16 @@ echo_n() {
 echo_error() {
   local exit_status=$1
   shift
-  echo $* >&2
+  echo "$*" >&2
   exit $exit_status
 }
 
 echo_stderr() {
-  echo $* >&2
+  echo "$*" >&2
 }
 
 is_relative() {
-  echo $1 | grep -vq '^/'
+  echo "$1" | grep -vq '^/'
 }
 
 version() {
@@ -50,12 +50,12 @@ EOV
 }
 
 handle_common_flags() {
-  local prog_name=$1
-  local version=$2
+  local prog_name="$1"
+  local version="$2"
   local verbosity=$3
 
   if [ $version -eq 1 ]; then
-    version $prog_name
+    version "$prog_name"
     exit 0
   elif [ $verbosity -ge 2 ]; then
     DEBUG=echo_stderr
@@ -92,8 +92,8 @@ handle_common_flags() {
 }
 
 handle_metadata_flags() {
-  local arg_tags=$1
-  local dotfiles_dirs=$2
+  local arg_tags="$1"
+  local dotfiles_dirs="$2"
 
   : ${TAGS:=$arg_tags}
   : ${DOTFILES_DIRS:=$dotfiles_dirs}
@@ -107,7 +107,12 @@ run_hooks() {
   $DEBUG "  with DOTFILES_DIRS: $DOTFILES_DIRS"
   local when="$1"
   local direction="$2"
-  local hook_file
+  local hook_file="$dotfiles_dir/hooks/$when-$direction"
+
+  if [ ! -e "$hook_file" ]; then
+    $DEBUG "no $when-$direction hook file, skipping"
+    return 1
+  fi
 
   if [ $RUN_HOOKS -eq 1 ]; then
     for dotfiles_dir in $DOTFILES_DIRS; do
@@ -126,7 +131,7 @@ run_hooks() {
 de_dot() {
   $DEBUG "de_dot $1"
   $DEBUG "  with DEST_DIR: $DEST_DIR"
-  echo $1 | sed -e "s|$DEST_DIR/||" | sed -e 's/^\.//'
+  echo "$1" | sed -e "s|$DEST_DIR/||" | sed -e 's/^\.//'
 }
 
 : ${RCRC:=$HOME/.rcrc}
