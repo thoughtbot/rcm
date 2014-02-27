@@ -164,13 +164,15 @@ handle_command_line "$@"
 
 run_hooks pre up
 
-saved_ifs=$IFS
+dests_and_srcs="$(lsrc $LS_ARGS)"
+
+saved_ifs="$IFS"
 IFS='
 '
-for dest_and_src in $(lsrc $LS_ARGS); do
+for dest_and_src in $dests_and_srcs; do
   IFS=:
-  set $dest_and_src
-  IFS=$saved_ifs
+  set -- $dest_and_src
+  IFS="$saved_ifs"
   dest="$1"
   src="$2"
   sigil="$3"
