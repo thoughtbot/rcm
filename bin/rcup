@@ -45,7 +45,7 @@ is_nested() {
 }
 
 is_identical() {
-  diff -q -s $1 $2 > /dev/null
+  diff -q -s "$1" "$2" > /dev/null
 }
 
 handle_dir() {
