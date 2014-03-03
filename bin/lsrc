@@ -307,7 +307,7 @@ for DOTFILES_DIR in $DOTFILES_DIRS; do
   if [ -d "$host_files" ]; then
     pushdir "$(basename "$host_files")"
     for file in ${FILES:-*}; do
-      handle_file "$file" "$DEST_DIR" "$host_files" . 0 "$exclude_file_globs" "$include_file_globs"
+      handle_file "$file" "$DEST_DIR" "$host_files" . 0 "$exclude_file_globs" "$include_file_globs" "$symlink_dirs_file_globs"
     done
     popdir
   fi
@@ -319,7 +319,7 @@ for DOTFILES_DIR in $DOTFILES_DIRS; do
       pushdir "$(basename "tag-$tag")"
       for file in ${FILES:-*}; do
         $DEBUG "TAG: $tag, exclude_file_globs: $exclude_file_globs"
-        handle_file "$file" "$DEST_DIR" "$DOTFILES_DIR/tag-$tag" . 0 "$exclude_file_globs" "$include_file_globs"
+        handle_file "$file" "$DEST_DIR" "$DOTFILES_DIR/tag-$tag" . 0 "$exclude_file_globs" "$include_file_globs" "$symlink_dirs_file_globs"
       done
       popdir
     fi
