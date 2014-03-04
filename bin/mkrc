@@ -1,20 +1,20 @@
 #!/bin/sh
 
-: ${RCM_LIB:=`dirname $0`/../share/rcm}
-. $RCM_LIB/rcm.sh
+: ${RCM_LIB:=$(dirname "$0")/../share/rcm}
+. "$RCM_LIB/rcm.sh"
 
 destination() {
-  local dotfiles_dir=$1
+  local dotfiles_dir="$1"
   local dotless=$2
   local in_host=$3
-  local tag=$4
+  local tag="$4"
 
   if [ "x$tag" != "x" ]; then
-    echo $dotfiles_dir/tag-$tag
+    echo "$dotfiles_dir/tag-$tag"
   elif [ $in_host = 1 ]; then
-    echo $dotfiles_dir/host-$HOSTNAME
+    echo "$dotfiles_dir/host-$HOSTNAME"
   else
-    echo $dotfiles_dir
+    echo "$dotfiles_dir"
   fi
 }
 
@@ -46,11 +46,11 @@ while getopts ChSsVvqot:d: opt; do
   case "$opt" in
     C) always_copy=1 ;;
     h) show_help ;;
-    t) tag=$OPTARG ;;
+    t) tag="$OPTARG" ;;
     v) verbosity=$(($verbosity + 1)) ;;
     q) verbosity=$(($verbosity - 1)) ;;
     o) in_host=1 ;;
-    d) DOTFILES_DIR=$OPTARG ;;
+    d) DOTFILES_DIR="$OPTARG" ;;
     V) version=1 ;;
     S) force_symlink=1 ;;
     s) force_symlink=0 ;;
@@ -72,17 +72,17 @@ files=$@
 
 if [ $force_symlink -eq 1 ]; then
   for file in $files; do
-    dedotted=`de_dot $file`
+    dedotted="$(de_dot "$file")"
     INSTALL="$INSTALL -S $dedotted"
   done
 fi
 
 for file in $files; do
-  dotless=`de_dot $file`
-  dest=`destination $DOTFILES_DIR $dotless $in_host $tag`
-  mkdir -p $dest/`dirname $dotless`
+  dotless="$(de_dot "$file")"
+  dest="$(destination "$DOTFILES_DIR" "$dotless" $in_host "$tag")"
+  mkdir -p "$dest/$(dirname "$dotless")"
   $PRINT "Moving..."
-  $MV $file $dest/$dotless
+  $MV "$file" "$dest/$dotless"
   $PRINT "Linking..."
-  $INSTALL -d $DOTFILES_DIR -t ${tag:--} $dotless
+  $INSTALL -d "$DOTFILES_DIR" -t "${tag:--}" "$dotless"
 done

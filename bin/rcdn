@@ -1,20 +1,20 @@
 #!/bin/sh
 
-: ${RCM_LIB:=`dirname $0`/../share/rcm}
-. $RCM_LIB/rcm.sh
+: ${RCM_LIB:=$(dirname "$0")/../share/rcm}
+. "$RCM_LIB/rcm.sh"
 
 remove_link() {
-  local dest=$1
-  local original=$2
-  local sigil=$3
+  local dest="$1"
+  local original="$2"
+  local sigil="$3"
 
-  if [ x$dest = "x/" ]; then
+  if [ "x$dest" = "x/" ]; then
     $VERBOSE "not a symlink, skipping: $original"
-  elif [ -L $dest -o "x$sigil" = "xX" ]; then
-    $RM -rf $dest
-    rmdir -p `dirname $original` 2>/dev/null
+  elif [ -L "$dest" -o "x$sigil" = "xX" ]; then
+    $RM -rf "$dest"
+    rmdir -p "$(dirname "$original")" 2>/dev/null
   else
-    remove_link `dirname $dest` $original
+    remove_link "$(dirname "$dest")" "$original"
   fi
 }
 
@@ -57,9 +57,9 @@ handle_command_line() {
 
   handle_common_flags rcup $version $verbosity
 
-  tags=${arg_tags:-$TAGS}
-  dotfiles_dirs=${dotfiles_dirs:-$DOTFILES_DIRS}
-  files=$@
+  tags="${arg_tags:-$TAGS}"
+  dotfiles_dirs="${dotfiles_dirs:-$DOTFILES_DIRS}"
+  files="$@"
   RUN_HOOKS=$run_hooks
 
   for tag in $tags; do
@@ -84,20 +84,20 @@ handle_command_line() {
 
 LS_ARGS=-F
 
-handle_command_line $*
+handle_command_line $@
 : ${DOTFILES_DIRS:=$DOTFILES_DIRS $DEFAULT_DOTFILES_DIR}
 
 run_hooks pre down
 
-for dest_and_src in `lsrc $LS_ARGS`; do
+for dest_and_src in $(lsrc $LS_ARGS); do
   saved_ifs=$IFS
   IFS=:
   set $dest_and_src
   IFS=$saved_ifs
-  dest=$1
-  sigil=$3
+  dest="$1"
+  sigil="$3"
 
-  remove_link $dest $dest $sigil
+  remove_link "$dest" "$dest" "$sigil"
 done
 
 run_hooks post down
