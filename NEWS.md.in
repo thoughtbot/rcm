@@ -1,5 +1,19 @@
 rcm (@PACKAGE_VERSION@) unstable; urgency=low
 
+  * BUGFIX: Support multiple -d options when given relative paths (Mike
+    Burns).
+  * BUGFIX: Cygwin compatibility for hostname (Mike Burns).
+  * Handle more files with spaces in their filename (Caleb Land, Pat
+    Brisbin, Mike Burns).
+  * Hooks in directories instead of just single executables (Pablo Olmos
+    de Aguilera Corradini, Mike Burns, Pat Brisbin).
+  * Option to force some directories to be symlinks, as documented under
+    SYMLINK_DIRS in rcrc(5) and -S for lsrc(1) (Pablo Olmos de Aguilera
+    Corradini).
+  * Improved packaging process (Mike Burns).
+  * Documentation fixes and updates (Jordan Eldredge, Anton Ilin, Mike
+    Burns).
+
  -- Mike Burns <mburns@thoughtbot.com>  Mon, 03 Feb 2014 16:58:33 +0200
 
 rcm (1.2.0) unstable; urgency=low
