@@ -259,7 +259,7 @@ handle_command_line() {
 
 DEST_STACK=
 
-handle_command_line $@
+handle_command_line "$@"
 
 : ${DOTFILES_DIRS:=$DOTFILES_DIRS $DEFAULT_DOTFILES_DIR}
 $DEBUG "DOTFILES_DIRS: $DOTFILES_DIRS"

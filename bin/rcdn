@@ -84,16 +84,20 @@ handle_command_line() {
 
 LS_ARGS=-F
 
-handle_command_line $@
+handle_command_line "$@"
 : ${DOTFILES_DIRS:=$DOTFILES_DIRS $DEFAULT_DOTFILES_DIR}
 
 run_hooks pre down
 
-for dest_and_src in $(lsrc $LS_ARGS); do
-  saved_ifs=$IFS
+dests_and_srcs="$(lsrc $LS_ARGS)"
+
+saved_ifs="$IFS"
+IFS='
+'
+for dest_and_src in $dests_and_srcs; do
   IFS=:
-  set $dest_and_src
-  IFS=$saved_ifs
+  set -- $dest_and_src
+  IFS="$saved_ifs"
   dest="$1"
   sigil="$3"
 
