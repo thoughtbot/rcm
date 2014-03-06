@@ -107,12 +107,7 @@ run_hooks() {
   $DEBUG "  with DOTFILES_DIRS: $DOTFILES_DIRS"
   local when="$1"
   local direction="$2"
-  local hook_file="$dotfiles_dir/hooks/$when-$direction"
-
-  if [ ! -e "$hook_file" ]; then
-    $DEBUG "no $when-$direction hook file, skipping"
-    return 1
-  fi
+  local hook_file
 
   if [ $RUN_HOOKS -eq 1 ]; then
     for dotfiles_dir in $DOTFILES_DIRS; do
