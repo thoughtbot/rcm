@@ -54,12 +54,14 @@ options. It uses the same pattern language as
 .Fl x ;
 more details are in the
 .Sx EXCLUDE PATTERN
-section.
+section. Note that you may have to quote the exclude pattern so the
+shell does not evaluate the glob.
 .
 .It Fl S Ar excl_pat
-symlink the directory that match the given pattern. See
+symlink the directories that match the given pattern. See
 .Sx EXCLUDE PATTERN
-for more details. This option can be repeated.
+for more details. This option can be repeated. You may need to quote the
+pattern to prevent the shell from swallowing the glob.
 .
 .It Fl t Ar TAG
 list dotfiles according to TAG
@@ -73,7 +75,8 @@ decrease verbosity
 .It Fl x Ar excl_pat
 exclude the files that match the given pattern. See
 .Sx EXCLUDE PATTERN
-for more details. This option can be repeated.
+for more details. This option can be repeated. Quote the pattern if it
+contains a valid shell glob.
 .
 .It Ar files ...
 only list the specified file(s)
@@ -104,7 +107,9 @@ Or more simply:
 .Pp
 .Dl bash_profile
 .Pp
-See the caveats noted in
+.
+Since exclude patterns are often valid shell globs, be sure to quote
+them. See the caveats noted in
 .Sx BUGS
 when using an exclude pattern.
 .Sh ENVIRONMENT
