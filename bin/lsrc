@@ -164,7 +164,9 @@ dotfiles_dir_excludes() {
   $DEBUG "dotfiles_dir_excludes $dotfiles_dir"
   $DEBUG "  with excludes: $excludes"
 
+  set -f
   for exclude in $excludes; do
+    set +f
     if echo "$exclude" | grep -q ':'; then
       dotfiles_dir_pat="$(echo "$exclude" | sed 's/:.*//')"
       file_glob="$(echo "$exclude" | sed 's/.*://')"
