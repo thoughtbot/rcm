@@ -17,13 +17,13 @@ Arch Linux:
 
 Debian-based (including Ubuntu):
 
-    wget http://thoughtbot.github.io/rcm/debs/rcm_1.2.0_all.deb
-    sudo dpkg -i rcm_1.2.0_all.deb
+    wget https://thoughtbot.github.io/rcm/debs/rcm_1.2.1_all.deb
+    sudo dpkg -i rcm_1.2.1_all.deb
 
 Gentoo-based (including Funtoo):
 
     sudo emerge layman
-    sudo layman -f --overlays http://github.com/bronislav/overlays/raw/master/layman.xml --add bronislav
+    sudo layman -f --overlays https://github.com/bronislav/overlays/raw/master/layman.xml --add bronislav
     sudo emerge rcm
 
 OS X:
@@ -34,6 +34,10 @@ OS X:
 Elsewhere:
 
 This uses the standard GNU autotools, so it's the normal dance:
+
+    wget https://thoughtbot.github.io/rcm/dist/rcm-1.2.1.tar.gz && \
+    tar -xvf rcm-1.2.1.tar.gz && \
+    cd rcm-1.2.1 && \
 
     ./configure && \
     make && \
@@ -56,7 +60,7 @@ Programs
 Support
 -------
 
-Pull requests welcome; see `DEVELOPERS.MD`.
+Pull requests welcome; see `CONTIRBUTING.MD`.
 
 License
 -------
