@@ -25,7 +25,7 @@ section, for details on the directory layout.
 .
 It supports these options:
 .
-.Bl -tag
+.Bl -tag -width "-I excl_pat"
 .It Fl d Ar DIR
 list dotfiles from the DIR. This can be specified multiple times.
 .
@@ -104,6 +104,9 @@ Or more simply:
 .Pp
 .Dl bash_profile
 .Pp
+See the caveats noted in
+.Sx BUGS
+when using an exclude pattern.
 .Sh ENVIRONMENT
 .Bl -tag -width ".Ev RCRC"
 .It Ev RCRC
@@ -121,3 +124,11 @@ User configuration file. Defaults to
 .Xr rcm 7
 .Sh AUTHORS
 .An "Mike Burns" Aq mike@mike-burns.com
+.Sh BUGS
+There are a few bugs around shell globs. Anything involving an exclude
+pattern is unpredictable, so use
+.Fl v
+when dealing with patterns. Specifically, globs may expand at any
+time and remain expanded for the duration of the run, which means they
+cannot be applied more than once. In addition, globs involving
+relative directory names do not work.
