@@ -17,8 +17,8 @@ Arch Linux:
 
 Debian-based (including Ubuntu):
 
-    wget https://thoughtbot.github.io/rcm/debs/rcm_1.2.1_all.deb
-    sudo dpkg -i rcm_1.2.1_all.deb
+    wget https://thoughtbot.github.io/rcm/debs/rcm_1.2.1-2_all.deb
+    sudo dpkg -i rcm_1.2.1-2_all.deb
 
 Gentoo-based (including Funtoo):
 
