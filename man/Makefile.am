@@ -1,5 +1,7 @@
 dist_man_MANS = lsrc.1 mkrc.1 rcdn.1 rcup.1 rcrc.5 rcm.7
 
+ORIGIN_URL=$(shell git config --get remote.origin.url)
+
 ###### manpages as HTML
 release_build_man_html:
 	([ -d $(abs_top_builddir)/gh-pages ] || git clone --branch gh-pages --single-branch .. $(abs_top_builddir)/gh-pages) && \
