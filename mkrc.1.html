@@ -24,7 +24,7 @@ MKRC(1)</td>
 </tbody>
 </table>
 <div class="section">
-<h1 id="x4e414d45">NAME</h1> <b class="name">mkrc</b> &#8212; <span class="desc">bless files into a dotfile</span></div>
+<h1 id="x4e414d45">NAME</h1> <b class="name">mkrc</b> &#8212; <span class="desc">bless files into a dotfile managed by rcm</span></div>
 <div class="section">
 <h1 id="x53594e4f50534953">SYNOPSIS</h1><table class="synopsis">
 <col style="width: 4.00ex;">
@@ -43,27 +43,35 @@ mkrc</td>
 <h1 id="x4445534352495054494f4e">DESCRIPTION</h1> This program adds files to your dotfiles directory then installs it back into your home directory. It can install files under a tag or different source directory. It supports these options:<dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;C</b></dt>
-<dd class="list-tag" style="margin-left: 10.00ex;">
+<dd class="list-tag" style="margin-left: 6.00ex;">
 copy instead of symlinking when installing the rc file back into your home directory</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;d</b> <i class="arg">DIR</i></dt>
-<dd class="list-tag" style="margin-left: 10.00ex;">
+<dd class="list-tag" style="margin-left: 6.00ex;">
 install dotfiles under the specified directory. This can be specified multiple times.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;o</b></dt>
-<dd class="list-tag" style="margin-left: 10.00ex;">
+<dd class="list-tag" style="margin-left: 6.00ex;">
 install dotfiles into the host-specific directory</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;q</b></dt>
-<dd class="list-tag" style="margin-left: 10.00ex;">
+<dd class="list-tag" style="margin-left: 6.00ex;">
 decrease verbosity</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;s</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+if the rc file is a file, symlink it; otherwise, make a directory structure as described in <a class="link-man" href="rcup.1.html">rcup(1)</a> in the section <i class="link-sec"><a class="link-sec" href="#x414c474f524954484d">ALGORITHM</a></i>. This is the default.</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;S</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+treat the specified rc files as files to be symlinked, even if they are directories</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;t</b> <i class="arg">TAG</i></dt>
-<dd class="list-tag" style="margin-left: 10.00ex;">
+<dd class="list-tag" style="margin-left: 6.00ex;">
 install dotfiles according to tag</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;v</b></dt>
-<dd class="list-tag" style="margin-left: 10.00ex;">
+<dd class="list-tag" style="margin-left: 6.00ex;">
 increase verbosity. This can be repeated for extra verbosity.</dd>
 </dl>
 </div>
@@ -94,6 +102,10 @@ User configuration file. Defaults to <i class="file">~/.rcrc</i>.</dd>
 <div class="display">
 <code class="lit">mkrc -C .ssh</code></div>
 </blockquote>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">mkrc -S .zpretzo</code></div>
+</blockquote>
 </div>
 <div class="section">
 <h1 id="x53454520414c534f">SEE ALSO</h1> <a class="link-man" href="lsrc.1.html">lsrc(1)</a>, <a class="link-man" href="rcdn.1.html">rcdn(1)</a>, <a class="link-man" href="rcup.1.html">rcup(1)</a>, <a class="link-man" href="rcrc.5.html">rcrc(5)</a>, <a class="link-man" href="rcm.7.html">rcm(7)</a></div>
@@ -107,7 +119,7 @@ User configuration file. Defaults to <i class="file">~/.rcrc</i>.</dd>
 <td class="foot-date">
 July 28, 2013</td>
 <td class="foot-os" align="right">
-Linux 3.2.0-4-amd64</td>
+Linux 3.12-1-amd64</td>
 </tr>
 </tbody>
 </table>

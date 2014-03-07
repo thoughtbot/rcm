@@ -32,20 +32,24 @@ RCRC(5)</td>
 It supports these variables:<dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="var">COPY_ALWAYS</b></dt>
-<dd class="list-tag" style="margin-left: 12.00ex;">
+<dd class="list-tag" style="margin-left: 13.00ex;">
 always copy files that match the listed globs, never symlink them.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="var">DOTFILES_DIRS</b></dt>
-<dd class="list-tag" style="margin-left: 12.00ex;">
+<dd class="list-tag" style="margin-left: 13.00ex;">
 the source directories for dotfiles. The first in the list is the canonical source. The default value is <code class="lit">~/.dotfiles</code></dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="var">EXCLUDES</b></dt>
-<dd class="list-tag" style="margin-left: 12.00ex;">
+<dd class="list-tag" style="margin-left: 13.00ex;">
 a space-separated list of exclude patterns. Exclude patterns are explained in detail in <a class="link-man" href="lsrc.1.html">lsrc(1)</a> under the section <i class="link-sec"><a class="link-sec" href="#x4558434c554445205041545445524e">EXCLUDE PATTERN</a></i>.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="var">TAGS</b></dt>
-<dd class="list-tag" style="margin-left: 12.00ex;">
+<dd class="list-tag" style="margin-left: 13.00ex;">
 the default tags.</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="var">SYMLINK_DIRS</b></dt>
+<dd class="list-tag" style="margin-left: 13.00ex;">
+a space-separated list of patterns. Directories matching a pattern are symlinked instead of descended. Patterns are explained in detail in <a class="link-man" href="lsrc.1.html">lsrc(1)</a> under the section <i class="link-sec"><a class="link-sec" href="#x4558434c554445205041545445524e">EXCLUDE PATTERN</a></i>.</dd>
 </dl>
 </div>
 <div class="section">
@@ -71,6 +75,10 @@ the default tags.</dd>
 <div class="display">
 <code class="lit">TAGS="freebsd development email git laptop gmail notmuch"</code></div>
 </blockquote>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">SYMLINK_DIRS="zprezto"</code></div>
+</blockquote>
 </div>
 <div class="section">
 <h1 id="x53454520414c534f">SEE ALSO</h1> <a class="link-man" href="lsrc.1.html">lsrc(1)</a>, <a class="link-man" href="mkrc.1.html">mkrc(1)</a>, <a class="link-man" href="rcdn.1.html">rcdn(1)</a>, <a class="link-man" href="rcup.1.html">rcup(1)</a>, <a class="link-man" href="rcm.7.html">rcm(7)</a></div>
@@ -84,7 +92,7 @@ the default tags.</dd>
 <td class="foot-date">
 July 28, 2013</td>
 <td class="foot-os" align="right">
-Linux 3.2.0-4-amd64</td>
+Linux 3.12-1-amd64</td>
 </tr>
 </tbody>
 </table>

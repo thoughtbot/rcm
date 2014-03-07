@@ -24,7 +24,7 @@ RCUP(1)</td>
 </tbody>
 </table>
 <div class="section">
-<h1 id="x4e414d45">NAME</h1> <b class="name">rcup</b> &#8212; <span class="desc">update and install dotfiles</span></div>
+<h1 id="x4e414d45">NAME</h1> <b class="name">rcup</b> &#8212; <span class="desc">update and install dotfiles managed by rcm</span></div>
 <div class="section">
 <h1 id="x53594e4f50534953">SYNOPSIS</h1><table class="synopsis">
 <col style="width: 4.00ex;">
@@ -45,51 +45,55 @@ See <i class="link-sec"><a class="link-sec" href="#x4449524543544f5259204c41594f
 It supports these options:<dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;C</b></dt>
-<dd class="list-tag" style="margin-left: 10.00ex;">
+<dd class="list-tag" style="margin-left: 11.00ex;">
 copy the files instead of symlinking them</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;d</b> <i class="arg">DIR</i></dt>
-<dd class="list-tag" style="margin-left: 10.00ex;">
+<dd class="list-tag" style="margin-left: 11.00ex;">
 install dotfiles from the <i class="arg">DIR</i>. This can be specified multiple times.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;f</b></dt>
-<dd class="list-tag" style="margin-left: 10.00ex;">
+<dd class="list-tag" style="margin-left: 11.00ex;">
 if the rc file already exists in your home directory but does not match the file in your dotfiles directory, remove the rc file then create the symlink</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;i</b></dt>
-<dd class="list-tag" style="margin-left: 10.00ex;">
+<dd class="list-tag" style="margin-left: 11.00ex;">
 if the rc file already exists in your home directory but does not match the file in your dotfiles directory, prompt for how to handle it. This is the default</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;I</b> <i class="arg">EXCL_PAT</i></dt>
-<dd class="list-tag" style="margin-left: 10.00ex;">
+<dd class="list-tag" style="margin-left: 11.00ex;">
 install rc files that match <i class="arg">EXCL_PAT</i> despite being excluded by the <b class="flag">&#45;x</b> flag or a setting in <a class="link-man" href="rcrc.5.html">rcrc(5)</a>. This can be repeated with additional patterns. See <a class="link-man" href="lsrc.1.html">lsrc(1)</a>, <i class="link-sec"><a class="link-sec" href="#x4558434c554445205041545445524e">EXCLUDE PATTERN</a></i>, for more details.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;k</b></dt>
-<dd class="list-tag" style="margin-left: 10.00ex;">
+<dd class="list-tag" style="margin-left: 11.00ex;">
 run pre- and post-hooks (see <i class="link-sec"><a class="link-sec" href="#x4449524543544f5259204c41594f5554">DIRECTORY LAYOUT</a></i> for more details on hooks). This is the default.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;K</b></dt>
-<dd class="list-tag" style="margin-left: 10.00ex;">
+<dd class="list-tag" style="margin-left: 11.00ex;">
 skip pre- and post-hooks</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;S</b> <i class="arg">EXCL_PAT</i></dt>
+<dd class="list-tag" style="margin-left: 11.00ex;">
+any rc file that matches <i class="arg">EXCL_PAT</i> is installed as if it were a file (using a symlink) instead of as if it were a directory (by making a directory). This option can be repeated.</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;t</b> <i class="arg">TAG</i></dt>
-<dd class="list-tag" style="margin-left: 10.00ex;">
+<dd class="list-tag" style="margin-left: 11.00ex;">
 install dotfiles according to <i class="arg">TAG</i></dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;q</b></dt>
-<dd class="list-tag" style="margin-left: 10.00ex;">
+<dd class="list-tag" style="margin-left: 11.00ex;">
 decrease verbosity</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;v</b></dt>
-<dd class="list-tag" style="margin-left: 10.00ex;">
+<dd class="list-tag" style="margin-left: 11.00ex;">
 increase verbosity. This can be repeated for extra verbosity.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;x</b> <i class="arg">EXCL_PAT</i></dt>
-<dd class="list-tag" style="margin-left: 10.00ex;">
+<dd class="list-tag" style="margin-left: 11.00ex;">
 do not install rc files that match <i class="arg">EXCL_PAT</i>. This can be repeated with additional patterns. See <a class="link-man" href="lsrc.1.html">lsrc(1)</a>, <i class="link-sec"><a class="link-sec" href="#x4558434c554445205041545445524e">EXCLUDE PATTERN</a></i>, for more details.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <i class="arg">files</i></dt>
-<dd class="list-tag" style="margin-left: 10.00ex;">
+<dd class="list-tag" style="margin-left: 11.00ex;">
 only install the specified file(s)</dd>
 </dl>
 </div>
@@ -99,7 +103,7 @@ Files are installed as symlinks. Directories are installed by making directories
 Three meta files are supported: host-specific files, tagged files, hooks.<p>
 Host-specific files go in a directory named for the host, prefixed with <i class="file">host-</i>. For example, <i class="file">.dotfiles/host-scarlett</i> contains files specific to the computer with hostname <i class="file">scarlett</i> , and these files will only be installed on the computer with hostname <i class="file">scarlett</i>.<p>
 Tagged files go in a directory named for the tag, prefixed with <code class="lit">tag-</code>. Therefore, files under <i class="file">.dotfiles/tag-git</i> are only installed when installing using the <code class="lit">git</code> tag.<p>
-Hooks go in a directory named <i class="file">hooks</i>. Two hooks are supported by <b class="name">rcup</b>: pre-up and post-up . These go in files with predictable filenames: <i class="file">.dotfiles/hooks/pre-up and</i> <i class="file">.dotfiles/hooks/post-up</i>. These files must be executable. They are run every time <b class="name">rcup</b> is run, and therefore must be idempotent.</div>
+Hooks go in a directory named <i class="file">hooks</i>. Two hooks are supported by <b class="name">rcup</b>: pre-up and post-up. These go in files or directories with predictable filenames: <i class="file">.dotfiles/hooks/pre-up</i> and <i class="file">.dotfiles/hooks/post-up</i>, or <i class="file">.dotfiles/hooks/pre-up/*</i> and <i class="file">.dotfiles/hooks/post-up/*</i>. These files must be executable. They are run every time <b class="name">rcup</b> is run, and therefore must be idempotent.</div>
 <div class="section">
 <h1 id="x414c474f524954484d">ALGORITHM</h1> It is instructive to understand the process <b class="name">rcup</b> uses when synchronizing your rc files:<ol style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-enum">
 <li class="list-enum" style="margin-top: 1.00em;">
@@ -138,7 +142,7 @@ User configuration file. Defaults to <i class="file">~/.rcrc</i>.</dd>
 <td class="foot-date">
 July 28, 2013</td>
 <td class="foot-os" align="right">
-Linux 3.2.0-4-amd64</td>
+Linux 3.12-1-amd64</td>
 </tr>
 </tbody>
 </table>

@@ -24,7 +24,7 @@ RCDN(1)</td>
 </tbody>
 </table>
 <div class="section">
-<h1 id="x4e414d45">NAME</h1> <b class="name">rcdn</b> &#8212; <span class="desc">remove dotfiles</span></div>
+<h1 id="x4e414d45">NAME</h1> <b class="name">rcdn</b> &#8212; <span class="desc">remove dotfiles as managed by rcm</span></div>
 <div class="section">
 <h1 id="x53594e4f50534953">SYNOPSIS</h1><table class="synopsis">
 <col style="width: 4.00ex;">
@@ -45,42 +45,56 @@ The files that are removed are symlinks. However, the <b class="var">COPY_ALWAYS
 The <b class="name">rcdn</b> program will run hooks before and after removing files, if these hooks exist. Hooks are executable programs inside the dotfiles directory, with the following names: <i class="file">hooks/pre-down and</i> <i class="file">hooks/post-down</i>. These hooks are run each time <b class="name">rcdn</b> is run and therefore must be idempotent.<dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;d</b> <i class="arg">DIR</i></dt>
-<dd class="list-tag" style="margin-left: 10.00ex;">
+<dd class="list-tag" style="margin-left: 11.00ex;">
 remove rc files from the <i class="arg">DIR</i>. This can be specified multiple times.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;I</b> <i class="arg">EXCL_PAT</i></dt>
-<dd class="list-tag" style="margin-left: 10.00ex;">
+<dd class="list-tag" style="margin-left: 11.00ex;">
 remove rc files that match <i class="arg">EXCL_PAT</i> despite being excluded by the <b class="flag">&#45;x</b> flag or a setting in <a class="link-man" href="rcrc.5.html">rcrc(5)</a>. This can be repeated with additional patterns. See <a class="link-man" href="lsrc.1.html">lsrc(1)</a>, <i class="link-sec"><a class="link-sec" href="#x4558434c554445205041545445524e">EXCLUDE PATTERN</a></i>, for more details.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;k</b></dt>
-<dd class="list-tag" style="margin-left: 10.00ex;">
+<dd class="list-tag" style="margin-left: 11.00ex;">
 run pre- and post-hooks. This is the default.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;K</b></dt>
-<dd class="list-tag" style="margin-left: 10.00ex;">
+<dd class="list-tag" style="margin-left: 11.00ex;">
 skip pre- and post-hooks</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;q</b></dt>
-<dd class="list-tag" style="margin-left: 10.00ex;">
+<dd class="list-tag" style="margin-left: 11.00ex;">
 decrease verbosity</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;S</b> <i class="arg">EXCL_PAT</i></dt>
+<dd class="list-tag" style="margin-left: 11.00ex;">
+when removing dotfiles, any file that matches <i class="arg">EXCL_PAT</i> should be treated as a file that was symlinked, even if it is a directory. This can be repeated.</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;t</b> <i class="arg">TAG</i></dt>
-<dd class="list-tag" style="margin-left: 10.00ex;">
+<dd class="list-tag" style="margin-left: 11.00ex;">
 remove dotfiles according to <i class="arg">TAG</i></dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;v</b></dt>
-<dd class="list-tag" style="margin-left: 10.00ex;">
+<dd class="list-tag" style="margin-left: 11.00ex;">
 increase verbosity. This can be repeated for extra verbosity.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;x</b> <i class="arg">EXCL_PAT</i></dt>
-<dd class="list-tag" style="margin-left: 10.00ex;">
+<dd class="list-tag" style="margin-left: 11.00ex;">
 do not remove rc files that match <i class="arg">EXCL_PAT</i>. This can be repeated with additional patterns. See <a class="link-man" href="lsrc.1.html">lsrc(1)</a>, <i class="link-sec"><a class="link-sec" href="#x4558434c554445205041545445524e">EXCLUDE PATTERN</a></i>, for more details.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <i class="arg">files</i></dt>
-<dd class="list-tag" style="margin-left: 10.00ex;">
+<dd class="list-tag" style="margin-left: 11.00ex;">
 only remove the specified file(s)</dd>
 </dl>
 </div>
+<div class="section">
+<h1 id="x454e5649524f4e4d454e54">ENVIRONMENT</h1><dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
+<dt class="list-tag" style="margin-top: 1.00em;">
+<span class="env">RCRC</span></dt>
+<dd class="list-tag" style="margin-left: 8.00ex;">
+User configuration file. Defaults to <i class="file">~/.rcrc</i>.</dd>
+</dl>
+</div>
+<div class="section">
+<h1 id="x46494c4553">FILES</h1> <i class="file">~/.rcrc</i></div>
 <div class="section">
 <h1 id="x4558414d504c4553">EXAMPLES</h1><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
 <div class="display">
@@ -104,16 +118,6 @@ only remove the specified file(s)</dd>
 </blockquote>
 </div>
 <div class="section">
-<h1 id="x454e5649524f4e4d454e54">ENVIRONMENT</h1><dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
-<dt class="list-tag" style="margin-top: 1.00em;">
-<span class="env">RCRC</span></dt>
-<dd class="list-tag" style="margin-left: 8.00ex;">
-User configuration file. Defaults to <i class="file">~/.rcrc</i>.</dd>
-</dl>
-</div>
-<div class="section">
-<h1 id="x46494c4553">FILES</h1> <i class="file">~/.rcrc</i></div>
-<div class="section">
 <h1 id="x53454520414c534f">SEE ALSO</h1> <a class="link-man" href="lsrc.1.html">lsrc(1)</a>, <a class="link-man" href="mkrc.1.html">mkrc(1)</a>, <a class="link-man" href="rcup.1.html">rcup(1)</a>, <a class="link-man" href="rcrc.5.html">rcrc(5)</a>, <a class="link-man" href="rcm.7.html">rcm(7)</a></div>
 <div class="section">
 <h1 id="x415554484f5253">AUTHORS</h1> <span class="author">Mike Burns</span> &#60;mike@mike-burns.com&#62;</div>
@@ -125,7 +129,7 @@ User configuration file. Defaults to <i class="file">~/.rcrc</i>.</dd>
 <td class="foot-date">
 August 2, 2013</td>
 <td class="foot-os" align="right">
-Linux 3.2.0-4-amd64</td>
+Linux 3.12-1-amd64</td>
 </tr>
 </tbody>
 </table>
