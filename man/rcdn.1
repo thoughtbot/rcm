@@ -3,7 +3,7 @@
 .Os
 .Sh NAME
 .Nm rcdn
-.Nd remove dotfiles
+.Nd remove dotfiles as managed by rcm
 .Sh SYNOPSIS
 .Nm rcdn
 .Op Fl kKvq
@@ -42,7 +42,7 @@ These hooks are run each time
 .Nm
 is run and therefore must be idempotent.
 .
-.Bl -tag
+.Bl -tag -width "-I EXCL_PAT"
 .It Fl d Ar DIR
 remove rc files from the
 .Ar DIR .
@@ -85,12 +85,6 @@ for more details.
 only remove the specified file(s)
 .El
 .
-.Sh EXAMPLES
-.Dl rcdn -v
-.Dl rcdn zshrc
-.Dl rcdn -t python
-.Dl rcdn -d ~/corporate-dotfiles
-.Dl rcdn -e '*:.zshrc'
 .Sh ENVIRONMENT
 .Bl -tag -width ".Ev RCRC"
 .It Ev RCRC
@@ -99,6 +93,12 @@ User configuration file. Defaults to
 .El
 .Sh FILES
 .Pa ~/.rcrc
+.Sh EXAMPLES
+.Dl rcdn -v
+.Dl rcdn zshrc
+.Dl rcdn -t python
+.Dl rcdn -d ~/corporate-dotfiles
+.Dl rcdn -e '*:.zshrc'
 .Sh SEE ALSO
 .Xr lsrc 1 ,
 .Xr mkrc 1 ,

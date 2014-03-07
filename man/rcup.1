@@ -3,7 +3,7 @@
 .Os
 .Sh NAME
 .Nm rcup
-.Nd update and install dotfiles
+.Nd update and install dotfiles managed by rcm
 .Sh SYNOPSIS
 .Nm rcup
 .Op Fl CfikKqv
@@ -24,7 +24,7 @@ See
 for details on the directory layout.
 .Pp
 It supports these options:
-.Bl -tag
+.Bl -tag -width "-x EXCL_PAT"
 .It Fl C
 copy the files instead of symlinking them
 .It Fl d Ar DIR
