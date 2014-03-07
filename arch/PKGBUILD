@@ -1,0 +1,33 @@
+# Maintainer: Pat Brisbin <pbrisbin@gmail.com>
+pkgname='rcm'
+pkgver=1.2.1
+pkgrel=1
+pkgdesc="rc file (dotfile) management"
+arch=('any')
+url="http://thoughtbot.github.io/rcm/"
+license=('BSD')
+depends=('')
+source=("http://thoughtbot.github.io/rcm/dist/rcm-1.2.1.tar.gz")
+sha1sums=('434bdfbb1df8e610586cd9042a1e2ac614290ca7')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  ./configure \
+     --disable-debug \
+     --disable-dependency-tracking \
+     --disable-silent-rules \
+     --prefix=/usr
+
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+
+  install -Dm644 LICENSE "$pkgdir/usr/share/licenses/${pkgname}/LICENSE"
+}
+
+# vim:set ts=2 sw=2 et:
