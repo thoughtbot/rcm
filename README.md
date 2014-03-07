@@ -60,7 +60,7 @@ Programs
 Support
 -------
 
-Pull requests welcome; see `CONTIRBUTING.MD`.
+Pull requests welcome; see `CONTRIBUTING.MD`.
 
 License
 -------
