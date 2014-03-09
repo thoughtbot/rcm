@@ -8,7 +8,7 @@ link_or_copy() {
   local sigil="$1"
 
   if [ "x$sigil" = "xX" ]; then
-    echo "$CP"
+    echo "cp_v"
   else
     echo "$LN"
   fi
@@ -20,7 +20,7 @@ link_file() {
   local sigil="$3"
 
   if [ -h "$dest" ]; then
-    $RM -f "$dest"
+    rm_v -f "$dest"
   fi
 
   action="$(link_or_copy "$sigil")"
@@ -35,7 +35,7 @@ replace_file() {
 
   $DEBUG replace_file "$1" "$2" $3
 
-  $RM -rf "$dest"
+  rm_v -rf "$dest"
   link_file "$src" "$dest" "$sigil"
 }
 
@@ -126,8 +126,9 @@ handle_command_line() {
   done
   shift $(($OPTIND-1))
 
+  LN="ln_v"
   if [ $always_copy -eq 1 ]; then
-    LN="$CP"
+    LN="cp_v"
   fi
 
   handle_common_flags rcup $version $verbosity

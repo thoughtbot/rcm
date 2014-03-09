@@ -82,7 +82,7 @@ for file in $files; do
   dest="$(destination "$DOTFILES_DIR" "$dotless" $in_host "$tag")"
   mkdir -p "$dest/$(dirname "$dotless")"
   $PRINT "Moving..."
-  $MV "$file" "$dest/$dotless"
+  mv_v "$file" "$dest/$dotless"
   $PRINT "Linking..."
   $INSTALL -d "$DOTFILES_DIR" -t "${tag:--}" "$dotless"
 done

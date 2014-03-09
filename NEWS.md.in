@@ -8,6 +8,7 @@ rcm (@PACKAGE_VERSION@) unstable; urgency=low
   * BUGFIX: Support multiple -d options when given relative paths (Mike
     Burns).
   * BUGFIX: Cygwin compatibility for hostname (Mike Burns).
+  * BUGFIX: Support -v option on OpenBSD (Javier López).
   * Handle more files with spaces in their filename (Caleb Land, Pat
     Brisbin, Mike Burns).
   * Hooks in directories instead of just single executables (Pablo Olmos

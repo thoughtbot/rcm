@@ -8,15 +8,31 @@ PRINT=echo
 PROMPT=echo_n
 ERROR=echo_error
 VERBOSE=:
-MKDIR=mkdir
-LN="ln -s"
-CP="cp -R"
-RM=rm
 DEFAULT_DOTFILES_DIR="$HOME/.dotfiles"
-MV=mv
+MKDIR=mkdir
 INSTALL=rcup
 ROOT_DIR="$HOME"
 HOSTNAME="$(hostname | sed -e 's/\..*//')"
+
+ln_v() {
+  $VERBOSE "'$1' -> '$2'"
+  ln -s "$1" "$2"
+}
+
+cp_v() {
+  $VERBOSE "'$1' -> '$2'"
+  cp -R "$1" "$2"
+}
+
+rm_v() {
+  $VERBOSE "removed '$2'"
+  rm $1 "$2"
+}
+
+mv_v() {
+  $VERBOSE "'$1' -> '$2'"
+  mv "$1" "$2"
+}
 
 unset CDPATH
 
@@ -61,28 +77,16 @@ handle_common_flags() {
     DEBUG=echo_stderr
     VERBOSE=echo
     PRINT=echo
-    MV="$MV -v"
-    RM="$RM -v"
-    LN="$LN -v"
-    CP="$CP -v"
     INSTALL="$INSTALL -vv"
   elif [ $verbosity -eq 1 ]; then
     DEBUG=:
     VERBOSE=echo
     PRINT=echo
-    MV="$MV -v"
-    RM="$RM -v"
-    LN="$LN -v"
-    CP="$CP -v"
     INSTALL="$INSTALL -v"
   elif [ $verbosity -eq 0 ]; then
     DEBUG=:
     VERBOSE=:
     PRINT=echo
-    MV="$MV -v"
-    RM="$RM -v"
-    LN="$LN -v"
-    CP="$CP -v"
   else
     DEBUG=:
     VERBOSE=:
