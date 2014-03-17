@@ -34,11 +34,6 @@ mv_v() {
   mv "$1" "$2"
 }
 
-LN=ln_v
-CP=cp_v
-RM=rm_v
-MV=mv_v
-
 unset CDPATH
 
 echo_n() {

@@ -11,7 +11,7 @@ remove_link() {
   if [ "x$dest" = "x/" ]; then
     $VERBOSE "not a symlink, skipping: $original"
   elif [ -L "$dest" -o "x$sigil" = "xX" ]; then
-    $RM -rf "$dest"
+    rm_v -rf "$dest"
     rmdir -p "$(dirname "$original")" 2>/dev/null
   else
     remove_link "$(dirname "$dest")" "$original"
