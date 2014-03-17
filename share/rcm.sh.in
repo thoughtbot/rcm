@@ -14,43 +14,30 @@ INSTALL=rcup
 ROOT_DIR="$HOME"
 HOSTNAME="$(hostname | sed -e 's/\..*//')"
 
-LN="ln -s"
-CP="cp -R"
-RM=rm
-MV=mv
-
 ln_v() {
-  echo "«$1» -> «$2»"
+  $VERBOSE "'$1' -> '$2'"
   ln -s "$1" "$2"
 }
 
 cp_v() {
-  echo "«$1» -> «$2»"
+  $VERBOSE "'$1' -> '$2'"
   cp -R "$1" "$2"
 }
 
 rm_v() {
-  echo "«$2» deleted"
+  $VERBOSE "removed '$2'"
   rm $1 "$2"
 }
 
 mv_v() {
-  echo "«$1» -> «$2»"
+  $VERBOSE "'$1' -> '$2'"
   mv "$1" "$2"
 }
 
-OS="$(uname -s)"
-if [ "$OS" = "OpenBSD" ] ; then
-  LN_V=ln_v
-  CP_V=cp_v
-  RM_V=rm_v
-  MV_V=mv_v
-else
-  MV_V="$MV -v"
-  RM_V="$RM -v"
-  LN_V="$LN -v"
-  CP_V="$CP -v"
-fi
+LN=ln_v
+CP=cp_v
+RM=rm_v
+MV=mv_v
 
 unset CDPATH
 
@@ -95,28 +82,16 @@ handle_common_flags() {
     DEBUG=echo_stderr
     VERBOSE=echo
     PRINT=echo
-    MV="$MV_V"
-    RM="$RM_V"
-    LN="$LN_V"
-    CP="$CP_V"
     INSTALL="$INSTALL -vv"
   elif [ $verbosity -eq 1 ]; then
     DEBUG=:
     VERBOSE=echo
     PRINT=echo
-    MV="$MV_V"
-    RM="$RM_V"
-    LN="$LN_V"
-    CP="$CP_V"
     INSTALL="$INSTALL -v"
   elif [ $verbosity -eq 0 ]; then
     DEBUG=:
     VERBOSE=:
     PRINT=echo
-    MV="$MV_V"
-    RM="$RM_V"
-    LN="$LN_V"
-    CP="$CP_V"
   else
     DEBUG=:
     VERBOSE=:
