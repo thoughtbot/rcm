@@ -1,5 +1,6 @@
 rcm (@PACKAGE_VERSION@) unstable; urgency=low
 
+  * BUGFIX: Cygwin now executes hooks (Daniel Watson).
 
  -- Mike Burns <mburns@thoughtbot.com>  Mon, 03 Feb 2014 16:58:33 +0200
 
