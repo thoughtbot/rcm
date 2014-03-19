@@ -28,3 +28,6 @@ homebrew-formulae
 release-arch
 deb-build
 rcm-*
+
+# Other generated files
+man/rcm.7
