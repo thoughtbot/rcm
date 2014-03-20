@@ -6,7 +6,7 @@ Overview
 
 - We do not currently have a test suite.
 - Update `NEWS.md.in`.
-- Update `rcm.7`.
+- Update `.mailmap`.
 - Submit a pull request on GitHub.
 
 Explanation
@@ -21,8 +21,11 @@ release. Bugfixes should be marked with `BUGFIX`. Small things (typos,
 code style) should be grouped but with multiple authors (`Documentation
 updates thanks to Dan Croak and Roberto Pedroso`).
 
-Ensure your name is in the list of contributors in `man/rcm.7`. These
-are alphabetical.
+We use your name and email address as produced by `git-shortlog(1)`. You
+can change how this is formatted by modifying `.mailmap`. More details
+on that file can be found in the git [Documentation/mailmap.txt][mailmap].
 
 Submit a pull request using GitHub. If there is a relevant bug, mention
 it in the commit message (`Fixes #42.`).
+
+[mailmap]: https://github.com/git/git/blob/6a907786af835ac15962be53f1492f2
