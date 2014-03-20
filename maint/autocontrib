@@ -1,6 +1,18 @@
 #!/usr/bin/env ruby
 
-require 'mustache'
+begin
+  require 'mustache'
+rescue LoadError
+  puts <<-HERE
+Error: This project requires the mustache Ruby gem in order to finish
+the maintainer setup. Please install it and re-run autocontrib.
+
+The mustache gem can be installed using gem:
+
+    gem install mustache
+  HERE
+  exit 1
+end
 
 class ContributorView < Mustache
   def contributors
