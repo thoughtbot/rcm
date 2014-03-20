@@ -3,7 +3,7 @@
 begin
   require 'mustache'
 rescue LoadError
-  puts <<-HERE
+  $stderr.puts <<-HERE
 Error: This project requires the mustache Ruby gem in order to finish
 the maintainer setup. Please install it and re-run autocontrib.
 
