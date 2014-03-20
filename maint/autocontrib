@@ -1,0 +1,45 @@
+#!/usr/bin/env ruby
+
+begin
+  require 'mustache'
+rescue LoadError
+  $stderr.puts <<-HERE
+Error: This project requires the mustache Ruby gem in order to finish
+the maintainer setup. Please install it and re-run autocontrib.
+
+The mustache gem can be installed using gem:
+
+    gem install mustache
+  HERE
+  exit 1
+end
+
+class ContributorView < Mustache
+  def contributors
+    @_contributors ||= raw_contributors
+  end
+
+  private
+
+  def raw_contributors
+    shortlog.map do |contributor_line|
+      if contributor_line =~ /\d+\s+(.+)\s+<(.+)>/
+        { :name => $1, :email => $2 }
+      end
+    end.compact
+  end
+
+  def shortlog
+    `git shortlog -es`.split("\n")
+  end
+end
+
+
+contributor_view = ContributorView.new
+
+ARGV.each do |template_filename|
+  output_filename = template_filename.sub(/\.mustache$/, '')
+  contributor_view.template_file = template_filename
+  output = contributor_view.render
+  File.write(output_filename, output)
+end
