@@ -1,1 +1,1 @@
-dist_pkgdata_SCRIPTS = rcm.sh
+dist_pkgdata_DATA = rcm.sh
