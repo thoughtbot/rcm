@@ -52,11 +52,11 @@ show symbols next to each file indicating status information. Supported symbols 
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;I</b> <i class="arg">excl_pat</i></dt>
 <dd class="list-tag" style="margin-left: 11.00ex;">
-include the files that match the given pattern. This is applied after any <b class="flag">&#45;x</b> options. It uses the same pattern language as <b class="flag">&#45;x</b>; more details are in the <i class="link-sec"><a class="link-sec" href="#x4558434c554445205041545445524e">EXCLUDE PATTERN</a></i> section.</dd>
+include the files that match the given pattern. This is applied after any <b class="flag">&#45;x</b> options. It uses the same pattern language as <b class="flag">&#45;x</b>; more details are in the <i class="link-sec"><a class="link-sec" href="#x4558434c554445205041545445524e">EXCLUDE PATTERN</a></i> section. Note that you may have to quote the exclude pattern so the shell does not evaluate the glob.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;S</b> <i class="arg">excl_pat</i></dt>
 <dd class="list-tag" style="margin-left: 11.00ex;">
-symlink the directory that match the given pattern. See <i class="link-sec"><a class="link-sec" href="#x4558434c554445205041545445524e">EXCLUDE PATTERN</a></i> for more details. This option can be repeated.</dd>
+symlink the directories that match the given pattern. See <i class="link-sec"><a class="link-sec" href="#x4558434c554445205041545445524e">EXCLUDE PATTERN</a></i> for more details. This option can be repeated. You may need to quote the pattern to prevent the shell from swallowing the glob.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;t</b> <i class="arg">TAG</i></dt>
 <dd class="list-tag" style="margin-left: 11.00ex;">
@@ -72,7 +72,7 @@ decrease verbosity</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;x</b> <i class="arg">excl_pat</i></dt>
 <dd class="list-tag" style="margin-left: 11.00ex;">
-exclude the files that match the given pattern. See <i class="link-sec"><a class="link-sec" href="#x4558434c554445205041545445524e">EXCLUDE PATTERN</a></i> for more details. This option can be repeated.</dd>
+exclude the files that match the given pattern. See <i class="link-sec"><a class="link-sec" href="#x4558434c554445205041545445524e">EXCLUDE PATTERN</a></i> for more details. This option can be repeated. Quote the pattern if it contains a valid shell glob.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <i class="arg">files ...</i></dt>
 <dd class="list-tag" style="margin-left: 11.00ex;">
@@ -99,7 +99,7 @@ Or more simply:<p>
 <code class="lit">bash_profile</code></div>
 </blockquote>
 <p>
-See the caveats noted in <i class="link-sec"><a class="link-sec" href="#x42554753">BUGS</a></i> when using an exclude pattern.</div>
+Since exclude patterns are often valid shell globs, be sure to quote them. See the caveats noted in <i class="link-sec"><a class="link-sec" href="#x42554753">BUGS</a></i> when using an exclude pattern.</div>
 <div class="section">
 <h1 id="x454e5649524f4e4d454e54">ENVIRONMENT</h1><dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
 <dt class="list-tag" style="margin-top: 1.00em;">
