@@ -17,8 +17,8 @@ Arch Linux:
 
 Debian-based (including Ubuntu):
 
-    wget https://thoughtbot.github.io/rcm/debs/rcm_1.2.1-2_all.deb
-    sudo dpkg -i rcm_1.2.1-2_all.deb
+    wget https://thoughtbot.github.io/rcm/debs/rcm_1.2.2-2_all.deb
+    sudo dpkg -i rcm_1.2.2-2_all.deb
 
 Gentoo-based (including Funtoo):
 
@@ -35,9 +35,9 @@ Elsewhere:
 
 This uses the standard GNU autotools, so it's the normal dance:
 
-    wget https://thoughtbot.github.io/rcm/dist/rcm-1.2.1.tar.gz && \
-    tar -xvf rcm-1.2.1.tar.gz && \
-    cd rcm-1.2.1 && \
+    wget https://thoughtbot.github.io/rcm/dist/rcm-1.2.2.tar.gz && \
+    tar -xvf rcm-1.2.2.tar.gz && \
+    cd rcm-1.2.2 && \
 
     ./configure && \
     make && \

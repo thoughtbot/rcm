@@ -1,5 +1,9 @@
 rcm (@PACKAGE_VERSION@) unstable; urgency=low
 
+ -- Mike Burns <mburns@thoughtbot.com>  Fri, 28 Mar 2014 16:30:53 +0100
+
+rcm (1.2.2) unstable; urgency=low
+
   * BUGFIX: Cygwin now executes hooks (Daniel Watson).
   * BUGFIX: Support -v option on OpenBSD (Javier López).
   * BUGFIX: Use a POSIX shell on Solaris (Mike Burns).
