@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT(rcm, 1.2.1, mburns@thoughtbot.com)
+AC_INIT(rcm, 1.2.2, mburns@thoughtbot.com)
 AM_INIT_AUTOMAKE
 
 # Checks for programs.
