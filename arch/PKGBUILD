@@ -1,14 +1,14 @@
 # Maintainer: Pat Brisbin <pbrisbin@gmail.com>
 pkgname='rcm'
-pkgver=1.2.1
+pkgver=1.2.2
 pkgrel=1
 pkgdesc="rc file (dotfile) management"
 arch=('any')
 url="http://thoughtbot.github.io/rcm/"
 license=('BSD')
 depends=('')
-source=("http://thoughtbot.github.io/rcm/dist/rcm-1.2.1.tar.gz")
-sha1sums=('434bdfbb1df8e610586cd9042a1e2ac614290ca7')
+source=("http://thoughtbot.github.io/rcm/dist/rcm-1.2.2.tar.gz")
+sha1sums=('844f4325e1eadeb2cf838629e5533b8d7450d0d9')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
