@@ -18,6 +18,10 @@ depcomp
 debian/rcm
 debian/rcm.debhelper.log
 share/rcm.sh
+bin/lsrc
+bin/mkrc
+bin/rcup
+bin/rcdn
 *deb
 NEWS.md
 rcm-*.tar.gz
