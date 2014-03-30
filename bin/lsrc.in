@@ -108,20 +108,20 @@ show_file() {
   local dotted=$5
   local symlink_dirs_file_globs="$6"
   local dest_file="$(build_path "$dest_dir" "$file" $dotted)"
+  local src_file="$(file_join "$dotfiles_subdir" "$file")"
+  local abs_src_file="$(file_join "$dotfiles_dir" "$src_file")"
+  local output="$dest_file:$abs_src_file"
 
-  if echo "$DEST_STACK" | grep -vq ":$dest_file"; then
+  if [ $SHOW_SIGILS -eq 1 ]; then
+    sigil="$(sigil_for "$src_file" "$symlink_dirs_file_globs")"
+    output="$output:$sigil"
+  fi
+
+  if echo "$DEST_STACK:" | grep -vq ":$dest_file:"; then
     DEST_STACK="$DEST_STACK:$dest_file"
-
-    src_file="$(file_join "$dotfiles_subdir" "$file")"
-    abs_src_file="$(file_join "$dotfiles_dir" "$src_file")"
-    output="$dest_file:$abs_src_file"
-
-    if [ $SHOW_SIGILS -eq 1 ]; then
-      sigil="$(sigil_for "$src_file" "$symlink_dirs_file_globs")"
-      output="$output:$sigil"
-    fi
-
     $PRINT "$output"
+  else
+    $VERBOSE "skipping hidden file $output"
   fi
 }
 
