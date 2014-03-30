@@ -42,3 +42,7 @@ test/test-suite.log
 
 # Other generated files
 man/rcm.7
+
+# Compilation output
+.deps
+.dirstamp
