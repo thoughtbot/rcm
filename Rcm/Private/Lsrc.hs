@@ -1,7 +1,7 @@
 module Rcm.Private.Lsrc where
 
 import System.FilePath (joinPath)
-import Rcm.GetOpt (getOpt)
+import Rcm.GetOpt (getOpt, Flag)
 
 data Config = Config {
    showSigils :: Bool
@@ -19,6 +19,7 @@ parseArgs :: Config -> [String] -> (Config, [String])
 parseArgs config args = (foldr handleOpt config flags, files)
   where (flags, files) = getOpt "FVqvhI:x:S:t:d:" args
 
+handleOpt :: Flag -> Config -> Config
 handleOpt ('F', _            ) c = c { showSigils = True }
 handleOpt ('h', _            ) c = c { showHelp = True }
 handleOpt ('I', (Just optArg)) c = c { includes = optArg : (includes c) }
