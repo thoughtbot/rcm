@@ -18,10 +18,10 @@ depcomp
 debian/rcm
 debian/rcm.debhelper.log
 share/rcm.sh
-bin/lsrc
-bin/mkrc
-bin/rcup
-bin/rcdn
+lsrc
+mkrc
+rcup
+rcdn
 *deb
 NEWS.md
 rcm-*.tar.gz
@@ -46,3 +46,5 @@ man/rcm.7
 # Compilation output
 .deps
 .dirstamp
+*.o
+*.hi

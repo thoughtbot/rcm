@@ -3,6 +3,7 @@
 module Rcm.Lsrc where
 
 import System.Environment (getArgs, getEnv)
+import System.FilePath (joinPath)
 import Rcm.GetOpt (getOpt)
 
 main = do
@@ -52,7 +53,7 @@ defaultConfig homeDir = Config {
   ,includes = []
   ,tags = []
   ,verbosity = 0
-  ,dotfilesDirs = [homeDir ++ "/.dotfiles"]
+  ,dotfilesDirs = [joinPath [homeDir, ".dotfiles"]]
   ,showVersion = False
   ,excludes = []
   ,symlinkDirs = []
