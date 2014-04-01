@@ -1,19 +1,8 @@
 module Rcm.Private.Lsrc where
 
 import System.FilePath (joinPath)
+import Rcm.Private.Data
 import Rcm.GetOpt (getOpt, Flag)
-
-data Config = Config {
-   showSigils :: Bool
-  ,showHelp :: Bool
-  ,includes :: [String]
-  ,tags :: [String]
-  ,verbosity :: Integer
-  ,dotfilesDirs :: [FilePath]
-  ,showVersion :: Bool
-  ,excludes :: [String]
-  ,symlinkDirs :: [String]
-} deriving (Show, Eq)
 
 parseArgs :: Config -> [String] -> (Config, [String])
 parseArgs config args = (foldr handleOpt config flags, files)

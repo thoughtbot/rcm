@@ -4,8 +4,9 @@ import Test.Hspec
 import Test.QuickCheck
 import System.FilePath (FilePath)
 import Data.List (isSuffixOf)
+import Rcm.Private.Data
 
-import Rcm.Private.Lsrc (parseArgs, defaultConfig, handleOpt, Config(..))
+import Rcm.Private.Lsrc (parseArgs, defaultConfig, handleOpt)
 
 data HandleOptArg = HandleOpt Char String Config (Config -> [String])
 
