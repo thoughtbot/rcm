@@ -9,7 +9,7 @@ mkrc should accept -r for a custom rcrc
 
   $ RCRC=./alt-rcrc mkrc -v .example
   Moving...
-  '.example' -> '*/.other-dotfiles/example' (glob)
+  '*/.example' -> '*/.other-dotfiles/example' (glob)
   Linking...
   '*/.other-dotfiles/example' -> '*/.example' (glob)
 

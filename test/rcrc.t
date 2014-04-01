@@ -9,7 +9,7 @@ Information should be read from ~/.rcrc by default
 
   $ mkrc -v .example
   Moving...
-  '.example' -> '*/.other-dotfiles/example' (glob)
+  '*/.example' -> '*/.other-dotfiles/example' (glob)
   Linking...
   '*/.other-dotfiles/example' -> '*/.example' (glob)
 
