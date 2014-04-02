@@ -1,5 +1,7 @@
 rcm (@PACKAGE_VERSION@) unstable; urgency=low
 
+  * BUGFIX: Allow files with the same prefix name in the same
+    directory. Verbose hidden files for lsrc(1) (Javier López).
   * Allow running mkrc on a relative file and preserve the
     path (Pablo Olmos de Aguilera Corradini).
 
