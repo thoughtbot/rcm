@@ -77,18 +77,10 @@ if [ $force_symlink -eq 1 ]; then
   done
 fi
 
-file_exists_in_cwd() {
-  local file=$1
-
-  if [ -s $PWD/$file ]; then
-    dotless="$(de_dot $PWD/$file)"
-  fi
-}
-
 for file in $files; do
+  [ -e "$PWD/$file" ] && file="$PWD/$file"
   dotless="$(de_dot "$file")"
   dest="$(destination "$DOTFILES_DIR" "$dotless" $in_host "$tag")"
-  file_exists_in_cwd $file
   mkdir -p "$dest/$(dirname "$dotless")"
   $PRINT "Moving..."
   mv_v "$file" "$dest/$dotless"
