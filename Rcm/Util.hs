@@ -1,4 +1,4 @@
-module Rcm.Util (at, afterElem) where
+module Rcm.Util (at, afterElem, isDotted) where
 
 import Data.List (elemIndex)
 
@@ -15,3 +15,8 @@ at xs i = at' xs i 0
 at' [] _ _ = Nothing
 at' (x:xs) i idx | idx == i = Just x
                  | otherwise = at' xs i (idx + 1)
+
+-- |True if the String begins with a period.
+isDotted :: String -> Bool
+isDotted ('.':_) = True
+isDotted _ = False

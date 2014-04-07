@@ -1,11 +1,14 @@
 module Rcm.Private.Dotfiles (getDotfiles, Dotfile(..)) where
 
-import Control.Applicative ((<$>))
 import Control.Monad (forM)
+import Control.Applicative ((<$>))
+import Control.Exception (handle, IOException)
 import System.Posix (getFileStatus, isDirectory)
 import System.Directory (getDirectoryContents)
+import System.FilePath (joinPath)
 import Data.Foldable (foldrM)
 
+import Rcm.Util (isDotted)
 import Rcm.Private.Data
 
 getDotfiles :: Config -> [FilePath] -> IO [Dotfile]
@@ -17,15 +20,30 @@ getDotfiles config files = foldrM g [] (dotfilesDirs config)
 
 getFiles :: FilePath -> IO [FilePath]
 getFiles baseDir = do
-  files <- getDirectoryContents baseDir
+  files <- ls baseDir
   foldrM g [] files
   where
-    g file acc = do
-      isDir <- (isDirectory <$> getFileStatus file)
-      if isDir then
-        getFiles file
-      else
-        return $ file:acc
+
+    g file acc = handle (handler acc) $ do
+          isDir <- (isDirectory <$> getFileStatus file)
+          if isDir then do
+            files <- getFiles file
+            return $ files ++ acc
+          else
+            return $ file:acc
+
+    handler :: a -> IOException -> IO a
+    handler acc e = do
+      print e
+      return acc
 
 mkDotfile :: FilePath -> Dotfile
 mkDotfile target = Dotfile target
+
+ls :: FilePath -> IO [FilePath]
+ls dir =
+  map (\file -> (joinPath [dir, file]))
+  <$>
+  filter (not . isDotted)
+  <$>
+  getDirectoryContents dir

@@ -6,11 +6,13 @@ import System.Directory
 import System.IO
 import System.FilePath (joinPath)
 import Control.Exception (finally)
+import Data.Set (Set)
+import qualified Data.Set as Set
 
 import Rcm.Private.Dotfiles (getDotfiles, Dotfile(..))
 import Rcm.Private.Data
 
-dotfilesSpecs = describe "Rcm.Private.DotfilesSpecs" $ do
+dotfilesSpecs = describe "Rcm.Private.Dotfiles" $ do
   context "getDotfiles" $ do
     context "normal dotfiles" $ do
       around setupNormalDotfiles $ do
@@ -21,7 +23,7 @@ dotfilesSpecs = describe "Rcm.Private.DotfilesSpecs" $ do
                             , joinPath [tmpDotfileDir, "cabal", "config"]
                             , joinPath [tmpDotfileDir, "zshrc"]
                             , joinPath [tmpDotfileDir, "vimrc"] ] in
-          getDotfiles config [] `shouldReturn` expected
+          getDotfiles config [] `shouldReturnWithSet` expected
 
 mkConfig = Config {
   showSigils = False
@@ -53,3 +55,8 @@ createNormalDotfiles = do
 removeNormalDotfiles = removeDirectoryRecursive tmpDotfileDir
 
 mkDotfile filePath = Dotfile { dotfileTarget = filePath }
+
+shouldReturnWithSet :: (Show a, Ord a) => IO [a] -> [a] -> Expectation
+shouldReturnWithSet action expected =
+  action >>= \actual ->
+    shouldBe (Set.fromList actual) (Set.fromList expected)

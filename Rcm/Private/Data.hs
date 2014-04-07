@@ -2,7 +2,7 @@ module Rcm.Private.Data where
 
 data Dotfile = Dotfile {
   dotfileTarget :: FilePath
-} deriving (Show, Eq)
+} deriving (Show, Eq, Ord)
 
 data Config = Config {
    showSigils :: Bool
