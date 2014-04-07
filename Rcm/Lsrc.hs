@@ -22,6 +22,6 @@ main = do
   dotfiles <- getDotfiles config files
 
   forM_ dotfiles $ \dotfile ->
-    putStrLn $ (dotfileSource dotfile) ++ ":" ++ (dotfileTarget dotfile)
+    putStrLn $ (dotfileSource dotfile) ++ ":" ++ (show $ dotfileTarget dotfile)
 
   return ()

@@ -18,11 +18,10 @@ dotfilesSpecs = describe "Rcm.Private.Dotfiles" $ do
       around setupNormalDotfiles $ do
         it "produces dotfiles from the given directories" $
           let config = mkConfig { dotfilesDirs = [tmpDotfileDir] }
-              expected = map mkDotfile [
-                              joinPath [tmpDotfileDir, "gnupg", "gpg.conf"]
-                            , joinPath [tmpDotfileDir, "cabal", "config"]
-                            , joinPath [tmpDotfileDir, "zshrc"]
-                            , joinPath [tmpDotfileDir, "vimrc"] ] in
+              expected = [mkDotfile tmpDotfileDir (Just "gnupg") "gpg.conf"
+                         ,mkDotfile tmpDotfileDir (Just "cabal") "config"
+                         ,mkDotfile tmpDotfileDir Nothing "zshrc"
+                         ,mkDotfile tmpDotfileDir Nothing "vimrc"] in
           getDotfiles config [] `shouldReturnWithSet` expected
 
 mkConfig = Config {
@@ -54,7 +53,16 @@ createNormalDotfiles = do
 
 removeNormalDotfiles = removeDirectoryRecursive tmpDotfileDir
 
-mkDotfile filePath = Dotfile { dotfileTarget = filePath }
+mkDotfile baseDir path file = Dotfile {
+  dotfileTarget = DotfileTarget {
+    dtBase = baseDir
+   ,dtPath = path
+   ,dtFile = file
+   ,dtTag  = Nothing
+   ,dtHost = Nothing
+   }
+ ,dotfileSource = "/tmp/unknown"
+}
 
 shouldReturnWithSet :: (Show a, Ord a) => IO [a] -> [a] -> Expectation
 shouldReturnWithSet action expected =
