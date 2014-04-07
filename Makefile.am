@@ -17,13 +17,13 @@ EXTRA_DIST = LICENSE README.md NEWS.md
 	$(COMPILE) -o $@ $<
 
 bin_PROGRAMS = lsrc
-dist_lsrc_SOURCES = Rcm/Lsrc.hs Rcm/Private/Lsrc.hs Rcm/Private/Dotfiles.hs Rcm/GetOpt.hs Rcm/Util.hs
+dist_lsrc_SOURCES = Rcm/Lsrc.hs Rcm/Private/Data.hs Rcm/Private/Lsrc.hs Rcm/Private/Dotfiles.hs Rcm/GetOpt.hs Rcm/Util.hs
 
 AM_GHC_DEPEND_FLAGS = -no-hs-main --make -pgmltrue -odir . -hidir .
 
 DEFAULT_INCLUDES = -i$(srcdir)
 
-GHC_PACKAGES = -package filepath
+GHC_PACKAGES = -package filepath -package unix -package directory
 
 AM_GHC_MAIN = -main-is Rcm.Lsrc
 AM_GHC_COMPILE_FLAGS = $(DEFS) $(GHC_PACKAGES) \

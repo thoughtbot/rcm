@@ -38,7 +38,7 @@ getFiles baseDir = do
       return acc
 
 mkDotfile :: FilePath -> Dotfile
-mkDotfile target = Dotfile target
+mkDotfile target = Dotfile target "/tmp/unknown"
 
 ls :: FilePath -> IO [FilePath]
 ls dir =

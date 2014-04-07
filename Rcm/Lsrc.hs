@@ -5,6 +5,7 @@ module Rcm.Lsrc where
 import Control.Monad (forM_)
 import System.Environment (getArgs, getEnv)
 import Rcm.Private.Lsrc
+import Rcm.Private.Data
 import Rcm.Private.Dotfiles (getDotfiles, Dotfile(..))
 
 main = do
@@ -21,6 +22,6 @@ main = do
   dotfiles <- getDotfiles config files
 
   forM_ dotfiles $ \dotfile ->
-    putStrLn (dotfileSource dotfile) ++ ":" ++ dotfileTarget dotfile
+    putStrLn $ (dotfileSource dotfile) ++ ":" ++ (dotfileTarget dotfile)
 
   return ()

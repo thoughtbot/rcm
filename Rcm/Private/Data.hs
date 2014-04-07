@@ -2,6 +2,7 @@ module Rcm.Private.Data where
 
 data Dotfile = Dotfile {
   dotfileTarget :: FilePath
+ ,dotfileSource :: FilePath
 } deriving (Show, Eq, Ord)
 
 data Config = Config {
