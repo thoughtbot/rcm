@@ -19,6 +19,7 @@ data Config = Config {
   ,showVersion :: Bool
   ,excludes :: [String]
   ,symlinkDirs :: [String]
+  ,homeDir :: FilePath
 } deriving (Show, Eq)
 
 data DotfileTarget = DotfileTarget {

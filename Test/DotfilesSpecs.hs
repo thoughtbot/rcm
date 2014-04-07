@@ -17,11 +17,13 @@ dotfilesSpecs = describe "Rcm.Private.Dotfiles" $ do
     context "normal dotfiles" $ do
       around setupNormalDotfiles $ do
         it "produces dotfiles from the given directories" $
-          let config = mkConfig { dotfilesDirs = [tmpDotfileDir] }
-              expected = [mkDotfile tmpDotfileDir (Just "gnupg") "gpg.conf"
-                         ,mkDotfile tmpDotfileDir (Just "cabal") "config"
-                         ,mkDotfile tmpDotfileDir Nothing "zshrc"
-                         ,mkDotfile tmpDotfileDir Nothing "vimrc"] in
+          let config = mkConfig {
+               dotfilesDirs = [tmpDotfileDir], homeDir = tmpHomeDir }
+              mkD = mkDotfile tmpHomeDir tmpDotfileDir
+              expected = [mkD (Just "gnupg") "gpg.conf"
+                         ,mkD (Just "cabal") "config"
+                         ,mkD Nothing "zshrc"
+                         ,mkD Nothing "vimrc"] in
           getDotfiles config [] `shouldReturnWithSet` expected
 
 mkConfig = Config {
@@ -34,9 +36,11 @@ mkConfig = Config {
  ,showVersion = False
  ,excludes = []
  ,symlinkDirs = []
+ ,homeDir = "/home/foo"
 }
 
 tmpDotfileDir = "/tmp/rcm-tmp-dotfile-dir"
+tmpHomeDir = "/tmp/rcm-tmp-home-dir"
 
 setupNormalDotfiles :: IO () -> IO ()
 setupNormalDotfiles test =
@@ -53,16 +57,17 @@ createNormalDotfiles = do
 
 removeNormalDotfiles = removeDirectoryRecursive tmpDotfileDir
 
-mkDotfile baseDir path file = Dotfile {
-  dotfileTarget = DotfileTarget {
-    dtBase = baseDir
-   ,dtPath = path
-   ,dtFile = file
-   ,dtTag  = Nothing
-   ,dtHost = Nothing
-   }
- ,dotfileSource = "/tmp/unknown"
-}
+mkDotfile homeDir baseDir path file = Dotfile {
+    dotfileTarget = DotfileTarget {
+      dtBase = baseDir
+     ,dtPath = path
+     ,dtFile = file
+     ,dtTag  = Nothing
+     ,dtHost = Nothing
+     }
+   ,dotfileSource = joinPath [homeDir, "." ++ pathAndFile]
+  }
+  where pathAndFile = maybe file (\p -> joinPath [p, file]) path
 
 shouldReturnWithSet :: (Show a, Ord a) => IO [a] -> [a] -> Expectation
 shouldReturnWithSet action expected =

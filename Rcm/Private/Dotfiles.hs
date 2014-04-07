@@ -15,30 +15,25 @@ getDotfiles :: Config -> [FilePath] -> IO [Dotfile]
 getDotfiles config files = foldrM g [] (dotfilesDirs config)
   where
     g dotfilesDir acc = do
-      dotfiles <- getFiles dotfilesDir
+      dotfiles <- getFiles config dotfilesDir
       return $ acc ++ dotfiles
 
-getFiles :: FilePath -> IO [Dotfile]
-getFiles baseDir = getFiles' baseDir ""
+getFiles :: Config -> FilePath -> IO [Dotfile]
+getFiles config baseDir = getFiles' config baseDir ""
 
-getFiles' baseDir subdir = do
+getFiles' config baseDir subdir = do
   files <- ls (joinPath [baseDir, subdir])
   foldrM g [] files
   where
     g file acc = handle (handler acc) $ do
-          isDir <- (isDirectory <$> getFileStatus (joinPath [baseDir, subdir, file]))
-          if isDir then do
-            files <- getFiles' baseDir $ joinPath [subdir, file]
-            return $ files ++ acc
-          else
-            let dt = DotfileTarget {
-                       dtBase = baseDir
-                      ,dtPath = if subdir == "" then Nothing else Just subdir
-                      ,dtFile = file
-                      ,dtTag = Nothing
-                      ,dtHost = Nothing
-                      } in
-            return $ (Dotfile dt "/tmp/unknown"):acc
+      isDir <- (isDirectory <$> getFileStatus (joinPath [baseDir, subdir, file]))
+      if isDir then do
+        files <- getFiles' config baseDir $ joinPath [subdir, file]
+        return $ files ++ acc
+      else
+        let dt = mkTarget baseDir subdir file
+            ds = mkSource config dt in
+        return $ (Dotfile dt ds):acc
 
     handler :: a -> IOException -> IO a
     handler acc e = do
@@ -47,3 +42,19 @@ getFiles' baseDir subdir = do
 
 ls :: FilePath -> IO [FilePath]
 ls dir = filter (not . isDotted) <$> getDirectoryContents dir
+
+mkTarget :: FilePath -> FilePath -> FilePath -> DotfileTarget
+mkTarget baseDir subdir file =
+  DotfileTarget {
+     dtBase = baseDir
+    ,dtPath = if subdir == "" then Nothing else Just subdir
+    ,dtFile = file
+    ,dtTag = Nothing
+    ,dtHost = Nothing
+    }
+
+mkSource :: Config -> DotfileTarget -> DotfileSource
+mkSource config dt = joinPath [homeDir config, "." ++ pathToFile (dtPath dt)]
+  where
+    pathToFile Nothing = dtFile dt
+    pathToFile (Just p) = joinPath [p, dtFile dt]

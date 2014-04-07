@@ -54,4 +54,5 @@ mkConfig = Config {
  ,showVersion = False
  ,excludes = []
  ,symlinkDirs = []
+ ,homeDir = "/home/foo"
 }

@@ -31,4 +31,5 @@ defaultConfig homeDir = Config {
   ,showVersion = False
   ,excludes = []
   ,symlinkDirs = []
+  ,homeDir = homeDir
 }
