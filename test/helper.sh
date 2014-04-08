@@ -1,9 +1,9 @@
-for bin in lsrc mkrc rcup rcdn; do
+for bin in mkrc rcup rcdn; do
   chmod +x "$TESTDIR/../bin"/$bin
 done
 
 export HOME="$PWD"
-export PATH="$TESTDIR/../bin:$PATH"
+export PATH="$TESTDIR/../bin:$TESTDIR/../src:$PATH"
 export RCRC="$HOME/.rcrc"
 export RCM_LIB="$TESTDIR/../share"
 

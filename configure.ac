@@ -57,4 +57,4 @@ AC_SUBST(GHC_LIB_PATH)
 # Checks for library functions.
 
 AM_EXTRA_RECURSIVE_TARGETS([release_build_man_html release_push_man_html release_clean_man_html])
-AC_OUTPUT(Makefile Rcm/Makefile man/Makefile test/Makefile NEWS.md)
+AC_OUTPUT(Makefile bin/Makefile src/Makefile man/Makefile test/Makefile NEWS.md bin/mkrc bin/rcup bin/rcdn)
