@@ -33,5 +33,12 @@ release-arch
 deb-build
 rcm-*
 
+# Files generated for or during testing
+test-driver
+*.t.err
+*.t.trs
+*.t.log
+test/test-suite.log
+
 # Other generated files
 man/rcm.7
