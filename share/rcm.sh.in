@@ -125,7 +125,7 @@ run_hooks() {
           find_opts=-print
         fi
 
-        find "$hook_file" -type f -perm -111 $find_opts -exec {} \;
+        find "$hook_file" -type f \( \( -user $USER -perm -100 \) -o -perm -001 \) $find_opts -exec {} \;
       else
         $DEBUG "no $when-$direction hook present for $dotfiles_dir, skipping"
       fi
