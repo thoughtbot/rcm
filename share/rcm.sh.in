@@ -12,7 +12,11 @@ DEFAULT_DOTFILES_DIR="$HOME/.dotfiles"
 MKDIR=mkdir
 INSTALL=rcup
 ROOT_DIR="$HOME"
-HOSTNAME="$(hostname | sed -e 's/\..*//')"
+if command -vp scutil > /dev/null; then
+  HOSTNAME="$(scutil --get ComputerName | tr '[:upper:]' '[:lower:]')"
+else
+  HOSTNAME="$(hostname | sed -e 's/\..*//')"
+fi
 
 ln_v() {
   $VERBOSE "'$1' -> '$2'"
