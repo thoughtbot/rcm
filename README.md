@@ -22,6 +22,8 @@ Debian-based (including Ubuntu):
 
 openSUSE/RHEL/CentOS: [instructions](http://software.opensuse.org/download.html?project=utilities&package=rcm)
 
+openSUSE/RHEL/CentOS: [download](http://software.opensuse.org/download.html?project=utilities&package=rcm)
+
 Gentoo-based (including Funtoo):
 
     sudo emerge layman
