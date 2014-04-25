@@ -11,6 +11,8 @@ import Data.Foldable (foldrM)
 import Rcm.Util (isDotted)
 import Rcm.Private.Data
 
+import System.Posix (getFileStatus, isDirectory)
+
 getDotfiles :: Config -> [FilePath] -> IO [Dotfile]
 getDotfiles config files = foldrM g [] (dotfilesDirs config)
   where
