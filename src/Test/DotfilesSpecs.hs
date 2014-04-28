@@ -5,7 +5,7 @@ import Test.QuickCheck
 import System.Directory
 import System.IO
 import System.FilePath (joinPath)
-import Control.Exception (finally, onException)
+import Control.Exception (finally, catch, SomeException)
 import Data.Set (Set)
 import qualified Data.Set as Set
 
@@ -27,20 +27,19 @@ dotfilesSpecs = describe "Rcm.Private.Dotfiles" $ do
           in getDotfiles config [] `shouldReturnWithSet` expected
 
     context "tagged dotfiles" $ do
-      around setupNormalDotfiles $ do
-        around setupTaggedDotfiles $ do
-          it "produces no tagged dotfiles by default" $
-            let config = mkConfig {
-                 dotfilesDirs = [tmpDotfileDir], homeDir = tmpHomeDir }
-                mkD = mkDotfile tmpHomeDir tmpDotfileDir
-                expected = [mkD (Just "gnupg") "gpg.conf"
-                           ,mkD (Just "cabal") "config"
-                           ,mkD Nothing "zshrc"
-                           ,mkD Nothing "vimrc"]
-            in getDotfiles config [] `shouldReturnWithSet` expected
+      around setupTaggedDotfiles $ do
+        it "produces no tagged dotfiles by default" $
+          let config = mkConfig {
+               dotfilesDirs = [tmpDotfileDir], homeDir = tmpHomeDir }
+              mkD = mkDotfile tmpHomeDir tmpDotfileDir
+              expected = [mkD (Just "gnupg") "gpg.conf"
+                         ,mkD (Just "cabal") "config"
+                         ,mkD Nothing "zshrc"
+                         ,mkD Nothing "vimrc"]
+          in getDotfiles config [] `shouldReturnWithSet` expected
 
 
-          it "produces dotfiles matching the tag when asked" $ False
+        it "produces dotfiles matching the tag when asked" $ False
 
 mkConfig = Config {
   showSigils = False
@@ -64,7 +63,8 @@ setupNormalDotfiles test =
 
 setupTaggedDotfiles :: IO () -> IO ()
 setupTaggedDotfiles test =
-  (createTaggedDotfiles >> test) `finally` removeTaggedDotfiles
+  (createNormalDotfiles >> createTaggedDotfiles >> test)
+    `finally` removeTaggedDotfiles
 
 createNormalDotfiles = do
   ensureDirectory tmpDotfileDir
@@ -76,7 +76,7 @@ createNormalDotfiles = do
   touchFile (joinPath [tmpDotfileDir, "vimrc"])
 
 removeNormalDotfiles =
-  (removeDirectoryRecursive tmpDotfileDir) `onException` return ()
+  (removeDirectoryRecursive tmpDotfileDir) `orException` return ()
 
 createTaggedDotfiles = do
   ensureDirectory tmpDotfileDir
@@ -101,8 +101,11 @@ mkDotfile homeDir baseDir path file = Dotfile {
 
 shouldReturnWithSet :: (Show a, Ord a) => IO [a] -> [a] -> Expectation
 shouldReturnWithSet action expected =
-  (action `onException` return []) >>= \actual ->
+  (action `orException` return []) >>= \actual ->
     shouldBe (Set.fromList actual) (Set.fromList expected)
 
-ensureDirectory path = (createDirectory path) `onException` return ()
+ensureDirectory path = (createDirectory path) `orException` return ()
 touchFile path = writeFile path ""
+
+orException io orResult = io `catch` f
+  where f x = let y = x :: SomeException in orResult
