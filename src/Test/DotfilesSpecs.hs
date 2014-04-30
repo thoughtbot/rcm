@@ -38,8 +38,17 @@ dotfilesSpecs = describe "Rcm.Private.Dotfiles" $ do
                          ,mkD Nothing "vimrc"]
           in getDotfiles config [] `shouldReturnWithSet` expected
 
-
-        it "produces dotfiles matching the tag when asked" $ False
+        it "produces dotfiles matching the tag when asked" $
+          let config = mkConfig {
+               dotfilesDirs = [tmpDotfileDir], homeDir = tmpHomeDir,
+               tags = ["ruby", "go"] }
+              mkD = mkDotfile tmpHomeDir tmpDotfileDir
+              expected = [mkD (Just "gnupg") "gpg.conf"
+                         ,mkD (Just "cabal") "config"
+                         ,mkD (Just "tag-ruby") "irbrc"
+                         ,mkD Nothing "zshrc"
+                         ,mkD Nothing "vimrc"]
+          in getDotfiles config [] `shouldReturnWithSet` expected
 
 mkConfig = Config {
   showSigils = False
