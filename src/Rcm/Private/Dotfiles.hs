@@ -1,17 +1,16 @@
 module Rcm.Private.Dotfiles (getDotfiles, Dotfile(..)) where
 
-import Control.Monad (forM)
+import Control.Monad (forM, filterM)
 import Control.Applicative ((<$>))
 import Control.Exception (handle, IOException)
-import System.Posix (getFileStatus, isDirectory)
+import System.Posix (getFileStatus, isDirectory, isRegularFile)
 import System.Directory (getDirectoryContents)
 import System.FilePath (joinPath)
 import Data.Foldable (foldrM)
+import Data.List (stripPrefix, isPrefixOf)
 
 import Rcm.Util (isDotted)
 import Rcm.Private.Data
-
-import System.Posix (getFileStatus, isDirectory)
 
 getDotfiles :: Config -> [FilePath] -> IO [Dotfile]
 getDotfiles config files = foldrM g [] (dotfilesDirs config)
@@ -21,7 +20,52 @@ getDotfiles config files = foldrM g [] (dotfilesDirs config)
       return $ acc ++ dotfiles
 
 getFiles :: Config -> FilePath -> IO [Dotfile]
-getFiles config baseDir = getFiles' config baseDir ""
+getFiles config baseDir = do
+  metaDirs <- getMetaDirs config baseDir
+  normalDirs <- getNormalDirs config baseDir
+  normalFiles <- getNormalFiles config baseDir
+  recurredDotfiles <- foldrM g [] (metaDirs ++ normalDirs)
+  let normalDotfiles = map (mkDotfile config baseDir) normalFiles
+
+  return $ normalDotfiles ++ recurredDotfiles
+
+  where
+    g dir dotfiles = do
+      files <- getFiles' config baseDir dir
+      return $ dotfiles ++ files
+
+getMetaDirs config baseDir =
+  filter (isDesiredMetadir config) <$> ls baseDir
+
+isDesiredMetadir config dir =
+  case stripPrefix "tag-" dir of
+    Just tag -> tag `elem` (tags config)
+    Nothing -> False
+
+getNormalDirs config baseDir = do
+  files <- ls baseDir
+  filterM g files
+  where
+    g file = do
+      isDir' <- isDir (joinPath [baseDir, file])
+      return $ isDir' && (not $ isMetaDir file)
+
+isMetaDir dir = "tag-" `isPrefixOf` dir
+
+isDir file = isDirectory <$> getFileStatus file
+
+getNormalFiles :: Config -> FilePath -> IO [FilePath]
+getNormalFiles config baseDir = do
+  subdirs <- ls baseDir
+  filterM onlyFile subdirs
+  where
+    onlyFile :: FilePath -> IO Bool
+    onlyFile file = isRegularFile <$> getFileStatus (joinPath [baseDir, file])
+
+mkDotfile config baseDir file = Dotfile dt ds
+  where
+    dt = mkTarget baseDir "" file
+    ds = mkSource config dt
 
 getFiles' config baseDir subdir = do
   files <- ls (joinPath [baseDir, subdir])
