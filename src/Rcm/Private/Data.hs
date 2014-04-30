@@ -20,6 +20,7 @@ data Config = Config {
   ,excludes :: [String]
   ,symlinkDirs :: [String]
   ,homeDir :: FilePath
+  ,hostname :: String
 } deriving (Show, Eq)
 
 data DotfileTarget = DotfileTarget {

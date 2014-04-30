@@ -23,7 +23,10 @@ lsrcSpecs = describe "Rcm.Private.Lsrc" $ do
 
   context "defaultConfig" $ do
     it "sets a default dotfiles directory" $
-      dotfilesDirs (defaultConfig "/tmp") `shouldBe` ["/tmp/.dotfiles"]
+      dotfilesDirs (defaultConfig "/tmp" "-") `shouldBe` ["/tmp/.dotfiles"]
+
+    it "sets a default hostname" $
+      hostname (defaultConfig "-" "zeroCool") `shouldBe` "zeroCool"
 
   context "handleOpt" $ do
     it "augments Configs when the opt takes an argument" $ property $
@@ -55,4 +58,5 @@ mkConfig = Config {
  ,excludes = []
  ,symlinkDirs = []
  ,homeDir = "/home/foo"
+ ,hostname = "gibson"
 }

@@ -21,7 +21,7 @@ handleOpt ('x', (Just optArg)) c = c { excludes = optArg : (excludes c) }
 handleOpt ('S', (Just optArg)) c = c { symlinkDirs = optArg : (symlinkDirs c) }
 handleOpt ('?', _            ) c = c -- TODO: new functionality
 
-defaultConfig homeDir = Config {
+defaultConfig homeDir hostname = Config {
    showSigils = False
   ,showHelp = False
   ,includes = []
@@ -32,4 +32,5 @@ defaultConfig homeDir = Config {
   ,excludes = []
   ,symlinkDirs = []
   ,homeDir = homeDir
+  ,hostname = hostname
 }

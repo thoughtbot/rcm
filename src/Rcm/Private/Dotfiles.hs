@@ -34,13 +34,14 @@ getFiles config baseDir = do
       files <- getFiles' config baseDir dir
       return $ dotfiles ++ files
 
-getMetaDirs config baseDir =
-  filter (isDesiredMetadir config) <$> ls baseDir
+getMetaDirs config baseDir = filter (isDesiredMetadir config) <$> ls baseDir
 
 isDesiredMetadir config dir =
   case stripPrefix "tag-" dir of
     Just tag -> tag `elem` (tags config)
-    Nothing -> False
+    Nothing -> case stripPrefix "host-" dir of
+      Just host -> host == hostname config
+      Nothing -> False
 
 getNormalDirs config baseDir = do
   files <- ls baseDir
@@ -50,7 +51,7 @@ getNormalDirs config baseDir = do
       isDir' <- isDir (joinPath [baseDir, file])
       return $ isDir' && (not $ isMetaDir file)
 
-isMetaDir dir = "tag-" `isPrefixOf` dir
+isMetaDir dir = "tag-" `isPrefixOf` dir || "host-" `isPrefixOf` dir
 
 isDir file = isDirectory <$> getFileStatus file
 

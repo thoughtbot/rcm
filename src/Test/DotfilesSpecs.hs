@@ -50,6 +50,20 @@ dotfilesSpecs = describe "Rcm.Private.Dotfiles" $ do
                          ,mkD Nothing "vimrc"]
           in getDotfiles config [] `shouldReturnWithSet` expected
 
+    context "host-specific dotfiles" $ do
+      around (setupHostnameDotfiles "gibson") $ do
+        it "produces host-specific dotfiles by default" $
+          let config = mkConfig {
+               dotfilesDirs = [tmpDotfileDir], homeDir = tmpHomeDir,
+               hostname = "gibson" }
+              mkD = mkDotfile tmpHomeDir tmpDotfileDir
+              expected = [mkD (Just "gnupg") "gpg.conf"
+                         ,mkD (Just "cabal") "config"
+                         ,mkD (Just "host-gibson") "rcrc"
+                         ,mkD Nothing "zshrc"
+                         ,mkD Nothing "vimrc"]
+          in getDotfiles config [] `shouldReturnWithSet` expected
+
 mkConfig = Config {
   showSigils = False
  ,showHelp = False
@@ -61,6 +75,7 @@ mkConfig = Config {
  ,excludes = []
  ,symlinkDirs = []
  ,homeDir = "/home/foo"
+ ,hostname = "cyberdelia"
 }
 
 tmpDotfileDir = "/tmp/rcm-tmp-dotfile-dir"
@@ -68,12 +83,16 @@ tmpHomeDir = "/tmp/rcm-tmp-home-dir"
 
 setupNormalDotfiles :: IO () -> IO ()
 setupNormalDotfiles test =
-  (createNormalDotfiles >> test) `finally` removeNormalDotfiles
+  (createNormalDotfiles >> test) `finally` removeDotfiles
 
 setupTaggedDotfiles :: IO () -> IO ()
 setupTaggedDotfiles test =
   (createNormalDotfiles >> createTaggedDotfiles >> test)
-    `finally` removeTaggedDotfiles
+    `finally` removeDotfiles
+
+setupHostnameDotfiles hostname test =
+  (createNormalDotfiles >> createHostnameDotfiles hostname >> test)
+    `finally` removeDotfiles
 
 createNormalDotfiles = do
   ensureDirectory tmpDotfileDir
@@ -84,9 +103,6 @@ createNormalDotfiles = do
   touchFile (joinPath [tmpDotfileDir, "zshrc"])
   touchFile (joinPath [tmpDotfileDir, "vimrc"])
 
-removeNormalDotfiles =
-  (removeDirectoryRecursive tmpDotfileDir) `orException` return ()
-
 createTaggedDotfiles = do
   ensureDirectory tmpDotfileDir
   ensureDirectory (joinPath [tmpDotfileDir, "tag-ruby"])
@@ -94,7 +110,15 @@ createTaggedDotfiles = do
   touchFile (joinPath [tmpDotfileDir, "tag-ruby", "irbrc"])
   touchFile (joinPath [tmpDotfileDir, "tag-ssh", "ssh_config"])
 
-removeTaggedDotfiles = removeNormalDotfiles
+createHostnameDotfiles hostname = do
+  ensureDirectory tmpDotfileDir
+  ensureDirectory (joinPath [tmpDotfileDir, "host-" ++ hostname])
+  ensureDirectory (joinPath [tmpDotfileDir, "host-" ++ hostname ++ "-aux"])
+  touchFile (joinPath [tmpDotfileDir, "host-" ++ hostname, "rcrc"])
+  touchFile (joinPath [tmpDotfileDir, "host-" ++ hostname ++ "-aux", "rcrc"])
+
+removeDotfiles =
+  (removeDirectoryRecursive tmpDotfileDir) `orException` return ()
 
 mkDotfile homeDir baseDir path file = Dotfile {
     dotfileTarget = DotfileTarget {

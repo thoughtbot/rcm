@@ -11,7 +11,7 @@ AM_GHC_DEPEND_FLAGS = -no-hs-main --make -pgmltrue -odir . -hidir .
 
 DEFAULT_INCLUDES = -i$(srcdir)
 
-GHC_PACKAGES = -package filepath -package unix -package directory
+GHC_PACKAGES = -package filepath -package unix -package directory -package network
 
 AM_GHC_MAIN = -main-is Rcm.Lsrc
 AM_GHC_COMPILE_FLAGS = $(DEFS) $(GHC_PACKAGES) \
