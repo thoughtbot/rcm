@@ -1,6 +1,7 @@
 module Rcm.Private.Data where
 
 import System.FilePath (joinPath)
+import System.Posix (FileStatus)
 
 type DotfileSource = FilePath
 
@@ -24,11 +25,11 @@ data Config = Config {
 } deriving (Show, Eq)
 
 data DotfileTarget = DotfileTarget {
-  dtBase :: FilePath
- ,dtPath :: Maybe FilePath
- ,dtFile :: FilePath
- ,dtTag  :: Maybe String
- ,dtHost :: Maybe String
+  dtBase   :: FilePath
+ ,dtPath   :: Maybe FilePath
+ ,dtFile   :: FilePath
+ ,dtTag    :: Maybe String
+ ,dtHost   :: Maybe String
 } deriving (Eq, Ord)
 
 instance Show DotfileTarget where
