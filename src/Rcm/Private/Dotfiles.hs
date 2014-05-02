@@ -8,6 +8,7 @@ import System.Directory (getDirectoryContents)
 import System.FilePath (joinPath)
 import Data.Foldable (foldrM)
 import Data.List (stripPrefix, isPrefixOf)
+import qualified Data.Map.Lazy as Map
 
 import Rcm.Util (isDotted)
 import Rcm.Private.Data
@@ -21,20 +22,28 @@ getDotfiles config files = foldrM g [] (dotfilesDirs config)
 
 getFiles :: Config -> FilePath -> IO [Dotfile]
 getFiles config baseDir = do
-  metaDirs <- getMetaDirs config baseDir
-  normalDirs <- getNormalDirs config baseDir
-  normalFiles <- getNormalFiles config baseDir
-  recurredDotfiles <- foldrM g [] (metaDirs ++ normalDirs)
+  files <- ls baseDir
+  fileStatuses <- mapM (\file -> getFileStatus $ joinPath [baseDir, file]) files
+  let directoryContents = Map.fromList $ zip files fileStatuses
+      metaDirs = Map.keys $ getMetaDirs config directoryContents
+      normalDirs = Map.keys $ getNormalDirs config directoryContents
+      normalFiles = Map.keys $ getNormalFiles config directoryContents
+
+  recurredMetaDotfiles <- foldrM h [] metaDirs
+  recurredDotfiles <- foldrM g [] normalDirs
   let normalDotfiles = map (mkDotfile config baseDir) normalFiles
 
-  return $ normalDotfiles ++ recurredDotfiles
+  return $ normalDotfiles ++ recurredDotfiles ++ recurredMetaDotfiles
 
   where
     g dir dotfiles = do
       files <- getFiles' config baseDir dir
       return $ dotfiles ++ files
+    h dir dotfiles = do
+      files <- getFiles' config (baseDir ++  dir) ""
+      return $ dotfiles ++ files
 
-getMetaDirs config baseDir = filter (isDesiredMetadir config) <$> ls baseDir
+getMetaDirs config = Map.filterWithKey (\k _ -> isDesiredMetadir config k)
 
 isDesiredMetadir config dir =
   case stripPrefix "tag-" dir of
@@ -43,25 +52,14 @@ isDesiredMetadir config dir =
       Just host -> host == hostname config
       Nothing -> False
 
-getNormalDirs config baseDir = do
-  files <- ls baseDir
-  filterM g files
+getNormalDirs config filesMap = Map.filterWithKey g filesMap
   where
-    g file = do
-      isDir' <- isDir (joinPath [baseDir, file])
-      return $ isDir' && (not $ isMetaDir file)
+    g basename fileStatus =
+      isDirectory fileStatus && (not $ isMetaDir basename)
 
 isMetaDir dir = "tag-" `isPrefixOf` dir || "host-" `isPrefixOf` dir
 
-isDir file = isDirectory <$> getFileStatus file
-
-getNormalFiles :: Config -> FilePath -> IO [FilePath]
-getNormalFiles config baseDir = do
-  subdirs <- ls baseDir
-  filterM onlyFile subdirs
-  where
-    onlyFile :: FilePath -> IO Bool
-    onlyFile file = isRegularFile <$> getFileStatus (joinPath [baseDir, file])
+getNormalFiles config filesMap = Map.filter isRegularFile filesMap
 
 mkDotfile config baseDir file = Dotfile dt ds
   where

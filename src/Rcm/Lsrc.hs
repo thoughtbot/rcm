@@ -16,11 +16,6 @@ main = do
   let c = defaultConfig homedir hostname
       (config,files) = parseArgs c args
 
-  putStrLn "Config:"
-  print config
-  putStrLn "Files:"
-  print files
-
   dotfiles <- getDotfiles config files
 
   forM_ dotfiles $ \dotfile ->

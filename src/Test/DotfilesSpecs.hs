@@ -20,10 +20,10 @@ dotfilesSpecs = describe "Rcm.Private.Dotfiles" $ do
           let config = mkConfig {
                dotfilesDirs = [tmpDotfileDir], homeDir = tmpHomeDir }
               mkD = mkDotfile tmpHomeDir tmpDotfileDir
-              expected = [mkD (Just "gnupg") "gpg.conf"
-                         ,mkD (Just "cabal") "config"
-                         ,mkD Nothing "zshrc"
-                         ,mkD Nothing "vimrc"]
+              expected = [mkD (Just "gnupg") (Just "gnupg") "gpg.conf"
+                         ,mkD (Just "cabal") (Just "cabal") "config"
+                         ,mkD Nothing Nothing "zshrc"
+                         ,mkD Nothing Nothing "vimrc"]
           in getDotfiles config [] `shouldReturnWithSet` expected
 
     context "tagged dotfiles" $ do
@@ -32,10 +32,10 @@ dotfilesSpecs = describe "Rcm.Private.Dotfiles" $ do
           let config = mkConfig {
                dotfilesDirs = [tmpDotfileDir], homeDir = tmpHomeDir }
               mkD = mkDotfile tmpHomeDir tmpDotfileDir
-              expected = [mkD (Just "gnupg") "gpg.conf"
-                         ,mkD (Just "cabal") "config"
-                         ,mkD Nothing "zshrc"
-                         ,mkD Nothing "vimrc"]
+              expected = [mkD (Just "gnupg") (Just "gnupg") "gpg.conf"
+                         ,mkD (Just "cabal") (Just "cabal") "config"
+                         ,mkD Nothing Nothing "zshrc"
+                         ,mkD Nothing Nothing "vimrc"]
           in getDotfiles config [] `shouldReturnWithSet` expected
 
         it "produces dotfiles matching the tag when asked" $
@@ -43,11 +43,11 @@ dotfilesSpecs = describe "Rcm.Private.Dotfiles" $ do
                dotfilesDirs = [tmpDotfileDir], homeDir = tmpHomeDir,
                tags = ["ruby", "go"] }
               mkD = mkDotfile tmpHomeDir tmpDotfileDir
-              expected = [mkD (Just "gnupg") "gpg.conf"
-                         ,mkD (Just "cabal") "config"
-                         ,mkD (Just "tag-ruby") "irbrc"
-                         ,mkD Nothing "zshrc"
-                         ,mkD Nothing "vimrc"]
+              expected = [mkD (Just "gnupg") (Just "gnupg") "gpg.conf"
+                         ,mkD (Just "cabal") (Just "cabal") "config"
+                         ,mkD (Just "tag-ruby") Nothing "irbrc"
+                         ,mkD Nothing Nothing "zshrc"
+                         ,mkD Nothing Nothing "vimrc"]
           in getDotfiles config [] `shouldReturnWithSet` expected
 
     context "host-specific dotfiles" $ do
@@ -57,11 +57,11 @@ dotfilesSpecs = describe "Rcm.Private.Dotfiles" $ do
                dotfilesDirs = [tmpDotfileDir], homeDir = tmpHomeDir,
                hostname = "gibson" }
               mkD = mkDotfile tmpHomeDir tmpDotfileDir
-              expected = [mkD (Just "gnupg") "gpg.conf"
-                         ,mkD (Just "cabal") "config"
-                         ,mkD (Just "host-gibson") "rcrc"
-                         ,mkD Nothing "zshrc"
-                         ,mkD Nothing "vimrc"]
+              expected = [mkD (Just "gnupg") (Just "gnupg") "gpg.conf"
+                         ,mkD (Just "cabal") (Just "cabal") "config"
+                         ,mkD (Just "host-gibson") Nothing "rcrc"
+                         ,mkD Nothing Nothing "zshrc"
+                         ,mkD Nothing Nothing "vimrc"]
           in getDotfiles config [] `shouldReturnWithSet` expected
 
 mkConfig = Config {
@@ -120,17 +120,17 @@ createHostnameDotfiles hostname = do
 removeDotfiles =
   (removeDirectoryRecursive tmpDotfileDir) `orException` return ()
 
-mkDotfile homeDir baseDir path file = Dotfile {
+mkDotfile homeDir baseDir targetPath sourcePath file = Dotfile {
     dotfileTarget = DotfileTarget {
       dtBase = baseDir
-     ,dtPath = path
+     ,dtPath = targetPath
      ,dtFile = file
      ,dtTag  = Nothing
      ,dtHost = Nothing
      }
    ,dotfileSource = joinPath [homeDir, "." ++ pathAndFile]
   }
-  where pathAndFile = maybe file (\p -> joinPath [p, file]) path
+  where pathAndFile = maybe file (\p -> joinPath [p, file]) sourcePath
 
 shouldReturnWithSet :: (Show a, Ord a) => IO [a] -> [a] -> Expectation
 shouldReturnWithSet action expected =
