@@ -78,7 +78,10 @@ if [ $force_symlink -eq 1 ]; then
 fi
 
 for file in $files; do
-  [ -e "$PWD/$file" ] && file="$PWD/$file"
+  case "$file" in
+    /*) break;;
+    *) [ -e "$PWD/$file" ] && file="$PWD/$file"
+  esac
   dotless="$(de_dot "$file")"
   dest="$(destination "$DOTFILES_DIR" "$dotless" $in_host "$tag")"
   mkdir -p "$dest/$(dirname "$dotless")"
