@@ -65,9 +65,17 @@ dotfilesSpecs = describe "Rcm.Private.Dotfiles" $ do
                dotfilesDirs = [tmpDotfileDir], homeDir = tmpHomeDir,
                hostname = "gibson" }
               mkD = mkDotfile tmpHomeDir tmpDotfileDir
+              hostDotfile = Dotfile {
+                 dotfileTarget = DotfileTarget {
+                   dtBase = tmpDotfileDir
+                  ,dtPath = Nothing
+                  ,dtFile = "rcrc"
+                  ,dtTag = Nothing
+                  ,dtHost = Just "gibson" }
+                ,dotfileSource = joinPath [tmpHomeDir, ".rcrc"] }
               expected = [mkD (Just "gnupg") (Just "gnupg") "gpg.conf"
                          ,mkD (Just "cabal") (Just "cabal") "config"
-                         ,mkD (Just "host-gibson") Nothing "rcrc"
+                         ,hostDotfile
                          ,mkD Nothing Nothing "zshrc"
                          ,mkD Nothing Nothing "vimrc"]
           in getDotfiles config [] `shouldReturnWithSet` expected
