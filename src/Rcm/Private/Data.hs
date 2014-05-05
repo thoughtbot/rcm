@@ -30,7 +30,7 @@ data DotfileTarget = DotfileTarget {
  ,dtFile   :: FilePath
  ,dtTag    :: Maybe String
  ,dtHost   :: Maybe String
-} deriving (Eq, Ord, Show)
+} deriving (Eq, Ord)
 
 instance Show DotfileTarget where
   show dt = joinPath paths
