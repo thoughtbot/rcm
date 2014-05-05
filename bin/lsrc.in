@@ -227,8 +227,9 @@ handle_command_line() {
   local excludes=
   local includes=
   local symlink_dirs=
+  local hostname=
 
-  while getopts FVqvhI:x:S:t:d: opt; do
+  while getopts FVqvhI:x:B:S:t:d: opt; do
     case "$opt" in
       F) show_sigils=1;;
       h) show_help ;;
@@ -240,11 +241,13 @@ handle_command_line() {
       V) version=1;;
       x) excludes="$excludes $OPTARG";;
       S) symlink_dirs="$symlink_dirs $OPTARG";;
+      B) hostname="$OPTARG";;
     esac
   done
   shift $(($OPTIND-1))
 
   handle_common_flags lsrc $version $verbosity
+  HOSTNAME="$(determine_hostname "$hostname")"
   SHOW_SIGILS=$show_sigils
   TAGS="${arg_tags:-$TAGS}"
   DOTFILES_DIRS="${dotfiles_dirs:-$DOTFILES_DIRS}"

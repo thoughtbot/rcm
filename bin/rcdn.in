@@ -37,10 +37,12 @@ handle_command_line() {
   local excludes=
   local includes=
   local symlink_dirs=
+  local hostname=
 
-  while getopts VqvhI:x:S:t:d: opt; do
+  while getopts VqvhI:x:S:t:d:B: opt; do
     case "$opt" in
       h) show_help ;;
+      B) hostname="$OPTARG" ;;
       I) includes="$includes $OPTARG";;
       k) run_hooks=1 ;;
       K) run_hooks=0 ;;
@@ -56,6 +58,7 @@ handle_command_line() {
   shift $(($OPTIND-1))
 
   handle_common_flags rcup $version $verbosity
+  hostname="$(determine_hostname "$hostname")"
 
   tags="${arg_tags:-$TAGS}"
   dotfiles_dirs="${dotfiles_dirs:-$DOTFILES_DIRS}"
@@ -77,7 +80,7 @@ handle_command_line() {
   for symlink_dir in $symlink_dirs; do
     LS_ARGS="$LS_ARGS -S $symlink_dir"
   done
-  LS_ARGS="$LS_ARGS $files"
+  LS_ARGS="$LS_ARGS -B $hostname $files"
 
   $DEBUG "LS_ARGS: $LS_ARGS"
 }

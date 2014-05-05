@@ -9,6 +9,7 @@
 .Op Fl Cvqo
 .Op Fl t Ar tag
 .Op Fl d Ar dir
+.Op Fl B Ar hostname
 .Ar files ...
 .Sh DESCRIPTION
 This program adds files to your dotfiles directory then installs it
@@ -18,6 +19,9 @@ different source directory.
 It supports these options:
 .
 .Bl -tag -width "-d DIR"
+.It Fl B Ar HOSTNAME
+use the supplied hostname instead of computing one. Implies
+.Fl o .
 .It Fl C
 copy instead of symlinking when installing the rc file back into your
 home directory

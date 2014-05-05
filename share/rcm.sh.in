@@ -12,7 +12,6 @@ DEFAULT_DOTFILES_DIR="$HOME/.dotfiles"
 MKDIR=mkdir
 INSTALL=rcup
 ROOT_DIR="$HOME"
-HOSTNAME="$(hostname | sed -e 's/\..*//')"
 
 ln_v() {
   $VERBOSE "'$1' -> '$2'"
@@ -96,15 +95,16 @@ handle_common_flags() {
   fi
 }
 
-handle_metadata_flags() {
-  local arg_tags="$1"
-  local dotfiles_dirs="$2"
+determine_hostname() {
+  local name="$1"
 
-  : ${TAGS:=$arg_tags}
-  : ${DOTFILES_DIRS:=$dotfiles_dirs}
-
-  $DEBUG "TAGS: $TAGS"
-  $DEBUG "DOTFILES_DIRS: $DOTFILES_DIRS"
+  if [ -n "$name" ]; then
+    echo "$name"
+  elif [ -n "$HOSTNAME" ]; then
+    echo "$HOSTNAME"
+  else
+    echo "$(hostname | sed -e 's/\..*//')"
+  fi
 }
 
 run_hooks() {
