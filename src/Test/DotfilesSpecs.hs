@@ -43,9 +43,17 @@ dotfilesSpecs = describe "Rcm.Private.Dotfiles" $ do
                dotfilesDirs = [tmpDotfileDir], homeDir = tmpHomeDir,
                tags = ["ruby", "go"] }
               mkD = mkDotfile tmpHomeDir tmpDotfileDir
+              rubyDotfile = Dotfile {
+                 dotfileTarget = DotfileTarget {
+                   dtBase = tmpDotfileDir
+                  ,dtPath = Nothing
+                  ,dtFile = "irbrc"
+                  ,dtTag = Just "ruby"
+                  ,dtHost = Nothing }
+                ,dotfileSource = joinPath [tmpHomeDir, ".irbrc"] }
               expected = [mkD (Just "gnupg") (Just "gnupg") "gpg.conf"
                          ,mkD (Just "cabal") (Just "cabal") "config"
-                         ,mkD (Just "tag-ruby") Nothing "irbrc"
+                         ,rubyDotfile
                          ,mkD Nothing Nothing "zshrc"
                          ,mkD Nothing Nothing "vimrc"]
           in getDotfiles config [] `shouldReturnWithSet` expected

@@ -36,6 +36,6 @@ instance Show DotfileTarget where
   show dt = joinPath paths
     where
     paths = [dtBase dt] ++ tag ++ host ++ path ++ [dtFile dt]
-    tag = maybe [] return (dtTag dt)
-    host = maybe [] return (dtHost dt)
+    tag = maybe [] (return . (++) "tag-") (dtTag dt)
+    host = maybe [] (return . (++) "host-") (dtHost dt)
     path = maybe [] return (dtPath dt)
