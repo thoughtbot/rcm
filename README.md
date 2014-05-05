@@ -68,3 +68,4 @@ License
 -------
 
 Copyright 2013 Mike Burns. BSD license.
+Copyright 2014 thoughtbot. BSD license.
