@@ -47,9 +47,22 @@ preserving the full path then symlink
   > cd .nested/deeply
 
   $ mkrc -v another_example
+  > cd ../..
   Moving...
   '*/.nested/deeply/another_example' -> '*/.dotfiles/nested/deeply/another_example' (glob)
   Linking...
   '*/.dotfiles/nested/deeply/another_example' -> '*/.nested/deeply/another_example' (glob)
 
   $ assert_linked "$HOME/.nested/deeply/another_example" "$HOME/.dotfiles/nested/deeply/another_example"
+
+Making an absolute rc file
+
+  $ touch .an_example
+
+  $ mkrc -v $PWD/.an_example
+  Moving...
+  '*/.an_example' -> '*/.dotfiles/an_example' (glob)
+  Linking...
+  '*/.dotfiles/an_example' -> '*/.an_example' (glob)
+
+  $ assert_linked "$HOME/.an_example" "$HOME/.dotfiles/an_example"

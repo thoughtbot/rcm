@@ -79,8 +79,8 @@ fi
 
 for file in $files; do
   case "$file" in
-    /*) break;;
-    *) [ -e "$PWD/$file" ] && file="$PWD/$file"
+    /*) : ;;
+    *) [ -e "$PWD/$file" ] && file="$PWD/$file" ;;
   esac
   dotless="$(de_dot "$file")"
   dest="$(destination "$DOTFILES_DIR" "$dotless" $in_host "$tag")"
