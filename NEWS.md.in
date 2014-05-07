@@ -4,6 +4,8 @@ rcm (@PACKAGE_VERSION@) unstable; urgency=low
     directory. Verbose hidden files for lsrc(1) (Javier López).
   * Allow running mkrc on a relative file and preserve the
     path (Pablo Olmos de Aguilera Corradini).
+  * A flag (-B), and a variable for rcrc(5) (HOSTNAME), for changing the
+    hostname as rcm sees it (Mike Burns).
 
  -- Mike Burns <mburns@thoughtbot.com>  Fri, 28 Mar 2014 16:30:53 +0100
 

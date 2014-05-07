@@ -1,6 +1,6 @@
   $ . "$TESTDIR/helper.sh"
 
-mkrc should accept -r for a custom rcrc
+mkrc should accept a custom rcrc
 
   $ touch .example
   > mkdir .other-dotfiles

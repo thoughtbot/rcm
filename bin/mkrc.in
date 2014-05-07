@@ -9,6 +9,8 @@ destination() {
   local in_host=$3
   local tag="$4"
 
+  $DEBUG "destination $dotfiles_dir $dotless $in_host $tag"
+
   if [ "x$tag" != "x" ]; then
     echo "$dotfiles_dir/tag-$tag"
   elif [ $in_host = 1 ]; then
@@ -36,13 +38,15 @@ for DOTFILES_DIR in $DOTFILES_DIRS $DEFAULT_DOTFILES_DIR; do
 done
 
 tag=
+hostname=
 verbosity=0
 in_host=0
 version=0
 always_copy=0
 force_symlink=0
+install_args=
 
-while getopts ChSsVvqot:d: opt; do
+while getopts ChSsVvqot:d:B: opt; do
   case "$opt" in
     C) always_copy=1 ;;
     h) show_help ;;
@@ -54,11 +58,17 @@ while getopts ChSsVvqot:d: opt; do
     V) version=1 ;;
     S) force_symlink=1 ;;
     s) force_symlink=0 ;;
+    B)
+      in_host=1
+      hostname="$OPTARG"
+      install_args="-B $hostname"
+      ;;
   esac
 done
 shift $(($OPTIND-1))
 
 handle_common_flags mkrc $version $verbosity
+HOSTNAME="$(determine_hostname "$hostname")"
 
 if [ $in_host -eq 1 -a "x$tag" != "x" ]; then
   $ERROR 1 "Cannot specify both -o and -t"
@@ -88,5 +98,5 @@ for file in $files; do
   $PRINT "Moving..."
   mv_v "$file" "$dest/$dotless"
   $PRINT "Linking..."
-  $INSTALL -d "$DOTFILES_DIR" -t "${tag:--}" "$dotless"
+  $INSTALL -d "$DOTFILES_DIR" -t "${tag:--}" $install_args "$dotless"
 done

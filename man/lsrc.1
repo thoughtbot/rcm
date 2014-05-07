@@ -12,6 +12,7 @@
 .Op Fl t Ar tag
 .Op Fl x Ar excl_pat
 .Op Fl N Ar excl_pat
+.Op Fl B Ar hostname
 .Op files ...
 .Sh DESCRIPTION
 This program lists all configuration files, both the sources in the
@@ -26,6 +27,11 @@ section, for details on the directory layout.
 It supports these options:
 .
 .Bl -tag -width "-I excl_pat"
+.It Fl B Ar HOSTNAME
+treat
+.Pa host-HOSTNAME
+as the host-specific directory instead of computing it based on the
+computer's hostname
 .It Fl d Ar DIR
 list dotfiles from the DIR. This can be specified multiple times.
 .

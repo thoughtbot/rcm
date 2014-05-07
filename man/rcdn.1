@@ -7,6 +7,7 @@
 .Sh SYNOPSIS
 .Nm rcdn
 .Op Fl kKvq
+.Op Fl B Ar hostname
 .Op Fl d Ar dir
 .Op Fl I Ar excl_pat
 .Op Fl t Ar tag
@@ -43,6 +44,10 @@ These hooks are run each time
 is run and therefore must be idempotent.
 .
 .Bl -tag -width "-I EXCL_PAT"
+.It Fl B Ar HOSTNAME
+treat
+.Pa host-HOSTNAME
+as the host-specific directory instead of computing it
 .It Fl d Ar DIR
 remove rc files from the
 .Ar DIR .

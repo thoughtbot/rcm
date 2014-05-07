@@ -44,6 +44,12 @@ explained in detail in
 under the section
 .Sx EXCLUDE PATTERN .
 .
+.It Va HOSTNAME
+the hostname for this computer. This is normally computed using the
+.Xr hostname 1
+command, but this command is non-standard and can prove unreliable. The
+.Va HOSTNAME
+variable forces a known hostname.
 .It Va TAGS
 the default tags.
 .
@@ -62,6 +68,7 @@ under the section
 .Dl COPY_ALWAYS="*"
 .Dl DOTFILES_DIRS="/home/mike/.dotfiles /usr/share/dotfiles"
 .Dl EXCLUDES="irbrc *:*emacs* dotfiles:python*"
+.Dl HOSTNAME="eggplant"
 .Dl TAGS="freebsd development email git laptop gmail notmuch"
 .Dl SYMLINK_DIRS="zprezto"
 .Sh SEE ALSO

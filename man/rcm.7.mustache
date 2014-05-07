@@ -213,6 +213,13 @@ dotfile directories listed in there are often specific to a single
 machine.
 .Pp
 .Dl mkrc -o .rcrc
+.Pp
+If your hostname is difficult to compute, or you otherwise want to use a
+different hostname, you can use the
+.Fl B
+flag.
+.Pp
+.Dl mkrc -B eggplant .rcrc
 .
 .Sh RATIONALE
 The rcm suite was built as an abstraction over the shell, Ruby, Python,

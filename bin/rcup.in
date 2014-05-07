@@ -104,10 +104,12 @@ handle_command_line() {
   local includes=
   local always_copy=0
   local symlink_dirs=
+  local hostname=
   REPLACE_ALL=0
 
-  while getopts CVqvfhikKI:x:S:t:d: opt; do
+  while getopts CVqvfhikKI:x:S:t:d:B: opt; do
     case "$opt" in
+      B) hostname="$OPTARG" ;;
       C) always_copy=1 ;;
       d) dotfiles_dirs="$dotfiles_dirs $OPTARG" ;;
       f) REPLACE_ALL=1 ;;
@@ -132,6 +134,7 @@ handle_command_line() {
   fi
 
   handle_common_flags rcup $version $verbosity
+  hostname="$(determine_hostname "$hostname")"
 
   tags="${arg_tags:-$TAGS}"
   DOTFILES_DIRS="${dotfiles_dirs:-$DOTFILES_DIRS}"
@@ -153,7 +156,7 @@ handle_command_line() {
   for symlink_dir in $symlink_dirs; do
     LS_ARGS="$LS_ARGS -S $symlink_dir"
   done
-  LS_ARGS="$LS_ARGS $files"
+  LS_ARGS="$LS_ARGS -B $hostname $files"
 
   $DEBUG "LS_ARGS: $LS_ARGS"
 }
