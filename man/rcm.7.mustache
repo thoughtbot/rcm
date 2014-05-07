@@ -220,6 +220,10 @@ different hostname, you can use the
 flag.
 .Pp
 .Dl mkrc -B eggplant .rcrc
+.Pp
+OS X users should see the
+.Sx BUGS
+section for more details.
 .
 .Sh RATIONALE
 The rcm suite was built as an abstraction over the shell, Ruby, Python,
@@ -246,6 +250,16 @@ is maintained by
 .An "Mike Burns" Aq Mt mburns@thoughtbot.com
 and
 .Lk http://thoughtbot.se thoughtbot
+.Sh BUGS
+For OS X systems, we strongly encourage the use of the
+.Va HOSTNAME
+variable in your
+.Xr rcrc 5 .
+We use the
+.Xr hostname 1
+program to determine the unique identifier for the host. This program is
+not specified by POSIX and can vary by system. On OS X the hostname is
+unpredictable, and can even change as part of the DHCP handshake.
 .Sh CONTRIBUTORS
 .An -split
 {{#contributors}}
