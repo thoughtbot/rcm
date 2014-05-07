@@ -10,19 +10,16 @@ import Rcm.Private.Rcrc (readRcrc, parseRcrc)
 
 rcrcSpecs = describe "Rcm.Private.Rcrc" $ do
 
-  homedir <- mkdtemp "rcm"
-
   context "readRcrc" $ do
-    around (withHomeAndRcrc homedir) $ do
-      it "produces the contents of the .rcrc" $
-        readRcrc homedir `shouldReturn` sampleRcrc
+    it "produces the contents of the .rcrc" $
+      let test = do
+          homedir <- mkdtemp "rcm"
+          writeFile (joinPath [homedir, ".rcrc"]) sampleRcrc
+          readRcrc homedir in
 
+      test `shouldReturn` sampleRcrc
 
-withHomeAndRcrc homedir test = do
-  writeFile (joinPath [homedir, ".rcrc"]) sampleRcrc
-  test
-
-sampleRcrc = intercalate '\n' configs
+sampleRcrc = intercalate "\n" configs
   where
     configs = [
        "COPY_ALWAYS=\"ssh/id_* weechat/* netrc\""
