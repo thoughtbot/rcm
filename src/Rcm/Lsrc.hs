@@ -15,6 +15,7 @@ main = do
   homedir <- getEnv "HOME"
   hostname <- getHostName
   rcrc <- readRcrc homedir
+
   let c = defaultConfig homedir hostname
       c' = parseRcrc rcrc c
       (config,files) = parseArgs c' args

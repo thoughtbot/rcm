@@ -9,4 +9,4 @@ readRcrc homedir = (readFile $ joinPath [homedir, ".rcrc"]) `catch` handler
     handler :: IOException -> IO String
     handler _ = return ""
 
-parseRcrc = undefined
+parseRcrc rcrc config = undefined
