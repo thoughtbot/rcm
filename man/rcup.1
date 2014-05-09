@@ -6,10 +6,11 @@
 .Nd update and install dotfiles managed by rcm
 .Sh SYNOPSIS
 .Nm rcup
-.Op Fl CfikKqv
+.Op Fl CfhiKkqVv
 .Op Fl B Ar hostname
 .Op Fl d Ar dir
 .Op Fl I Ar excl_pat
+.Op Fl S Ar excl_pat
 .Op Fl t Ar tag
 .Op Fl x Ar excl_pat
 .Op Ar files ...
@@ -40,10 +41,8 @@ This can be specified multiple times.
 if the rc file already exists in your home directory but does not match
 the file in your dotfiles directory, remove the rc file then create the
 symlink
-.It Fl i
-if the rc file already exists in your home directory but does not match
-the file in your dotfiles directory, prompt for how to handle it. This
-is the default
+.It Fl h
+show usage instructions.
 .It Fl I Ar EXCL_PAT
 install rc files that match
 .Ar EXCL_PAT
@@ -55,12 +54,16 @@ This can be repeated with additional patterns. See
 .Xr lsrc 1 ,
 .Sx EXCLUDE PATTERN ,
 for more details.
+.It Fl i
+if the rc file already exists in your home directory but does not match
+the file in your dotfiles directory, prompt for how to handle it. This
+is the default
+.It Fl K
+skip pre- and post-hooks
 .It Fl k
 run pre- and post-hooks (see
 .Sx DIRECTORY LAYOUT
 for more details on hooks). This is the default.
-.It Fl K
-skip pre- and post-hooks
 .It Fl S Ar EXCL_PAT
 any rc file that matches
 .Ar EXCL_PAT
@@ -71,6 +74,8 @@ install dotfiles according to
 .Ar TAG
 .It Fl q
 decrease verbosity
+.It Fl V
+show the version number.
 .It Fl v
 increase verbosity. This can be repeated for extra verbosity.
 .It Fl x Ar EXCL_PAT
