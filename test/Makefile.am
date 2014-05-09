@@ -1,4 +1,4 @@
-TESTS = \
+dist_TESTS = \
 	lsrc-dotfiles-dirs.t \
 	lsrc-excludes.t \
 	lsrc-hostname.t \
