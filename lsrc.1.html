@@ -34,13 +34,17 @@ LSRC(1)</td>
 <td>
 lsrc</td>
 <td>
-&#91;<span class="opt"><b class="flag">&#45;Fvq</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;d</b> <i class="arg">dir</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;I</b> <i class="arg">excl_pat</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;t</b> <i class="arg">tag</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;x</b> <i class="arg">excl_pat</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;N</b> <i class="arg">excl_pat</i></span>&#93; &#91;<span class="opt">files ...</span>&#93;</td>
+&#91;<span class="opt"><b class="flag">&#45;FhqVv</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;B</b> <i class="arg">hostname</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;d</b> <i class="arg">dir</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;I</b> <i class="arg">excl_pat</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;S</b> <i class="arg">excl_pat</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;t</b> <i class="arg">tag</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;x</b> <i class="arg">excl_pat</i></span>&#93; &#91;<span class="opt">files ...</span>&#93;</td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="section">
 <h1 id="x4445534352495054494f4e">DESCRIPTION</h1> This program lists all configuration files, both the sources in the dotfiles directories and the destinations in your home directory. See <a class="link-man" href="rcup.1.html">rcup(1)</a>, the <i class="link-sec"><a class="link-sec" href="#x4449524543544f5259204c41594f5554">DIRECTORY LAYOUT</a></i> section, for details on the directory layout. It supports these options:<dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;B</b> <i class="arg">HOSTNAME</i></dt>
+<dd class="list-tag" style="margin-left: 11.00ex;">
+treat <i class="file">host-HOSTNAME</i> as the host-specific directory instead of computing it based on the computer's hostname</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;d</b> <i class="arg">DIR</i></dt>
 <dd class="list-tag" style="margin-left: 11.00ex;">
@@ -49,6 +53,10 @@ list dotfiles from the DIR. This can be specified multiple times.</dd>
 <b class="flag">&#45;F</b></dt>
 <dd class="list-tag" style="margin-left: 11.00ex;">
 show symbols next to each file indicating status information. Supported symbols are <code class="lit">@</code> which indicates that the file is a symlink, <code class="lit">$</code> which indicates it's a symlinked directory, and <code class="lit">X</code> to indicate that the file is a copy. More details on copied files and symlinked directories can be found in <a class="link-man" href="rcrc.5.html">rcrc(5)</a> under the documentation on <b class="var">COPY_ALWAYS</b> and <b class="var">SYMLINK_DIRS</b>, respectively.</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;h</b></dt>
+<dd class="list-tag" style="margin-left: 11.00ex;">
+show usage instructions.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;I</b> <i class="arg">excl_pat</i></dt>
 <dd class="list-tag" style="margin-left: 11.00ex;">
@@ -61,6 +69,10 @@ symlink the directories that match the given pattern. See <i class="link-sec"><a
 <b class="flag">&#45;t</b> <i class="arg">TAG</i></dt>
 <dd class="list-tag" style="margin-left: 11.00ex;">
 list dotfiles according to TAG</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;V</b></dt>
+<dd class="list-tag" style="margin-left: 11.00ex;">
+show the version number.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;v</b></dt>
 <dd class="list-tag" style="margin-left: 11.00ex;">

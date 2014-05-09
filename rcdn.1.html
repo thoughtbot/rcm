@@ -34,7 +34,7 @@ RCDN(1)</td>
 <td>
 rcdn</td>
 <td>
-&#91;<span class="opt"><b class="flag">&#45;kKvq</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;d</b> <i class="arg">dir</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;I</b> <i class="arg">excl_pat</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;t</b> <i class="arg">tag</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;x</b> <i class="arg">excl_pat</i></span>&#93; &#91;<span class="opt"><i class="arg">files ...</i></span>&#93;</td>
+&#91;<span class="opt"><b class="flag">&#45;hqVv</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;B</b> <i class="arg">hostname</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;d</b> <i class="arg">dir</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;I</b> <i class="arg">excl_pat</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;S</b> <i class="arg">excl_pat</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;t</b> <i class="arg">tag</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;x</b> <i class="arg">excl_pat</i></span>&#93; &#91;<span class="opt"><i class="arg">files ...</i></span>&#93;</td>
 </tr>
 </tbody>
 </table>
@@ -44,21 +44,29 @@ rcdn</td>
 The files that are removed are symlinks. However, the <b class="var">COPY_ALWAYS</b> setting in <a class="link-man" href="rcrc.5.html">rcrc(5)</a> modifies this. If a rc file is not a symlink but an ancestor directory is, that directory is removed. If a rc file is not a symlink but is listed in <b class="var">COPY_ALWAYS</b> the file is removed.<p>
 The <b class="name">rcdn</b> program will run hooks before and after removing files, if these hooks exist. Hooks are executable programs inside the dotfiles directory, with the following names: <i class="file">hooks/pre-down and</i> <i class="file">hooks/post-down</i>. These hooks are run each time <b class="name">rcdn</b> is run and therefore must be idempotent.<dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
 <dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;B</b> <i class="arg">HOSTNAME</i></dt>
+<dd class="list-tag" style="margin-left: 11.00ex;">
+treat <i class="file">host-HOSTNAME</i> as the host-specific directory instead of computing it</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;d</b> <i class="arg">DIR</i></dt>
 <dd class="list-tag" style="margin-left: 11.00ex;">
 remove rc files from the <i class="arg">DIR</i>. This can be specified multiple times.</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;h</b></dt>
+<dd class="list-tag" style="margin-left: 11.00ex;">
+show usage instructions.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;I</b> <i class="arg">EXCL_PAT</i></dt>
 <dd class="list-tag" style="margin-left: 11.00ex;">
 remove rc files that match <i class="arg">EXCL_PAT</i> despite being excluded by the <b class="flag">&#45;x</b> flag or a setting in <a class="link-man" href="rcrc.5.html">rcrc(5)</a>. This can be repeated with additional patterns. See <a class="link-man" href="lsrc.1.html">lsrc(1)</a>, <i class="link-sec"><a class="link-sec" href="#x4558434c554445205041545445524e">EXCLUDE PATTERN</a></i>, for more details.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
-<b class="flag">&#45;k</b></dt>
-<dd class="list-tag" style="margin-left: 11.00ex;">
-run pre- and post-hooks. This is the default.</dd>
-<dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;K</b></dt>
 <dd class="list-tag" style="margin-left: 11.00ex;">
 skip pre- and post-hooks</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;k</b></dt>
+<dd class="list-tag" style="margin-left: 11.00ex;">
+run pre- and post-hooks. This is the default.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;q</b></dt>
 <dd class="list-tag" style="margin-left: 11.00ex;">
@@ -75,6 +83,10 @@ remove dotfiles according to <i class="arg">TAG</i></dd>
 <b class="flag">&#45;v</b></dt>
 <dd class="list-tag" style="margin-left: 11.00ex;">
 increase verbosity. This can be repeated for extra verbosity.</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;V</b></dt>
+<dd class="list-tag" style="margin-left: 11.00ex;">
+show the version number.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;x</b> <i class="arg">EXCL_PAT</i></dt>
 <dd class="list-tag" style="margin-left: 11.00ex;">

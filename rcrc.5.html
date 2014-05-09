@@ -43,6 +43,10 @@ the source directories for dotfiles. The first in the list is the canonical sour
 <dd class="list-tag" style="margin-left: 13.00ex;">
 a space-separated list of exclude patterns. Exclude patterns are explained in detail in <a class="link-man" href="lsrc.1.html">lsrc(1)</a> under the section <i class="link-sec"><a class="link-sec" href="#x4558434c554445205041545445524e">EXCLUDE PATTERN</a></i>.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
+<b class="var">HOSTNAME</b></dt>
+<dd class="list-tag" style="margin-left: 13.00ex;">
+the hostname for this computer. This is normally computed using the <a class="link-man" href="hostname.1.html">hostname(1)</a> command, but this command is non-standard and can prove unreliable. The <b class="var">HOSTNAME</b> variable forces a known hostname.</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
 <b class="var">TAGS</b></dt>
 <dd class="list-tag" style="margin-left: 13.00ex;">
 the default tags.</dd>
@@ -70,6 +74,10 @@ a space-separated list of patterns. Directories matching a pattern are symlinked
 <blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
 <div class="display">
 <code class="lit">EXCLUDES="irbrc *:*emacs* dotfiles:python*"</code></div>
+</blockquote>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">HOSTNAME="eggplant"</code></div>
 </blockquote>
 <blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
 <div class="display">

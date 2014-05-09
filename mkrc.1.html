@@ -34,13 +34,17 @@ MKRC(1)</td>
 <td>
 mkrc</td>
 <td>
-&#91;<span class="opt"><b class="flag">&#45;Cvqo</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;t</b> <i class="arg">tag</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;d</b> <i class="arg">dir</i></span>&#93; <i class="arg">files ...</i></td>
+&#91;<span class="opt"><b class="flag">&#45;ChoqSsVv</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;t</b> <i class="arg">tag</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;d</b> <i class="arg">dir</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;B</b> <i class="arg">hostname</i></span>&#93; <i class="arg">files ...</i></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="section">
 <h1 id="x4445534352495054494f4e">DESCRIPTION</h1> This program adds files to your dotfiles directory then installs it back into your home directory. It can install files under a tag or different source directory. It supports these options:<dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;B</b> <i class="arg">HOSTNAME</i></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+use the supplied hostname instead of computing one. Implies <b class="flag">&#45;o</b>.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;C</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
@@ -50,6 +54,10 @@ copy instead of symlinking when installing the rc file back into your home direc
 <dd class="list-tag" style="margin-left: 6.00ex;">
 install dotfiles under the specified directory. This can be specified multiple times.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;h</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+show usage instructions.</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;o</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
 install dotfiles into the host-specific directory</dd>
@@ -58,13 +66,13 @@ install dotfiles into the host-specific directory</dd>
 <dd class="list-tag" style="margin-left: 6.00ex;">
 decrease verbosity</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
-<b class="flag">&#45;s</b></dt>
-<dd class="list-tag" style="margin-left: 6.00ex;">
-if the rc file is a file, symlink it; otherwise, make a directory structure as described in <a class="link-man" href="rcup.1.html">rcup(1)</a> in the section <i class="link-sec"><a class="link-sec" href="#x414c474f524954484d">ALGORITHM</a></i>. This is the default.</dd>
-<dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;S</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
 treat the specified rc files as files to be symlinked, even if they are directories</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;s</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+if the rc file is a file, symlink it; otherwise, make a directory structure as described in <a class="link-man" href="rcup.1.html">rcup(1)</a> in the section <i class="link-sec"><a class="link-sec" href="#x414c474f524954484d">ALGORITHM</a></i>. This is the default.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;t</b> <i class="arg">TAG</i></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
@@ -73,6 +81,10 @@ install dotfiles according to tag</dd>
 <b class="flag">&#45;v</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
 increase verbosity. This can be repeated for extra verbosity.</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;V</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+show the version number.</dd>
 </dl>
 </div>
 <div class="section">

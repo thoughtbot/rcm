@@ -34,7 +34,7 @@ RCUP(1)</td>
 <td>
 rcup</td>
 <td>
-&#91;<span class="opt"><b class="flag">&#45;CfikKqv</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;d</b> <i class="arg">dir</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;I</b> <i class="arg">excl_pat</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;t</b> <i class="arg">tag</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;x</b> <i class="arg">excl_pat</i></span>&#93; &#91;<span class="opt"><i class="arg">files ...</i></span>&#93;</td>
+&#91;<span class="opt"><b class="flag">&#45;CfhiKkqVv</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;B</b> <i class="arg">hostname</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;d</b> <i class="arg">dir</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;I</b> <i class="arg">excl_pat</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;S</b> <i class="arg">excl_pat</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;t</b> <i class="arg">tag</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;x</b> <i class="arg">excl_pat</i></span>&#93; &#91;<span class="opt"><i class="arg">files ...</i></span>&#93;</td>
 </tr>
 </tbody>
 </table>
@@ -43,6 +43,10 @@ rcup</td>
 <h1 id="x4445534352495054494f4e">DESCRIPTION</h1> This is a program to update and install personal dotfiles. These dotfiles are managed in a separate directory. Use <b class="name">rcup</b> to install files from your dotfiles directories or from host- or tag-specific directories within.<p>
 See <i class="link-sec"><a class="link-sec" href="#x4449524543544f5259204c41594f5554">DIRECTORY LAYOUT</a></i> for details on the directory layout.<p>
 It supports these options:<dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;B</b> <i class="arg">HOSTNAME</i></dt>
+<dd class="list-tag" style="margin-left: 11.00ex;">
+treat <i class="file">host-HOSTNAME</i> as the host-specific directory instead of computing it</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;C</b></dt>
 <dd class="list-tag" style="margin-left: 11.00ex;">
@@ -56,21 +60,25 @@ install dotfiles from the <i class="arg">DIR</i>. This can be specified multiple
 <dd class="list-tag" style="margin-left: 11.00ex;">
 if the rc file already exists in your home directory but does not match the file in your dotfiles directory, remove the rc file then create the symlink</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
-<b class="flag">&#45;i</b></dt>
+<b class="flag">&#45;h</b></dt>
 <dd class="list-tag" style="margin-left: 11.00ex;">
-if the rc file already exists in your home directory but does not match the file in your dotfiles directory, prompt for how to handle it. This is the default</dd>
+show usage instructions.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;I</b> <i class="arg">EXCL_PAT</i></dt>
 <dd class="list-tag" style="margin-left: 11.00ex;">
 install rc files that match <i class="arg">EXCL_PAT</i> despite being excluded by the <b class="flag">&#45;x</b> flag or a setting in <a class="link-man" href="rcrc.5.html">rcrc(5)</a>. This can be repeated with additional patterns. See <a class="link-man" href="lsrc.1.html">lsrc(1)</a>, <i class="link-sec"><a class="link-sec" href="#x4558434c554445205041545445524e">EXCLUDE PATTERN</a></i>, for more details.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
-<b class="flag">&#45;k</b></dt>
+<b class="flag">&#45;i</b></dt>
 <dd class="list-tag" style="margin-left: 11.00ex;">
-run pre- and post-hooks (see <i class="link-sec"><a class="link-sec" href="#x4449524543544f5259204c41594f5554">DIRECTORY LAYOUT</a></i> for more details on hooks). This is the default.</dd>
+if the rc file already exists in your home directory but does not match the file in your dotfiles directory, prompt for how to handle it. This is the default</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;K</b></dt>
 <dd class="list-tag" style="margin-left: 11.00ex;">
 skip pre- and post-hooks</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;k</b></dt>
+<dd class="list-tag" style="margin-left: 11.00ex;">
+run pre- and post-hooks (see <i class="link-sec"><a class="link-sec" href="#x4449524543544f5259204c41594f5554">DIRECTORY LAYOUT</a></i> for more details on hooks). This is the default.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;S</b> <i class="arg">EXCL_PAT</i></dt>
 <dd class="list-tag" style="margin-left: 11.00ex;">
@@ -83,6 +91,10 @@ install dotfiles according to <i class="arg">TAG</i></dd>
 <b class="flag">&#45;q</b></dt>
 <dd class="list-tag" style="margin-left: 11.00ex;">
 decrease verbosity</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;V</b></dt>
+<dd class="list-tag" style="margin-left: 11.00ex;">
+show the version number.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;v</b></dt>
 <dd class="list-tag" style="margin-left: 11.00ex;">
