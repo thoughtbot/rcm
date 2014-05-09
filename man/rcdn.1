@@ -6,10 +6,11 @@
 .Nd remove dotfiles as managed by rcm
 .Sh SYNOPSIS
 .Nm rcdn
-.Op Fl kKvq
+.Op Fl hqVv
 .Op Fl B Ar hostname
 .Op Fl d Ar dir
 .Op Fl I Ar excl_pat
+.Op Fl S Ar excl_pat
 .Op Fl t Ar tag
 .Op Fl x Ar excl_pat
 .Op Ar files ...
@@ -52,6 +53,8 @@ as the host-specific directory instead of computing it
 remove rc files from the
 .Ar DIR .
 This can be specified multiple times.
+.It Fl h
+show usage instructions.
 .It Fl I Ar EXCL_PAT
 remove rc files that match
 .Ar EXCL_PAT
@@ -63,10 +66,10 @@ This can be repeated with additional patterns. See
 .Xr lsrc 1 ,
 .Sx EXCLUDE PATTERN ,
 for more details.
-.It Fl k
-run pre- and post-hooks. This is the default.
 .It Fl K
 skip pre- and post-hooks
+.It Fl k
+run pre- and post-hooks. This is the default.
 .It Fl q
 decrease verbosity
 .It Fl S Ar EXCL_PAT
@@ -79,6 +82,8 @@ remove dotfiles according to
 .Ar TAG
 .It Fl v
 increase verbosity. This can be repeated for extra verbosity.
+.It Fl V
+show the version number.
 .It Fl x Ar EXCL_PAT
 do not remove rc files that match
 .Ar EXCL_PAT .
