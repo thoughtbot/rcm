@@ -17,8 +17,8 @@ Arch Linux:
 
 Debian-based (including Ubuntu):
 
-    wget https://thoughtbot.github.io/rcm/debs/rcm_1.2.2-2_all.deb
-    sudo dpkg -i rcm_1.2.2-2_all.deb
+    wget https://thoughtbot.github.io/rcm/debs/rcm_1.2.3-1_all.deb
+    sudo dpkg -i rcm_1.2.3-1_all.deb
 
 openSUSE/RHEL/CentOS: [instructions](http://software.opensuse.org/download.html?project=utilities&package=rcm)
 
@@ -37,9 +37,9 @@ Elsewhere:
 
 This uses the standard GNU autotools, so it's the normal dance:
 
-    wget https://thoughtbot.github.io/rcm/dist/rcm-1.2.2.tar.gz && \
-    tar -xvf rcm-1.2.2.tar.gz && \
-    cd rcm-1.2.2 && \
+    wget https://thoughtbot.github.io/rcm/dist/rcm-1.2.3.tar.gz && \
+    tar -xvf rcm-1.2.3.tar.gz && \
+    cd rcm-1.2.3 && \
 
     ./configure && \
     make && \
