@@ -6,13 +6,13 @@
 .Nd show dotfiles files managed by rcm
 .Sh SYNOPSIS
 .Nm lsrc
-.Op Fl Fvq
+.Op Fl FhqVv
+.Op Fl B Ar hostname
 .Op Fl d Ar dir
 .Op Fl I Ar excl_pat
+.Op Fl S Ar excl_pat
 .Op Fl t Ar tag
 .Op Fl x Ar excl_pat
-.Op Fl N Ar excl_pat
-.Op Fl B Ar hostname
 .Op files ...
 .Sh DESCRIPTION
 This program lists all configuration files, both the sources in the
@@ -52,6 +52,9 @@ and
 .Va SYMLINK_DIRS ,
 respectively.
 .
+.It Fl h
+show usage instructions.
+.
 .It Fl I Ar excl_pat
 include the files that match the given pattern. This is applied after
 any
@@ -71,6 +74,9 @@ pattern to prevent the shell from swallowing the glob.
 .
 .It Fl t Ar TAG
 list dotfiles according to TAG
+.
+.It Fl V
+show the version number.
 .
 .It Fl v
 increase verbosity. This can be repeated for extra verbosity.
