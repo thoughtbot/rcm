@@ -1,3 +1,9 @@
+rcm (1.2.3-1) unstable; urgency=medium
+
+  * New upstream release
+
+ -- Mike Burns <mburns@thoughtbot.com>  Fri, 09 May 2014 14:30:57 +0200
+
 rcm (1.2.2-2) unstable; urgency=medium
 
   * New upstream release

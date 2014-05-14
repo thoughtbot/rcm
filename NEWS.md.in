@@ -1,5 +1,9 @@
 rcm (@PACKAGE_VERSION@) unstable; urgency=low
 
+ -- Mike Burns <mburns@thoughtbot.com>  Fri, 09 May 2014 14:17:49 +0200
+
+rcm (1.2.3) unstable; urgency=low
+
   * BUGFIX: Allow files with the same prefix name in the same
     directory (Javier López).
   * BUGFIX: Pick up hooks that are executable by the user or by the
