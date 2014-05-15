@@ -5,6 +5,8 @@ module Rcm.Lsrc where
 import Control.Monad (forM_)
 import System.Environment (getArgs, getEnv)
 import Network.BSD (getHostName)
+import Control.Arrow ((&&&))
+import Data.List (intercalate)
 import Rcm.Private.Lsrc
 import Rcm.Private.Rcrc
 import Rcm.Private.Data
@@ -22,7 +24,9 @@ main = do
 
   dotfiles <- getDotfiles config files
 
-  forM_ dotfiles $ \dotfile ->
-    putStrLn $ (dotfileSource dotfile) ++ ":" ++ (show $ dotfileTarget dotfile)
+  forM_ dotfiles $
+    putStrLn .
+      uncurry (\a b -> a ++ ":" ++ (show b)) .
+      (dotfileSource &&& dotfileTarget)
 
   return ()
