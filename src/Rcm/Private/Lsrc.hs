@@ -1,6 +1,7 @@
 module Rcm.Private.Lsrc where
 
 import System.FilePath (joinPath)
+import Data.List (isPrefixOf)
 import Rcm.Private.Data
 import Rcm.GetOpt (getOpt, Flag)
 
@@ -35,7 +36,11 @@ initialConfig homeDir hostname = Config {
   ,hostname = hostname
 }
 
-defaultConfig homeDir config
+defaultConfig homeDir pwd config
   | null $ dotfilesDirs config =
       config { dotfilesDirs = [joinPath [homeDir, ".dotfiles"]] }
-  | otherwise = config
+  | otherwise = config { dotfilesDirs = map (absolutize pwd) (dotfilesDirs config) }
+  where
+    absolutize pwd path
+      | "/" `isPrefixOf` path = path
+      | otherwise = joinPath [pwd, path]

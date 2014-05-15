@@ -31,11 +31,15 @@ lsrcSpecs = describe "Rcm.Private.Lsrc" $ do
   context "defaultConfig" $ do
     it "sets a default dotfiles directory" $
       let c = initialConfig "/tmp" "zeroCool" in
-        dotfilesDirs (defaultConfig "/tmp" c) `shouldBe` ["/tmp/.dotfiles"]
+        dotfilesDirs (defaultConfig "/tmp" "/" c) `shouldBe` ["/tmp/.dotfiles"]
 
     it "only sets a dotfiles directory if none are set" $
       let c = (initialConfig "/tmp" "h") { dotfilesDirs = ["/var/tmp"] } in
-        dotfilesDirs (defaultConfig "/tmp" c) `shouldBe` ["/var/tmp"]
+        dotfilesDirs (defaultConfig "/tmp" "/" c) `shouldBe` ["/var/tmp"]
+
+    it "makes all directories absolute" $
+      let c = (initialConfig "/tmp" "h") { dotfilesDirs = ["a"] } in
+        dotfilesDirs (defaultConfig "/tmp" "/var" c) `shouldBe` ["/var/a"]
 
   context "handleOpt" $ do
     it "augments Configs when the opt takes an argument" $ property $
