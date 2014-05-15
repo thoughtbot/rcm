@@ -20,7 +20,7 @@ main = do
 
   let c = defaultConfig homedir hostname
       c' = parseRcrc rcrc c
-      (config,files) = parseArgs c' args
+      (config,files) = parseArgs args c'
 
   dotfiles <- getDotfiles config files
 

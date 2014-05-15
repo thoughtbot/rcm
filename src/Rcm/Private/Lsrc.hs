@@ -4,8 +4,8 @@ import System.FilePath (joinPath)
 import Rcm.Private.Data
 import Rcm.GetOpt (getOpt, Flag)
 
-parseArgs :: Config -> [String] -> (Config, [String])
-parseArgs config args = (foldr handleOpt config flags, files)
+parseArgs :: [String] -> Config -> (Config, [String])
+parseArgs args config = (foldr handleOpt config flags, files)
   where (flags, files) = getOpt "FVqvhI:x:S:t:d:" args
 
 handleOpt :: Flag -> Config -> Config

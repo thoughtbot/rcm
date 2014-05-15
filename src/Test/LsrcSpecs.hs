@@ -15,11 +15,11 @@ lsrcSpecs = describe "Rcm.Private.Lsrc" $ do
   context "parseArgs" $ do
     it "turns sigils on when passed -F" $
       let c = mkConfig { showSigils = False } in
-      parseArgs c ["-F"] `shouldBe` (c { showSigils = True }, [])
+      parseArgs ["-F"] c `shouldBe` (c { showSigils = True }, [])
 
     it "adds the inclusion pattern when passed -I" $
       let c = mkConfig { includes = [] } in
-      parseArgs c ["-I", "pat"] `shouldBe` (c { includes = ["pat"] }, [])
+      parseArgs ["-I", "pat"] c `shouldBe` (c { includes = ["pat"] }, [])
 
   context "defaultConfig" $ do
     it "sets a default dotfiles directory" $
