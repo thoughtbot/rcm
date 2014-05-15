@@ -50,7 +50,7 @@ rcrcSpecs = describe "Rcm.Private.Rcrc" $ do
             ,dotfilesDirs = ["/home/mike/.dotfiles", "/usr/share/dotfiles"]
             ,showVersion = False
             ,excludes = ["irbrc", "*:*emacs*", "dotfiles:python*"]
-            ,symlinkDirs = ["zpretzo"]
+            ,symlinkDirs = ["zprezto"]
             ,homeDir = "/tmp"
             ,hostname = "baz"
             }
