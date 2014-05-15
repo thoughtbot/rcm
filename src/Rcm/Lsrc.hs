@@ -23,11 +23,23 @@ main = do
       (c'',files) = parseArgs args c'
       config = defaultConfig homedir c''
 
-  dotfiles <- getDotfiles config files
+  if showHelp config then do
+    putStrLn "Usage: lsrc [-FVqvh] [-I EXCL_PAT] [-x EXCL_PAT] [-N EXCL_PAT ] [-t TAG] [-d DOT_DIR]"
+    putStrLn "see lsrc(1) and rcm(5) for more details"
+  else if showVersion config then do
+    putStrLn "lsrc (rcm) 1.2.2"
+    putStrLn "Copyright (C) 2013 Mike Burns"
+    putStrLn "Copyright (C) 2014 thoughtbot"
+    putStrLn "License BSD: BSD 3-clause license"
+    putStrLn ""
+    putStrLn "Written by Mike Burns."
+  else do
 
-  forM_ dotfiles $
-    putStrLn .
-      uncurry (\a b -> a ++ ":" ++ (show b)) .
-      (dotfileSource &&& dotfileTarget)
+    dotfiles <- getDotfiles config files
 
-  return ()
+    forM_ dotfiles $
+      putStrLn .
+        uncurry (\a b -> a ++ ":" ++ (show b)) .
+        (dotfileSource &&& dotfileTarget)
+
+    return ()
