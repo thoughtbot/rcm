@@ -6,7 +6,7 @@ import System.FilePath (FilePath)
 import Data.List (isSuffixOf)
 import Rcm.Private.Data
 
-import Rcm.Private.Lsrc (parseArgs, defaultConfig, handleOpt)
+import Rcm.Private.Lsrc (parseArgs, initialConfig, defaultConfig, handleOpt)
 
 data HandleOptArg = HandleOpt Char String Config (Config -> [String])
 
@@ -21,12 +21,21 @@ lsrcSpecs = describe "Rcm.Private.Lsrc" $ do
       let c = mkConfig { includes = [] } in
       parseArgs ["-I", "pat"] c `shouldBe` (c { includes = ["pat"] }, [])
 
+  context "initialConfig" $ do
+    it "sets a default hostname" $
+      hostname (initialConfig "-" "zeroCool") `shouldBe` "zeroCool"
+
+    it "sets a default home directory" $
+      homeDir (initialConfig "/tmp" "zeroCool") `shouldBe` "/tmp"
+
   context "defaultConfig" $ do
     it "sets a default dotfiles directory" $
-      dotfilesDirs (defaultConfig "/tmp" "-") `shouldBe` ["/tmp/.dotfiles"]
+      let c = initialConfig "/tmp" "zeroCool" in
+        dotfilesDirs (defaultConfig "/tmp" c) `shouldBe` ["/tmp/.dotfiles"]
 
-    it "sets a default hostname" $
-      hostname (defaultConfig "-" "zeroCool") `shouldBe` "zeroCool"
+    it "only sets a dotfiles directory if none are set" $
+      let c = (initialConfig "/tmp" "h") { dotfilesDirs = ["/var/tmp"] } in
+        dotfilesDirs (defaultConfig "/tmp" c) `shouldBe` ["/var/tmp"]
 
   context "handleOpt" $ do
     it "augments Configs when the opt takes an argument" $ property $

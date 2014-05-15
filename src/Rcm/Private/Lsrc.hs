@@ -21,16 +21,21 @@ handleOpt ('x', (Just optArg)) c = c { excludes = optArg : (excludes c) }
 handleOpt ('S', (Just optArg)) c = c { symlinkDirs = optArg : (symlinkDirs c) }
 handleOpt ('?', _            ) c = c -- TODO: new functionality
 
-defaultConfig homeDir hostname = Config {
+initialConfig homeDir hostname = Config {
    showSigils = False
   ,showHelp = False
   ,includes = []
   ,tags = []
   ,verbosity = 0
-  ,dotfilesDirs = [joinPath [homeDir, ".dotfiles"]]
+  ,dotfilesDirs = []
   ,showVersion = False
   ,excludes = []
   ,symlinkDirs = []
   ,homeDir = homeDir
   ,hostname = hostname
 }
+
+defaultConfig homeDir config
+  | null $ dotfilesDirs config =
+      config { dotfilesDirs = [joinPath [homeDir, ".dotfiles"]] }
+  | otherwise = config

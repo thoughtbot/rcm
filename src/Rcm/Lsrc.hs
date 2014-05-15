@@ -18,9 +18,10 @@ main = do
   hostname <- getHostName
   rcrc <- readRcrc homedir
 
-  let c = defaultConfig homedir hostname
+  let c = initialConfig homedir hostname
       c' = parseRcrc rcrc c
-      (config,files) = parseArgs args c'
+      (c'',files) = parseArgs args c'
+      config = defaultConfig homedir c''
 
   dotfiles <- getDotfiles config files
 
