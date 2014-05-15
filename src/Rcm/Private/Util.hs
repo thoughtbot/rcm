@@ -1,4 +1,4 @@
-module Rcm.Util (at, afterElem, isDotted) where
+module Rcm.Private.Util (at, afterElem, isDotted) where
 
 import Data.List (elemIndex)
 

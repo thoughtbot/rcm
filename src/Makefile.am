@@ -5,7 +5,7 @@
 
 bin_PROGRAMS = lsrc
 
-dist_lsrc_SOURCES = Rcm/Lsrc.hs Rcm/Private/Data.hs Rcm/Private/Lsrc.hs Rcm/Private/Rcrc.hs Rcm/Private/Dotfiles.hs Rcm/GetOpt.hs Rcm/Util.hs
+dist_lsrc_SOURCES = Rcm/Lsrc.hs Rcm/Private/Data.hs Rcm/Private/Lsrc.hs Rcm/Private/Rcrc.hs Rcm/Private/Dotfiles.hs Rcm/GetOpt.hs Rcm/Private/Util.hs
 
 AM_GHC_DEPEND_FLAGS = -no-hs-main --make -pgmltrue -odir . -hidir .
 

@@ -11,7 +11,7 @@ import Data.List (stripPrefix, isPrefixOf)
 import Data.Maybe (listToMaybe, fromJust, isJust, fromMaybe)
 import qualified Data.Map.Lazy as Map
 
-import Rcm.Util (isDotted)
+import Rcm.Private.Util (isDotted)
 import Rcm.Private.Data
 
 getDotfiles :: Config -> [FilePath] -> IO [Dotfile]

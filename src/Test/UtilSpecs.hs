@@ -4,9 +4,9 @@ import Test.Hspec
 import Test.QuickCheck
 import Data.Maybe (isJust, isNothing)
 
-import Rcm.Util (at, afterElem, isDotted)
+import Rcm.Private.Util (at, afterElem, isDotted)
 
-utilSpecs = describe "Rcm.Util" $ do
+utilSpecs = describe "Rcm.Private.Util" $ do
   context "at" $ do
     it "produces missing and existing values as correct" $ property $
       prop_atMissingExisting

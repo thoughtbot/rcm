@@ -17,7 +17,7 @@ argument), and one list of unparsed arguments (files, intuitively).
 module Rcm.GetOpt (Flag, getOpt) where
 
 import Data.List (isPrefixOf)
-import Rcm.Util (at, afterElem)
+import Rcm.Private.Util (at, afterElem)
 
 -- |A flag represents one command line option and its argument.
 type Flag = (Char, Maybe String)
