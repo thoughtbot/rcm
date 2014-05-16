@@ -1,0 +1,47 @@
+# Maintainer: Pat Brisbin <pbrisbin@gmail.com>
+_gitname='@PACKAGE@'
+pkgname=$_gitname-git
+pkgver=0.0.0
+pkgrel=3
+pkgdesc="rc file (dotfile) management"
+arch=('any')
+url="http://thoughtbot.github.io/@PACKAGE@/"
+license=('BSD')
+conflicts=('@PACKAGE@')
+makedepends=('git' 'ruby-mustache')
+source=('git://github.com/thoughtbot/@PACKAGE@')
+md5sums=('SKIP')
+
+pkgver() {
+  cd "$_gitname"
+
+  git describe --always | sed 's|-|.|g'
+}
+
+prepare() {
+  cd "$_gitname"
+
+  ./autogen.sh
+}
+
+build() {
+  cd "$_gitname"
+
+  ./configure \
+     --disable-debug \
+     --disable-dependency-tracking \
+     --disable-silent-rules \
+     --prefix=/usr
+
+  make
+}
+
+package() {
+  cd "$_gitname"
+
+  make DESTDIR="$pkgdir/" install
+
+  install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$_gitname/LICENSE"
+}
+
+# vim:set ts=2 sw=2 et:

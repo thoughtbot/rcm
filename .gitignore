@@ -18,6 +18,7 @@ depcomp
 debian/rcm
 debian/rcm.debhelper.log
 share/rcm.sh
+arch/git-PKGBIULD
 bin/lsrc
 bin/mkrc
 bin/rcup
