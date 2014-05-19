@@ -27,7 +27,7 @@ main = do
 
   if showHelp config then do
     putStrLn "Usage: lsrc [-FVqvh] [-I EXCL_PAT] [-x EXCL_PAT] [-N EXCL_PAT ] [-t TAG] [-d DOT_DIR]"
-    putStrLn "see lsrc(1) and rcm(5) for more details"
+    putStrLn "see lsrc(1) and rcm(7) for more details"
   else if showVersion config then do
     putStrLn "lsrc (rcm) 1.2.2"
     putStrLn "Copyright (C) 2013 Mike Burns"
