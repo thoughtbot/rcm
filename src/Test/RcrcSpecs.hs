@@ -4,6 +4,7 @@ import Test.Hspec
 import System.FilePath (joinPath)
 import System.Posix.Temp (mkdtemp)
 import Data.List (intercalate)
+import Rcm.Private.Patterns (exclPat)
 import Rcm.Private.Data
 
 import Rcm.Private.Rcrc (readRcrc, parseRcrc)
@@ -49,8 +50,8 @@ rcrcSpecs = describe "Rcm.Private.Rcrc" $ do
             ,verbosity = 0
             ,dotfilesDirs = ["/home/mike/.dotfiles", "/usr/share/dotfiles"]
             ,showVersion = False
-            ,excludes = ["irbrc", "*:*emacs*", "dotfiles:python*"]
-            ,symlinkDirs = ["zprezto"]
+            ,excludes = map exclPat ["irbrc", "*:*emacs*", "dotfiles:python*"]
+            ,symlinkDirs = map exclPat ["zprezto"]
             ,homeDir = "/tmp"
             ,hostname = "baz"
             }

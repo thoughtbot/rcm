@@ -6,6 +6,7 @@ import Test.UtilSpecs (utilSpecs)
 import Test.GetOptSpecs (getOptSpecs)
 import Test.DotfilesSpecs (dotfilesSpecs)
 import Test.RcrcSpecs (rcrcSpecs)
+import Test.PatternsSpecs (patternsSpecs)
 
 main = hspec $ do
   lsrcSpecs
@@ -13,3 +14,4 @@ main = hspec $ do
   getOptSpecs
   dotfilesSpecs
   rcrcSpecs
+  patternsSpecs

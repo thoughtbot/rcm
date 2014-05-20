@@ -1,9 +1,13 @@
 module Rcm.Private.Data where
 
+import System.FilePath.Glob (Pattern)
 import System.FilePath (joinPath)
 import System.Posix (FileStatus)
 
 type DotfileSource = FilePath
+
+data ExclPat = ExclPatAll Pattern | ExclPatDotfileDir FilePath Pattern
+  deriving (Show, Eq)
 
 data Dotfile = Dotfile {
   dotfileTarget :: DotfileTarget
@@ -13,13 +17,13 @@ data Dotfile = Dotfile {
 data Config = Config {
    showSigils :: Bool
   ,showHelp :: Bool
-  ,includes :: [String]
+  ,includes :: [ExclPat]
   ,tags :: [String]
   ,verbosity :: Integer
   ,dotfilesDirs :: [FilePath]
   ,showVersion :: Bool
-  ,excludes :: [String]
-  ,symlinkDirs :: [String]
+  ,excludes :: [ExclPat]
+  ,symlinkDirs :: [ExclPat]
   ,homeDir :: FilePath
   ,hostname :: String
 } deriving (Show, Eq)

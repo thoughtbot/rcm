@@ -4,6 +4,7 @@ import Control.Exception (catch, IOException)
 import System.FilePath (joinPath)
 import Data.List.Split (splitOn)
 
+import Rcm.Private.Patterns (exclPat)
 import Rcm.Private.Data
 
 readRcrc :: FilePath -> IO String
@@ -32,10 +33,10 @@ parseKey "SYMLINK_DIRS" = SymlinkDirs . splitOn " " . stripQuotes
 updateConfig :: ConfigLine -> Config -> Config
 updateConfig (CopyAlways _) c = c
 updateConfig (DotfilesDirs dirs) c = c { dotfilesDirs = dirs }
-updateConfig (Excludes globs) c = c { excludes = globs }
+updateConfig (Excludes globs) c = c { excludes = map exclPat globs }
 updateConfig (Hostname s) c = c { hostname = s }
 updateConfig (Tags s) c = c { tags = s }
-updateConfig (SymlinkDirs dirs) c = c { symlinkDirs = dirs }
+updateConfig (SymlinkDirs dirs) c = c { symlinkDirs = map exclPat dirs }
 
 stripQuotes :: String -> String
 stripQuotes ('"':s) = init s

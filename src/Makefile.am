@@ -5,13 +5,13 @@
 
 bin_PROGRAMS = lsrc
 
-dist_lsrc_SOURCES = Rcm/Lsrc.hs Rcm/Private/Data.hs Rcm/Private/Lsrc.hs Rcm/Private/Rcrc.hs Rcm/Private/Dotfiles.hs Rcm/GetOpt.hs Rcm/Private/Util.hs
+dist_lsrc_SOURCES = Rcm/Lsrc.hs Rcm/Private/Data.hs Rcm/Private/Lsrc.hs Rcm/Private/Rcrc.hs Rcm/Private/Dotfiles.hs Rcm/GetOpt.hs Rcm/Private/Util.hs Rcm/Private/Patterns.hs
 
 AM_GHC_DEPEND_FLAGS = -no-hs-main --make -pgmltrue -odir . -hidir .
 
 DEFAULT_INCLUDES = -i$(srcdir)
 
-GHC_PACKAGES = -package filepath -package unix -package directory -package network -package split
+GHC_PACKAGES = -package filepath -package unix -package directory -package network -package split -package Glob
 
 AM_GHC_MAIN = -main-is Rcm.Lsrc
 AM_GHC_COMPILE_FLAGS = $(DEFS) $(GHC_PACKAGES) \

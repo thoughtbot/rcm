@@ -4,11 +4,12 @@ import Test.Hspec
 import Test.QuickCheck
 import System.FilePath (FilePath)
 import Data.List (isSuffixOf)
+import Rcm.Private.Patterns (exclPat)
 import Rcm.Private.Data
 
 import Rcm.Private.Lsrc (parseArgs, initialConfig, defaultConfig, handleOpt)
 
-data HandleOptArg = HandleOpt Char String Config (Config -> [String])
+data HandleOptArg = HandleOpt Char String Config (Config -> [ExclPat])
 
 lsrcSpecs = describe "Rcm.Private.Lsrc" $ do
 
@@ -19,7 +20,7 @@ lsrcSpecs = describe "Rcm.Private.Lsrc" $ do
 
     it "adds the inclusion pattern when passed -I" $
       let c = mkConfig { includes = [] } in
-      parseArgs ["-I", "pat"] c `shouldBe` (c { includes = ["pat"] }, [])
+      parseArgs ["-I", "pat"] c `shouldBe` (c { includes = [exclPat "pat"] }, [])
 
   context "initialConfig" $ do
     it "sets a default hostname" $
@@ -53,11 +54,9 @@ instance Show HandleOptArg where
 
 instance Arbitrary HandleOptArg where
   arbitrary = elements [
-    HandleOpt 'I' "pat" (mkConfig { includes = ["foo"] }) includes
-   ,HandleOpt 't' "tag" (mkConfig { tags = ["foo"] }) tags
-   ,HandleOpt 'd' "dir" (mkConfig { dotfilesDirs = ["foo"] }) dotfilesDirs
-   ,HandleOpt 'x' "pat" (mkConfig { excludes = ["foo"] }) excludes
-   ,HandleOpt 'S' "pat" (mkConfig { symlinkDirs = ["foo"] }) symlinkDirs
+    HandleOpt 'I' "pat" (mkConfig { includes = [exclPat "foo"] }) includes
+   ,HandleOpt 'x' "pat" (mkConfig { excludes = [exclPat "foo"] }) excludes
+   ,HandleOpt 'S' "pat" (mkConfig { symlinkDirs = [exclPat "foo"] }) symlinkDirs
     ]
 
 mkConfig = Config {

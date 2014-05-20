@@ -4,6 +4,7 @@ import System.FilePath (joinPath)
 import Data.List (isPrefixOf)
 import Rcm.Private.Data
 import Rcm.GetOpt (getOpt, Flag)
+import Rcm.Private.Patterns (exclPat)
 
 parseArgs :: [String] -> Config -> (Config, [String])
 parseArgs args config = (foldr handleOpt config flags, files)
@@ -12,14 +13,14 @@ parseArgs args config = (foldr handleOpt config flags, files)
 handleOpt :: Flag -> Config -> Config
 handleOpt ('F', _            ) c = c { showSigils = True }
 handleOpt ('h', _            ) c = c { showHelp = True }
-handleOpt ('I', (Just optArg)) c = c { includes = optArg : (includes c) }
+handleOpt ('I', (Just optArg)) c = c { includes = (exclPat optArg) : (includes c) }
 handleOpt ('t', (Just optArg)) c = c { tags = optArg : (tags c) }
 handleOpt ('v', _            ) c = c { verbosity = (verbosity c) + 1 }
 handleOpt ('q', _            ) c = c { verbosity = (verbosity c) - 1 }
 handleOpt ('d', (Just optArg)) c = c { dotfilesDirs = optArg : (dotfilesDirs c) }
 handleOpt ('V', _            ) c = c { showVersion = True }
-handleOpt ('x', (Just optArg)) c = c { excludes = optArg : (excludes c) }
-handleOpt ('S', (Just optArg)) c = c { symlinkDirs = optArg : (symlinkDirs c) }
+handleOpt ('x', (Just optArg)) c = c { excludes = (exclPat optArg) : (excludes c) }
+handleOpt ('S', (Just optArg)) c = c { symlinkDirs = (exclPat optArg) : (symlinkDirs c) }
 handleOpt ('?', _            ) c = c -- TODO: new functionality
 
 initialConfig homeDir hostname = Config {
