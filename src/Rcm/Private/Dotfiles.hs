@@ -6,6 +6,7 @@ import Control.Exception (handle, IOException)
 import System.Posix (getFileStatus, isDirectory, isRegularFile, FileStatus)
 import System.Directory (getDirectoryContents)
 import System.FilePath (joinPath)
+import System.FilePath.Glob (match)
 import Data.Foldable (foldrM)
 import Data.List (stripPrefix, isPrefixOf)
 import Data.Maybe (listToMaybe, fromJust, isJust, fromMaybe)
@@ -18,7 +19,7 @@ getDotfiles :: Config -> [FilePath] -> IO [Dotfile]
 getDotfiles config _ = do
   dotfiles <- forM (dotfilesDirs config) $ \dir -> do
                 files <- walkPath config dir
-                return $ prune config files
+                return $ filter (prune config) files
   return $ concat dotfiles
 
 data DFNode = DFNode FilePath [FilePath] String FileStatus
@@ -43,16 +44,25 @@ walkPath config dir = subtrees [dir]
       | otherwise =
         return $ [mkDotfile config subdirs status]
 
-prune :: Config -> [Dotfile] -> [Dotfile]
-prune config dotfiles = filter prune' dotfiles
+prune :: Config -> Dotfile -> Bool
+prune config dotfile = desiredMeta && included
   where
 
-  prune' :: Dotfile -> Bool
-  prune' dotfile 
-    | isMeta dotfile =
-      (tagStr dotfile) `elem` (tags config) ||
-        (hostnameStr dotfile) == (hostname config)
+  dt = dotfileTarget dotfile
+
+  desiredMeta 
+    | isMeta dt =
+      (tagStr dt) `elem` (tags config) ||
+        (hostnameStr dt) == (hostname config)
     | otherwise = True
+
+  included = not $ or $ map excluder (excludes config)
+
+  excluder (ExclPatAll pattern) = match pattern path
+  excluder (ExclPatDotfileDir dir pattern) = 
+    (dtBase dt) == dir && match pattern path
+
+  path = maybe (dtFile dt) (\p -> joinPath [p, dtFile dt]) (dtPath dt)
 
 ls :: FilePath -> IO [FilePath]
 ls dir = filter (not . isDotted) <$> getDirectoryContents dir
@@ -80,9 +90,8 @@ splitDir dirs =
 
 isMetaDir dir = "tag-" `isPrefixOf` dir || "host-" `isPrefixOf` dir
 
-isMeta dotfile = isJust (dtHost dt) || isJust (dtTag dt)
-  where dt = dotfileTarget dotfile
+isMeta dt = isJust (dtHost dt) || isJust (dtTag dt)
 
-tagStr = fromMaybe "" . dtTag . dotfileTarget
+tagStr = fromMaybe "" . dtTag
 
-hostnameStr = fromMaybe "" . dtHost . dotfileTarget
+hostnameStr = fromMaybe "" . dtHost

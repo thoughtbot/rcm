@@ -9,6 +9,7 @@ import Control.Exception (finally, catch, SomeException)
 import Data.Set (Set)
 import qualified Data.Set as Set
 
+import Rcm.Private.Patterns (exclPat)
 import Rcm.Private.Dotfiles (getDotfiles, Dotfile(..))
 import Rcm.Private.Data
 
@@ -80,6 +81,32 @@ dotfilesSpecs = describe "Rcm.Private.Dotfiles" $ do
                          ,mkD Nothing Nothing "vimrc"]
           in getDotfiles config [] `shouldReturnWithSet` expected
 
+  context "excluded files" $ do
+    around setupMultipleDotfiles $ do
+      it "ignores the excluded files" $
+          let config = mkConfig {
+               dotfilesDirs = [tmpDotfileDir, otherDotfileDir],
+               homeDir = tmpHomeDir,
+               excludes = [exclPat "gnupg/gpg.conf",
+                           exclPat "/tmp/rcm-other-dotfile-dir:cabal/config"]
+               }
+              mkD = mkDotfile tmpHomeDir tmpDotfileDir
+              hostDotfile = Dotfile {
+                 dotfileTarget = DotfileTarget {
+                   dtBase = tmpDotfileDir
+                  ,dtPath = Nothing
+                  ,dtFile = "rcrc"
+                  ,dtTag = Nothing
+                  ,dtHost = Just "gibson" }
+                ,dotfileSource = joinPath [tmpHomeDir, ".rcrc"] }
+              expected = [mkD (Just "cabal") (Just "cabal") "config"
+                         ,mkD Nothing Nothing "zshrc"
+                         ,mkD Nothing Nothing "vimrc"
+                         ,mkDotfile tmpHomeDir otherDotfileDir Nothing Nothing "mkshrc"
+                         ,mkDotfile tmpHomeDir otherDotfileDir Nothing Nothing "xmodmap"]
+          in getDotfiles config [] `shouldReturnWithSet` expected
+        
+
 mkConfig = Config {
   showSigils = False
  ,showHelp = False
@@ -95,6 +122,7 @@ mkConfig = Config {
 }
 
 tmpDotfileDir = "/tmp/rcm-tmp-dotfile-dir"
+otherDotfileDir = "/tmp/rcm-other-dotfile-dir"
 tmpHomeDir = "/tmp/rcm-tmp-home-dir"
 
 setupNormalDotfiles :: IO () -> IO ()
@@ -109,6 +137,9 @@ setupTaggedDotfiles test =
 setupHostnameDotfiles hostname test =
   (createNormalDotfiles >> createHostnameDotfiles hostname >> test)
     `finally` removeDotfiles
+
+setupMultipleDotfiles test =
+  (createNormalDotfiles >> createOtherDotfiles >> test) `finally` removeDotfiles
 
 createNormalDotfiles = do
   ensureDirectory tmpDotfileDir
@@ -132,6 +163,12 @@ createHostnameDotfiles hostname = do
   ensureDirectory (joinPath [tmpDotfileDir, "host-" ++ hostname ++ "-aux"])
   touchFile (joinPath [tmpDotfileDir, "host-" ++ hostname, "rcrc"])
   touchFile (joinPath [tmpDotfileDir, "host-" ++ hostname ++ "-aux", "rcrc"])
+
+createOtherDotfiles = do
+  ensureDirectory otherDotfileDir
+  ensureDirectory (joinPath [otherDotfileDir, "cabal"])
+  touchFile (joinPath [otherDotfileDir, "cabal", "config"])
+  touchFile (joinPath [otherDotfileDir, "xmodmap"])
 
 removeDotfiles =
   (removeDirectoryRecursive tmpDotfileDir) `orException` return ()

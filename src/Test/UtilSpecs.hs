@@ -3,8 +3,9 @@ module Test.UtilSpecs (utilSpecs) where
 import Test.Hspec
 import Test.QuickCheck
 import Data.Maybe (isJust, isNothing)
+import Data.List (isPrefixOf)
 
-import Rcm.Private.Util (at, afterElem, isDotted)
+import Rcm.Private.Util (at, afterElem, isDotted, absolutize)
 
 utilSpecs = describe "Rcm.Private.Util" $ do
   context "at" $ do
@@ -18,6 +19,10 @@ utilSpecs = describe "Rcm.Private.Util" $ do
   context "isDotted" $ do
     it "is true when the string begins with a dot" $ property $
       prop_isDottedBeginsWithDot
+
+  context "absolutize" $ do
+    it "combines relative directories with the supplied directory" $ property $
+      prop_absolutizeCominesDirectories
 
 prop_atMissingExisting :: Positive Int -> [Char] -> Bool
 prop_atMissingExisting pIdx xs =
@@ -34,3 +39,9 @@ prop_afterElemMissingExisting xss@(x:xs) =
 prop_isDottedBeginsWithDot :: String -> Bool
 prop_isDottedBeginsWithDot s@('.':ss) = isDotted s == True
 prop_isDottedBeginsWithDot s = isDotted s == False
+
+prop_absolutizeCominesDirectories :: String -> Bool
+prop_absolutizeCominesDirectories path =
+  let expectedPath = if null path then "/tmp" else "/tmp/" ++ path
+      assertion = if "/" `isPrefixOf` path then (== path) else (== expectedPath)
+  in assertion $ absolutize "/tmp" path

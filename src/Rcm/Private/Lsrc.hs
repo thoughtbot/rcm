@@ -1,10 +1,9 @@
 module Rcm.Private.Lsrc where
 
-import System.FilePath (joinPath)
-import Data.List (isPrefixOf)
 import Rcm.Private.Data
 import Rcm.GetOpt (getOpt, Flag)
 import Rcm.Private.Patterns (exclPat)
+import Rcm.Private.Util (absolutize)
 
 parseArgs :: [String] -> Config -> (Config, [String])
 parseArgs args config = (foldr handleOpt config flags, files)
@@ -37,11 +36,14 @@ initialConfig homeDir hostname = Config {
   ,hostname = hostname
 }
 
-defaultConfig homeDir pwd config
-  | null $ dotfilesDirs config =
-      config { dotfilesDirs = [joinPath [homeDir, ".dotfiles"]] }
-  | otherwise = config { dotfilesDirs = map (absolutize pwd) (dotfilesDirs config) }
+defaultConfig homeDir pwd config =
+  config { dotfilesDirs = defaultDotfilesDirs, excludes = defaultExcludes }
   where
-    absolutize pwd path
-      | "/" `isPrefixOf` path = path
-      | otherwise = joinPath [pwd, path]
+    defaultDotfilesDirs
+      | null $ dotfilesDirs config = [absolutize homeDir ".dotfiles"]
+      | otherwise = map (absolutize pwd) (dotfilesDirs config)
+
+    defaultExcludes = map absExcl (excludes config)
+
+    absExcl (ExclPatDotfileDir dir p) = ExclPatDotfileDir (absolutize pwd dir) p
+    absExcl x = x
