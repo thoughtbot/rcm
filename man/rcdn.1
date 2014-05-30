@@ -11,6 +11,7 @@
 .Op Fl d Ar dir
 .Op Fl I Ar excl_pat
 .Op Fl S Ar excl_pat
+.Op Fl s Ar excl_pat
 .Op Fl t Ar tag
 .Op Fl x Ar excl_pat
 .Op Ar files ...
@@ -77,6 +78,12 @@ when removing dotfiles, any file that matches
 .Ar EXCL_PAT
 should be treated as a file that was symlinked, even if it is a
 directory. This can be repeated.
+.It Fl s Ar EXCL_PAT
+when removing dotfiles, any directory that matches
+.Ar EXCL_PAT
+should be recurred upon like normal. This is the default, and is the opposite of
+.Fl S .
+This can be repeated.
 .It Fl t Ar TAG
 remove dotfiles according to
 .Ar TAG

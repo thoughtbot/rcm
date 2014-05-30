@@ -43,7 +43,7 @@ verbosity=0
 in_host=0
 version=0
 always_copy=0
-force_symlink=0
+force_symlink=50
 install_args=
 
 while getopts :ChSsVvqot:d:B: opt; do
@@ -85,6 +85,11 @@ if [ $force_symlink -eq 1 ]; then
   for file in $files; do
     dedotted="$(de_dot "$file")"
     INSTALL="$INSTALL -S $dedotted"
+  done
+elif [ $force_symlink -eq 0 ]; then
+  for file in $files; do
+    dedotted="$(de_dot "$file")"
+    INSTALL="$INSTALL -s $dedotted"
   done
 fi
 

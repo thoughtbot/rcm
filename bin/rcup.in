@@ -104,10 +104,11 @@ handle_command_line() {
   local includes=
   local always_copy=0
   local symlink_dirs=
+  local never_symlink_dirs=
   local hostname=
   REPLACE_ALL=0
 
-  while getopts :CVqvfhikKI:x:S:t:d:B: opt; do
+  while getopts :CVqvfhikKI:x:S:s:t:d:B: opt; do
     case "$opt" in
       B) hostname="$OPTARG" ;;
       C) always_copy=1 ;;
@@ -121,6 +122,7 @@ handle_command_line() {
       q) verbosity=$(($verbosity - 1)) ;;
       t) arg_tags="$arg_tags $OPTARG" ;;
       S) symlink_dirs="$symlink_dirs $OPTARG";;
+      s) never_symlink_dirs="$never_symlink_dirs $OPTARG";;
       v) verbosity=$(($verbosity + 1)) ;;
       V) version=1 ;;
       x) excludes="$excludes $OPTARG" ;;
@@ -156,6 +158,9 @@ handle_command_line() {
   done
   for symlink_dir in $symlink_dirs; do
     LS_ARGS="$LS_ARGS -S $symlink_dir"
+  done
+  for never_symlink_dir in $never_symlink_dirs; do
+    LS_ARGS="$LS_ARGS -s $never_symlink_dir"
   done
   LS_ARGS="$LS_ARGS -B $hostname $files"
 

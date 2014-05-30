@@ -11,6 +11,7 @@
 .Op Fl d Ar dir
 .Op Fl I Ar excl_pat
 .Op Fl S Ar excl_pat
+.Op Fl s Ar excl_pat
 .Op Fl t Ar tag
 .Op Fl x Ar excl_pat
 .Op files ...
@@ -71,6 +72,19 @@ symlink the directories that match the given pattern. See
 .Sx EXCLUDE PATTERN
 for more details. This option can be repeated. You may need to quote the
 pattern to prevent the shell from swallowing the glob.
+.
+.It Fl s Ar excl_pat
+if a directory matches the given pattern, recur inside of it instead of
+symlinking. See
+.Sx EXCLUDE PATTERN
+for more details. This is the opposite of the
+.Fl S
+option, and can be used to undo it or the
+.Va SYMLINK_DIRS
+setting in your
+.Xr rcrc 5
+configuration. It can be repeated, and the pattern may need to be quoted to
+protect it from your shell.
 .
 .It Fl t Ar TAG
 list dotfiles according to TAG
