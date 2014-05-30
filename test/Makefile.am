@@ -1,4 +1,4 @@
-dist_TESTS = \
+TESTS = \
 	lsrc-dotfiles-dirs.t \
 	lsrc-excludes.t \
 	lsrc-hostname.t \
@@ -19,5 +19,7 @@ dist_TESTS = \
 	rcup-link-files.t \
 	rcup-hostname.t \
 	rcup-usage.t
+
+dist_check_SCRIPTS = $(TESTS)
 
 LOG_COMPILER = cram
