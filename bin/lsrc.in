@@ -229,7 +229,7 @@ handle_command_line() {
   local symlink_dirs=
   local hostname=
 
-  while getopts FVqvhI:x:B:S:t:d: opt; do
+  while getopts :FVqvhI:x:B:S:t:d: opt; do
     case "$opt" in
       F) show_sigils=1;;
       h) show_help ;;
@@ -242,6 +242,7 @@ handle_command_line() {
       x) excludes="$excludes $OPTARG";;
       S) symlink_dirs="$symlink_dirs $OPTARG";;
       B) hostname="$OPTARG";;
+      ?) show_help 64 ;;
     esac
   done
   shift $(($OPTIND-1))

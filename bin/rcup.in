@@ -107,7 +107,7 @@ handle_command_line() {
   local hostname=
   REPLACE_ALL=0
 
-  while getopts CVqvfhikKI:x:S:t:d:B: opt; do
+  while getopts :CVqvfhikKI:x:S:t:d:B: opt; do
     case "$opt" in
       B) hostname="$OPTARG" ;;
       C) always_copy=1 ;;
@@ -124,6 +124,7 @@ handle_command_line() {
       v) verbosity=$(($verbosity + 1)) ;;
       V) version=1 ;;
       x) excludes="$excludes $OPTARG" ;;
+      ?) show_help 64 ;;
     esac
   done
   shift $(($OPTIND-1))

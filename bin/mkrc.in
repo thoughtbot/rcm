@@ -30,7 +30,7 @@ show_help() {
 }
 
 if [ $# -eq 0 ]; then
-  show_help 1
+  show_help 64
 fi
 
 for DOTFILES_DIR in $DOTFILES_DIRS $DEFAULT_DOTFILES_DIR; do
@@ -46,7 +46,7 @@ always_copy=0
 force_symlink=0
 install_args=
 
-while getopts ChSsVvqot:d:B: opt; do
+while getopts :ChSsVvqot:d:B: opt; do
   case "$opt" in
     C) always_copy=1 ;;
     h) show_help ;;
@@ -63,6 +63,7 @@ while getopts ChSsVvqot:d:B: opt; do
       hostname="$OPTARG"
       install_args="-B $hostname"
       ;;
+    ?) show_help 64 ;;
   esac
 done
 shift $(($OPTIND-1))

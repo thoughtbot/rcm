@@ -1,5 +1,7 @@
 rcm (@PACKAGE_VERSION@) unstable; urgency=low
 
+  * Show usage information when given bad arguments (Mike Burns).
+
  -- Mike Burns <mburns@thoughtbot.com>  Fri, 09 May 2014 14:17:49 +0200
 
 rcm (1.2.3) unstable; urgency=low
