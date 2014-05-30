@@ -37,9 +37,10 @@ handle_command_line() {
   local excludes=
   local includes=
   local symlink_dirs=
+  local never_symlink_dirs=
   local hostname=
 
-  while getopts :VqvhI:x:S:t:d:B: opt; do
+  while getopts :VqvhI:x:S:s:t:d:B: opt; do
     case "$opt" in
       h) show_help ;;
       B) hostname="$OPTARG" ;;
@@ -48,6 +49,7 @@ handle_command_line() {
       K) run_hooks=0 ;;
       t) arg_tags="$arg_tags $OPTARG" ;;
       S) symlink_dirs="$symlink_dirs $OPTARG";;
+      s) never_symlink_dirs="$never_symlink_dirs $OPTARG";;
       v) verbosity=$(($verbosity + 1));;
       q) verbosity=$(($verbosity - 1));;
       d) dotfiles_dirs="$dotfiles_dirs $OPTARG" ;;
@@ -80,6 +82,9 @@ handle_command_line() {
   done
   for symlink_dir in $symlink_dirs; do
     LS_ARGS="$LS_ARGS -S $symlink_dir"
+  done
+  for never_symlink_dir in $symlink_dirs; do
+    LS_ARGS="$LS_ARGS -s $never_symlink_dir"
   done
   LS_ARGS="$LS_ARGS -B $hostname $files"
 

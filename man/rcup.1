@@ -11,6 +11,7 @@
 .Op Fl d Ar dir
 .Op Fl I Ar excl_pat
 .Op Fl S Ar excl_pat
+.Op Fl s Ar excl_pat
 .Op Fl t Ar tag
 .Op Fl x Ar excl_pat
 .Op Ar files ...
@@ -69,6 +70,14 @@ any rc file that matches
 .Ar EXCL_PAT
 is installed as if it were a file (using a symlink) instead of as if it
 were a directory (by making a directory). This option can be repeated.
+.It Fl s Ar EXCL_PAT
+any file that matches
+.Ar EXCL_PAT
+is installed as normal, in accordance with the
+.Sx ALGORITHM
+section below. This is the opposite of
+.Fl S .
+This option can be repeated.
 .It Fl t Ar TAG
 install dotfiles according to
 .Ar TAG
