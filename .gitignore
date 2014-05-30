@@ -26,6 +26,7 @@ bin/rcdn
 *deb
 NEWS.md
 rcm-*.tar.gz
+arch/git-PKGBUILD
 
 # Sub-repositories for release
 gh-pages
