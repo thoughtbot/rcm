@@ -1,12 +1,15 @@
 rcm
 ===
 
-This is a management suite for dotfiles.
+This is a management suite for dotfiles. **See [the tutorial][rcm7] to get
+started quickly.**
 
 It assumes that you have a separate dotfiles directory, or are
 interested in creating one.
 
-The programs provided are `rcup`, `mkrc`, `rcdn`, and `lsrc`.
+The programs provided are [rcup(1)][rcup1], [mkrc(1)][mkrc1], [rcdn(1)][rcdn1],
+and [lsrc(1)][lsrc1]. They are explained in [the tutorial][rcm7] and configured
+using [rcrc(5)][rcrc5].
 
 Installation
 ------------
@@ -50,14 +53,22 @@ For more, see `INSTALL`.
 Programs
 --------
 
-* `rcup` is the main program. It is used to install and update dotfiles,
-  with support for tags, host-specific files, and multiple source
+* [rcup(1)][rcup1] is the main program. It is used to install and update
+  dotfiles, with support for tags, host-specific files, and multiple source
   directories.
-* `rcdn` is the opposite of `rcup`.
-* `mkrc` is for introducing a dotfile into your dotfiles directory, with
-  support for tags and multiple source directories.
-* `lsrc` shows you all your dotfiles and where they would be symlinked
-  to. It is used by `rcup` but is provided for your own use, too.
+* [rcdn(1)][rcdn1] is the opposite of [rcup(1)][rcup1].
+* [mkrc(1)][mkrc1] is for introducing a dotfile into your dotfiles directory,
+  with support for tags and multiple source directories.
+* [lsrc(1)][lsrc1] shows you all your dotfiles and where they would be
+  symlinked to. It is used by [rcup(1)][rcup1] but is provided for your own
+  use, too.
+
+[rcup1]: http://thoughtbot.github.io/rcm/rcup.1.html
+[mkrc1]: http://thoughtbot.github.io/rcm/mkrc.1.html
+[rcdn1]: http://thoughtbot.github.io/rcm/rcdn.1.html
+[lsrc1]: http://thoughtbot.github.io/rcm/lsrc.1.html
+[rcm7]: http://thoughtbot.github.io/rcm/rcm.7.html
+[rcrc5]: http://thoughtbot.github.io/rcm/rcrc.5.html
 
 Support
 -------
