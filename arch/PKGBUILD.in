@@ -1,7 +1,7 @@
 # Maintainer: Pat Brisbin <pbrisbin@gmail.com>
 pkgname='@PACKAGE@'
 pkgver=@PACKAGE_VERSION@
-pkgrel=1
+pkgrel=2
 pkgdesc="rc file (dotfile) management"
 arch=('any')
 url="http://thoughtbot.github.io/@PACKAGE@/"
@@ -12,21 +12,15 @@ sha1sums=('@DIST_SHA@')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
-
   ./configure \
-     --disable-debug \
-     --disable-dependency-tracking \
      --disable-silent-rules \
      --prefix=/usr
-
   make
 }
 
 package() {
   cd "$srcdir/$pkgname-$pkgver"
-
   make DESTDIR="$pkgdir/" install
-
   install -Dm644 LICENSE "$pkgdir/usr/share/licenses/${pkgname}/LICENSE"
 }
 
