@@ -2,7 +2,7 @@
 _gitname='@PACKAGE@'
 pkgname=$_gitname-git
 pkgver=0.0.0
-pkgrel=3
+pkgrel=4
 pkgdesc="rc file (dotfile) management"
 arch=('any')
 url="http://thoughtbot.github.io/@PACKAGE@/"
@@ -13,34 +13,26 @@ source=('git://github.com/thoughtbot/@PACKAGE@')
 md5sums=('SKIP')
 
 pkgver() {
-  cd "$_gitname"
-
-  git describe --always | sed 's|-|.|g'
+  cd "$srcdir/$_gitname"
+  git describe --long | sed -r 's/([^-]*-g)/r\1/;s/-/./g'
 }
 
 prepare() {
-  cd "$_gitname"
-
+  cd "$srcdir/$_gitname"
   ./autogen.sh
 }
 
 build() {
-  cd "$_gitname"
-
+  cd "$srcdir/$_gitname"
   ./configure \
-     --disable-debug \
-     --disable-dependency-tracking \
-     --disable-silent-rules \
-     --prefix=/usr
-
+    --disable-silent-rules \
+    --prefix=/usr
   make
 }
 
 package() {
-  cd "$_gitname"
-
+  cd "$srcdir/$_gitname"
   make DESTDIR="$pkgdir/" install
-
   install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$_gitname/LICENSE"
 }
 
