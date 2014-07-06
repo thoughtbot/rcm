@@ -1,7 +1,7 @@
 # Maintainer: Pat Brisbin <pbrisbin@gmail.com>
 _gitname='@PACKAGE@'
 pkgname=$_gitname-git
-pkgver=0.0.0
+pkgver=v1.2.3.r6.gdb0be68
 pkgrel=4
 pkgdesc="rc file (dotfile) management"
 arch=('any')
