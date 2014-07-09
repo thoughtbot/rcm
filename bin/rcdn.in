@@ -40,7 +40,7 @@ handle_command_line() {
   local never_symlink_dirs=
   local hostname=
 
-  while getopts :VqvhI:x:S:s:t:d:B: opt; do
+  while getopts :VqvhIKk:x:S:s:t:d:B: opt; do
     case "$opt" in
       h) show_help ;;
       B) hostname="$OPTARG" ;;
