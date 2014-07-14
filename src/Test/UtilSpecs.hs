@@ -17,7 +17,7 @@ utilSpecs = describe "Rcm.Private.Util" $ do
       prop_afterElemMissingExisting
 
   context "splitOn" $ do
-    it "splits a list into componentes with a delimiter" $ property $
+    it "splits a list into componentes using a delimiter" $ property $
       prop_intercalateSplittedIsId
 
   context "isDotted" $ do
