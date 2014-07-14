@@ -1,4 +1,4 @@
-module Rcm.Private.Util (at, afterElem, isDotted, absolutize) where
+module Rcm.Private.Util (at, afterElem, splitOn, isDotted, absolutize) where
 
 import Data.List (elemIndex, isPrefixOf)
 import System.FilePath (joinPath)
@@ -9,6 +9,27 @@ afterElem :: (Eq a) => a -> [a] -> Maybe a
 afterElem e xs = do
   idx <- elemIndex e xs
   xs `at` (idx + 1)
+
+findInfix :: (Eq a) => [a] -> [a] -> Int -> Maybe Int
+findInfix _ [] _ = Nothing
+findInfix d l@(_:xs) i = if d `isPrefixOf` l
+                              then Just i
+                              else findInfix d xs (i+1)
+
+splitAtInfix :: (Eq a) => [a] -> [a] -> Maybe ([a],[a])
+splitAtInfix d l = findInfix d l 0 >>= mkRes
+  where
+    mkRes i = let (pre,pos) = splitAt i l
+              in return (pre, drop (length d) pos)
+
+-- |Given a delimiter, splits a list and return the components.
+splitOn :: (Eq a) => [a] -> [a] -> [[a]]
+splitOn [] l = [l]
+splitOn _ [] = [[]]
+splitOn d l = let msp = splitAtInfix d l
+              in case msp of
+                   Nothing -> [l]
+                   Just (pre,pos) -> pre : splitOn d pos
 
 -- |Just like (!!) except it produces a Maybe.
 at :: [a] -> Int -> Maybe a

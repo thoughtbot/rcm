@@ -2,10 +2,10 @@ module Rcm.Private.Rcrc (readRcrc, parseRcrc) where
 
 import Control.Exception (catch, IOException)
 import System.FilePath (joinPath)
-import Data.List.Split (splitOn)
 
 import Rcm.Private.Patterns (exclPat)
 import Rcm.Private.Data
+import Rcm.Private.Util (splitOn)
 
 readRcrc :: FilePath -> IO String
 readRcrc homedir = (readFile $ joinPath [homedir, ".rcrc"]) `catch` handler
