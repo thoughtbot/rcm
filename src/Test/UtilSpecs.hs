@@ -3,7 +3,7 @@ module Test.UtilSpecs (utilSpecs) where
 import Test.Hspec
 import Test.QuickCheck
 import Data.Maybe (isJust, isNothing)
-import Data.List (isPrefixOf)
+import Data.List (intercalate, isPrefixOf)
 
 import Rcm.Private.Util (at, afterElem, splitOn, isDotted, absolutize)
 
@@ -40,7 +40,7 @@ prop_afterElemMissingExisting xss@(x:xs) =
   let assertion = if null xs then isNothing else isJust in
   assertion $ x `afterElem` xss
 
-prop_intercalateSplittedIsId :: (Eq a) => [a] -> [a] -> Bool
+prop_intercalateSplittedIsId :: String -> String -> Bool
 prop_intercalateSplittedIsId del lst = (intercalate del $ splitOn del lst) == lst
 
 prop_isDottedBeginsWithDot :: String -> Bool
