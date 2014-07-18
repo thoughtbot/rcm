@@ -3,9 +3,9 @@ module Test.UtilSpecs (utilSpecs) where
 import Test.Hspec
 import Test.QuickCheck
 import Data.Maybe (isJust, isNothing)
-import Data.List (isPrefixOf)
+import Data.List (intercalate, isPrefixOf)
 
-import Rcm.Private.Util (at, afterElem, isDotted, absolutize)
+import Rcm.Private.Util (at, afterElem, splitOn, isDotted, absolutize)
 
 utilSpecs = describe "Rcm.Private.Util" $ do
   context "at" $ do
@@ -15,6 +15,10 @@ utilSpecs = describe "Rcm.Private.Util" $ do
   context "afterElem" $ do
     it "produces missing and existing values as correct" $ property $
       prop_afterElemMissingExisting
+
+  context "splitOn" $ do
+    it "splits a list into componentes using a delimiter" $ property $
+      prop_intercalateSplittedIsId
 
   context "isDotted" $ do
     it "is true when the string begins with a dot" $ property $
@@ -35,6 +39,9 @@ prop_afterElemMissingExisting [] = isNothing $ 'x' `afterElem` []
 prop_afterElemMissingExisting xss@(x:xs) =
   let assertion = if null xs then isNothing else isJust in
   assertion $ x `afterElem` xss
+
+prop_intercalateSplittedIsId :: String -> String -> Bool
+prop_intercalateSplittedIsId del lst = (intercalate del $ splitOn del lst) == lst
 
 prop_isDottedBeginsWithDot :: String -> Bool
 prop_isDottedBeginsWithDot s@('.':ss) = isDotted s == True
