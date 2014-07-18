@@ -10,17 +10,15 @@ afterElem e xs = do
   idx <- elemIndex e xs
   xs `at` (idx + 1)
 
-findInfix :: (Eq a) => [a] -> [a] -> Int -> Maybe Int
-findInfix _ [] _ = Nothing
-findInfix d l@(_:xs) i = if d `isPrefixOf` l
-                              then Just i
-                              else findInfix d xs (i+1)
-
 splitAtInfix :: (Eq a) => [a] -> [a] -> Maybe ([a],[a])
-splitAtInfix d l = findInfix d l 0 >>= mkRes
+splitAtInfix del txt = findInfix del txt 0 >>= mkRes
   where
-    mkRes i = let (pre,pos) = splitAt i l
-              in return (pre, drop (length d) pos)
+    findInfix _ [] _ = Nothing
+    findInfix d l@(_:xs) i = if d `isPrefixOf` l
+                                then Just i
+                                else findInfix d xs (i+1)
+    mkRes i = let (pre,pos) = splitAt i txt
+              in return (pre, drop (length del) pos)
 
 -- |Given a delimiter, splits a list and return the components.
 splitOn :: (Eq a) => [a] -> [a] -> [[a]]
