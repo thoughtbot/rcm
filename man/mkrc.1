@@ -6,7 +6,7 @@
 .Nd bless files into a dotfile managed by rcm
 .Sh SYNOPSIS
 .Nm mkrc
-.Op Fl ChoqSsVv
+.Op Fl ChoqSsVvUu
 .Op Fl t Ar tag
 .Op Fl d Ar dir
 .Op Fl B Ar hostname
@@ -46,6 +46,12 @@ in the section
 This is the default.
 .It Fl t Ar TAG
 install dotfiles according to tag
+.It Fl U
+the specified files or directories are to be installed without a leading
+dot.
+.It Fl u
+the specified files or directories are to be installed with a leading dot. This
+is the default.
 .It Fl v
 increase verbosity. This can be repeated for extra verbosity.
 .It Fl V
@@ -66,6 +72,7 @@ User configuration file. Defaults to
 .Dl mkrc -o ~/.rcrc
 .Dl mkrc -C .ssh
 .Dl mkrc -S .zpretzo
+.Dl mkrc -U bin
 .Sh SEE ALSO
 .Xr lsrc 1 ,
 .Xr rcdn 1 ,

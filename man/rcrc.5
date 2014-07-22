@@ -60,6 +60,16 @@ symlinked instead of descended. Patterns are explained in detail in
 under the section
 .Sx EXCLUDE PATTERN .
 .
+.It Va UNDOTTED
+a space separated list of patterns. Files matching this pattern
+will be symlinked without a leading dot. If a file is also in
+.Va SYMLINK_DIRS ,
+then the directory will be symlinked without a leading dot.
+Patterns are explained in detail in
+.Xr lsrc 1
+under the section
+.Sx EXCLUDE PATTERN .
+.
 .El
 .Sh FILES
 .Pa ~/.rcrc
@@ -70,7 +80,8 @@ under the section
 .Dl EXCLUDES="irbrc *:*emacs* dotfiles:python*"
 .Dl HOSTNAME="eggplant"
 .Dl TAGS="freebsd development email git laptop gmail notmuch"
-.Dl SYMLINK_DIRS="zprezto"
+.Dl SYMLINK_DIRS="zprezto texmf"
+.Dl UNDOTTED="texmf"
 .Sh SEE ALSO
 .Xr lsrc 1 ,
 .Xr mkrc 1 ,

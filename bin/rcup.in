@@ -171,7 +171,7 @@ handle_file() {
 show_help() {
   local exit_code=${1:-0}
 
-  $PRINT "Usage: rcup [-CfghiKkqVv] [-B HOSTNAME] [-d DOT_DIR] [-I EXCL_PAT] [-S EXCL_PAT] [-s EXCL_PAT] [-t TAG] [-x EXCL_PAT]"
+  $PRINT "Usage: rcup [-CfhiKkqVv] [-B HOSTNAME] [-d DOT_DIR] [-I EXCL_PAT] [-S EXCL_PAT] [-s EXCL_PAT] [-t TAG] [-U EXCL_PAT] [-u EXCL_PAT] [-x EXCL_PAT]"
   $PRINT "see rcup(1) and rcm(7) for more details"
 
   exit $exit_code
@@ -192,10 +192,12 @@ handle_command_line() {
   local hostname=
   local generate=0
   local args=$*
+  local undotted=
+  local never_undotted=
   REPLACE_ALL=0
   GENERATE=
 
-  while getopts :CVqvfghikKI:x:S:s:t:d:B: opt; do
+  while getopts :CVqvfghikKI:x:S:s:U:u:t:d:B: opt; do
     case "$opt" in
       B) hostname="$OPTARG" ;;
       C) always_copy=1 ;;
@@ -211,6 +213,8 @@ handle_command_line() {
       t) arg_tags="$arg_tags $OPTARG" ;;
       S) symlink_dirs="$symlink_dirs $OPTARG";;
       s) never_symlink_dirs="$never_symlink_dirs $OPTARG";;
+      U) undotted="$undotted $OPTARG";;
+      u) never_undotted="$never_undotted $OPTARG";;
       v) verbosity=$(($verbosity + 1)) ;;
       V) version=1 ;;
       x) excludes="$excludes $OPTARG" ;;
@@ -259,6 +263,13 @@ handle_command_line() {
   for never_symlink_dir in $never_symlink_dirs; do
     LS_ARGS="$LS_ARGS -s $never_symlink_dir"
   done
+  for undot in $undotted; do
+    LS_ARGS="$LS_ARGS -U $undot"
+  done
+  for never_undot in $never_undotted; do
+    LS_ARGS="$LS_ARGS -u $never_undot"
+  done
+
   LS_ARGS="$LS_ARGS -B $hostname $files"
 
   $DEBUG "LS_ARGS: $LS_ARGS"

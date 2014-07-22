@@ -13,6 +13,8 @@
 .Op Fl S Ar excl_pat
 .Op Fl s Ar excl_pat
 .Op Fl t Ar tag
+.Op Fl U Ar excl_pat
+.Op Fl u Ar excl_pat
 .Op Fl x Ar excl_pat
 .Op Ar files ...
 .Sh DESCRIPTION
@@ -87,6 +89,29 @@ This can be repeated.
 .It Fl t Ar TAG
 remove dotfiles according to
 .Ar TAG
+.It Fl U Ar EXCL_PAT
+any rc file or directory that matches
+.Ar EXCL_PAT
+is considered to have been installed without a leading dot when removing them.
+Must be specified for rc files or directories that were indeed installed
+without a leading dot. This can be repeated. See the
+documentation of the
+.Fl U
+option in
+.Xr lsrc 1
+for more information.
+.It Fl u Ar EXCL_PAT
+any rc file or directory that matches
+.Ar EXCL_PAT
+is considered to have been installed with a leading dot when removing them.
+This is the default, and is the opposite of
+.Fl U .
+This can be repeated. See the
+documentation of the
+.Fl u
+option in
+.Xr lsrc 1
+for more information.
 .It Fl v
 increase verbosity. This can be repeated for extra verbosity.
 .It Fl V

@@ -7,6 +7,7 @@ TESTS = \
 	lsrc-symlink-dirs.t \
 	lsrc-tags.t \
 	lsrc-usage.t \
+	lsrc-undotted.t \
 	mkrc-alternate-dotfiles-dir.t \
 	mkrc-copy-file.t \
 	mkrc-host-file.t \
@@ -15,6 +16,7 @@ TESTS = \
 	mkrc-symlink-dirs.t \
 	mkrc-tagged-file.t \
 	mkrc-usage.t \
+	mkrc-undotted.t \
 	rcrc-custom.t \
 	rcrc-hostname.t \
 	rcrc.t \
