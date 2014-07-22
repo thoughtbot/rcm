@@ -282,6 +282,9 @@ $DEBUG "SYMLINK_DIRS: $SYMLINK_DIRS"
 : ${MK_DIRS:=""}
 $DEBUG "MK_DIRS: $MK_DIRS"
 
+: ${UNDOTTED:=""}
+$DEBUG "UNDOTTED: $UNDOTTED"
+
 relative_root_dir="$PWD"
 
 for DOTFILES_DIR in $DOTFILES_DIRS; do
@@ -303,16 +306,23 @@ for DOTFILES_DIR in $DOTFILES_DIRS; do
   $DEBUG "symlink_dirs_file_globs: $symlink_dirs_file_globs"
   mk_dirs_file_globs=$(dotfiles_dir_excludes "$DOTFILES_DIR" "$MK_DIRS")
   $DEBUG "mk_dirs_file_globs: $mk_dirs_file_globs"
+  undotted_file_globs=$(dotfiles_dir_excludes "$DOTFILES_DIR" "$UNDOTTED")
+  $DEBUG "undotted_file_globs: $undotted_file_globs"
 
   cd "$DOTFILES_DIR"
   DIR_STACK=":$DOTFILES_DIR"
 
   for file in ${FILES:-*}; do
+    dotted=0
     if is_metafile "$file"; then
       continue
     fi
 
-    handle_file "$file" "$DEST_DIR" "$DOTFILES_DIR" . 0 "$exclude_file_globs" "$include_file_globs" "$symlink_dirs_file_globs" "$mk_dirs_file_globs"
+    if is_excluded "$file" "$undotted_file_globs" ""; then
+      dotted=1
+    fi
+
+    handle_file "$file" "$DEST_DIR" "$DOTFILES_DIR" . "$dotted" "$exclude_file_globs" "$include_file_globs" "$symlink_dirs_file_globs" "$mk_dirs_file_globs"
   done
 
   cd "$DOTFILES_DIR"
@@ -321,7 +331,12 @@ for DOTFILES_DIR in $DOTFILES_DIRS; do
   if [ -d "$host_files" ]; then
     pushdir "$(basename "$host_files")"
     for file in ${FILES:-*}; do
-      handle_file "$file" "$DEST_DIR" "$host_files" . 0 "$exclude_file_globs" "$include_file_globs" "$symlink_dirs_file_globs" "$mk_dirs_file_globs"
+      dotted=0
+      if is_excluded "$file" "$undotted_file_globs" ""; then
+        dotted=1
+      fi
+
+      handle_file "$file" "$DEST_DIR" "$host_files" . "$dotted" "$exclude_file_globs" "$include_file_globs" "$symlink_dirs_file_globs" "$mk_dirs_file_globs"
     done
     popdir
   fi
@@ -333,7 +348,11 @@ for DOTFILES_DIR in $DOTFILES_DIRS; do
       pushdir "$(basename "tag-$tag")"
       for file in ${FILES:-*}; do
         $DEBUG "TAG: $tag, exclude_file_globs: $exclude_file_globs"
-        handle_file "$file" "$DEST_DIR" "$DOTFILES_DIR/tag-$tag" . 0 "$exclude_file_globs" "$include_file_globs" "$symlink_dirs_file_globs" "$mk_dirs_file_globs"
+        dotted=0
+        if is_excluded "$file" "$undotted_file_globs" ""; then
+          dotted=1
+        fi
+        handle_file "$file" "$DEST_DIR" "$DOTFILES_DIR/tag-$tag" . "$dotted" "$exclude_file_globs" "$include_file_globs" "$symlink_dirs_file_globs" "$mk_dirs_file_globs"
       done
       popdir
     fi
