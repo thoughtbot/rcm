@@ -23,7 +23,7 @@ destination() {
 show_help() {
   local exit_code=${1:-0}
 
-  $PRINT "Usage: mkrc [-ChSsVvqo] [-t TAG] [-d DIR] [-B HOSTNAME] FILES ..."
+  $PRINT "Usage: mkrc [-ChSsUuVvqo] [-t TAG] [-d DIR] [-B HOSTNAME] FILES ..."
   $PRINT "see mkrc(1) and rcm(7) for more details"
 
   exit $exit_code
@@ -44,9 +44,10 @@ in_host=0
 version=0
 always_copy=0
 force_symlink=50
+undotted=50
 install_args=
 
-while getopts :ChSsVvqot:d:B: opt; do
+while getopts :ChSsUuVvqot:d:B: opt; do
   case "$opt" in
     C) always_copy=1 ;;
     h) show_help ;;
@@ -58,6 +59,8 @@ while getopts :ChSsVvqot:d:B: opt; do
     V) version=1 ;;
     S) force_symlink=1 ;;
     s) force_symlink=0 ;;
+    U) undotted=1 ;;
+    u) undotted=0 ;;
     B)
       in_host=1
       hostname="$OPTARG"
@@ -90,6 +93,18 @@ elif [ $force_symlink -eq 0 ]; then
   for file in $files; do
     dedotted="$(de_dot "$file")"
     INSTALL="$INSTALL -s $dedotted"
+  done
+fi
+
+if [ $undotted -eq 1 ]; then
+  for file in $files; do
+    dedotted="$(de_dot "$file")"
+    INSTALL="$INSTALL -U $dedotted"
+  done
+elif [ $undotted -eq 0 ]; then
+  for file in $files; do
+    dedotted="$(de_dot "$file")"
+    INSTALL="$INSTALL -u $dedotted"
   done
 fi
 
