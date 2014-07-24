@@ -6,7 +6,7 @@
 .Nd bless files into a dotfile managed by rcm
 .Sh SYNOPSIS
 .Nm mkrc
-.Op Fl ChoqSsVv
+.Op Fl ChoqSsVvUu
 .Op Fl t Ar tag
 .Op Fl d Ar dir
 .Op Fl B Ar hostname
@@ -46,6 +46,11 @@ in the section
 This is the default.
 .It Fl t Ar TAG
 install dotfiles according to tag
+.It Fl U
+installs the specified rc files without a leading dot, even if they are
+directories.
+.It Fl u
+installs the specified rc file with a leading dot. This is the default.
 .It Fl v
 increase verbosity. This can be repeated for extra verbosity.
 .It Fl V

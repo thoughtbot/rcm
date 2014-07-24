@@ -13,6 +13,8 @@
 .Op Fl S Ar excl_pat
 .Op Fl s Ar excl_pat
 .Op Fl t Ar tag
+.Op Fl U Ar excl_pat
+.Op Fl u Ar excl_pat
 .Op Fl x Ar excl_pat
 .Op Ar files ...
 .Sh DESCRIPTION
@@ -81,6 +83,16 @@ This option can be repeated.
 .It Fl t Ar TAG
 install dotfiles according to
 .Ar TAG
+.It Fl U Ar EXCL_PAT
+any rc file that matches
+.Ar EXCL_PAT
+is installed without a leading dot. This option can be repeated.
+.It Fl u Ar EXCL_PAT
+any file that matches
+.Ar EXCL_PAT
+is installed with a leading dot. This is the opposite of
+.Fl U .
+This option can be repeated. This is the default.
 .It Fl q
 decrease verbosity
 .It Fl V
