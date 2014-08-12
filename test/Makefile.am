@@ -20,6 +20,7 @@ TESTS = \
 	rcrc.t \
 	rcup-link-files.t \
 	rcup-hostname.t \
+	rcup-standalone.t \
 	rcup-symlink-dirs.t \
 	rcup-usage.t
 

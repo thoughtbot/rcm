@@ -9,6 +9,7 @@
 .Op Fl CfhiKkqVv
 .Op Fl B Ar hostname
 .Op Fl d Ar dir
+.Op Fl g
 .Op Fl I Ar excl_pat
 .Op Fl S Ar excl_pat
 .Op Fl s Ar excl_pat
@@ -42,6 +43,15 @@ This can be specified multiple times.
 if the rc file already exists in your home directory but does not match
 the file in your dotfiles directory, remove the rc file then create the
 symlink
+.It Fl g
+print to
+.Li stdout
+a standalone shell script that will run the
+.Nm
+command as specified.
+Nothing on your filesystem will be modified by
+.Nm
+when this flag is passed.
 .It Fl h
 show usage instructions.
 .It Fl I Ar EXCL_PAT
@@ -86,7 +96,10 @@ decrease verbosity
 .It Fl V
 show the version number.
 .It Fl v
-increase verbosity. This can be repeated for extra verbosity.
+increase verbosity.
+This can be repeated for extra verbosity.
+Verbose messages are printed to
+.Li stderr .
 .It Fl x Ar EXCL_PAT
 do not install rc files that match
 .Ar EXCL_PAT .
