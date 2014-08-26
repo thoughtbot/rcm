@@ -1,5 +1,5 @@
 AUTOMAKE_OPTIONS = foreign
-SUBDIRS = man share bin test
+SUBDIRS = man share src bin test
 EXTRA_DIST = LICENSE README.md NEWS.md
 
 .PHONY: release \

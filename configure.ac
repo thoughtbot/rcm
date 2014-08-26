@@ -14,6 +14,8 @@ solaris*)
 esac
 AC_SUBST([SHELL])
 
+AC_PROG_CC
+
 # Checks for libraries.
 
 # Checks for header files.
@@ -23,4 +25,18 @@ AC_SUBST([SHELL])
 # Checks for library functions.
 
 AM_EXTRA_RECURSIVE_TARGETS([release_build_man_html release_push_man_html release_clean_man_html])
-AC_OUTPUT(Makefile bin/Makefile man/Makefile share/Makefile test/Makefile share/rcm.sh arch/git-PKGBUILD NEWS.md bin/lsrc bin/mkrc bin/rcdn bin/rcup)
+AC_OUTPUT([
+  Makefile
+  bin/Makefile
+  man/Makefile
+  src/Makefile
+  share/Makefile
+  test/Makefile
+  share/rcm.sh
+  arch/git-PKGBUILD
+  NEWS.md
+  bin/lsrc
+  bin/mkrc
+  bin/rcdn
+  bin/rcup
+])
