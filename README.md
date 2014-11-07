@@ -25,7 +25,7 @@ Debian-based:
     
 Ubuntu (precise or trusty):
 
-    sudo apt-add-repository ppa:martin-frost/thoughtbot-rcm
+    sudo add-apt-repository ppa:martin-frost/thoughtbot-rcm
     sudo apt-get update
     sudo apt-get install rcm
 
