@@ -78,7 +78,7 @@ Many existing dotfile directories have scripts named
 .Pa install
 or
 .Pa Makefile
-in the directory directory. This will cause a
+in the directory. This will cause a
 .Pa ~/.install
 or
 .Pa ~/.Makefile
@@ -239,6 +239,33 @@ flag.
 OS X users should see the
 .Sx BUGS
 section for more details.
+.
+.Sh STANDALONE INSTALLATION SCRIPT
+.
+The
+.Xr rcup 1
+tool can be used to generate a portable shell script.
+Instead of running a command such as
+.Xr ln 1
+or
+.Xr rm 1 ,
+it will print the command to
+.Li stdout .
+This is controlled with the
+.Fl g
+flag.
+Note that this will generate a script to create an exact replica of the
+synchronization, including tags, host-specific files, and dotfiles directories.
+.Pp
+.Dl env RCRC=/dev/null rcup -B 0 -g > install.sh
+.Pp
+Using the above command, you can now run
+.Li install.sh
+to install (or re-install) your rc files.
+The
+.Li install.sh
+script can be stored in your dotfiles directory, copied between computers, and
+so on.
 .
 .Sh RATIONALE
 The rcm suite was built as an abstraction over the shell, Ruby, Python,

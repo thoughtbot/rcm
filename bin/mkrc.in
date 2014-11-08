@@ -117,8 +117,8 @@ for file in $files; do
   dotless="$(de_dot "$file")"
   dest="$(destination "$DOTFILES_DIR" "$dotless" $in_host "$tag")"
   mkdir -p "$dest/$(dirname "$dotless")"
-  $PRINT "Moving..."
+  $VERBOSE "Moving..."
   mv_v "$file" "$dest/$dotless"
-  $PRINT "Linking..."
+  $VERBOSE "Linking..."
   $INSTALL -d "$DOTFILES_DIR" -t "${tag:--}" $install_args "$dotless"
 done

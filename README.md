@@ -18,10 +18,16 @@ Arch Linux:
 
   https://aur.archlinux.org/packages/rcm-git/
 
-Debian-based (including Ubuntu):
+Debian-based:
 
     wget https://thoughtbot.github.io/rcm/debs/rcm_1.2.3-1_all.deb
     sudo dpkg -i rcm_1.2.3-1_all.deb
+    
+Ubuntu (precise or trusty):
+
+    sudo add-apt-repository ppa:martin-frost/thoughtbot-rcm
+    sudo apt-get update
+    sudo apt-get install rcm
 
 openSUSE/RHEL/CentOS: [instructions](http://software.opensuse.org/download.html?project=utilities&package=rcm)
 
