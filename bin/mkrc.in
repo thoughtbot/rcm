@@ -109,11 +109,6 @@ elif [ $undotted -eq 0 ]; then
 fi
 
 for file in $files; do
-  if [ "${file:0:1}" != "." ] ; then
-    dedotted="$(de_dot "$file")"
-    INSTALL="$INSTALL -U $dedotted"
-  fi
-
   case "$file" in
     /*) : ;;
     *) [ -e "$PWD/$file" ] && file="$PWD/$file" ;;

@@ -115,7 +115,7 @@ in
 .Pp
 .Dl rcup -d configs -v
 .
-.Ss COMMONG PROBLEM: CONFIGURATION FILES/DIRECTORIES WITHOUT DOTS
+.Ss COMMON PROBLEM: CONFIGURATION FILES/DIRECTORIES WITHOUT DOTS
 By default, the rcm suite will prefix every file and directory it manages
 with a dot. If that is not desired, for example in the case of
 .Pa ~/bin
@@ -124,7 +124,11 @@ or
 you can add that file or directory to
 .Ev UNDOTTED
 in
-.Xr rcrc 5 .
+.Xr rcrc 5
+or use the
+.Fl U
+option. For example:
+.Dl mkrc -U bin bin
 .
 .Sh QUICK START FOR EMPTY DOTFILES DIRECTORIES
 This section is for those who do not have an existing dotfiles
