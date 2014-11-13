@@ -51,7 +51,6 @@ the specified files or directories are to be installed without a leading
 dot. This is the default for files that are specified without a leading dot.
 .It Fl u
 the specified files or directories are to be installed with a leading dot.
-This is the default for files that are specified with a leading dot.
 .It Fl v
 increase verbosity. This can be repeated for extra verbosity.
 .It Fl V
@@ -72,7 +71,7 @@ User configuration file. Defaults to
 .Dl mkrc -o ~/.rcrc
 .Dl mkrc -C .ssh
 .Dl mkrc -S .zpretzo
-.Dl mkrc bin
+.Dl mkrc -U bin
 .Sh SEE ALSO
 .Xr lsrc 1 ,
 .Xr rcdn 1 ,
