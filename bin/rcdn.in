@@ -21,7 +21,7 @@ remove_link() {
 show_help() {
   local exit_code=${1:-0}
 
-  $PRINT "Usage: rcdn [-hqVv] [-B HOSTNAME] [-d DOT_DIR] [-I EXCL_PAT] [-S EXCL_PAT] [-t TAG] [-x EXCL_PAT]"
+  $PRINT "Usage: rcdn [-hKkqVv] [-B HOSTNAME] [-d DOT_DIR] [-I EXCL_PAT] [-S EXCL_PAT] [-s EXCL_PAT] [-t TAG] [-x EXCL_PAT]"
   $PRINT "see rcdn(1) and rcm(7) for more details"
 
   exit $exit_code
