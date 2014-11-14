@@ -31,7 +31,7 @@ merged.
 Submit a pull request using GitHub. If there is a relevant bug, mention
 it in the commit message (`Fixes #42.`).
 
-[mailmap]: https://github.com/git/git/blob/6a907786af835ac15962be53f1492f2
+[mailmap]: https://github.com/git/git/blob/master/Documentation/mailmap.txt
 
 Testing
 -----
