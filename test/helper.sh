@@ -9,6 +9,14 @@ export RCM_LIB="$TESTDIR/../share"
 
 mkdir .dotfiles
 
+hostname() {
+  if [ -n "$HOSTNAME" ]; then
+    echo "$HOSTNAME"
+  else
+    command hostname | sed -e 's/\..*//'
+  fi
+}
+
 assert() {
   local msg="$1"; shift
 
