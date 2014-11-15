@@ -171,7 +171,7 @@ handle_file() {
 show_help() {
   local exit_code=${1:-0}
 
-  $PRINT "Usage: rcup [-CfhiKkqVv] [-B HOSTNAME] [-d DOT_DIR] [-I EXCL_PAT] [-S EXCL_PAT] [-t TAG] [-U EXCL_PAT] [-x EXCL_PAT]"
+  $PRINT "Usage: rcup [-CfhiKkqVv] [-B HOSTNAME] [-d DOT_DIR] [-I EXCL_PAT] [-S EXCL_PAT] [-s EXCL_PAT] [-t TAG] [-U EXCL_PAT] [-u EXCL_PAT] [-x EXCL_PAT]"
   $PRINT "see rcup(1) and rcm(7) for more details"
 
   exit $exit_code
