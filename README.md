@@ -22,14 +22,6 @@ Debian-based:
 
     wget https://thoughtbot.github.io/rcm/debs/rcm_1.2.3-1_all.deb
     sudo dpkg -i rcm_1.2.3-1_all.deb
-    
-Ubuntu (precise or trusty):
-
-    sudo add-apt-repository ppa:martin-frost/thoughtbot-rcm
-    sudo apt-get update
-    sudo apt-get install rcm
-
-openSUSE/RHEL/CentOS: [instructions](http://software.opensuse.org/download.html?project=utilities&package=rcm)
 
 Gentoo-based (including Funtoo):
 
@@ -37,10 +29,22 @@ Gentoo-based (including Funtoo):
     sudo layman -f --overlays https://github.com/bronislav/overlays/raw/master/layman.xml --add bronislav
     sudo emerge rcm
 
+OpenBSD (-current):
+
+    sudo pkg_add rcm
+
+openSUSE/RHEL/CentOS: [instructions](http://software.opensuse.org/download.html?project=utilities&package=rcm)
+
 OS X:
 
     brew tap thoughtbot/formulae
     brew install rcm
+
+Ubuntu (precise or trusty):
+
+    sudo add-apt-repository ppa:martin-frost/thoughtbot-rcm
+    sudo apt-get update
+    sudo apt-get install rcm
 
 Elsewhere:
 
