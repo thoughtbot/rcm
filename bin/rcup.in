@@ -190,6 +190,8 @@ handle_command_line() {
   local symlink_dirs=
   local never_symlink_dirs=
   local hostname=
+  local undotted=
+  local never_undotted=
   local generate=0
   local args=$*
   local undotted=
