@@ -8,51 +8,50 @@ Making a release
 
 2. Update the build system by running: `./autogen.sh`.
 
-3. Build the packages:
+3. Build the trivial packages:
 
 This all depends on a `gh-pages` branch:
 
     git branch gh-pages origin/gh-pages
 
+First build the distribution:
+
+    make distcheck
+
 On any system you can build the tarball, Homebrew package, Arch
 PKGBUILD, and tag:
 
-    make release_build_tarball release_build_homebrew release_build_arch \
-	    release_build_tag
+    ./maint/release build tarball rcm-*.tar.gz
+    ./maint/release build homebrew rcm-*.tar.gz
+    ./maint/release build arch rcm-*.tar.gz
+    ./maint/release build tag rcm-*.tar.gz
 
 You need mdocml to tranform the manpages into HTML:
 
-    make release_build_man_html
+    ./maint/release build man_html rcm-*.tar.gz
+
+Once built, you can push it live:
+
+    ./maint/release push tarball rcm-*.tar.gz
+    # ... etc. ...
+
+And once pushed, you should clean up
+
+    ./maint/release clean tarball rcm-*.tar.gz
+    # ... etc. ...
+
+4. Build the Debian package:
 
 Only on Debian systems can you build the Debian package:
 
-    make release_build_deb
+    make NEWS.md
+    ./maint/release build deb rcm-*.tar.gz
+    ./maint/release push deb rcm-*.tar.gz
+    ./maint/release clean deb rcm-*.tar.gz
 
-If you are on a Debian system with mdocml, here is a shortcut:
+5. Contact package maintainers:
 
-    make release_build
-
-From here you can push these:
-
-    make release_push_tarball release_push_homebrew release_push_arch \
-	    release_push_tag release_push_man_html
-    make release_push_deb
-
-Or, all at once:
-
-    make release_push
-
-You can clean individual steps:
-
-    make release_clean_tarball release_clean_homebrew release_clean_arch \
-      release_clean_deb release_clean_tag release_clean_man_html
-
-Or, again, everything at once:
-
-    make release_clean
-
-If you are on a Debian system, have mdocml installed, have an absurd
-amount of trust in the system, and know how to debug it intimately, give
-everything a go:
-
-    make release
+Gentoo   Anton Ilin     <anton@ilin.dn.ua>            0xCB2AA11FEB76CE36
+OpenBSD  Mike Burns     <mike+openbsd@mike-burns.com> 0x3E6761F72846B014
+openSUSE Andrei Dziahel <develop7@develop7.info>      0x58BA3FA4A49D76C2
+Ubuntu   Martin Frost   <frost@ceri.se>               0x98624E2FE507FAF2
