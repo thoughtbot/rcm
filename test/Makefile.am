@@ -27,5 +27,6 @@ TESTS = \
 	rcup-usage.t
 
 dist_check_SCRIPTS = $(TESTS)
+dist_check_DATA = helper.sh
 
 LOG_COMPILER = cram
