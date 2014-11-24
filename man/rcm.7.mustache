@@ -52,7 +52,7 @@ the directory only contains rc files; and these rc filenames do not
 begin with a period. See the caveats below if this is not you.
 .Bl -enum
 .It
-Dryrun with
+Dry run with
 .Xr lsrc 1 .
 Look for anything unexpected in here, such as
 .Pa ~/.install
@@ -68,10 +68,18 @@ This is likely to do nothing, since your dotfiles already exist.
 .Pp
 .Dl rcup -v
 .It
-When necessary, add new rc files with
+When necessary, add new rc files to the dotfiles directory with
 .Xr mkrc 1 .
 .Pp
 .Dl mkrc ~/.tigrc
+.Pp
+In the other direction, you can use
+.Xr rcup 1
+to create the symlinks from
+.Pa ~/.dotfiles
+to your home directory.
+.Pp
+.Dl rcup tigrc
 .El
 .Ss COMMON PROBLEM: EXISTING INSTALL SCRIPTS
 Many existing dotfile directories have scripts named
