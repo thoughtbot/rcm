@@ -4,11 +4,9 @@ Developers
 Making a release
 ----------------
 
-1. Bump the version in `configure.ac`, in `AC_INIT`.
+1. Bump the version within the `AC_INIT` macro call in `configure.ac`.
 
-2. Update the build system. This depends on GNU autoconf and GNU automake.
-
-    ./autogen.sh
+2. Update the build system by running: `./autogen.sh`.
 
 3. Build the packages:
 

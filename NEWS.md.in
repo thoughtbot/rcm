@@ -2,7 +2,7 @@ rcm (@PACKAGE_VERSION@) unstable; urgency=low
 
   * BUGFIX: Use custom function instead of `readlink` to resolve symlinks in
     test helpers (Melissa Xie).
-  * Documentation fixes (Melissa Xie)
+  * Documentation fixes and updates (Melissa Xie).
   * Show usage information when given bad arguments (Mike Burns).
 
  -- Mike Burns <mburns@thoughtbot.com>  Fri, 09 May 2014 14:17:49 +0200
