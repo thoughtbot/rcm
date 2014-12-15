@@ -24,7 +24,10 @@ TESTS = \
 	rcup-hostname.t \
 	rcup-standalone.t \
 	rcup-symlink-dirs.t \
-	rcup-usage.t
+	rcup-usage.t \
+	rcdn-hooks.t \
+	rcup-hooks.t
+
 
 dist_check_SCRIPTS = $(TESTS)
 dist_check_DATA = helper.sh

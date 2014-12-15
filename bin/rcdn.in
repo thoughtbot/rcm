@@ -31,7 +31,7 @@ handle_command_line() {
   local arg_tags=
   local verbosity=0
   local version=0
-  local run_hooks=0
+  local run_hooks=1
   local dotfiles_dirs=
   local files=
   local excludes=
@@ -124,4 +124,5 @@ for dest_and_src in $dests_and_srcs; do
   remove_link "$dest" "$dest" "$sigil"
 done
 
+IFS="$saved_ifs"
 run_hooks post down
