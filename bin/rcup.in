@@ -302,4 +302,5 @@ for dest_and_src in $dests_and_srcs; do
   handle_file "$GENERATE" "$src" "$dest" "$sigil"
 done
 
+IFS="$saved_ifs"
 run_hooks post up
