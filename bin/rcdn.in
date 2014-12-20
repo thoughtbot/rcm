@@ -124,4 +124,5 @@ for dest_and_src in $dests_and_srcs; do
   remove_link "$dest" "$dest" "$sigil"
 done
 
+IFS="$saved_ifs"
 run_hooks post down
