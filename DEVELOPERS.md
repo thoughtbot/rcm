@@ -50,6 +50,10 @@ Only on Debian systems can you build the Debian package:
     ./maint/release push deb rcm-*.tar.gz
     ./maint/release clean deb rcm-*.tar.gz
 
+This will create both a binary and a signed source package.
+
+Source packages go in the `deb-src` directory on the `gh-pages` branch.
+
 5. Contact package maintainers:
 
 Gentoo   Anton Ilin     <anton@ilin.dn.ua>            0xCB2AA11FEB76CE36
