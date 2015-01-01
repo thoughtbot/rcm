@@ -37,6 +37,23 @@ it in the commit message (`Fixes #42.`).
 
 [mailmap]: https://github.com/git/git/blob/master/Documentation/mailmap.txt
 
+Setup
+-----
+
+1. Install dependencies
+
+Cram is used for tests:
+
+    pip install cram
+
+The mustache gem is used for building the html pages.
+
+    gem install mustache
+
+2. Start hacking
+
+Just remember to run `./configure` before any `make` commands.
+
 Testing
 -------
 

@@ -16,6 +16,7 @@ This all depends on a `gh-pages` branch:
 
 First build the distribution:
 
+    ./configure
     make distcheck
 
 On any system you can build the tarball, Homebrew package, Arch
