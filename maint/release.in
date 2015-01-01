@@ -1,7 +1,7 @@
 #!/bin/sh
 
-ORIGIN_URL=$(shell git config --get remote.origin.url)
-CURRENT_BRANCH=$(shell git rev-parse --abbrev-ref HEAD)
+ORIGIN_URL=$(git config --get remote.origin.url)
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 PACKAGE='@PACKAGE@'
 PACKAGE_VERSION='@PACKAGE_VERSION@'
 abs_srcdir='@abs_srcdir@'
@@ -79,20 +79,20 @@ release_clean_arch() {
 # Deb
 release_build_deb() {
   ([ -d deb-build ] || mkdir -p deb-build) && \
-    cp $(DIST_ARCHIVES) deb-build/$(PACKAGE)_$(PACKAGE_VERSION).orig.tar.gz && \
-    tar -C deb-build -xf deb-build/$(PACKAGE)_$(PACKAGE_VERSION).orig.tar.gz && \
-    cp -R debian deb-build/$(PACKAGE)-$(PACKAGE_VERSION) && \
-    cd deb-build/$(PACKAGE)-$(PACKAGE_VERSION) && \
+    cp ${DIST_ARCHIVES} deb-build/${PACKAGE}_${PACKAGE_VERSION}.orig.tar.gz && \
+    tar -C deb-build -xf deb-build/${PACKAGE}_${PACKAGE_VERSION}.orig.tar.gz && \
+    cp -R debian deb-build/${PACKAGE}-${PACKAGE_VERSION} && \
+    cd deb-build/${PACKAGE}-${PACKAGE_VERSION} && \
     dch -d "New upstream release" && dch -r "" && \
     cp debian/changelog $(abs_srcdir)/debian/changelog && \
     debuild -us -uc && \
     cd $(abs_srcdir) && \
     ([ -d gh-pages ] || git clone --branch gh-pages $(ORIGIN_URL) gh-pages) && \
     ([ -d gh-pages/debs ] || mkdir gh-pages/debs) && \
-    cp deb-build/$(PACKAGE)_$(PACKAGE_VERSION)*.deb gh-pages/debs && \
+    cp deb-build/${PACKAGE}_${PACKAGE_VERSION}*.deb gh-pages/debs && \
     cd gh-pages && \
-    git add debs/$(PACKAGE)_$(PACKAGE_VERSION)*deb && \
-    git commit -m "Release version $(PACKAGE_VERSION) for Debian" -- debs/$(PACKAGE)_$(PACKAGE_VERSION)*deb
+    git add debs/${PACKAGE}_${PACKAGE_VERSION}*deb && \
+    git commit -m "Release version ${PACKAGE_VERSION} for Debian" -- debs/${PACKAGE}_${PACKAGE_VERSION}*deb
 }
 
 release_push_deb() {
@@ -115,7 +115,7 @@ release_push_tag() {
   git push origin --tags
 }
 
-release_clean_tag() {
+release_clean_tag() { :
 }
 
 generate_dist_sha() {
@@ -145,7 +145,7 @@ release_clean_man_html() {
 
 # Main:
 
-if [ $# < 3 ]; then
+if [ $# -lt 3 ]; then
   echo "Usage: release (build|push|clean) (tarball|homebrew|arch|deb|tag|man_html) DIST_ARCHIVES" >&2
   exit 64
 fi
