@@ -119,7 +119,8 @@ release_push_tag() {
   git push origin --tags
 }
 
-release_clean_tag() { :
+release_clean_tag() {
+  :
 }
 
 generate_dist_sha() {
