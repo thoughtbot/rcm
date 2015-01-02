@@ -46,7 +46,7 @@ Cram is used for tests:
 
     pip install cram
 
-The mustache gem is used for building the html pages.
+The mustache gem is used for building the HTML pages.
 
     gem install mustache
 
