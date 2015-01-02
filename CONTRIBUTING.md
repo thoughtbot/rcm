@@ -52,8 +52,6 @@ The mustache gem is used for building the HTML pages.
 
 2. Start hacking
 
-Just remember to run `./configure` before any `make` commands.
-
 Testing
 -------
 
