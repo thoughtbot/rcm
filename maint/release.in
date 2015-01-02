@@ -88,9 +88,14 @@ release_build_deb() {
     cd ${abs_top_builddir} && \
     ([ -d gh-pages ] || git clone --branch gh-pages ${ORIGIN_URL} gh-pages) && \
     ([ -d gh-pages/debs ] || mkdir gh-pages/debs) && \
+    ([ -d gh-pages/deb-src ] || mkdir gh-pages/deb-src) && \
     cp deb-build/${PACKAGE}_${PACKAGE_VERSION}*.deb gh-pages/debs && \
+    cp deb-build/${PACKAGE}_${PACKAGE_VERSION}*.dsc gh-pages/deb-src && \
+    cp deb-build/${PACKAGE}_${PACKAGE_VERSION}*.{orig,debian}.tar.gz gh-pages/deb-src && \
     cd gh-pages && \
     git add debs/${PACKAGE}_${PACKAGE_VERSION}*deb && \
+    git add deb-src/${PACKAGE}_${PACKAGE_VERSION}*dsc && \
+    git add deb-src/${PACKAGE}_${PACKAGE_VERSION}*{orig,debian}.tar.gz && \
     git commit -m "Release version ${PACKAGE_VERSION} for Debian" -- debs/${PACKAGE}_${PACKAGE_VERSION}*deb
 }
 
