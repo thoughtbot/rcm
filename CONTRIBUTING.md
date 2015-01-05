@@ -4,11 +4,6 @@ Contributing
 Overview
 --------
 
-- Fork the repo.
-- Prepare the build system: `./autogen.sh`. (This depends on GNU autoconf and
-  GNU automake.)
-- Configure the package: `./configure`.
-- Make sure the tests pass: `make check`.
 - Make your changes.
 - Update `NEWS.md.in`.
 - Update `.mailmap` if necessary.
@@ -40,17 +35,22 @@ it in the commit message (`Fixes #42.`).
 Setup
 -----
 
-1. Install dependencies
+1. Fork the repo.
+2. Install dependencies
 
-Cram is used for tests:
+  Cram is used for tests:
 
-    pip install cram
+      pip install cram
 
-The mustache gem is used for building the HTML pages.
+  The mustache gem is used for building the HTML pages.
 
-    gem install mustache
+      gem install mustache
 
-2. Start hacking
+3. Prepare the build system: `./autogen.sh`. (This depends on GNU
+   autoconf and GNU automake.)
+4. Configure the package: `./configure`.
+5. Make sure the tests pass: `make check`.
+6. Start hacking
 
 Testing
 -------
