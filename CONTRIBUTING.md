@@ -38,13 +38,8 @@ Setup
 1. Fork the repo.
 2. Install dependencies
 
-  Cram is used for tests:
-
-      pip install cram
-
-  The mustache gem is used for building the HTML pages.
-
-      gem install mustache
+  - Cram is used for tests: `pip install cram`
+  - The mustache gem for building the HTML pages: `gem install mustache`
 
 3. Prepare the build system: `./autogen.sh`. (This depends on GNU
    autoconf and GNU automake.)
