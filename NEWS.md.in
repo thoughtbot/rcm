@@ -1,12 +1,19 @@
 rcm (@PACKAGE_VERSION@) unstable; urgency=low
 
-  * BUGFIX: Use custom function instead of `readlink` to resolve symlinks in
-    test helpers (Melissa Xie).
-  * Documentation fixes and updates (Melissa Xie and Jason Daniel Augustine
-    Gilliland).
+  * BUGFIX: Control whether hooks should run in rcdn(1) with the -K and -k
+    flags (Ben Turrubiates, Christopher Koch, Mike Burns, Mikkel Fahnøe
+    Jørgensen).
+  * Massive documentation fixes and updates (Christopher Koch, David Alexander,
+    Jason Daniel Augustine Gilliland, Martin Frost, Melissa Xie, Mike Burns,
+    Scott Stevenson).
+  * Generate a minimal standalone rcup(1) script with the -g flag (Mike Burns).
+  * Support rc files without leading dots via the -U and -u flags in lsrc(1),
+    rcup(1), and rcdn(1), and the UNDOTTED setting in rcrc(5) (Christopher
+    Koch).
+  * Override SYMLINK_DIRS or -S with -s (Mike Burns).
   * Show usage information when given bad arguments (Mike Burns).
 
- -- Mike Burns <mburns@thoughtbot.com>  Fri, 09 May 2014 14:17:49 +0200
+ -- Mike Burns <mburns@thoughtbot.com>  Thu, 08 Jan 2015 14:50:00 +0200
 
 rcm (1.2.3) unstable; urgency=low
 
