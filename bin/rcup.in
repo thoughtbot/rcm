@@ -169,16 +169,21 @@ handle_file() {
     elif [ $REPLACE_ALL -eq 1 ]; then
       replace_file "$src" "$dest" "$sigil"
     else
-      $PROMPT "overwrite ${dest}? [ynaq]"
-      read overwrite
-      case "$overwrite" in
-        a) REPLACE_ALL=1
-           replace_file "$src" "$dest" "$sigil"
-           ;;
-        y) replace_file "$src" "$dest" "$sigil" ;;
-        q) exit 1 ;;
-        *) $VERBOSE "skipping $dest" ;;
-      esac
+      overwrite=""
+      while [ -z "$overwrite" -o "$overwrite" == "d" ]
+      do
+        $PROMPT "overwrite ${dest} (d for diff)? [yndaq]"
+        read overwrite
+        case "$overwrite" in
+          d) diff "$src" "$dest" ;;
+          a) REPLACE_ALL=1
+             replace_file "$src" "$dest" "$sigil"
+             ;;
+          y) replace_file "$src" "$dest" "$sigil" ;;
+          q) exit 1 ;;
+          *) $VERBOSE "skipping $dest" ;;
+        esac
+      done
     fi
   else
     link_file "$src" "$dest" "$sigil"
