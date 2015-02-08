@@ -126,6 +126,18 @@ is_nested() {
   echo "$1" | sed "s:$DEST_DIR/::" | grep -q '/'
 }
 
+is_linked() {
+  local src="$1"
+  local dest="$2"
+
+  if [ -h "$dest" ]; then
+    local link_dest=$(readlink $dest)
+    [ "$link_dest" == "$src" ]
+  else
+    return 1
+  fi  
+}
+
 is_identical() {
   diff -s "$1" "$2" > /dev/null
 }
@@ -148,7 +160,12 @@ handle_file() {
 
   if [ "$generate" -ne 1 -a -e "$dest" ]; then
     if is_identical "$src" "$dest"; then
-      $VERBOSE "identical $dest"
+      if [ "x$sigil" != "xX" ] && ! is_linked "$src" "$dest"; then
+        $VERBOSE "replacing identical but incorrectly linked $dest"
+        replace_file "$src" "$dest" "$sigil"
+      else
+        $VERBOSE "identical $dest"
+      fi
     elif [ $REPLACE_ALL -eq 1 ]; then
       replace_file "$src" "$dest" "$sigil"
     else
