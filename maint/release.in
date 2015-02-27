@@ -11,20 +11,20 @@ dist_man_MANS='lsrc.1 mkrc.1 rcdn.1 rcup.1 rcrc.5 rcm.7'
 
 edit_package() {
   sed \
-    -e "s|@PACKAGE[@]|$(PACKAGE)|g" \
-    -e "s|@PACKAGE_VERSION[@]|$(PACKAGE_VERSION)|g" \
-    -e "s|@DIST_ARCHIVES[@]|$(DIST_ARCHIVES)|g" \
-    -e "s|@DIST_SHA[@]|$(DIST_SHA)|g"
+    -e "s|@PACKAGE[@]|$PACKAGE|g" \
+    -e "s|@PACKAGE_VERSION[@]|$PACKAGE_VERSION|g" \
+    -e "s|@DIST_ARCHIVES[@]|$DIST_ARCHIVES|g" \
+    -e "s|@DIST_SHA[@]|$DIST_SHA|g"
 }
 
 # Tarball
 release_build_tarball() {
   ([ -d gh-pages ] || git clone --branch gh-pages . gh-pages) && \
     ([ -d gh-pages/dist ] || mkdir gh-pages/dist) && \
-    cp $(DIST_ARCHIVES) gh-pages/dist && \
+    cp $DIST_ARCHIVES gh-pages/dist && \
     cd gh-pages && \
-      git add dist/$(DIST_ARCHIVES) && \
-      git commit -m "Release version $(PACKAGE_VERSION) tarball"
+      git add dist/$DIST_ARCHIVES && \
+      git commit -m "Release version $PACKAGE_VERSION tarball"
 }
 
 release_push_tarball() {
@@ -34,16 +34,16 @@ release_push_tarball() {
 
 release_clean_tarball() {
   rm -rf gh-pages
-  rm -rf $(DIST_ARCHIVES)
+  rm -rf $DIST_ARCHIVES
 }
 
 # Homebrew
 release_build_homebrew() {
   ([ -d homebrew-formulae ] || git clone git@github.com:thoughtbot/homebrew-formulae.git homebrew-formulae) && \
-    $(edit_package) homebrew/$(PACKAGE).rb.in > homebrew-formulae/Formula/$(PACKAGE).rb && \
+    $edit_package homebrew/$PACKAGE.rb.in > homebrew-formulae/Formula/$PACKAGE.rb && \
     cd homebrew-formulae && \
-    git add Formula/$(PACKAGE).rb && \
-    git commit -m "$(PACKAGE): Release version $(PACKAGE_VERSION)"
+    git add Formula/$PACKAGE.rb && \
+    git commit -m "$PACKAGE: Release version $PACKAGE_VERSION"
 }
 
 release_push_homebrew() {
@@ -53,17 +53,17 @@ release_push_homebrew() {
 
 release_clean_homebrew() {
   rm -rf homebrew-formulae
-  rm -rf $(DIST_ARCHIVES)
+  rm -rf $DIST_ARCHIVES
 }
 
 # Arch
 release_build_arch() {
   ([ -d gh-pages ] || git clone --branch gh-pages . gh-pages) && \
     ([ -d gh-pages/arch ] || mkdir gh-pages/arch) && \
-    $(edit_package) arch/PKGBUILD.in > gh-pages/arch/PKGBUILD &&\
+    $edit_package arch/PKGBUILD.in > gh-pages/arch/PKGBUILD &&\
     cd gh-pages &&\
       git add arch/PKGBUILD &&\
-      git commit -m "Release version $(PACKAGE_VERSION) Arch package"
+      git commit -m "Release version $PACKAGE_VERSION Arch package"
 }
 
 release_push_arch() {
@@ -73,7 +73,7 @@ release_push_arch() {
 
 release_clean_arch() {
   rm -rf gh-pages
-  rm -rf $(DIST_ARCHIVES)
+  rm -rf $DIST_ARCHIVES
 }
 
 # Deb
@@ -107,12 +107,12 @@ release_push_deb() {
 release_clean_deb() {
   rm -rf gh-pages
   rm -rf deb-build
-  rm -rf $(DIST_ARCHIVES)
+  rm -rf $DIST_ARCHIVES
 }
 
 # Tag
 release_build_tag() {
-  git tag -s v$(PACKAGE_VERSION) -m "Release $(PACKAGE_VERSION)"
+  git tag -s v$PACKAGE_VERSION -m "Release $PACKAGE_VERSION"
 }
 
 release_push_tag() {
@@ -124,28 +124,28 @@ release_clean_tag() {
 }
 
 generate_dist_sha() {
-  export DIST_SHA=$(shasum $(srcdir)/$(DIST_ARCHIVES) | cut -d' ' -f1)
+  export DIST_SHA=$(shasum $srcdir/$DIST_ARCHIVES | cut -d' ' -f1)
 }
 
 # manpages as HTML
 release_build_man_html() {
-  ([ -d $(abs_top_builddir)/gh-pages ] || git clone --branch gh-pages --single-branch .. $(abs_top_builddir)/gh-pages) && \
-  for i in $(dist_man_MANS); do \
-    mandoc -Thtml -Oman=%N.%S.html $$i > $(abs_top_builddir)/gh-pages/$$i.html ; \
+  ([ -d $abs_top_builddir/gh-pages ] || git clone --branch gh-pages --single-branch .. $abs_top_builddir/gh-pages) && \
+  for i in $dist_man_MANS; do \
+    mandoc -Thtml -Oman=%N.%S.html $$i > $abs_top_builddir/gh-pages/$$i.html ; \
   done && \
-  cd $(abs_top_builddir)/gh-pages && \
+  cd $abs_top_builddir/gh-pages && \
   cp rcm.7.html index.html && \
   git add -A && \
-  git commit -m "HTML documentation for $(PACKAGE_VERSION)"
+  git commit -m "HTML documentation for $PACKAGE_VERSION"
 }
 
 release_push_man_html() {
-  cd $(abs_top_builddir)/gh-pages && \
-    git push -f $(ORIGIN_URL) gh-pages
+  cd $abs_top_builddir/gh-pages && \
+    git push -f $ORIGIN_URL gh-pages
 }
 
 release_clean_man_html() {
-  rm -rf $(abs_top_builddir)/gh-pages
+  rm -rf $abs_top_builddir/gh-pages
 }
 
 # Main:
