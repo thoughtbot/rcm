@@ -130,12 +130,7 @@ is_linked() {
   local src="$1"
   local dest="$2"
 
-  if [ -h "$dest" ]; then
-    local link_dest=$(readlink $dest)
-    [ "$link_dest" == "$src" ]
-  else
-    return 1
-  fi  
+  [ -h "$dest" ] && [ "$(readlink "$dest")" = "$src" ]
 }
 
 is_identical() {
@@ -170,7 +165,7 @@ handle_file() {
       replace_file "$src" "$dest" "$sigil"
     else
       overwrite=""
-      while [ -z "$overwrite" -o "$overwrite" == "d" ]
+      while [ -z "$overwrite" -o "$overwrite" = "d" ]
       do
         $PROMPT "overwrite ${dest} (d for diff)? [yndaq]"
         read overwrite
