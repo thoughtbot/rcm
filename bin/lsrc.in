@@ -323,21 +323,6 @@ for DOTFILES_DIR in $DOTFILES_DIRS; do
   cd "$DOTFILES_DIR"
   DIR_STACK=":$DOTFILES_DIR"
 
-  for file in ${FILES:-*}; do
-    dotted=0
-    if is_metafile "$file"; then
-      continue
-    fi
-
-    if is_excluded "$file" "$undotted_file_globs" "$never_undotted_file_globs"; then
-      dotted=1
-    fi
-
-    handle_file "$file" "$DEST_DIR" "$DOTFILES_DIR" . "$dotted" "$exclude_file_globs" "$include_file_globs" "$symlink_dirs_file_globs" "$mk_dirs_file_globs"
-  done
-
-  cd "$DOTFILES_DIR"
-
   host_files="$DOTFILES_DIR/host-$HOSTNAME"
   if [ -d "$host_files" ]; then
     pushdir "$(basename "$host_files")"
@@ -369,4 +354,18 @@ for DOTFILES_DIR in $DOTFILES_DIRS; do
     fi
   done
 
+  cd "$DOTFILES_DIR"
+
+  for file in ${FILES:-*}; do
+    dotted=0
+    if is_metafile "$file"; then
+      continue
+    fi
+
+    if is_excluded "$file" "$undotted_file_globs" "$never_undotted_file_globs"; then
+      dotted=1
+    fi
+
+    handle_file "$file" "$DEST_DIR" "$DOTFILES_DIR" . "$dotted" "$exclude_file_globs" "$include_file_globs" "$symlink_dirs_file_globs" "$mk_dirs_file_globs"
+  done
 done

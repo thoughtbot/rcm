@@ -13,9 +13,9 @@ The hostname can be set in ~/.rcrc
   $ echo 'HOSTNAME="eggplant_firetruck"' > $HOME/.rcrc
 
   $ lsrc
-  /*/.example:/*/.dotfiles/example (glob)
   /*/.nh-example:/*/.dotfiles/host-eggplant_firetruck/nh-example (glob)
+  /*/.example:/*/.dotfiles/example (glob)
 
   $ lsrc -B haircut_hammer
-  /*/.example:/*/.dotfiles/example (glob)
   /*/.nh-example:/*/.dotfiles/host-haircut_hammer/nh-example (glob)
+  /*/.example:/*/.dotfiles/example (glob)
