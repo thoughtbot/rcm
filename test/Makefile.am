@@ -8,6 +8,7 @@ TESTS = \
 	lsrc-tags.t \
 	lsrc-usage.t \
 	lsrc-undotted.t \
+	lsrc-host-tags-default.t \
 	mkrc-alternate-dotfiles-dir.t \
 	mkrc-copy-file.t \
 	mkrc-host-file.t \
