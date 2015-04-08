@@ -175,8 +175,22 @@ User configuration file. Defaults to
 .Xr rcrc 5 ,
 .Xr rcm 7
 .Sh AUTHORS
-.An "Mike Burns" Aq mike@mike-burns.com
+.Nm
+is maintained by
+.An "Mike Burns" Aq Mt mburns@thoughtbot.com
+and
+.Lk http://thoughtbot.se thoughtbot
 .Sh BUGS
+For OS X systems, we strongly encourage the use of the
+.Va HOSTNAME
+variable in your
+.Xr rcrc 5 .
+We use the
+.Xr hostname 1
+program to determine the unique identifier for the host. This program is
+not specified by POSIX and can vary by system. On OS X the hostname is
+unpredictable, and can even change as part of the DHCP handshake.
+.Pp
 There are a few bugs around shell globs. Anything involving an exclude
 pattern is unpredictable, so use
 .Fl v
