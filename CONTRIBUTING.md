@@ -28,9 +28,12 @@ existing test suite passes with any changes you make. Also, any attempts to add
 or extend tests will increase the chances of your pull request being merged.
 
 Submit a pull request using GitHub. If there is a relevant bug, mention
-it in the commit message (`Fixes #42.`).
+it in the commit message (`Fixes #42.`). We love pull requests from everyone.
+By participating in this project, you agree to abide by the thoughtbot
+[code of conduct].
 
 [mailmap]: https://github.com/git/git/blob/master/Documentation/mailmap.txt
+[code of conduct]: https://thoughtbot.com/open-source-code-of-conduct
 
 Setup
 -----
