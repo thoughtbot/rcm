@@ -1,6 +1,6 @@
 class Rcm < Formula
-  homepage 'http://thoughtbot.github.io/rcm'
-  url 'http://thoughtbot.github.io/@PACKAGE@/dist/@DIST_ARCHIVES@'
+  homepage 'https://thoughtbot.github.io/rcm'
+  url 'https://thoughtbot.github.io/@PACKAGE@/dist/@DIST_ARCHIVES@'
   sha1 '@DIST_SHA@'
 
   def install
