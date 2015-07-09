@@ -1,4 +1,5 @@
 class Rcm < Formula
+  desc "management suite for dotfiles"
   homepage "https://thoughtbot.github.io/rcm"
   url "https://thoughtbot.github.io/@PACKAGE@/dist/@DIST_ARCHIVES@"
   sha1 "@DIST_SHA@"
