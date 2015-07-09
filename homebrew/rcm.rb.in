@@ -1,5 +1,3 @@
-require 'formula'
-
 class Rcm < Formula
   homepage 'http://thoughtbot.github.io/rcm'
   url 'http://thoughtbot.github.io/@PACKAGE@/dist/@DIST_ARCHIVES@'
