@@ -62,7 +62,7 @@ This uses the standard GNU autotools, so it's the normal dance:
 
     ./configure && \
     make && \
-    make install
+    sudo make install
 
 For more, see `INSTALL`.
 
