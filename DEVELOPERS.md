@@ -56,7 +56,7 @@ Source packages go in the `deb-src` directory on the `gh-pages` branch.
 
 5. Contact package maintainers:
 
-Gentoo   Anton Ilin     <anton@ilin.dn.ua>            0xCB2AA11FEB76CE36
-OpenBSD  Mike Burns     <mike+openbsd@mike-burns.com> 0x3E6761F72846B014
-openSUSE Andrei Dziahel <develop7@develop7.info>      0x58BA3FA4A49D76C2
+Gentoo   Anton Ilin     <anton@ilin.dn.ua>            0xCB2AA11FEB76CE36  
+OpenBSD  Mike Burns     <mike+openbsd@mike-burns.com> 0x3E6761F72846B014  
+openSUSE Andrei Dziahel <develop7@develop7.info>      0x58BA3FA4A49D76C2  
 Ubuntu   Martin Frost   <frost@ceri.se>               0x98624E2FE507FAF2
