@@ -27,7 +27,9 @@ TESTS = \
 	rcup-symlink-dirs.t \
 	rcup-usage.t \
 	rcdn-hooks.t \
-	rcup-hooks.t
+	rcdn-hooks-run-in-situ.t \
+	rcup-hooks.t \
+	rcup-hooks-run-in-situ.t
 
 
 dist_check_SCRIPTS = $(TESTS)

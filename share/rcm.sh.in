@@ -126,7 +126,14 @@ run_hooks() {
           find_opts=-print
         fi
 
-        find "$hook_file" -type f \( \( -user $USER -perm -100 \) -o -perm -001 \) $find_opts -exec {} \;
+        # Emulate the non-POSIX-compliant `-execdir` action with `-exec` and a shell one-liner.
+        # The former is however a bit better when it comes to security. On the other hand
+        # running these hooks imply some level of trust; surely one doesn't clone somebody
+        # else's dotfiles repository without reviewing the hooks before doing an `rcup`?
+        find "$hook_file" -type f \( \( -user $USER -perm -100 \) -o -perm -001 \) \
+          -exec \
+            sh -c 'cd "`dirname $1`" && ./"`basename $1`"' arg0 '{}' \
+            \;
       else
         $DEBUG "no $when-$direction hook present for $dotfiles_dir, skipping"
       fi
