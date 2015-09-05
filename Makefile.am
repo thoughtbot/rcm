@@ -1,6 +1,7 @@
 AUTOMAKE_OPTIONS = foreign
 SUBDIRS = man share bin test
-EXTRA_DIST = LICENSE README.md NEWS.md
+EXTRA_DIST = LICENSE README.md NEWS.md m4
+ACLOCAL_AMFLAGS = -I m4
 
 .PHONY: release
 

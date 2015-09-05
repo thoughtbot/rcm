@@ -9,6 +9,8 @@ PROMPT=echo_n
 ERROR=echo_error
 VERBOSE=:
 DEFAULT_DOTFILES_DIR="$HOME/.dotfiles"
+FIND="@FIND@"
+FIND_HAS_EXECDIR="@FIND_HAS_EXECDIR@"
 MKDIR=mkdir
 INSTALL=rcup
 ROOT_DIR="$HOME"
@@ -126,7 +128,8 @@ run_hooks() {
           find_opts=-print
         fi
 
-        find "$hook_file" -type f \( \( -user $USER -perm -100 \) -o -perm -001 \) $find_opts -exec {} \;
+        $FIND "$hook_file" -type f \( \( -user $USER -perm -100 \) -o -perm -001 \) $find_opts \
+          @FIND_EXEC_SNIPPET@
       else
         $DEBUG "no $when-$direction hook present for $dotfiles_dir, skipping"
       fi

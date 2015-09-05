@@ -1,0 +1,7 @@
+          -exec sh -c 'cd "`dirname $1`" && ./"`basename $1`"' arg0 '{}' \;
+          # The above emulates the non-POSIX-compliant `-execdir` action with `-exec` and
+          # a shell one-liner. The former is however a bit better when it comes to security.
+          # On the other hand running these hooks imply some level of trust; surely one
+          # doesn't clone somebody else's dotfiles repository without reviewing the hooks
+          # before doing an `rcup`? The mystery argument arg0 is the unused program name (aka $0)
+          # for the shell one-liner.
