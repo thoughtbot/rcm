@@ -51,7 +51,7 @@ echo_stderr() {
 }
 
 is_relative() {
-  echo "$1" | grep -vq '^/'
+  echo "$1" | grep -v '^/' >/dev/null
 }
 
 version() {

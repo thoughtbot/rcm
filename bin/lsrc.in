@@ -118,7 +118,7 @@ show_file() {
     output="$output:$sigil"
   fi
 
-  if echo "$DEST_STACK:" | grep -vq ":$dest_file:"; then
+  if echo "$DEST_STACK:" | grep -v ":$dest_file:" >/dev/null; then
     DEST_STACK="$DEST_STACK:$dest_file"
     $PRINT "$output"
   else
@@ -167,7 +167,7 @@ dotfiles_dir_excludes() {
   $DEBUG "  with excludes: $excludes"
 
   for exclude in $excludes; do
-    if echo "$exclude" | grep -q ':'; then
+    if echo "$exclude" | grep ':' >/dev/null; then
       dotfiles_dir_pat="$(echo "$exclude" | sed 's/:.*//')"
       file_glob="$(echo "$exclude" | sed 's/.*://')"
 
