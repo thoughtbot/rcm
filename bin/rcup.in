@@ -123,11 +123,11 @@ replace_file() {
 }
 
 is_nested() {
-  echo "$1" | sed "s:$DEST_DIR/::" | grep -q '/'
+  echo "$1" | sed "s:$DEST_DIR/::" | grep '/' >/dev/null
 }
 
 is_identical() {
-  diff -q -s "$1" "$2" > /dev/null
+  diff -c "$1" "$2" > /dev/null 2>&1
 }
 
 handle_dir() {

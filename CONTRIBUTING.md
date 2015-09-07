@@ -57,6 +57,9 @@ The test suite uses [cram][]. It is an integration suite, meaning the
 programs are exercised from the outside and assertions are made only on
 their output or effects.
 
+The test suite requires Perl with the `Cwd` module. It expects to find Perl as
+`perl` in `$PATH`.
+
 All tests can be run like so:
 
     $ make check
