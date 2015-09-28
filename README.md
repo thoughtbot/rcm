@@ -16,7 +16,7 @@ Installation
 
 Arch Linux:
 
-  https://aur.archlinux.org/packages/rcm-git/
+  https://aur.archlinux.org/packages/rcm/
 
 Debian-based:
 
