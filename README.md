@@ -20,16 +20,10 @@ Arch Linux:
 
 Debian-based:
 
-    wget https://thoughtbot.github.io/rcm/debs/rcm_1.2.3-1_all.deb
-    sha=$(sha256sum rcm_1.2.3-1_all.deb | cut -f1 -d' ')
+    wget https://thoughtbot.github.io/rcm/debs/rcm_1.3.0-1_all.deb
+    sha=$(sha256sum rcm_1.3.0-1_all.deb | cut -f1 -d' ')
     [ "$sha" = "fb8ec2611cd4d519965b66fcf950bd93d7593773659f83a8612053217daa38b4" ] && \
-    sudo dpkg -i rcm_1.2.3-1_all.deb
-
-Gentoo-based (including Funtoo):
-
-    sudo emerge layman
-    sudo layman -f --overlays https://github.com/bronislav/overlays/raw/master/layman.xml --add bronislav
-    sudo emerge rcm
+    sudo dpkg -i rcm_1.3.0-1_all.deb
 
 OpenBSD (-current):
 
@@ -57,13 +51,13 @@ Elsewhere:
 
 This uses the standard GNU autotools, so it's the normal dance:
 
-    curl -LO https://thoughtbot.github.io/rcm/dist/rcm-1.2.3.tar.gz && \
+    curl -LO https://thoughtbot.github.io/rcm/dist/rcm-1.3.0.tar.gz && \
 
-    sha=$(sha256 rcm-1.2.3.tar.gz | cut -f1 -d' ') && \
+    sha=$(sha256 rcm-1.3.0.tar.gz | cut -f1 -d' ') && \
     [ "$sha" = "502fd44e567ed0cfd00fb89ccc257dac8d6eb5d003f121299b5294c01665973f" ] && \
 
-    tar -xvf rcm-1.2.3.tar.gz && \
-    cd rcm-1.2.3 && \
+    tar -xvf rcm-1.3.0.tar.gz && \
+    cd rcm-1.3.0 && \
 
     ./configure && \
     make && \
