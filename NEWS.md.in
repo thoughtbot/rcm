@@ -5,12 +5,17 @@ rcm (@PACKAGE_VERSION@) unstable; urgency=low
     Jørgensen).
   * Massive documentation fixes and updates (Christopher Koch, David Alexander,
     Jason Daniel Augustine Gilliland, Martin Frost, Melissa Xie, Mike Burns,
-    Scott Stevenson).
+    Scott Stevenson, Jarkko Kniivilä, Blake Williams, Carl van Tonder, Teo
+    Ljungberg, Zach Latta, Devraj Mehta, Vlad GURDIGA, Joe Ferris).
+  * Host-specific files take priority, then tags, then default (Christian
+    Höltje).
+  * Run hooks in the directory in which they are located (Jarkko Kniivilä).
   * Generate a minimal standalone rcup(1) script with the -g flag (Mike Burns).
   * Support rc files without leading dots via the -U and -u flags in lsrc(1),
     rcup(1), and rcdn(1), and the UNDOTTED setting in rcrc(5) (Christopher
     Koch).
-  * Override SYMLINK_DIRS or -S with -s (Mike Burns).
+  * Improved Solaris support (Jarkko Kniivilä).
+  * Override `SYMLINK_DIRS` or -S with -s (Mike Burns).
   * Show usage information when given bad arguments (Mike Burns).
 
  -- Mike Burns <mburns@thoughtbot.com>  Thu, 08 Jan 2015 14:50:00 +0200
