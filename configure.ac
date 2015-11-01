@@ -3,6 +3,7 @@
 
 AC_PREREQ([2.69])
 AC_INIT(rcm, 1.2.4, mburns@thoughtbot.com)
+AC_CONFIG_MACRO_DIR([m4])
 AM_INIT_AUTOMAKE
 
 # Checks for programs.
@@ -13,6 +14,20 @@ solaris*)
     ;;
 esac
 AC_SUBST([SHELL])
+
+AX_PROG_FIND_W_EXECDIR
+if test -n "$FIND"; then
+    FIND_HAS_EXECDIR=yes
+    FIND_EXEC_SNIPPET="$srcdir/m4/prog-find-w-execdir.snippet.txt"
+else
+    FIND_HAS_EXECDIR=no
+    AC_PATH_PROGS(FIND_WO_EXECDIR, [gfind find])
+    FIND="$FIND_WO_EXECDIR"
+    FIND_EXEC_SNIPPET="$srcdir/m4/prog-find-wo-execdir.snippet.txt"
+fi
+AC_SUBST([FIND])
+AC_SUBST([FIND_HAS_EXECDIR])
+AC_SUBST_FILE([FIND_EXEC_SNIPPET])
 
 # Checks for libraries.
 
