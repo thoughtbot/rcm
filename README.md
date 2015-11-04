@@ -28,7 +28,7 @@ Debian-based:
 OpenBSD (-current):
 
     sudo pkg_add rcm
-    
+
 Fedora 21/22/23:
 
     sudo dnf copr enable seeitcoming/rcm
@@ -41,7 +41,7 @@ OS X:
     brew tap thoughtbot/formulae
     brew install rcm
 
-Ubuntu (precise or trusty):
+Ubuntu:
 
     sudo add-apt-repository ppa:martin-frost/thoughtbot-rcm
     sudo apt-get update
