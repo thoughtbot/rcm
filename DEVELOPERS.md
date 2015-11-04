@@ -58,4 +58,4 @@ Source packages go in the `deb-src` directory on the `gh-pages` branch.
 
 OpenBSD  Mike Burns     <mike+openbsd@mike-burns.com> 0x3E6761F72846B014  
 openSUSE Andrei Dziahel <develop7@develop7.info>      0x58BA3FA4A49D76C2  
-Ubuntu   Martin Frost   <frost@ceri.se>               0x98624E2FE507FAF2
+Ubuntu   Martin Frost   <frost@ceri.se>               0X4609D1E5ECA538E6
