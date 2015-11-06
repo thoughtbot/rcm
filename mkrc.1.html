@@ -34,7 +34,7 @@ MKRC(1)</td>
 <td>
 mkrc</td>
 <td>
-&#91;<span class="opt"><b class="flag">&#45;ChoqSsVv</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;t</b> <i class="arg">tag</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;d</b> <i class="arg">dir</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;B</b> <i class="arg">hostname</i></span>&#93; <i class="arg">files ...</i></td>
+&#91;<span class="opt"><b class="flag">&#45;ChoqSsVvUu</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;t</b> <i class="arg">tag</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;d</b> <i class="arg">dir</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;B</b> <i class="arg">hostname</i></span>&#93; <i class="arg">files ...</i></td>
 </tr>
 </tbody>
 </table>
@@ -78,6 +78,14 @@ if the rc file is a file, symlink it; otherwise, make a directory structure as d
 <dd class="list-tag" style="margin-left: 6.00ex;">
 install dotfiles according to tag</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;U</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+the specified files or directories are to be installed without a leading dot.</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;u</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+the specified files or directories are to be installed with a leading dot. This is the default.</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;v</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
 increase verbosity. This can be repeated for extra verbosity.</dd>
@@ -118,11 +126,15 @@ User configuration file. Defaults to <i class="file">~/.rcrc</i>.</dd>
 <div class="display">
 <code class="lit">mkrc -S .zpretzo</code></div>
 </blockquote>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">mkrc -U bin</code></div>
+</blockquote>
 </div>
 <div class="section">
 <h1 id="x53454520414c534f">SEE ALSO</h1> <a class="link-man" href="lsrc.1.html">lsrc(1)</a>, <a class="link-man" href="rcdn.1.html">rcdn(1)</a>, <a class="link-man" href="rcup.1.html">rcup(1)</a>, <a class="link-man" href="rcrc.5.html">rcrc(5)</a>, <a class="link-man" href="rcm.7.html">rcm(7)</a></div>
 <div class="section">
-<h1 id="x415554484f5253">AUTHORS</h1> <span class="author">Mike Burns</span> &#60;mike@mike-burns.com&#62;</div>
+<h1 id="x415554484f5253">AUTHORS</h1> <b class="name">mkrc</b> is maintained by <span class="author">Mike Burns</span> &#60;<a class="link-mail" href="mailto:mburns@thoughtbot.com">mburns@thoughtbot.com</a>&#62; and <a class="link-ext" href="http://thoughtbot.se">thoughtbot</a></div>
 <table summary="Document Footer" class="foot" width="100%">
 <col width="50%">
 <col width="50%">
@@ -131,7 +143,7 @@ User configuration file. Defaults to <i class="file">~/.rcrc</i>.</dd>
 <td class="foot-date">
 July 28, 2013</td>
 <td class="foot-os" align="right">
-Linux 3.12-1-amd64</td>
+Linux 3.16.0-4-amd64</td>
 </tr>
 </tbody>
 </table>

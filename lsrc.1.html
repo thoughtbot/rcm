@@ -34,7 +34,7 @@ LSRC(1)</td>
 <td>
 lsrc</td>
 <td>
-&#91;<span class="opt"><b class="flag">&#45;FhqVv</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;B</b> <i class="arg">hostname</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;d</b> <i class="arg">dir</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;I</b> <i class="arg">excl_pat</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;S</b> <i class="arg">excl_pat</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;t</b> <i class="arg">tag</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;x</b> <i class="arg">excl_pat</i></span>&#93; &#91;<span class="opt">files ...</span>&#93;</td>
+&#91;<span class="opt"><b class="flag">&#45;FhqVv</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;B</b> <i class="arg">hostname</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;d</b> <i class="arg">dir</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;I</b> <i class="arg">excl_pat</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;S</b> <i class="arg">excl_pat</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;s</b> <i class="arg">excl_pat</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;t</b> <i class="arg">tag</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;U</b> <i class="arg">excl_pat</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;u</b> <i class="arg">excl_pat</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;x</b> <i class="arg">excl_pat</i></span>&#93; &#91;<span class="opt">files ...</span>&#93;</td>
 </tr>
 </tbody>
 </table>
@@ -66,9 +66,21 @@ include the files that match the given pattern. This is applied after any <b cla
 <dd class="list-tag" style="margin-left: 11.00ex;">
 symlink the directories that match the given pattern. See <i class="link-sec"><a class="link-sec" href="#x4558434c554445205041545445524e">EXCLUDE PATTERN</a></i> for more details. This option can be repeated. You may need to quote the pattern to prevent the shell from swallowing the glob.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;s</b> <i class="arg">excl_pat</i></dt>
+<dd class="list-tag" style="margin-left: 11.00ex;">
+if a directory matches the given pattern, recur inside of it instead of symlinking. See <i class="link-sec"><a class="link-sec" href="#x4558434c554445205041545445524e">EXCLUDE PATTERN</a></i> for more details. This is the opposite of the <b class="flag">&#45;S</b> option, and can be used to undo it or the <b class="var">SYMLINK_DIRS</b> setting in your <a class="link-man" href="rcrc.5.html">rcrc(5)</a> configuration. It can be repeated, and the pattern may need to be quoted to protect it from your shell.</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;t</b> <i class="arg">TAG</i></dt>
 <dd class="list-tag" style="margin-left: 11.00ex;">
 list dotfiles according to TAG</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;U</b> <i class="arg">excl_pat</i></dt>
+<dd class="list-tag" style="margin-left: 11.00ex;">
+the rc files or directories matching this pattern will not be symlinked or created with a leading dot. See <i class="link-sec"><a class="link-sec" href="#x4558434c554445205041545445524e">EXCLUDE PATTERN</a></i> for more details. This option can be repeated. You may need to quote the pattern to prevent the shell from swallowing the glob.</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;u</b> <i class="arg">excl_pat</i></dt>
+<dd class="list-tag" style="margin-left: 11.00ex;">
+if an rc file or directory matches the given pattern, it must be dotted. See <i class="link-sec"><a class="link-sec" href="#x4558434c554445205041545445524e">EXCLUDE PATTERN</a></i> for more details. This is the opposite of the <b class="flag">&#45;U</b> option, and can be used to undo it or the <b class="var">UNDOTTED</b> setting in your <a class="link-man" href="rcrc.5.html">rcrc(5)</a> configuration. This option can be repeated. You may need to quote the pattern to prevent the shell from swallowing the glob.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;V</b></dt>
 <dd class="list-tag" style="margin-left: 11.00ex;">
@@ -125,9 +137,10 @@ User configuration file. Defaults to <i class="file">~/.rcrc</i>.</dd>
 <div class="section">
 <h1 id="x53454520414c534f">SEE ALSO</h1> <a class="link-man" href="mkrc.1.html">mkrc(1)</a>, <a class="link-man" href="rcdn.1.html">rcdn(1)</a>, <a class="link-man" href="rcup.1.html">rcup(1)</a>, <a class="link-man" href="rcrc.5.html">rcrc(5)</a>, <a class="link-man" href="rcm.7.html">rcm(7)</a></div>
 <div class="section">
-<h1 id="x415554484f5253">AUTHORS</h1> <span class="author">Mike Burns</span> &#60;mike@mike-burns.com&#62;</div>
+<h1 id="x415554484f5253">AUTHORS</h1> <b class="name">lsrc</b> is maintained by <span class="author">Mike Burns</span> &#60;<a class="link-mail" href="mailto:mburns@thoughtbot.com">mburns@thoughtbot.com</a>&#62; and <a class="link-ext" href="http://thoughtbot.se">thoughtbot</a></div>
 <div class="section">
-<h1 id="x42554753">BUGS</h1> There are a few bugs around shell globs. Anything involving an exclude pattern is unpredictable, so use <b class="flag">&#45;v</b> when dealing with patterns. Specifically, globs may expand at any time and remain expanded for the duration of the run, which means they cannot be applied more than once. In addition, globs involving relative directory names do not work.</div>
+<h1 id="x42554753">BUGS</h1> For OS X systems, we strongly encourage the use of the <b class="var">HOSTNAME</b> variable in your <a class="link-man" href="rcrc.5.html">rcrc(5)</a>. We use the <a class="link-man" href="hostname.1.html">hostname(1)</a> program to determine the unique identifier for the host. This program is not specified by POSIX and can vary by system. On OS X the hostname is unpredictable, and can even change as part of the DHCP handshake.<p>
+There are a few bugs around shell globs. Anything involving an exclude pattern is unpredictable, so use <b class="flag">&#45;v</b> when dealing with patterns. Specifically, globs may expand at any time and remain expanded for the duration of the run, which means they cannot be applied more than once. In addition, globs involving relative directory names do not work.</div>
 <table summary="Document Footer" class="foot" width="100%">
 <col width="50%">
 <col width="50%">
@@ -136,7 +149,7 @@ User configuration file. Defaults to <i class="file">~/.rcrc</i>.</dd>
 <td class="foot-date">
 February 7, 2014</td>
 <td class="foot-os" align="right">
-Linux 3.12-1-amd64</td>
+Linux 3.16.0-4-amd64</td>
 </tr>
 </tbody>
 </table>

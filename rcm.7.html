@@ -85,7 +85,7 @@ This guide serves as a tutorial motivating the suite. For a list of quick refere
 <div class="section">
 <h1 id="x515549434b20535441525420464f52204558495354494e4720444f5446494c4553204449524543544f52494553">QUICK START FOR EXISTING DOTFILES DIRECTORIES</h1> This section is for those who already have an existing dotfiles directory; this directory is <i class="file">~/.dotfiles</i>; the directory only contains rc files; and these rc filenames do not begin with a period. See the caveats below if this is not you.<ol style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-enum">
 <li class="list-enum" style="margin-top: 1.00em;">
-Dryrun with <a class="link-man" href="lsrc.1.html">lsrc(1)</a>. Look for anything unexpected in here, such as <i class="file">~/.install</i> or <i class="file">~/.Makefile</i>, or an empty list of dotfiles.<p>
+Dry run with <a class="link-man" href="lsrc.1.html">lsrc(1)</a>. Look for anything unexpected in here, such as <i class="file">~/.install</i> or <i class="file">~/.Makefile</i>, or an empty list of dotfiles.<p>
 <blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
 <div class="display">
 <code class="lit">lsrc</code></div>
@@ -99,15 +99,21 @@ Update any symlinks with <a class="link-man" href="rcup.1.html">rcup(1)</a>. Thi
 </blockquote>
 </li>
 <li class="list-enum" style="margin-top: 1.00em;">
-When necessary, add new rc files with <a class="link-man" href="mkrc.1.html">mkrc(1)</a>.<p>
+When necessary, add new rc files to the dotfiles directory with <a class="link-man" href="mkrc.1.html">mkrc(1)</a>.<p>
 <blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
 <div class="display">
 <code class="lit">mkrc ~/.tigrc</code></div>
 </blockquote>
+<p>
+In the other direction, you can use <a class="link-man" href="rcup.1.html">rcup(1)</a> to create the symlinks from <i class="file">~/.dotfiles</i> to your home directory.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">rcup tigrc</code></div>
+</blockquote>
 </li>
 </ol>
 <div class="subsection">
-<h2 id="x434f4d4d4f4e2050524f424c454d3a204558495354494e4720494e5354414c4c2053435249505453">COMMON PROBLEM: EXISTING INSTALL SCRIPTS</h2> Many existing dotfile directories have scripts named <i class="file">install</i> or <i class="file">Makefile</i> in the directory directory. This will cause a <i class="file">~/.install</i> or <i class="file">~/.Makefile</i> symlink to be created in your home directory. Use an exclusion pattern to ignore these.<p>
+<h2 id="x434f4d4d4f4e2050524f424c454d3a204558495354494e4720494e5354414c4c2053435249505453">COMMON PROBLEM: EXISTING INSTALL SCRIPTS</h2> Many existing dotfile directories have scripts named <i class="file">install</i> or <i class="file">Makefile</i> in the directory. This will cause a <i class="file">~/.install</i> or <i class="file">~/.Makefile</i> symlink to be created in your home directory. Use an exclusion pattern to ignore these.<p>
 <blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
 <div class="display">
 <code class="lit">rcup -x install -x Rakefile -x Makefile -x install.sh</code></div>
@@ -131,6 +137,13 @@ Note that this will break any existing symlinks. Those can be safely removed usi
 <blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
 <div class="display">
 <code class="lit">rcup -d configs -v</code></div>
+</blockquote>
+</div>
+<div class="subsection">
+<h2 id="x434f4d4d4f4e2050524f424c454d3a20434f4e46494755524154494f4e2046494c45532f4449524543544f5249455320574954484f555420444f5453">COMMON PROBLEM: CONFIGURATION FILES/DIRECTORIES WITHOUT DOTS</h2> By default, the rcm suite will prefix every file and directory it manages with a dot. If that is not desired, for example in the case of <i class="file">~/bin</i> or <i class="file">~/texmf</i>, you can add that file or directory to <span class="env">UNDOTTED</span> in <a class="link-man" href="rcrc.5.html">rcrc(5)</a> or use the <b class="flag">&#45;U</b> option. For example:<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">mkrc -U bin</code></div>
 </blockquote>
 </div>
 </div>
@@ -157,7 +170,7 @@ This will give you a directory named <i class="file">~/.dotfiles</i> with your d
 <h1 id="x54414747454420444f5446494c4553">TAGGED DOTFILES</h1> This suite becomes more powerful if you share your dotfiles directory between computers, either because multiple people share the same directory or because you have multiple computers.<p>
 If you share the dotfiles directory between people, you may end up with some irrelevant or even incorrect rc files. For example, you may have a <i class="file">.zshrc</i> while your other contributor has a <i class="file">.bashrc</i>. This situation can be handled with tags.<ol style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-enum">
 <li class="list-enum" style="margin-top: 1.00em;">
-A tag is a directory under the dotfiles directory the starts with the letters <code class="lit">tag-</code>. We can handle the competing shell example by making a <i class="file">tag-zsh</i> directory and moving the <i class="file">.zshrc</i> file into it using <a class="link-man" href="mkrc.1.html">mkrc(1)</a> and passing the <b class="flag">&#45;t</b> option.<p>
+A tag is a directory under the dotfiles directory that starts with the letters <code class="lit">tag-</code>. We can handle the competing shell example by making a <i class="file">tag-zsh</i> directory and moving the <i class="file">.zshrc</i> file into it using <a class="link-man" href="mkrc.1.html">mkrc(1)</a> and passing the <b class="flag">&#45;t</b> option.<p>
 <blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
 <div class="display">
 <code class="lit">mkrc -t zsh .zshrc</code></div>
@@ -201,6 +214,14 @@ If your hostname is difficult to compute, or you otherwise want to use a differe
 <p>
 OS X users should see the <i class="link-sec"><a class="link-sec" href="#x42554753">BUGS</a></i> section for more details.</div>
 <div class="section">
+<h1 id="x5354414e44414c4f4e4520494e5354414c4c4154494f4e20534352495054">STANDALONE INSTALLATION SCRIPT</h1> The <a class="link-man" href="rcup.1.html">rcup(1)</a> tool can be used to generate a portable shell script. Instead of running a command such as <a class="link-man" href="ln.1.html">ln(1)</a> or <a class="link-man" href="rm.1.html">rm(1)</a>, it will print the command to <code class="lit">stdout</code>. This is controlled with the <b class="flag">&#45;g</b> flag. Note that this will generate a script to create an exact replica of the synchronization, including tags, host-specific files, and dotfiles directories.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">env RCRC=/dev/null rcup -B 0 -g &gt; install.sh</code></div>
+</blockquote>
+<p>
+Using the above command, you can now run <code class="lit">install.sh</code> to install (or re-install) your rc files. The <code class="lit">install.sh</code> script can be stored in your dotfiles directory, copied between computers, and so on.</div>
+<div class="section">
 <h1 id="x524154494f4e414c45">RATIONALE</h1> The rcm suite was built as an abstraction over the shell, Ruby, Python, and make scripts people were writing and sharing. It is intended to run on any unix system and support the range from simple to complex dotfile directories.<p>
 As such, this suite is useful as a common base. Through this we can share tools and develop this further as a first-class entity. It is also our hope that a common set of tools will encourage others to share their dotfiles, too.</div>
 <div class="section">
@@ -212,7 +233,7 @@ As such, this suite is useful as a common base. Through this we can share tools 
 <div class="section">
 <h1 id="x42554753">BUGS</h1> For OS X systems, we strongly encourage the use of the <b class="var">HOSTNAME</b> variable in your <a class="link-man" href="rcrc.5.html">rcrc(5)</a>. We use the <a class="link-man" href="hostname.1.html">hostname(1)</a> program to determine the unique identifier for the host. This program is not specified by POSIX and can vary by system. On OS X the hostname is unpredictable, and can even change as part of the DHCP handshake.</div>
 <div class="section">
-<h1 id="x434f4e5452494255544f5253">CONTRIBUTORS</h1> <span class="author"></span><span class="author">Andrei Dziahel</span> &#60;<a class="link-mail" href="mailto:develop7@develop7.info">develop7@develop7.info</a>&#62; <span class="author">Anton Ilin</span> &#60;<a class="link-mail" href="mailto:anton@ilin.dn.ua">anton@ilin.dn.ua</a>&#62; <span class="author">Caleb Land</span> &#60;<a class="link-mail" href="mailto:caleb@land.fm">caleb@land.fm</a>&#62; <span class="author">Christian Ho??ltje</span> &#60;<a class="link-mail" href="mailto:docwhat@gerf.org">docwhat@gerf.org</a>&#62; <span class="author">Dan Croak</span> &#60;<a class="link-mail" href="mailto:dan@thoughtbot.com">dan@thoughtbot.com</a>&#62; <span class="author">Daniel Watson</span> &#60;<a class="link-mail" href="mailto:dwatson@thig.com">dwatson@thig.com</a>&#62; <span class="author">George Brocklehurst</span> &#60;<a class="link-mail" href="mailto:george@thoughtbot.com">george@thoughtbot.com</a>&#62; <span class="author">Javier L??pez</span> &#60;<a class="link-mail" href="mailto:linux.kitten@gmail.com">linux.kitten@gmail.com</a>&#62; <span class="author">John Axel Eriksson</span> &#60;<a class="link-mail" href="mailto:john@insane.se">john@insane.se</a>&#62; <span class="author">Jordan Eldredge</span> &#60;<a class="link-mail" href="mailto:jordaneldredge@gmail.com">jordaneldredge@gmail.com</a>&#62; <span class="author">Mike Burns</span> &#60;<a class="link-mail" href="mailto:mburns@thoughtbot.com">mburns@thoughtbot.com</a>&#62; <span class="author">Pablo Olmos de Aguilera Corradini</span> &#60;<a class="link-mail" href="mailto:pablo@glatelier.org">pablo@glatelier.org</a>&#62; <span class="author">Patrick Brisbin</span> &#60;<a class="link-mail" href="mailto:pat@thoughtbot.com">pat@thoughtbot.com</a>&#62; <span class="author">Roberto Pedroso</span> &#60;<a class="link-mail" href="mailto:roberto@rpedroso.com">roberto@rpedroso.com</a>&#62;</div>
+<h1 id="x434f4e5452494255544f5253">CONTRIBUTORS</h1> <span class="author"></span><span class="author">Andrei Dziahel</span> &#60;<a class="link-mail" href="mailto:develop7@develop7.info">develop7@develop7.info</a>&#62; <span class="author">Anton Ilin</span> &#60;<a class="link-mail" href="mailto:anton@ilin.dn.ua">anton@ilin.dn.ua</a>&#62; <span class="author">Ben Turrubiates</span> &#60;<a class="link-mail" href="mailto:ben@turrubiat.es">ben@turrubiat.es</a>&#62; <span class="author">Blake Williams</span> &#60;<a class="link-mail" href="mailto:blake@blakewilliams.me">blake@blakewilliams.me</a>&#62; <span class="author">Caleb Land</span> &#60;<a class="link-mail" href="mailto:caleb@land.fm">caleb@land.fm</a>&#62; <span class="author">Carl van Tonder</span> &#60;<a class="link-mail" href="mailto:carl@supervacuo.com">carl@supervacuo.com</a>&#62; <span class="author">Christian Ho??ltje</span> &#60;<a class="link-mail" href="mailto:docwhat@gerf.org">docwhat@gerf.org</a>&#62; <span class="author">Christian H??ltje</span> &#60;<a class="link-mail" href="mailto:docwhat@gerf.org">docwhat@gerf.org</a>&#62; <span class="author">Christopher Koch</span> &#60;<a class="link-mail" href="mailto:ckoch@cs.nmt.edu">ckoch@cs.nmt.edu</a>&#62; <span class="author">Dan Croak</span> &#60;<a class="link-mail" href="mailto:dan@thoughtbot.com">dan@thoughtbot.com</a>&#62; <span class="author">Daniel Watson</span> &#60;<a class="link-mail" href="mailto:dwatson@thig.com">dwatson@thig.com</a>&#62; <span class="author">David Alexander</span> &#60;<a class="link-mail" href="mailto:davidpaulalexander@gmail.com">davidpaulalexander@gmail.com</a>&#62; <span class="author">Devraj Mehta</span> &#60;<a class="link-mail" href="mailto:devm33@gmail.com">devm33@gmail.com</a>&#62; <span class="author">George Brocklehurst</span> &#60;<a class="link-mail" href="mailto:george@thoughtbot.com">george@thoughtbot.com</a>&#62; <span class="author">Jarkko Kniivil??</span> &#60;<a class="link-mail" href="mailto:jkniiv@gmail.com">jkniiv@gmail.com</a>&#62; <span class="author">Jason Daniel Augustine Gilliland</span> &#60;<a class="link-mail" href="mailto:jdagilliland@gmail.com">jdagilliland@gmail.com</a>&#62; <span class="author">Javier L??pez</span> &#60;<a class="link-mail" href="mailto:linux.kitten@gmail.com">linux.kitten@gmail.com</a>&#62; <span class="author">Joe Ferris</span> &#60;<a class="link-mail" href="mailto:jferris@thoughtbot.com">jferris@thoughtbot.com</a>&#62; <span class="author">John Axel Eriksson</span> &#60;<a class="link-mail" href="mailto:john@insane.se">john@insane.se</a>&#62; <span class="author">Jordan Eldredge</span> &#60;<a class="link-mail" href="mailto:jordaneldredge@gmail.com">jordaneldredge@gmail.com</a>&#62; <span class="author">Martin Frost</span> &#60;<a class="link-mail" href="mailto:frost@ceri.se">frost@ceri.se</a>&#62; <span class="author">Melissa Xie</span> &#60;<a class="link-mail" href="mailto:melissa@thoughtbot.com">melissa@thoughtbot.com</a>&#62; <span class="author">Michael Reed</span> &#60;<a class="link-mail" href="mailto:supertron421@gmail.com">supertron421@gmail.com</a>&#62; <span class="author">Mike Burns</span> &#60;<a class="link-mail" href="mailto:mburns@thoughtbot.com">mburns@thoughtbot.com</a>&#62; <span class="author">Pablo Olmos de Aguilera Corradini</span> &#60;<a class="link-mail" href="mailto:pablo@glatelier.org">pablo@glatelier.org</a>&#62; <span class="author">Patrick Brisbin</span> &#60;<a class="link-mail" href="mailto:pat@thoughtbot.com">pat@thoughtbot.com</a>&#62; <span class="author">Roberto Pedroso</span> &#60;<a class="link-mail" href="mailto:roberto@rpedroso.com">roberto@rpedroso.com</a>&#62; <span class="author">Scott Stevenson</span> &#60;<a class="link-mail" href="mailto:scott@stevenson.io">scott@stevenson.io</a>&#62; <span class="author">Teo Ljungberg</span> &#60;<a class="link-mail" href="mailto:teo@teoljungberg.com">teo@teoljungberg.com</a>&#62; <span class="author">Vlad GURDIGA</span> &#60;<a class="link-mail" href="mailto:gurdiga@gmail.com">gurdiga@gmail.com</a>&#62; <span class="author">Zach Latta</span> &#60;<a class="link-mail" href="mailto:zach@zachlatta.com">zach@zachlatta.com</a>&#62;</div>
 <table summary="Document Footer" class="foot" width="100%">
 <col width="50%">
 <col width="50%">
@@ -221,7 +242,7 @@ As such, this suite is useful as a common base. Through this we can share tools 
 <td class="foot-date">
 July 28, 2013</td>
 <td class="foot-os" align="right">
-Linux 3.12-1-amd64</td>
+Linux 3.16.0-4-amd64</td>
 </tr>
 </tbody>
 </table>

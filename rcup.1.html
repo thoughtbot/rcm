@@ -34,7 +34,7 @@ RCUP(1)</td>
 <td>
 rcup</td>
 <td>
-&#91;<span class="opt"><b class="flag">&#45;CfhiKkqVv</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;B</b> <i class="arg">hostname</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;d</b> <i class="arg">dir</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;I</b> <i class="arg">excl_pat</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;S</b> <i class="arg">excl_pat</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;t</b> <i class="arg">tag</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;x</b> <i class="arg">excl_pat</i></span>&#93; &#91;<span class="opt"><i class="arg">files ...</i></span>&#93;</td>
+&#91;<span class="opt"><b class="flag">&#45;CfhiKkqVv</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;B</b> <i class="arg">hostname</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;d</b> <i class="arg">dir</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;g</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;I</b> <i class="arg">excl_pat</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;S</b> <i class="arg">excl_pat</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;s</b> <i class="arg">excl_pat</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;t</b> <i class="arg">tag</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;U</b> <i class="arg">excl_pat</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;u</b> <i class="arg">excl_pat</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;x</b> <i class="arg">excl_pat</i></span>&#93; &#91;<span class="opt"><i class="arg">files ...</i></span>&#93;</td>
 </tr>
 </tbody>
 </table>
@@ -60,6 +60,10 @@ install dotfiles from the <i class="arg">DIR</i>. This can be specified multiple
 <dd class="list-tag" style="margin-left: 11.00ex;">
 if the rc file already exists in your home directory but does not match the file in your dotfiles directory, remove the rc file then create the symlink</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;g</b></dt>
+<dd class="list-tag" style="margin-left: 11.00ex;">
+print to <code class="lit">stdout</code> a standalone shell script that will run the <b class="name">rcup</b> command as specified. Nothing on your filesystem will be modified by <b class="name">rcup</b> when this flag is passed.</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;h</b></dt>
 <dd class="list-tag" style="margin-left: 11.00ex;">
 show usage instructions.</dd>
@@ -84,9 +88,21 @@ run pre- and post-hooks (see <i class="link-sec"><a class="link-sec" href="#x444
 <dd class="list-tag" style="margin-left: 11.00ex;">
 any rc file that matches <i class="arg">EXCL_PAT</i> is installed as if it were a file (using a symlink) instead of as if it were a directory (by making a directory). This option can be repeated.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;s</b> <i class="arg">EXCL_PAT</i></dt>
+<dd class="list-tag" style="margin-left: 11.00ex;">
+any file that matches <i class="arg">EXCL_PAT</i> is installed as normal, in accordance with the <i class="link-sec"><a class="link-sec" href="#x414c474f524954484d">ALGORITHM</a></i> section below. This is the opposite of <b class="flag">&#45;S</b>. This option can be repeated.</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;t</b> <i class="arg">TAG</i></dt>
 <dd class="list-tag" style="margin-left: 11.00ex;">
 install dotfiles according to <i class="arg">TAG</i></dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;U</b> <i class="arg">EXCL_PAT</i></dt>
+<dd class="list-tag" style="margin-left: 11.00ex;">
+any rc file that matches <i class="arg">EXCL_PAT</i> is installed without a leading dot. This option can be repeated. See the documentation of the <b class="flag">&#45;U</b> option in <a class="link-man" href="lsrc.1.html">lsrc(1)</a> for more information.</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;u</b> <i class="arg">EXCL_PAT</i></dt>
+<dd class="list-tag" style="margin-left: 11.00ex;">
+any rc file that matches <i class="arg">EXCL_PAT</i> is installed with a leading dot. This is the opposite of <b class="flag">&#45;U</b>. This option can be repeated. This is the default. See the documentation of the <b class="flag">&#45;u</b> option in <a class="link-man" href="lsrc.1.html">lsrc(1)</a> for more information.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;q</b></dt>
 <dd class="list-tag" style="margin-left: 11.00ex;">
@@ -98,7 +114,7 @@ show the version number.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;v</b></dt>
 <dd class="list-tag" style="margin-left: 11.00ex;">
-increase verbosity. This can be repeated for extra verbosity.</dd>
+increase verbosity. This can be repeated for extra verbosity. Verbose messages are printed to <code class="lit">stderr</code>.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;x</b> <i class="arg">EXCL_PAT</i></dt>
 <dd class="list-tag" style="margin-left: 11.00ex;">
@@ -113,7 +129,7 @@ only install the specified file(s)</dd>
 <h1 id="x4449524543544f5259204c41594f5554">DIRECTORY LAYOUT</h1> Any non-dot non-meta file or directory under your dotfiles directory will be installed as a dotfile. For example, <i class="file">.dotfiles/zshrc</i> will be installed into <i class="file">~/.zshrc</i> .<p>
 Files are installed as symlinks. Directories are installed by making directories. The <b class="flag">&#45;C</b> flag causes files to be installed as copies instead of symlinks. The <b class="var">COPY_ALWAYS</b> option in <a class="link-man" href="rcrc.5.html">rcrc(5)</a> can be used to list files that must only be copied.<p>
 Three meta files are supported: host-specific files, tagged files, hooks.<p>
-Host-specific files go in a directory named for the host, prefixed with <i class="file">host-</i>. For example, <i class="file">.dotfiles/host-scarlett</i> contains files specific to the computer with hostname <i class="file">scarlett</i> , and these files will only be installed on the computer with hostname <i class="file">scarlett</i>.<p>
+Host-specific files go in a directory named for the host, prefixed with <i class="file">host-</i>. For example, <i class="file">.dotfiles/host-scarlett</i> contains files specific to the computer with hostname <i class="file">scarlett</i>, and these files will only be installed on the computer with hostname <i class="file">scarlett</i>.<p>
 Tagged files go in a directory named for the tag, prefixed with <code class="lit">tag-</code>. Therefore, files under <i class="file">.dotfiles/tag-git</i> are only installed when installing using the <code class="lit">git</code> tag.<p>
 Hooks go in a directory named <i class="file">hooks</i>. Two hooks are supported by <b class="name">rcup</b>: pre-up and post-up. These go in files or directories with predictable filenames: <i class="file">.dotfiles/hooks/pre-up</i> and <i class="file">.dotfiles/hooks/post-up</i>, or <i class="file">.dotfiles/hooks/pre-up/*</i> and <i class="file">.dotfiles/hooks/post-up/*</i>. These files must be executable. They are run every time <b class="name">rcup</b> is run, and therefore must be idempotent.</div>
 <div class="section">
@@ -145,7 +161,7 @@ User configuration file. Defaults to <i class="file">~/.rcrc</i>.</dd>
 <div class="section">
 <h1 id="x53454520414c534f">SEE ALSO</h1> <a class="link-man" href="lsrc.1.html">lsrc(1)</a>, <a class="link-man" href="mkrc.1.html">mkrc(1)</a>, <a class="link-man" href="rcdn.1.html">rcdn(1)</a>, <a class="link-man" href="rcrc.5.html">rcrc(5)</a>, <a class="link-man" href="rcm.7.html">rcm(7)</a></div>
 <div class="section">
-<h1 id="x415554484f5253">AUTHORS</h1> <span class="author">Mike Burns</span> &#60;mike@mike-burns.com&#62;</div>
+<h1 id="x415554484f5253">AUTHORS</h1> <b class="name">rcup</b> is maintained by <span class="author">Mike Burns</span> &#60;<a class="link-mail" href="mailto:mburns@thoughtbot.com">mburns@thoughtbot.com</a>&#62; and <a class="link-ext" href="http://thoughtbot.se">thoughtbot</a></div>
 <table summary="Document Footer" class="foot" width="100%">
 <col width="50%">
 <col width="50%">
@@ -154,7 +170,7 @@ User configuration file. Defaults to <i class="file">~/.rcrc</i>.</dd>
 <td class="foot-date">
 July 28, 2013</td>
 <td class="foot-os" align="right">
-Linux 3.12-1-amd64</td>
+Linux 3.16.0-4-amd64</td>
 </tr>
 </tbody>
 </table>

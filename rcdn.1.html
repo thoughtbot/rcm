@@ -34,7 +34,7 @@ RCDN(1)</td>
 <td>
 rcdn</td>
 <td>
-&#91;<span class="opt"><b class="flag">&#45;hqVv</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;B</b> <i class="arg">hostname</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;d</b> <i class="arg">dir</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;I</b> <i class="arg">excl_pat</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;S</b> <i class="arg">excl_pat</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;t</b> <i class="arg">tag</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;x</b> <i class="arg">excl_pat</i></span>&#93; &#91;<span class="opt"><i class="arg">files ...</i></span>&#93;</td>
+&#91;<span class="opt"><b class="flag">&#45;hKkqVv</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;B</b> <i class="arg">hostname</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;d</b> <i class="arg">dir</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;I</b> <i class="arg">excl_pat</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;S</b> <i class="arg">excl_pat</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;s</b> <i class="arg">excl_pat</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;t</b> <i class="arg">tag</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;U</b> <i class="arg">excl_pat</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;u</b> <i class="arg">excl_pat</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;x</b> <i class="arg">excl_pat</i></span>&#93; &#91;<span class="opt"><i class="arg">files ...</i></span>&#93;</td>
 </tr>
 </tbody>
 </table>
@@ -42,7 +42,7 @@ rcdn</td>
 <div class="section">
 <h1 id="x4445534352495054494f4e">DESCRIPTION</h1> This program will remove all the rc files that the <a class="link-man" href="rcm.7.html">rcm(7)</a> suite knows about. This can be further controlled with the <b class="flag">&#45;t</b> and <b class="flag">&#45;d</b> flags.<p>
 The files that are removed are symlinks. However, the <b class="var">COPY_ALWAYS</b> setting in <a class="link-man" href="rcrc.5.html">rcrc(5)</a> modifies this. If a rc file is not a symlink but an ancestor directory is, that directory is removed. If a rc file is not a symlink but is listed in <b class="var">COPY_ALWAYS</b> the file is removed.<p>
-The <b class="name">rcdn</b> program will run hooks before and after removing files, if these hooks exist. Hooks are executable programs inside the dotfiles directory, with the following names: <i class="file">hooks/pre-down and</i> <i class="file">hooks/post-down</i>. These hooks are run each time <b class="name">rcdn</b> is run and therefore must be idempotent.<dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
+The <b class="name">rcdn</b> program will run hooks before and after removing files, if these hooks exist. Hooks are executable programs inside the dotfiles directory, with the following names: <i class="file">hooks/pre-down</i> and <i class="file">hooks/post-down</i>. These hooks are run each time <b class="name">rcdn</b> is run and therefore must be idempotent.<dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;B</b> <i class="arg">HOSTNAME</i></dt>
 <dd class="list-tag" style="margin-left: 11.00ex;">
@@ -76,9 +76,21 @@ decrease verbosity</dd>
 <dd class="list-tag" style="margin-left: 11.00ex;">
 when removing dotfiles, any file that matches <i class="arg">EXCL_PAT</i> should be treated as a file that was symlinked, even if it is a directory. This can be repeated.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;s</b> <i class="arg">EXCL_PAT</i></dt>
+<dd class="list-tag" style="margin-left: 11.00ex;">
+when removing dotfiles, any directory that matches <i class="arg">EXCL_PAT</i> should be recurred upon like normal. This is the default, and is the opposite of <b class="flag">&#45;S</b>. This can be repeated.</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;t</b> <i class="arg">TAG</i></dt>
 <dd class="list-tag" style="margin-left: 11.00ex;">
 remove dotfiles according to <i class="arg">TAG</i></dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;U</b> <i class="arg">EXCL_PAT</i></dt>
+<dd class="list-tag" style="margin-left: 11.00ex;">
+any rc file or directory that matches <i class="arg">EXCL_PAT</i> is considered to have been installed without a leading dot when removing them. Must be specified for rc files or directories that were indeed installed without a leading dot. This can be repeated. See the documentation of the <b class="flag">&#45;U</b> option in <a class="link-man" href="lsrc.1.html">lsrc(1)</a> for more information.</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;u</b> <i class="arg">EXCL_PAT</i></dt>
+<dd class="list-tag" style="margin-left: 11.00ex;">
+any rc file or directory that matches <i class="arg">EXCL_PAT</i> is considered to have been installed with a leading dot when removing them. This is the default, and is the opposite of <b class="flag">&#45;U</b>. This can be repeated. See the documentation of the <b class="flag">&#45;u</b> option in <a class="link-man" href="lsrc.1.html">lsrc(1)</a> for more information.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;v</b></dt>
 <dd class="list-tag" style="margin-left: 11.00ex;">
@@ -126,13 +138,13 @@ User configuration file. Defaults to <i class="file">~/.rcrc</i>.</dd>
 </blockquote>
 <blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
 <div class="display">
-<code class="lit">rcdn -e '*:.zshrc'</code></div>
+<code class="lit">rcdn -x '*:.zshrc'</code></div>
 </blockquote>
 </div>
 <div class="section">
 <h1 id="x53454520414c534f">SEE ALSO</h1> <a class="link-man" href="lsrc.1.html">lsrc(1)</a>, <a class="link-man" href="mkrc.1.html">mkrc(1)</a>, <a class="link-man" href="rcup.1.html">rcup(1)</a>, <a class="link-man" href="rcrc.5.html">rcrc(5)</a>, <a class="link-man" href="rcm.7.html">rcm(7)</a></div>
 <div class="section">
-<h1 id="x415554484f5253">AUTHORS</h1> <span class="author">Mike Burns</span> &#60;mike@mike-burns.com&#62;</div>
+<h1 id="x415554484f5253">AUTHORS</h1> <b class="name">rcdn</b> is maintained by <span class="author">Mike Burns</span> &#60;<a class="link-mail" href="mailto:mburns@thoughtbot.com">mburns@thoughtbot.com</a>&#62; and <a class="link-ext" href="http://thoughtbot.se">thoughtbot</a></div>
 <table summary="Document Footer" class="foot" width="100%">
 <col width="50%">
 <col width="50%">
@@ -141,7 +153,7 @@ User configuration file. Defaults to <i class="file">~/.rcrc</i>.</dd>
 <td class="foot-date">
 August 2, 2013</td>
 <td class="foot-os" align="right">
-Linux 3.12-1-amd64</td>
+Linux 3.16.0-4-amd64</td>
 </tr>
 </tbody>
 </table>
