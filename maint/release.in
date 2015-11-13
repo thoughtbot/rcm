@@ -87,7 +87,7 @@ release_build_deb() {
     cp -R debian deb-build/${PACKAGE}-${PACKAGE_VERSION} && \
     cd deb-build/${PACKAGE}-${PACKAGE_VERSION} && \
     dch -d "New upstream release" && dch -r "" && \
-    debuild --prepend-path=/usr/local/bin -e USER -F && \
+    debuild --prepend-path=/usr/local/bin -F && \
     cd ${abs_top_builddir} && \
     ([ -d gh-pages ] || git clone --branch gh-pages ${ORIGIN_URL} gh-pages) && \
     ([ -d gh-pages/debs ] || mkdir gh-pages/debs) && \
