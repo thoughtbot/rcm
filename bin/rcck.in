@@ -1,0 +1,7 @@
+#!/bin/sh
+
+dotteds=$(find $HOME -maxdepth 1 -regex "$HOME\/\..*")
+
+for dotted in $dotteds; do
+  find -L $dotted -type l -exec rm -i {} +
+done
