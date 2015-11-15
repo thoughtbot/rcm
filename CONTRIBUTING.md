@@ -66,7 +66,7 @@ All tests can be run like so:
 
 Individual tests can be run like so:
 
-    $ env TESTS=lsrc-dotfiles-dirs.t make -e check
+    $ env TESTS=test/lsrc-dotfiles-dirs.t make -e check
 
 If you intend to write a new test:
 
