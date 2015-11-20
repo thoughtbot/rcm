@@ -8,7 +8,9 @@ remove_link() {
   local original="$2"
   local sigil="$3"
 
-  if [ "x$dest" = "x/" ]; then
+  $DEBUG "remove_link $1 $2 $3"
+
+  if [ "x$dest" = "x/" -o "x$dest" = "x$DEST_DIR" ]; then
     $VERBOSE "not a symlink, skipping: $original"
   elif [ -L "$dest" -o "x$sigil" = "xX" ]; then
     rm_v -rf "$dest"
