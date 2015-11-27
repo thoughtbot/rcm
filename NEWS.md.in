@@ -1,5 +1,6 @@
 rcm (@PACKAGE_VERSION@) unstable; urgency=low
 
+  * BUGFIX: Relative exclude globs now work (Eric Collins, Mike Burns).
   * BUGFIX: Use $LOGNAME instead of $USER for compatibility (Mike Burns).
   * BUGFIX: rcdn(1) stops at DEST_DIR (Kyle Cook, Mike Burns).
   * BUGFIX: Symlink existing files, even when identical (Graham Bennett).

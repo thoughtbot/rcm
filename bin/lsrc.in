@@ -141,9 +141,9 @@ handle_file() {
 
   if [ ! -e "$file" ]; then
     $VERBOSE "skipping non-existent file $file"
-  elif is_excluded "$file" "$exclude_file_globs" "$include_file_globs"; then
+  elif is_excluded "$dotfiles_subdir/$file" "$exclude_file_globs" "$include_file_globs"; then
     $VERBOSE "skipping excluded file $file"
-  elif [ -d "$file" ] && is_excluded "$file" "$symlink_dirs_file_globs" "$mk_dirs_file_globs"; then
+  elif [ -d "$file" ] && is_excluded "$dotfiles_subdir/$file" "$symlink_dirs_file_globs" "$mk_dirs_file_globs"; then
     show_file "$file" "$dest_dir" "$dotfiles_dir" "$dotfiles_subdir" $dotted
   elif [ -d "$file" ]; then
     show_dir "$file" "$dest_dir" "$dotfiles_dir" "$dotfiles_subdir" $dotted "$exclude_file_globs" "$include_file_globs" "$symlink_dirs_file_globs" "$mk_dirs_file_globs"
@@ -188,6 +188,7 @@ is_excluded() {
   local file="$1"
   local exclude_file_globs="$2"
   local include_file_globs="$3"
+  local base_file="$(basename "$file")"
 
   $DEBUG "is_excluded $file $exclude_file_globs $include_file_globs"
 
@@ -195,20 +196,40 @@ is_excluded() {
     $DEBUG "file: $file"
     $DEBUG "exclude_file_glob: $exclude_file_glob"
 
-    case "$file" in
-      $exclude_file_glob)
-        for include_file_glob in $include_file_globs; do
-          case "$file" in
-            $include_file_glob) return 1;;
-          esac
-        done
+    is_single_excluded "$file" "$exclude_file_glob" "$include_file_globs"
+    ret=$?
+    if [ $ret -eq 0 -o $ret -eq 1 ]; then
+      return $ret
+    fi
 
-        return 0
-        ;;
-    esac
+    is_single_excluded "$base_file" "$exclude_file_glob" "$include_file_globs"
+    ret=$?
+    if [ $ret -eq 0 -o $ret -eq 1 ]; then
+      return $ret
+    fi
   done
 
   return 1
+}
+
+is_single_excluded() {
+  local file="$1"
+  local exclude_file_glob="$2"
+  local include_file_globs="$3"
+
+  case "$file" in
+    $exclude_file_glob)
+      for include_file_glob in $include_file_globs; do
+        case "$file" in
+          $include_file_glob) return 1;;
+        esac
+      done
+
+      return 0
+      ;;
+  esac
+
+  return 2
 }
 
 show_help() {
