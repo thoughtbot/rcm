@@ -35,6 +35,7 @@ TESTS = \
 	test/rcup-hostname.t \
 	test/rcup-standalone.t \
 	test/rcup-symlink-dirs.t \
+	test/rcup-symlink-existing.t \
 	test/rcup-usage.t \
 	test/rcdn-hooks.t \
 	test/rcdn-hooks-run-in-situ.t \
