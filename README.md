@@ -36,10 +36,15 @@ Fedora 21/22/23:
 
 openSUSE/RHEL/CentOS: [instructions](http://software.opensuse.org/download.html?project=utilities&package=rcm)
 
-OS X:
+OS X with Homebrew:
 
     brew tap thoughtbot/formulae
     brew install rcm
+    
+
+OS X with MacPorts:
+
+    port install rcm
 
 Ubuntu:
 
