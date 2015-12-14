@@ -27,12 +27,16 @@ Debian-based:
 
 OpenBSD (-current):
 
-    sudo pkg_add rcm
+    doas pkg_add rcm
 
 Fedora 21/22/23:
 
     sudo dnf copr enable seeitcoming/rcm
     sudo dnf install rcm
+
+FreeBSD:
+
+    sudo pkg install rcm
 
 openSUSE/RHEL/CentOS: [instructions](http://software.opensuse.org/download.html?project=utilities&package=rcm)
 
