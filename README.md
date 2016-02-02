@@ -62,7 +62,7 @@ This uses the standard GNU autotools, so it's the normal dance:
     curl -LO https://thoughtbot.github.io/rcm/dist/rcm-1.3.0.tar.gz && \
 
     sha=$(sha256 rcm-1.3.0.tar.gz | cut -f1 -d' ') && \
-    [ "$sha" = "502fd44e567ed0cfd00fb89ccc257dac8d6eb5d003f121299b5294c01665973f" ] && \
+    [ "$sha" = "ddcf638b367b0361d8e063c29fd573dbe1712d1b83e8d5b3a868e4aa45ffc847" ] && \
 
     tar -xvf rcm-1.3.0.tar.gz && \
     cd rcm-1.3.0 && \
