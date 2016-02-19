@@ -5,7 +5,7 @@ Should exclude items with -x
   $ touch .dotfiles/example
   > touch .dotfiles/excluded
 
-  $ lsrc -x excluded
+  $ lsrc -vvv -x excluded
   /*/.example:/*/.dotfiles/example (glob)
 
 Should accept directory:file syntax

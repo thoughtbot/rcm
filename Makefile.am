@@ -15,6 +15,7 @@ TESTS = \
 	test/lsrc-sigils.t \
 	test/lsrc.t \
 	test/lsrc-symlink-dirs.t \
+	test/lsrc-symlink-dirs-deep.t \
 	test/lsrc-tags.t \
 	test/lsrc-usage.t \
 	test/lsrc-undotted.t \

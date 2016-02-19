@@ -141,9 +141,9 @@ handle_file() {
 
   if [ ! -e "$file" ]; then
     $VERBOSE "skipping non-existent file $file"
-  elif is_excluded "$file" "$exclude_file_globs" "$include_file_globs"; then
+  elif is_excluded "$dotfiles_subdir" "$file" "$exclude_file_globs" "$include_file_globs"; then
     $VERBOSE "skipping excluded file $file"
-  elif [ -d "$file" ] && is_excluded "$file" "$symlink_dirs_file_globs" "$mk_dirs_file_globs"; then
+  elif [ -d "$file" ] && is_excluded "$dotfiles_subdir" "$file" "$symlink_dirs_file_globs" "$mk_dirs_file_globs"; then
     show_file "$file" "$dest_dir" "$dotfiles_dir" "$dotfiles_subdir" $dotted
   elif [ -d "$file" ]; then
     show_dir "$file" "$dest_dir" "$dotfiles_dir" "$dotfiles_subdir" $dotted "$exclude_file_globs" "$include_file_globs" "$symlink_dirs_file_globs" "$mk_dirs_file_globs"
@@ -185,20 +185,21 @@ dotfiles_dir_excludes() {
 }
 
 is_excluded() {
-  local file="$1"
-  local exclude_file_globs="$2"
-  local include_file_globs="$3"
+  local dotfiles_subdir="$1"
+  local file="$2"
+  local exclude_file_globs="$3"
+  local include_file_globs="$4"
 
-  $DEBUG "is_excluded $file $exclude_file_globs $include_file_globs"
+  $DEBUG "is_excluded $dotfiles_subdir $file $exclude_file_globs $include_file_globs"
 
   for exclude_file_glob in $exclude_file_globs; do
     $DEBUG "file: $file"
     $DEBUG "exclude_file_glob: $exclude_file_glob"
 
-    case "$file" in
+    case "$dotfiles_subdir/$file" in
       $exclude_file_glob)
         for include_file_glob in $include_file_globs; do
-          case "$file" in
+          case "$dotfiles_subdir/$file" in
             $include_file_glob) return 1;;
           esac
         done
@@ -328,7 +329,7 @@ for DOTFILES_DIR in $DOTFILES_DIRS; do
     pushdir "$(basename "$host_files")"
     for file in ${FILES:-*}; do
       dotted=0
-      if is_excluded "$file" "$undotted_file_globs" "$never_undotted_file_globs"; then
+      if is_excluded "" "$file" "$undotted_file_globs" "$never_undotted_file_globs"; then
         dotted=1
       fi
 
@@ -345,7 +346,7 @@ for DOTFILES_DIR in $DOTFILES_DIRS; do
       for file in ${FILES:-*}; do
         $DEBUG "TAG: $tag, exclude_file_globs: $exclude_file_globs"
         dotted=0
-        if is_excluded "$file" "$undotted_file_globs" "$never_undotted_file_globs"; then
+        if is_excluded "" "$file" "$undotted_file_globs" "$never_undotted_file_globs"; then
           dotted=1
         fi
         handle_file "$file" "$DEST_DIR" "$DOTFILES_DIR/tag-$tag" . "$dotted" "$exclude_file_globs" "$include_file_globs" "$symlink_dirs_file_globs" "$mk_dirs_file_globs"
@@ -362,7 +363,7 @@ for DOTFILES_DIR in $DOTFILES_DIRS; do
       continue
     fi
 
-    if is_excluded "$file" "$undotted_file_globs" "$never_undotted_file_globs"; then
+    if is_excluded "" "$file" "$undotted_file_globs" "$never_undotted_file_globs"; then
       dotted=1
     fi
 
