@@ -25,6 +25,19 @@ Debian-based:
     [ "$sha" = "2e95bbc23da4a0b995ec4757e0920197f4c92357214a65fedaf24274cda6806d" ] && \
     sudo dpkg -i rcm_1.3.0-1_all.deb
 
+Korora:
+
+  64-bit Korora 23:
+
+    sudo dnf copr enable seeitcoming/rcm fedora-23-x86_64
+    sudo dnf install rcm
+
+  Korora is similar to Fedora but with [an additional version and architecture
+  specification][copr-fedora-korora]. Replace `fedora-23-x86_64` as
+  appropriate.
+
+  [copr-fedora-korora]: https://kororaproject.org/about/news/when-adding-a-copr-repo-to-korora-fails
+
 OpenBSD (-current):
 
     doas pkg_add rcm
