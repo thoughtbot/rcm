@@ -25,6 +25,15 @@ Debian-based:
     [ "$sha" = "2e95bbc23da4a0b995ec4757e0920197f4c92357214a65fedaf24274cda6806d" ] && \
     sudo dpkg -i rcm_1.3.0-1_all.deb
 
+Korora:
+
+  Copr requires an additional argument for Fedora remixes such as Korora. See [here](https://kororaproject.org/about/news/when-adding-a-copr-repo-to-korora-fails) for more information.
+
+  For 64 bit Korora 23, use the following commands:
+
+    sudo dnf copr enable seeitcoming/rcm fedora-23-x86_64
+    sudo dnf install rcm
+
 OpenBSD (-current):
 
     doas pkg_add rcm
