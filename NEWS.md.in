@@ -1,5 +1,6 @@
 rcm (@PACKAGE_VERSION@) unstable; urgency=low
 
+  * BUGFIX: Add mkrc support for paths with spaces (Federico Gandellini)
   * BUGFIX: Control whether hooks should run in rcdn(1) with the -K and -k
     flags (Ben Turrubiates, Christopher Koch, Mike Burns, Mikkel Fahnøe
     Jørgensen).

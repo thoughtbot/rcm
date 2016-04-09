@@ -84,6 +84,9 @@ fi
 
 files=$@
 
+PREVIFS=$IFS
+IFS=$(echo -en "\n\b")
+
 if [ $force_symlink -eq 1 ]; then
   for file in $files; do
     dedotted="$(de_dot "$file")"
@@ -122,3 +125,5 @@ for file in $files; do
   $VERBOSE "Linking..."
   $INSTALL -d "$DOTFILES_DIR" -t "${tag:--}" $install_args "$dotless"
 done
+
+IFS=$PREVIFS
