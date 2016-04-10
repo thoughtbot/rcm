@@ -39,6 +39,8 @@ TESTS = \
 	test/rcup-usage.t \
 	test/rcdn-hooks.t \
 	test/rcdn-hooks-run-in-situ.t \
+	test/rcck.t \
+	test/rcck-usage.t \
 	test/rcup-hooks.t \
 	test/rcup-hooks-run-in-situ.t
 
