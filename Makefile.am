@@ -29,6 +29,7 @@ TESTS = \
 	test/mkrc-usage.t \
 	test/mkrc-undotted.t \
 	test/rcrc-custom.t \
+	test/rcrc-custom-local.t \
 	test/rcrc-hostname.t \
 	test/rcrc.t \
 	test/rcup-link-files.t \

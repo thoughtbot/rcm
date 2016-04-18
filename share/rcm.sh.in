@@ -147,7 +147,13 @@ de_dot() {
   echo "$1" | sed -e "s|$DEST_DIR/||" | sed -e 's/^\.//'
 }
 
-: ${RCRC:=$HOME/.rcrc}
+if [ -z "$RCRC" ]; then
+  if [ -r "$PWD/rcrc" ]; then
+    RCRC=$PWD/rcrc
+  else
+    RCRC=$HOME/.rcrc
+  fi
+fi
 
 if [ -r "$RCRC" ]; then
   . "$RCRC"
