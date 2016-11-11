@@ -1,5 +1,16 @@
 rcm (@PACKAGE_VERSION@) unstable; urgency=low
 
+  * BUGFIX: Use $LOGNAME instead of $USER for compatibility (Mike Burns).
+  * BUGFIX: rcdn(1) stops at DEST_DIR (Kyle Cook, Mike Burns).
+  * BUGFIX: Symlink existing files, even when identical (Graham Bennett).
+  * BUGFIX: Sort hooks by filename before execution instead of arbitrary order
+    (David Alexander).
+  * Documentation improvements (Nick Novitski, Ben Stephens, Casey Rodarmor).
+
+ -- Mike Burns <mburns@thoughtbot.com>  Sat, 12 Nov 2016 16:16:00 -0500
+
+rcm (1.3.0) unstable; urgency=low
+
   * BUGFIX: Control whether hooks should run in rcdn(1) with the -K and -k
     flags (Ben Turrubiates, Christopher Koch, Mike Burns, Mikkel Fahnøe
     Jørgensen).

@@ -183,6 +183,15 @@ and
 These files must be executable. They are run every time
 .Nm
 is run, and therefore must be idempotent.
+.Pp
+Hooks will be executed one at a time, sorted alphabetically. For instance,
+.Pa hooks/pre-up/animals
+will run before
+.Pa hooks/pre-up/aquariums ,
+and
+.Pa hooks/pre-up/4-eyes
+will run before
+.Pa hooks/post-up/2-u-nothing-compares .
 .Sh ALGORITHM
 It is instructive to understand the process
 .Nm rcup
