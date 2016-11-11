@@ -17,6 +17,8 @@ rcm (@PACKAGE_VERSION@) unstable; urgency=low
   * Improved Solaris support (Jarkko Kniivilä).
   * Override `SYMLINK_DIRS` or -S with -s (Mike Burns).
   * Show usage information when given bad arguments (Mike Burns).
+  * BUGFIX: Sort hooks by filename before execution instead of arbitrary order
+    (David Alexander)
 
  -- Mike Burns <mburns@thoughtbot.com>  Thu, 08 Jan 2015 14:50:00 +0200
 

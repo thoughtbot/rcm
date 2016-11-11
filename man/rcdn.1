@@ -47,7 +47,18 @@ and
 These hooks are run each time
 .Nm
 is run and therefore must be idempotent.
-.
+.Pp
+Hooks will be executed one at a time, in a sorted fashion. For instance:
+
+* 
+.Pa hooks/pre-down/1-script
+will run before
+.Pa hooks/pre-down/2-other-script .
+
+* 
+.Pa hooks/pre-down/4-something
+will run before
+.Pa hooks/post-down/2-another-thing .
 .Bl -tag -width "-I EXCL_PAT"
 .It Fl B Ar HOSTNAME
 treat
