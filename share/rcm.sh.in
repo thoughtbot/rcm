@@ -131,9 +131,9 @@ run_hooks() {
         # running these hooks imply some level of trust; surely one doesn't clone somebody
         # else's dotfiles repository without reviewing the hooks before doing an `rcup`?
         find "$hook_file" -type f \( \( -user $LOGNAME -perm -100 \) -o -perm -001 \) \
-          -exec \
-            sh -c 'cd "`dirname $1`" && ./"`basename $1`"' arg0 '{}' \
-            \;
+          | sort | while read file; do
+            sh -c 'cd "`dirname $1`" && ./"`basename $1`"' arg0 "$file"
+          done
       else
         $DEBUG "no $when-$direction hook present for $dotfiles_dir, skipping"
       fi

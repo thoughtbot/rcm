@@ -39,8 +39,10 @@ TESTS = \
 	test/rcup-usage.t \
 	test/rcdn-hooks.t \
 	test/rcdn-hooks-run-in-situ.t \
+	test/rcdn-hooks-run-in-order.t \
 	test/rcup-hooks.t \
-	test/rcup-hooks-run-in-situ.t
+	test/rcup-hooks-run-in-situ.t \
+	test/rcup-hooks-run-in-order.t
 
 dist_check_SCRIPTS = $(TESTS)
 dist_check_DATA = test/helper.sh
