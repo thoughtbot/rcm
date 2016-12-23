@@ -260,7 +260,10 @@ handle_command_line() {
   tags="${arg_tags:-$TAGS}"
   DOTFILES_DIRS="${dotfiles_dirs:-$DOTFILES_DIRS}"
   RUN_HOOKS=$run_hooks
-  files="$@"
+  files=
+  for file; do
+    files="$files $(encode "$file")"
+  done
 
   for tag in $tags; do
     LS_ARGS="$LS_ARGS -t $tag"

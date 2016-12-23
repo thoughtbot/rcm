@@ -15,6 +15,7 @@ TESTS = \
 	test/lsrc-sigils.t \
 	test/lsrc.t \
 	test/lsrc-symlink-dirs.t \
+	test/lsrc-spaces.t \
 	test/lsrc-tags.t \
 	test/lsrc-usage.t \
 	test/lsrc-undotted.t \
@@ -24,6 +25,7 @@ TESTS = \
 	test/mkrc-host-file.t \
 	test/mkrc-hostname.t \
 	test/mkrc-simple-output.t \
+	test/mkrc-spaces.t \
 	test/mkrc-symlink-dirs.t \
 	test/mkrc-tagged-file.t \
 	test/mkrc-usage.t \

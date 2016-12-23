@@ -147,6 +147,20 @@ de_dot() {
   echo "$1" | sed -e "s|$DEST_DIR/||" | sed -e 's/^\.//'
 }
 
+DELIMITER="\a"
+
+encode() {
+  local file="$1"
+
+  echo "$file" | tr " " "$DELIMITER"
+}
+
+decode() {
+  local file="$1"
+
+  echo "$file" | tr "$DELIMITER" " "
+}
+
 : ${RCRC:=$HOME/.rcrc}
 
 if [ -r "$RCRC" ]; then

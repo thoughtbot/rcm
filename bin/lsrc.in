@@ -347,7 +347,8 @@ for DOTFILES_DIR in $DOTFILES_DIRS; do
   host_files="$DOTFILES_DIR/host-$HOSTNAME"
   if [ -d "$host_files" ]; then
     pushdir "$(basename "$host_files")"
-    for file in ${FILES:-*}; do
+    for escaped_file in ${FILES:-*}; do
+      file="$(decode "$escaped_file")"
       dotted=0
       if is_excluded "$file" "$undotted_file_globs" "$never_undotted_file_globs"; then
         dotted=1
@@ -363,7 +364,8 @@ for DOTFILES_DIR in $DOTFILES_DIRS; do
   for tag in $TAGS; do
     if [ -d "tag-$tag" ]; then
       pushdir "$(basename "tag-$tag")"
-      for file in ${FILES:-*}; do
+      for escaped_file in ${FILES:-*}; do
+        file="$(decode "$escaped_file")"
         $DEBUG "TAG: $tag, exclude_file_globs: $exclude_file_globs"
         dotted=0
         if is_excluded "$file" "$undotted_file_globs" "$never_undotted_file_globs"; then
@@ -377,7 +379,8 @@ for DOTFILES_DIR in $DOTFILES_DIRS; do
 
   cd "$DOTFILES_DIR"
 
-  for file in ${FILES:-*}; do
+  for escaped_file in ${FILES:-*}; do
+    file="$(decode "$escaped_file")"
     dotted=0
     if is_metafile "$file"; then
       continue
