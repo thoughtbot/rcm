@@ -60,3 +60,6 @@ OpenBSD  Mike Burns                 <mike+openbsd@mike-burns.com> 0x3E6761F72846
 openSUSE Andrei Dziahel             <develop7@develop7.info>      0x58BA3FA4A49D76C2  
 Ubuntu   Martin Frost               <frost@ceri.se>               0x4609D1E5ECA538E6  
 FreeBSD  Leonardo Brondani Schenkel <leonardo@schenkel.net>       0x0883b5ebf741f50a  
+Korora   Carl van Tonder            <carl@supervacuo.com>         0xb55275fbcbe8383c
+Arch     Max Falk                   <gmdfalk@gmail.com>           0x9cbdc83ba3753845
+MacPorts Aljaž Srebrnič             <a2piratesoft@gmail.com>      0xe140e1eea54ee677
