@@ -1,5 +1,5 @@
 AC_PREREQ([2.69])
-AC_INIT(rcm, 1.3.0, mburns@thoughtbot.com)
+AC_INIT(rcm, 1.3.1, mburns@thoughtbot.com)
 AM_INIT_AUTOMAKE([subdir-objects])
 
 # /bin/sh on Solaris is not POSIX, so try to find another one.

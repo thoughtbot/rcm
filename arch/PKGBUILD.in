@@ -8,7 +8,7 @@ url="http://thoughtbot.github.io/@PACKAGE@/"
 license=('BSD')
 depends=('')
 source=("http://thoughtbot.github.io/@PACKAGE@/dist/@DIST_ARCHIVES@")
-sha1sums=('@DIST_SHA@')
+sha256sums=('@DIST_SHA@')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"

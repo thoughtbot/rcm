@@ -129,7 +129,7 @@ release_clean_tag() {
 }
 
 generate_dist_sha() {
-  export DIST_SHA=$(shasum $srcdir/$DIST_ARCHIVES | cut -d' ' -f1)
+  export DIST_SHA=$(openssl sha256 $srcdir/$DIST_ARCHIVES | cut -d' ' -f2)
 }
 
 # manpages as HTML

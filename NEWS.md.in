@@ -9,7 +9,7 @@ rcm (@PACKAGE_VERSION@) unstable; urgency=low
     (David Alexander).
   * Documentation improvements (Nick Novitski, Ben Stephens, Casey Rodarmor).
 
- -- Mike Burns <mburns@thoughtbot.com>  Sat, 12 Nov 2016 16:16:00 -0500
+ -- Mike Burns <mburns@thoughtbot.com>  Sat, 26 Dec 2016 17:00:00 -0500
 
 rcm (1.3.0) unstable; urgency=low
 
