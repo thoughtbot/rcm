@@ -63,3 +63,4 @@ FreeBSD  Leonardo Brondani Schenkel <leonardo@schenkel.net>       0x0883b5ebf741
 Korora   Carl van Tonder            <carl@supervacuo.com>         0xb55275fbcbe8383c
 Arch     Max Falk                   <gmdfalk@gmail.com>           0x9cbdc83ba3753845
 MacPorts Aljaž Srebrnič             <a2piratesoft@gmail.com>      0xe140e1eea54ee677
+Debian   Eric Collins               <eric+debian@tabfugni.cc>     0x7BEB44E2771AB877

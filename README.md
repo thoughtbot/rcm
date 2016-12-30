@@ -20,10 +20,10 @@ Arch Linux:
 
 Debian-based:
 
-    wget https://thoughtbot.github.io/rcm/debs/rcm_1.3.1-1_all.deb
-    sha=$(sha256sum rcm_1.3.1-1_all.deb | cut -f1 -d' ')
-    [ "$sha" = "2e95bbc23da4a0b995ec4757e0920197f4c92357214a65fedaf24274cda6806d" ] && \
-    sudo dpkg -i rcm_1.3.1-1_all.deb
+    wget -qO - https://apt.thoughtbot.com/thoughtbot_apt.gpg.key | sudo apt-key add -
+    echo "deb http://apt.thoughtbot.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/thoughtbot.list
+    sudo apt-get update
+    sudo apt-get install rcm
 
 Korora:
 

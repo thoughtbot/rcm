@@ -81,7 +81,7 @@ release_clean_arch() {
 
 # Deb
 release_build_deb() {
-  ([ -d deb-build ] || mkdir -p deb-build) && \
+  mkdir deb-build && \
     cp ${DIST_ARCHIVES} deb-build/${PACKAGE}_${PACKAGE_VERSION}.orig.tar.gz && \
     tar -C deb-build -xf deb-build/${PACKAGE}_${PACKAGE_VERSION}.orig.tar.gz && \
     cp -R debian deb-build/${PACKAGE}-${PACKAGE_VERSION} && \
@@ -90,8 +90,8 @@ release_build_deb() {
     debuild --prepend-path=/usr/local/bin -F && \
     cd ${abs_top_builddir} && \
     ([ -d gh-pages ] || git clone --branch gh-pages ${ORIGIN_URL} gh-pages) && \
-    ([ -d gh-pages/debs ] || mkdir gh-pages/debs) && \
-    ([ -d gh-pages/deb-src ] || mkdir gh-pages/deb-src) && \
+    mkdir gh-pages/debs && \
+    mkdir gh-pages/deb-src && \
     cp deb-build/${PACKAGE}_${PACKAGE_VERSION}*.deb gh-pages/debs && \
     cp deb-build/${PACKAGE}_${PACKAGE_VERSION}*.dsc gh-pages/deb-src && \
     cp deb-build/${PACKAGE}_${PACKAGE_VERSION}*.orig.tar.?z gh-pages/deb-src && \
