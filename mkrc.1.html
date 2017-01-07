@@ -1,102 +1,106 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="resource-type" content="document">
+<meta charset="utf-8"/>
+<style>
+table.head, table.foot { width: 100%; }
+td.head-rtitle, td.foot-os { text-align: right; }
+td.head-vol { text-align: center; }
+table.foot td { width: 50%; }
+table.head td { width: 33%; }
+div.spacer { margin: 1em 0; }
+</style>
 <title>
 MKRC(1)</title>
 </head>
 <body>
 <div class="mandoc">
-<table summary="Document Header" class="head" width="100%">
-<col width="30%">
-<col width="30%">
-<col width="30%">
+<table class="head">
 <tbody>
 <tr>
 <td class="head-ltitle">
 MKRC(1)</td>
-<td class="head-vol" align="center">
+<td class="head-vol">
 General Commands Manual</td>
-<td class="head-rtitle" align="right">
+<td class="head-rtitle">
 MKRC(1)</td>
 </tr>
 </tbody>
 </table>
 <div class="section">
-<h1 id="x4e414d45">NAME</h1> <b class="name">mkrc</b> &#8212; <span class="desc">bless files into a dotfile managed by rcm</span></div>
+<h1 id="NAME">NAME</h1> <b class="name">mkrc</b> &#8212; <span class="desc">bless files into a dotfile managed by rcm</span></div>
 <div class="section">
-<h1 id="x53594e4f50534953">SYNOPSIS</h1><table class="synopsis">
-<col style="width: 4.00ex;">
-<col>
+<h1 id="SYNOPSIS">SYNOPSIS</h1><table class="synopsis">
+<col style="width: 4.00ex;"/>
+<col/>
 <tbody>
 <tr>
 <td>
-mkrc</td>
+<b class="name">mkrc</b></td>
 <td>
-&#91;<span class="opt"><b class="flag">&#45;ChoqSsVvUu</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;t</b> <i class="arg">tag</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;d</b> <i class="arg">dir</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;B</b> <i class="arg">hostname</i></span>&#93; <i class="arg">files ...</i></td>
+[<span class="opt"><b class="flag">-ChoqSsVvUu</b></span>] [<span class="opt"><b class="flag">-t</b> <i class="arg">tag</i></span>] [<span class="opt"><b class="flag">-d</b> <i class="arg">dir</i></span>] [<span class="opt"><b class="flag">-B</b> <i class="arg">hostname</i></span>] <i class="arg">files ...</i></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="section">
-<h1 id="x4445534352495054494f4e">DESCRIPTION</h1> This program adds files to your dotfiles directory then installs it back into your home directory. It can install files under a tag or different source directory. It supports these options:<dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
+<h1 id="DESCRIPTION">DESCRIPTION</h1> This program adds files to your dotfiles directory then installs it back into your home directory. It can install files under a tag or different source directory. It supports these options:<dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
 <dt class="list-tag" style="margin-top: 1.00em;">
-<b class="flag">&#45;B</b> <i class="arg">HOSTNAME</i></dt>
+<b class="flag">-B</b> <i class="arg">HOSTNAME</i></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
-use the supplied hostname instead of computing one. Implies <b class="flag">&#45;o</b>.</dd>
+use the supplied hostname instead of computing one. Implies <b class="flag">-o</b>.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
-<b class="flag">&#45;C</b></dt>
+<b class="flag">-C</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
 copy instead of symlinking when installing the rc file back into your home directory</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
-<b class="flag">&#45;d</b> <i class="arg">DIR</i></dt>
+<b class="flag">-d</b> <i class="arg">DIR</i></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
 install dotfiles under the specified directory. This can be specified multiple times.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
-<b class="flag">&#45;h</b></dt>
+<b class="flag">-h</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
 show usage instructions.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
-<b class="flag">&#45;o</b></dt>
+<b class="flag">-o</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
 install dotfiles into the host-specific directory</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
-<b class="flag">&#45;q</b></dt>
+<b class="flag">-q</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
 decrease verbosity</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
-<b class="flag">&#45;S</b></dt>
+<b class="flag">-S</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
 treat the specified rc files as files to be symlinked, even if they are directories</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
-<b class="flag">&#45;s</b></dt>
+<b class="flag">-s</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
-if the rc file is a file, symlink it; otherwise, make a directory structure as described in <a class="link-man" href="rcup.1.html">rcup(1)</a> in the section <i class="link-sec"><a class="link-sec" href="#x414c474f524954484d">ALGORITHM</a></i>. This is the default.</dd>
+if the rc file is a file, symlink it; otherwise, make a directory structure as described in <a class="link-man" href="rcup.1.html">rcup(1)</a> in the section <i class="link-sec"><a class="link-sec" href="#ALGORITHM">ALGORITHM</a></i>. This is the default.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
-<b class="flag">&#45;t</b> <i class="arg">TAG</i></dt>
+<b class="flag">-t</b> <i class="arg">TAG</i></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
 install dotfiles according to tag</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
-<b class="flag">&#45;U</b></dt>
+<b class="flag">-U</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
 the specified files or directories are to be installed without a leading dot.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
-<b class="flag">&#45;u</b></dt>
+<b class="flag">-u</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
 the specified files or directories are to be installed with a leading dot. This is the default.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
-<b class="flag">&#45;v</b></dt>
+<b class="flag">-v</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
 increase verbosity. This can be repeated for extra verbosity.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
-<b class="flag">&#45;V</b></dt>
+<b class="flag">-V</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
 show the version number.</dd>
 </dl>
 </div>
 <div class="section">
-<h1 id="x454e5649524f4e4d454e54">ENVIRONMENT</h1><dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
+<h1 id="ENVIRONMENT">ENVIRONMENT</h1><dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
 <dt class="list-tag" style="margin-top: 1.00em;">
 <span class="env">RCRC</span></dt>
 <dd class="list-tag" style="margin-left: 8.00ex;">
@@ -104,9 +108,9 @@ User configuration file. Defaults to <i class="file">~/.rcrc</i>.</dd>
 </dl>
 </div>
 <div class="section">
-<h1 id="x46494c4553">FILES</h1> <i class="file">~/.dotfiles</i> <i class="file">~/.rcrc</i></div>
+<h1 id="FILES">FILES</h1> <i class="file">~/.dotfiles</i> <i class="file">~/.rcrc</i></div>
 <div class="section">
-<h1 id="x4558414d504c4553">EXAMPLES</h1><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<h1 id="EXAMPLES">EXAMPLES</h1><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
 <div class="display">
 <code class="lit">mkrc ~/.vimrc</code></div>
 </blockquote>
@@ -132,18 +136,16 @@ User configuration file. Defaults to <i class="file">~/.rcrc</i>.</dd>
 </blockquote>
 </div>
 <div class="section">
-<h1 id="x53454520414c534f">SEE ALSO</h1> <a class="link-man" href="lsrc.1.html">lsrc(1)</a>, <a class="link-man" href="rcdn.1.html">rcdn(1)</a>, <a class="link-man" href="rcup.1.html">rcup(1)</a>, <a class="link-man" href="rcrc.5.html">rcrc(5)</a>, <a class="link-man" href="rcm.7.html">rcm(7)</a></div>
+<h1 id="SEE_ALSO">SEE ALSO</h1> <a class="link-man" href="lsrc.1.html">lsrc(1)</a>, <a class="link-man" href="rcdn.1.html">rcdn(1)</a>, <a class="link-man" href="rcup.1.html">rcup(1)</a>, <a class="link-man" href="rcrc.5.html">rcrc(5)</a>, <a class="link-man" href="rcm.7.html">rcm(7)</a></div>
 <div class="section">
-<h1 id="x415554484f5253">AUTHORS</h1> <b class="name">mkrc</b> is maintained by <span class="author">Mike Burns</span> &#60;<a class="link-mail" href="mailto:mburns@thoughtbot.com">mburns@thoughtbot.com</a>&#62; and <a class="link-ext" href="http://thoughtbot.se">thoughtbot</a></div>
-<table summary="Document Footer" class="foot" width="100%">
-<col width="50%">
-<col width="50%">
+<h1 id="AUTHORS">AUTHORS</h1> <b class="name">mkrc</b> is maintained by <span class="author">Mike Burns</span> &lt;<a class="link-mail" href="mailto:mburns@thoughtbot.com">mburns@thoughtbot.com</a>&gt; and <a class="link-ext" href="http://thoughtbot.se">thoughtbot</a></div>
+<table class="foot">
 <tbody>
 <tr>
 <td class="foot-date">
 July 28, 2013</td>
-<td class="foot-os" align="right">
-Linux 3.16.0-4-amd64</td>
+<td class="foot-os">
+OpenBSD 6.0</td>
 </tr>
 </tbody>
 </table>

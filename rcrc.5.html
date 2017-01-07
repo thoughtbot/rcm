@@ -1,34 +1,39 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="resource-type" content="document">
+<meta charset="utf-8"/>
+<style>
+table.head, table.foot { width: 100%; }
+td.head-rtitle, td.foot-os { text-align: right; }
+td.head-vol { text-align: center; }
+table.foot td { width: 50%; }
+table.head td { width: 33%; }
+div.spacer { margin: 1em 0; }
+</style>
 <title>
 RCRC(5)</title>
 </head>
 <body>
 <div class="mandoc">
-<table summary="Document Header" class="head" width="100%">
-<col width="30%">
-<col width="30%">
-<col width="30%">
+<table class="head">
 <tbody>
 <tr>
 <td class="head-ltitle">
 RCRC(5)</td>
-<td class="head-vol" align="center">
+<td class="head-vol">
 File Formats Manual</td>
-<td class="head-rtitle" align="right">
+<td class="head-rtitle">
 RCRC(5)</td>
 </tr>
 </tbody>
 </table>
 <div class="section">
-<h1 id="x4e414d45">NAME</h1> <b class="name">rcrc</b> &#8212; <span class="desc">configuration for rcm</span></div>
+<h1 id="NAME">NAME</h1> <b class="name">rcrc</b> &#8212; <span class="desc">configuration for rcm</span></div>
 <div class="section">
-<h1 id="x53594e4f50534953">SYNOPSIS</h1> <span class="env">X</span>=&#8220;<b class="var">a&#160;</b><b class="var">b&#160;</b><b class="var">c</b>&#8221;</div>
+<h1 id="SYNOPSIS">SYNOPSIS</h1> <span class="env">X</span>=&#8220;<b class="var">a&#160;</b><b class="var">b&#160;</b><b class="var">c</b>&#8221;</div>
 <div class="section">
-<h1 id="x4445534352495054494f4e">DESCRIPTION</h1> The rcm dotfile manager can be configured using a <i class="file">.rcrc</i> file in your home directory. This location can be changed by setting the <i class="file">RCRC</i> environment variable. The format is POSIX shell. It is sourced in by the <a class="link-man" href="lsrc.1.html">lsrc(1)</a>, <a class="link-man" href="mkrc.1.html">mkrc(1)</a>, <a class="link-man" href="rcdn.1.html">rcdn(1)</a>, and <a class="link-man" href="rcup.1.html">rcup(1)</a> programs.<p>
+<h1 id="DESCRIPTION">DESCRIPTION</h1> The rcm dotfile manager can be configured using a <i class="file">.rcrc</i> file in your home directory. This location can be changed by setting the <i class="file">RCRC</i> environment variable. The format is POSIX shell. It is sourced in by the <a class="link-man" href="lsrc.1.html">lsrc(1)</a>, <a class="link-man" href="mkrc.1.html">mkrc(1)</a>, <a class="link-man" href="rcdn.1.html">rcdn(1)</a>, and <a class="link-man" href="rcup.1.html">rcup(1)</a> programs.<div class="spacer">
+</div>
 It supports these variables:<dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="var">COPY_ALWAYS</b></dt>
@@ -41,7 +46,7 @@ the source directories for dotfiles. The first in the list is the source to whic
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="var">EXCLUDES</b></dt>
 <dd class="list-tag" style="margin-left: 13.00ex;">
-a space-separated list of exclude patterns. Exclude patterns are explained in detail in <a class="link-man" href="lsrc.1.html">lsrc(1)</a> under the section <i class="link-sec"><a class="link-sec" href="#x4558434c554445205041545445524e">EXCLUDE PATTERN</a></i>.</dd>
+a space-separated list of exclude patterns. Exclude patterns are explained in detail in <a class="link-man" href="lsrc.1.html">lsrc(1)</a> under the section <i class="link-sec"><a class="link-sec" href="#EXCLUDE_PATTERN">EXCLUDE PATTERN</a></i>.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="var">HOSTNAME</b></dt>
 <dd class="list-tag" style="margin-left: 13.00ex;">
@@ -53,62 +58,60 @@ the default tags.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="var">SYMLINK_DIRS</b></dt>
 <dd class="list-tag" style="margin-left: 13.00ex;">
-a space-separated list of patterns. Directories matching a pattern are symlinked instead of descended. Patterns are explained in detail in <a class="link-man" href="lsrc.1.html">lsrc(1)</a> under the section <i class="link-sec"><a class="link-sec" href="#x4558434c554445205041545445524e">EXCLUDE PATTERN</a></i>.</dd>
+a space-separated list of patterns. Directories matching a pattern are symlinked instead of descended. Patterns are explained in detail in <a class="link-man" href="lsrc.1.html">lsrc(1)</a> under the section <i class="link-sec"><a class="link-sec" href="#EXCLUDE_PATTERN">EXCLUDE PATTERN</a></i>.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="var">UNDOTTED</b></dt>
 <dd class="list-tag" style="margin-left: 13.00ex;">
-a space separated list of patterns. Files matching this pattern will be symlinked without a leading dot. If a file is also in <b class="var">SYMLINK_DIRS</b>, then the directory will be symlinked without a leading dot. Patterns are explained in detail in <a class="link-man" href="lsrc.1.html">lsrc(1)</a> under the section <i class="link-sec"><a class="link-sec" href="#x4558434c554445205041545445524e">EXCLUDE PATTERN</a></i>.</dd>
+a space separated list of patterns. Files matching this pattern will be symlinked without a leading dot. If a file is also in <b class="var">SYMLINK_DIRS</b>, then the directory will be symlinked without a leading dot. Patterns are explained in detail in <a class="link-man" href="lsrc.1.html">lsrc(1)</a> under the section <i class="link-sec"><a class="link-sec" href="#EXCLUDE_PATTERN">EXCLUDE PATTERN</a></i>.</dd>
 </dl>
 </div>
 <div class="section">
-<h1 id="x46494c4553">FILES</h1> <i class="file">~/.rcrc</i></div>
+<h1 id="FILES">FILES</h1> <i class="file">~/.rcrc</i></div>
 <div class="section">
-<h1 id="x4558414d504c4553">EXAMPLES</h1><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<h1 id="EXAMPLES">EXAMPLES</h1><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
 <div class="display">
-<code class="lit">COPY_ALWAYS="ssh/id_* weechat/* netrc"</code></div>
+<code class="lit">COPY_ALWAYS=&quot;ssh/id_* weechat/* netrc&quot;</code></div>
 </blockquote>
 <blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
 <div class="display">
-<code class="lit">COPY_ALWAYS="*"</code></div>
+<code class="lit">COPY_ALWAYS=&quot;*&quot;</code></div>
 </blockquote>
 <blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
 <div class="display">
-<code class="lit">DOTFILES_DIRS="/home/mike/.dotfiles /usr/share/dotfiles"</code></div>
+<code class="lit">DOTFILES_DIRS=&quot;/home/mike/.dotfiles /usr/share/dotfiles&quot;</code></div>
 </blockquote>
 <blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
 <div class="display">
-<code class="lit">EXCLUDES="irbrc *:*emacs* dotfiles:python*"</code></div>
+<code class="lit">EXCLUDES=&quot;irbrc *:*emacs* dotfiles:python*&quot;</code></div>
 </blockquote>
 <blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
 <div class="display">
-<code class="lit">HOSTNAME="eggplant"</code></div>
+<code class="lit">HOSTNAME=&quot;eggplant&quot;</code></div>
 </blockquote>
 <blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
 <div class="display">
-<code class="lit">TAGS="freebsd development email git laptop gmail notmuch"</code></div>
+<code class="lit">TAGS=&quot;freebsd development email git laptop gmail notmuch&quot;</code></div>
 </blockquote>
 <blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
 <div class="display">
-<code class="lit">SYMLINK_DIRS="zprezto texmf"</code></div>
+<code class="lit">SYMLINK_DIRS=&quot;zprezto texmf&quot;</code></div>
 </blockquote>
 <blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
 <div class="display">
-<code class="lit">UNDOTTED="texmf"</code></div>
+<code class="lit">UNDOTTED=&quot;texmf&quot;</code></div>
 </blockquote>
 </div>
 <div class="section">
-<h1 id="x53454520414c534f">SEE ALSO</h1> <a class="link-man" href="lsrc.1.html">lsrc(1)</a>, <a class="link-man" href="mkrc.1.html">mkrc(1)</a>, <a class="link-man" href="rcdn.1.html">rcdn(1)</a>, <a class="link-man" href="rcup.1.html">rcup(1)</a>, <a class="link-man" href="rcm.7.html">rcm(7)</a></div>
+<h1 id="SEE_ALSO">SEE ALSO</h1> <a class="link-man" href="lsrc.1.html">lsrc(1)</a>, <a class="link-man" href="mkrc.1.html">mkrc(1)</a>, <a class="link-man" href="rcdn.1.html">rcdn(1)</a>, <a class="link-man" href="rcup.1.html">rcup(1)</a>, <a class="link-man" href="rcm.7.html">rcm(7)</a></div>
 <div class="section">
-<h1 id="x415554484f5253">AUTHORS</h1> <b class="name">rcrc</b> is maintained by <span class="author">Mike Burns</span> &#60;<a class="link-mail" href="mailto:mburns@thoughtbot.com">mburns@thoughtbot.com</a>&#62; and <a class="link-ext" href="http://thoughtbot.se">thoughtbot</a></div>
-<table summary="Document Footer" class="foot" width="100%">
-<col width="50%">
-<col width="50%">
+<h1 id="AUTHORS">AUTHORS</h1> <b class="name">rcrc</b> is maintained by <span class="author">Mike Burns</span> &lt;<a class="link-mail" href="mailto:mburns@thoughtbot.com">mburns@thoughtbot.com</a>&gt; and <a class="link-ext" href="http://thoughtbot.se">thoughtbot</a></div>
+<table class="foot">
 <tbody>
 <tr>
 <td class="foot-date">
 July 28, 2013</td>
-<td class="foot-os" align="right">
-Linux 3.16.0-4-amd64</td>
+<td class="foot-os">
+OpenBSD 6.0</td>
 </tr>
 </tbody>
 </table>
