@@ -42,7 +42,7 @@ OpenBSD (-current):
 
     doas pkg_add rcm
 
-Fedora 21/22/23:
+Fedora 22, 23, 24, 25:
 
     sudo dnf copr enable seeitcoming/rcm
     sudo dnf install rcm
