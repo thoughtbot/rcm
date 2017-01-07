@@ -20,10 +20,10 @@ Arch Linux:
 
 Debian-based:
 
-    wget https://thoughtbot.github.io/rcm/debs/rcm_1.3.0-1_all.deb
-    sha=$(sha256sum rcm_1.3.0-1_all.deb | cut -f1 -d' ')
+    wget https://thoughtbot.github.io/rcm/debs/rcm_1.3.1-1_all.deb
+    sha=$(sha256sum rcm_1.3.1-1_all.deb | cut -f1 -d' ')
     [ "$sha" = "2e95bbc23da4a0b995ec4757e0920197f4c92357214a65fedaf24274cda6806d" ] && \
-    sudo dpkg -i rcm_1.3.0-1_all.deb
+    sudo dpkg -i rcm_1.3.1-1_all.deb
 
 Korora:
 
@@ -72,13 +72,13 @@ Elsewhere:
 
 This uses the standard GNU autotools, so it's the normal dance:
 
-    curl -LO https://thoughtbot.github.io/rcm/dist/rcm-1.3.0.tar.gz && \
+    curl -LO https://thoughtbot.github.io/rcm/dist/rcm-1.3.1.tar.gz && \
 
-    sha=$(sha256 rcm-1.3.0.tar.gz | cut -f1 -d' ') && \
+    sha=$(sha256 rcm-1.3.1.tar.gz | cut -f1 -d' ') && \
     [ "$sha" = "ddcf638b367b0361d8e063c29fd573dbe1712d1b83e8d5b3a868e4aa45ffc847" ] && \
 
-    tar -xvf rcm-1.3.0.tar.gz && \
-    cd rcm-1.3.0 && \
+    tar -xvf rcm-1.3.1.tar.gz && \
+    cd rcm-1.3.1 && \
 
     ./configure && \
     make && \
