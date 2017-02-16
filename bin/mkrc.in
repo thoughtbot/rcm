@@ -5,8 +5,8 @@
 
 destination() {
   local dotfiles_dir="$1"
-  local dotless=$2
-  local in_host=$3
+  local dotless="$2"
+  local in_host="$3"
   local tag="$4"
 
   $DEBUG "destination $dotfiles_dir $dotless $in_host $tag"

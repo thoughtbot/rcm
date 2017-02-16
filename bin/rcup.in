@@ -136,7 +136,7 @@ is_linked() {
 
   if [ -h "$dest" ]; then
     local link_dest=$(readlink $dest)
-    [ "$link_dest" == "$src" ]
+    expr "$link_dest" == "$src" >/dev/null
   else
     return 1
   fi  
@@ -208,7 +208,7 @@ handle_command_line() {
   local never_symlink_dirs=
   local hostname=
   local generate=0
-  local args=$*
+  local args="$*"
   local undotted=
   local never_undotted=
   REPLACE_ALL=0
