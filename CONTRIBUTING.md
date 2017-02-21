@@ -76,3 +76,73 @@ If you intend to write a new test:
 4. When in doubt, use existing tests as a guide.
 
 [cram]: https://bitheap.org/cram/
+
+Governance
+==========
+
+Your interaction with this project can be divided into three sections: you as a
+contributor, you as a committer, and how to become a committer.
+
+Commenter and meta-contributor
+------------------------------
+
+Those commenting and triaging issues and pull reports are expected to adhere to
+our [code of conduct].
+
+Contributor
+-----------
+
+This is a slow-moving project. The maintainers' goal is to provide a yearly
+release.
+
+As a contributor, you can expect a maintainer to add a GitHub label to your
+pull request or issue within two weeks. This indicates that a maintainer has
+seen your contribution and quickly triaged it. If a maintainer believe that
+your feature request will not be merged, they will tell you as much during the
+triage step.
+
+Bug reports, either as issues or as pull requests, get the maintainers'
+priority. The maintainers consider documentation bugs to be as important as
+code bugs.
+
+Feature contributions (that is, a pull request that add a new feature) get
+lower priority. A maintainer will evaluate the patch carefully for
+maintainability and to ensure the test coverage is high.
+
+Feature requests without a patch will be closed. A maintainer will try to
+provide a description of how to write your patch while we close the request,
+though they cannot guarantee this.
+
+Interactions outside of GitHub Issues and Pull Requests are not considered
+contributing. For example, tweeting about a bug in rcm is not contributing to
+rcm, and therefore we can make no guarantees or promises about such an action.
+
+You are expected to adhere to our [code of conduct].
+
+Committer
+---------
+
+As a committer, you can merge at any time. The maintainers encourage you to
+have the code reviewed by someone beforehand. Those in the thoughtbot team can
+ping the `@thoughtbot/shell` group.
+
+You are expected to adhere to our [code of conduct].
+
+Maintainer
+----------
+
+A maintainer acts as a project manager and, as such, has final say and
+responsibility.
+
+All maintainers must adhere to our [code of conduct].
+
+Promotion
+---------
+
+All current thoughtbot employees are committers to rcm.
+
+Contributors with two merged patches are welcome to request committer access by
+emailing support@thoughtbot.com.
+
+Existing contributors become a maintainer by taking on more work and
+responsibility.
