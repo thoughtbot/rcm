@@ -136,7 +136,7 @@ is_linked() {
 
   if [ -h "$dest" ]; then
     local link_dest=$(readlink $dest)
-    expr "$link_dest" == "$src" >/dev/null
+    [ "$link_dest" = "$src" ]
   else
     return 1
   fi  
