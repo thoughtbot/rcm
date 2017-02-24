@@ -44,7 +44,8 @@ TESTS = \
 	test/rcdn-hooks-run-in-order.t \
 	test/rcup-hooks.t \
 	test/rcup-hooks-run-in-situ.t \
-	test/rcup-hooks-run-in-order.t
+	test/rcup-hooks-run-in-order.t \
+	test/rcup-spaces.t
 
 dist_check_SCRIPTS = $(TESTS)
 dist_check_DATA = test/helper.sh

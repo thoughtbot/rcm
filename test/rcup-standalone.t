@@ -12,7 +12,7 @@
   #
   #    sh install.sh
   #
-  # Environment variables: VERBOSE, CP, LN, MKDIR, RM, DIRNAME, XARGS.
+  # Environment variables: VERBOSE, CP, LN, MKDIR, RM, DIRNAME.
   #
   #    env VERBOSE=1 sh install.sh
   #
@@ -30,7 +30,6 @@
   : ${MKDIR:=/bin/mkdir}
   : ${RM:=/bin/rm}
   : ${DIRNAME:=/usr/bin/dirname}
-  : ${XARGS:=/usr/bin/xargs}
   verbose() {
     if [ "$VERBOSE" -gt 0 ]; then
       echo "$@"
@@ -51,7 +50,7 @@
       esac
     fi
     verbose "'$1' -> '$2'"
-    $DIRNAME "$2" | $XARGS $MKDIR -p
+    $MKDIR -p "$($DIRNAME "$2")"
     $CP -R "$1" "$2"
   }
   handle_file_ln() {
@@ -69,7 +68,7 @@
       esac
     fi
     verbose "'$1' -> '$2'"
-    $DIRNAME "$2" | $XARGS $MKDIR -p
+    $MKDIR -p "$($DIRNAME "$2")"
     $LN -sf "$1" "$2"
   }
   handle_file_ln "*eggplant_firetruck/lampshade/bottle" "*.eggplant_firetruck/lampshade/bottle" (glob)
