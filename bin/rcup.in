@@ -34,7 +34,7 @@ print_generated_preface() {
 #
 #    sh install.sh
 #
-# Environment variables: VERBOSE, CP, LN, MKDIR, RM, DIRNAME, XARGS.
+# Environment variables: VERBOSE, CP, LN, MKDIR, RM, DIRNAME.
 #
 #    env VERBOSE=1 sh install.sh
 #
@@ -52,7 +52,6 @@ print_generated_preface() {
 : \${MKDIR:=/bin/mkdir}
 : \${RM:=/bin/rm}
 : \${DIRNAME:=/usr/bin/dirname}
-: \${XARGS:=/usr/bin/xargs}
 verbose() {
   if [ "\$VERBOSE" -gt 0 ]; then
     echo "\$@"
@@ -73,7 +72,7 @@ handle_file_cp() {
     esac
   fi
   verbose "'\$1' -> '\$2'"
-  \$DIRNAME "\$2" | \$XARGS \$MKDIR -p
+  \$MKDIR -p "\$(\$DIRNAME "\$2")"
   \$CP -R "\$1" "\$2"
 }
 handle_file_ln() {
@@ -91,7 +90,7 @@ handle_file_ln() {
     esac
   fi
   verbose "'\$1' -> '\$2'"
-  \$DIRNAME "\$2" | \$XARGS \$MKDIR -p
+  \$MKDIR -p "\$(\$DIRNAME "\$2")"
   \$LN -sf "\$1" "\$2"
 }
 PREFACE
@@ -145,9 +144,9 @@ is_linked() {
 handle_dir() {
   local dest="$1"
 
-  $DEBUG "handle_dir $1"
+  $DEBUG "handle_dir $dest"
 
-  dirname "$dest" | xargs $MKDIR -p
+  $MKDIR -p "$(dirname "$dest")"
 }
 
 handle_file() {
