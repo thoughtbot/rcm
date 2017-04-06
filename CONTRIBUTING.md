@@ -50,6 +50,21 @@ Setup
 5. Make sure the tests pass: `make check`.
 6. Start hacking
 
+Setup
+-----
+
+1. Fork the repo.
+2. Install dependencies
+
+  - Cram is used for tests: `pip install cram`
+  - The mustache gem for building the HTML pages: `gem install mustache`
+
+3. Prepare the build system: `./autogen.sh`. (This depends on GNU
+   autoconf and GNU automake.)
+4. Configure the package: `./configure`.
+5. Make sure the tests pass: `make check`.
+6. Start hacking
+
 Testing
 -------
 
