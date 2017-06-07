@@ -68,6 +68,10 @@ Ubuntu:
     sudo apt-get update
     sudo apt-get install rcm
 
+Gentoo:
+
+    emerge app-admin/rcm
+
 Elsewhere:
 
 This uses the standard GNU autotools, so it's the normal dance:
