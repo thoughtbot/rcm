@@ -58,7 +58,7 @@ macOS with Homebrew:
     brew tap thoughtbot/formulae
     brew install rcm
 
-OmacOS with MacPorts:
+macOS with MacPorts:
 
     port install rcm
 
