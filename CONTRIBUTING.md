@@ -71,7 +71,7 @@ Individual tests can be run like so:
 If you intend to write a new test:
 
 1. Add your test at `test/subcommand-something-meaningful.t`.
-2. Add the relative name to the `TESTS` variable in `test/Makefile.am`.
+2. Add the relative name to the `TESTS` variable in `Makefile.am`.
 3. Source `test/helper.sh` as the first line of your test.
 4. When in doubt, use existing tests as a guide.
 

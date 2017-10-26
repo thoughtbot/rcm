@@ -320,6 +320,8 @@ relative_root_dir="$PWD"
 for DOTFILES_DIR in $DOTFILES_DIRS; do
   cd "$relative_root_dir"
 
+  DOTFILES_DIR="$(echo "$DOTFILES_DIR" | sed -e "s|~|$HOME|g")"
+
   if is_relative $DOTFILES_DIR; then
     DOTFILES_DIR="$PWD/$DOTFILES_DIR"
   fi
