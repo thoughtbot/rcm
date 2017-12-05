@@ -72,6 +72,10 @@ Gentoo:
 
     emerge app-admin/rcm
 
+Void Linux:
+
+    sudo xbps-install -S rcm
+
 Elsewhere:
 
 This uses the standard GNU autotools, so it's the normal dance:
