@@ -13,6 +13,10 @@ MKDIR=mkdir
 INSTALL=rcup
 ROOT_DIR="$HOME"
 
+if [ -z "$LOGNAME" ]; then
+  LOGNAME=$(whoami)
+fi
+
 ln_v() {
   $VERBOSE "'$1' -> '$2'"
   ln -s "$1" "$2"
