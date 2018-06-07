@@ -6,7 +6,7 @@
 pushdir() {
   DIR_STACK="$DIR_STACK:$PWD/$1"
   $DEBUG "cd'ing to $1 from $PWD with stack $DIR_STACK"
-  cd "$1"
+  cd -- "$1"
 }
 
 popdir() {
@@ -14,7 +14,7 @@ popdir() {
   prior="$(echo "$DIR_STACK" | sed -e "s|:$current$||" | sed -e 's/.*://g')"
   DIR_STACK="$(echo "$DIR_STACK" | sed -e 's/:[^:]*$//')"
   $DEBUG "cd'ing to $prior from $PWD with stack $DIR_STACK"
-  cd "$prior"
+  cd -- "$prior"
 }
 
 build_path() {
@@ -318,7 +318,7 @@ $DEBUG "NEVER_UNDOTTED: $NEVER_UNDOTTED"
 relative_root_dir="$PWD"
 
 for DOTFILES_DIR in $DOTFILES_DIRS; do
-  cd "$relative_root_dir"
+  cd -- "$relative_root_dir"
 
   DOTFILES_DIR="$(eval echo "$DOTFILES_DIR")"
 
@@ -343,7 +343,7 @@ for DOTFILES_DIR in $DOTFILES_DIRS; do
   never_undotted_file_globs="$(dotfiles_dir_excludes "$DOTFILES_DIR" "$NEVER_UNDOTTED")"
   $DEBUG "never_undotted_file_globs: $never_undotted_file_globs"
 
-  cd "$DOTFILES_DIR"
+  cd -- "$DOTFILES_DIR"
   DIR_STACK=":$DOTFILES_DIR"
 
   host_files="$DOTFILES_DIR/host-$HOSTNAME"
@@ -361,7 +361,7 @@ for DOTFILES_DIR in $DOTFILES_DIRS; do
     popdir
   fi
 
-  cd "$DOTFILES_DIR"
+  cd -- "$DOTFILES_DIR"
 
   for tag in $TAGS; do
     if [ -d "tag-$tag" ]; then
@@ -379,7 +379,7 @@ for DOTFILES_DIR in $DOTFILES_DIRS; do
     fi
   done
 
-  cd "$DOTFILES_DIR"
+  cd -- "$DOTFILES_DIR"
 
   for escaped_file in ${FILES:-*}; do
     file="$(decode "$escaped_file")"
