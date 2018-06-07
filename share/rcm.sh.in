@@ -132,7 +132,7 @@ run_hooks() {
         # else's dotfiles repository without reviewing the hooks before doing an `rcup`?
         find "$hook_file" -type f \( \( -user $LOGNAME -perm -100 \) -o -perm -001 \) \
           | sort | while read file; do
-            sh -c 'cd "`dirname $1`" && ./"`basename $1`"' arg0 "$file"
+            sh -c 'cd -- "`dirname $1`" && ./"`basename $1`"' arg0 "$file"
           done
       else
         $DEBUG "no $when-$direction hook present for $dotfiles_dir, skipping"
