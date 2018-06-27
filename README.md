@@ -76,6 +76,9 @@ Void Linux:
 
     sudo xbps-install -S rcm
 
+Alpine Linux:
+    sudo apk add rcm
+
 Elsewhere:
 
 This uses the standard GNU autotools, so it's the normal dance:
