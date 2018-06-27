@@ -72,6 +72,9 @@ Gentoo:
 
     emerge app-admin/rcm
 
+Alpine Linux:
+    sudo apk add rcm
+
 Elsewhere:
 
 This uses the standard GNU autotools, so it's the normal dance:
