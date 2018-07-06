@@ -51,7 +51,6 @@ And once pushed, you should clean up
 | Arch     | Max Falk                   | <gmdfalk@gmail.com>           | 0x9cbdc83ba3753845 |
 | Debian   | Eric Collins               | <eric+debian@tabfugni.cc>     | 0x7BEB44E2771AB877 |
 | Fedora   | Carl van Tonder            | <carl@supervacuo.com>         | 0xa478c47bcb683786 |
-| FreeBSD  | Leonardo Brondani Schenkel | <leonardo@schenkel.net>       | 0x0883b5ebf741f50a |
 | Gentoo   | Florian Tham               | <fgtham@gmail.com>            | 0x7286dc0e62941423 |
 | Korora   | Carl van Tonder            | <carl@supervacuo.com>         | 0xb55275fbcbe8383c |
 | Homebrew | Mike Burns                 | <mburns@thoughtbot.com>       | 0x3E6761F72846B014 |
