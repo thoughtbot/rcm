@@ -1,5 +1,18 @@
 rcm (@PACKAGE_VERSION@) unstable; urgency=low
 
+  * BUGFIX: Use =, not ==, in test(1) (Florian Tham).
+  * BUGFIX: Directories with spaces in rcup(1) (Florian Tham).
+  * BUGFIX: Fallback the LOGNAME from whoami (AJ Villalobos, Mike Burns).
+  * BUGFIX: Fix cd for paths beginning with hyphen (-) (Christian Höltje).
+  * Feature: Expand ~ in DOTFILES_DIR (Rebecca Meritz).
+  * Documentation improvements (Alan Yee, Eric Collins, Florian Tham, kajisha,
+	    Matthew Horan, maxice8, Mike Burns, Rebecca Meritz, Scott Stevenson,
+	    Tyson Gach, Yota Toyama).
+
+ -- Mike Burns <mburns@thoughtbot.com>  Fri, 06 Jul 2018 11:00:00 -0500
+
+rcm (1.3.1) unstable; urgency=low
+
   * BUGFIX: Handle dotfile names with spaces in them (Eric Collins, Mike Burns).
   * BUGFIX: Relative exclude globs now work (Eric Collins, Mike Burns).
   * BUGFIX: Use $LOGNAME instead of $USER for compatibility (Mike Burns).
@@ -7,8 +20,6 @@ rcm (@PACKAGE_VERSION@) unstable; urgency=low
   * BUGFIX: Symlink existing files, even when identical (Graham Bennett).
   * BUGFIX: Sort hooks by filename before execution instead of arbitrary order
     (David Alexander).
-  * BUGFIX: Rename "OS X" to "macOS" everywhere (Alan Yee).
-  * Feature: Expand ~ in DOTFILES_DIR (Rebecca Meritz).
   * Documentation improvements (Nick Novitski, Ben Stephens, Casey Rodarmor).
 
  -- Mike Burns <mburns@thoughtbot.com>  Sat, 26 Dec 2016 17:00:00 -0500
