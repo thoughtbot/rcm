@@ -28,19 +28,6 @@ Debian-based:
     sudo apt-get update
     sudo apt-get install rcm
 
-Korora:
-
-  64-bit Korora 23:
-
-    sudo dnf copr enable seeitcoming/rcm fedora-23-x86_64
-    sudo dnf install rcm
-
-  Korora is similar to Fedora but with [an additional version and architecture
-  specification][copr-fedora-korora]. Replace `fedora-23-x86_64` as
-  appropriate.
-
-  [copr-fedora-korora]: https://kororaproject.org/about/news/when-adding-a-copr-repo-to-korora-fails
-
 Fedora 22, 23, 24, 25:
 
     sudo dnf copr enable seeitcoming/rcm
@@ -53,6 +40,19 @@ FreeBSD:
 Gentoo:
 
     emerge app-admin/rcm
+
+Korora:
+
+  64-bit Korora 23:
+
+    sudo dnf copr enable seeitcoming/rcm fedora-23-x86_64
+    sudo dnf install rcm
+
+  Korora is similar to Fedora but with [an additional version and architecture
+  specification][copr-fedora-korora]. Replace `fedora-23-x86_64` as
+  appropriate.
+
+  [copr-fedora-korora]: https://kororaproject.org/about/news/when-adding-a-copr-repo-to-korora-fails
 
 macOS with Homebrew:
 
