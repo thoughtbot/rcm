@@ -14,6 +14,9 @@ using [rcrc(5)][rcrc5].
 Installation
 ------------
 
+Alpine Linux:
+    sudo apk add rcm
+
 Arch Linux:
 
   https://aur.archlinux.org/packages/rcm/
@@ -38,10 +41,6 @@ Korora:
 
   [copr-fedora-korora]: https://kororaproject.org/about/news/when-adding-a-copr-repo-to-korora-fails
 
-OpenBSD (-current):
-
-    doas pkg_add rcm
-
 Fedora 22, 23, 24, 25:
 
     sudo dnf copr enable seeitcoming/rcm
@@ -51,7 +50,9 @@ FreeBSD:
 
     sudo pkg install rcm
 
-openSUSE/RHEL/CentOS: [instructions](http://software.opensuse.org/download.html?project=utilities&package=rcm)
+Gentoo:
+
+    emerge app-admin/rcm
 
 macOS with Homebrew:
 
@@ -62,22 +63,21 @@ macOS with MacPorts:
 
     port install rcm
 
+OpenBSD:
+
+    doas pkg_add rcm
+
+openSUSE/RHEL/CentOS: [instructions](http://software.opensuse.org/download.html?project=utilities&package=rcm)
+
 Ubuntu:
 
     sudo add-apt-repository ppa:martin-frost/thoughtbot-rcm
     sudo apt-get update
     sudo apt-get install rcm
 
-Gentoo:
-
-    emerge app-admin/rcm
-
 Void Linux:
 
     sudo xbps-install -S rcm
-
-Alpine Linux:
-    sudo apk add rcm
 
 Elsewhere:
 
