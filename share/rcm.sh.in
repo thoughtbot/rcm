@@ -121,6 +121,8 @@ run_hooks() {
 
   if [ $RUN_HOOKS -eq 1 ]; then
     for dotfiles_dir in $DOTFILES_DIRS; do
+      dotfiles_dir=$(eval echo "$dotfiles_dir")
+
       hook_file="$dotfiles_dir/hooks/$when-$direction"
 
       if [ -e "$hook_file" ]; then
