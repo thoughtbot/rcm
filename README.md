@@ -83,13 +83,13 @@ Elsewhere:
 
 This uses the standard GNU autotools, so it's the normal dance:
 
-    curl -LO https://thoughtbot.github.io/rcm/dist/rcm-1.3.1.tar.gz &&
+    curl -LO https://thoughtbot.github.io/rcm/dist/rcm-1.3.2.tar.gz &&
 
-    sha=$(sha256 rcm-1.3.1.tar.gz | cut -f1 -d' ') &&
-    [ "$sha" = "9c8f92dba63ab9cb8a6b3d0ccf7ed8edf3f0fb388b044584d74778145fae7f8f" ] &&
+    sha=$(sha256 rcm-1.3.2.tar.gz | cut -f1 -d' ') &&
+    [ "$sha" = "2f31b49c241ed6e74578fc71e6b2ba3a87183d311f28e05b9f7cc7c1c55dda64" ] &&
 
-    tar -xvf rcm-1.3.1.tar.gz &&
-    cd rcm-1.3.1 &&
+    tar -xvf rcm-1.3.2.tar.gz &&
+    cd rcm-1.3.2 &&
 
     ./configure &&
     make &&
