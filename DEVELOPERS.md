@@ -19,12 +19,10 @@ First build the distribution:
     ./configure
     make distcheck
 
-On any system you can build the tarball, Homebrew package, Arch
-PKGBUILD, and tag:
+On any system you can build the tarball, Homebrew package, and tag:
 
     ./maint/release build tarball rcm-*.tar.gz
     ./maint/release build homebrew rcm-*.tar.gz
-    ./maint/release build arch rcm-*.tar.gz
     ./maint/release build tag rcm-*.tar.gz
 
 You need mdocml to tranform the manpages into HTML:
@@ -34,27 +32,18 @@ You need mdocml to tranform the manpages into HTML:
 Once built, you can push it live:
 
     ./maint/release push tarball rcm-*.tar.gz
-    # ... etc. ...
+    ./maint/release push homebrew rcm-*.tar.gz
+    ./maint/release push tag rcm-*.tar.gz
+    ./maint/release push man_html rcm-*.tar.gz
 
 And once pushed, you should clean up
 
     ./maint/release clean tarball rcm-*.tar.gz
-    # ... etc. ...
+    ./maint/release clean homebrew rcm-*.tar.gz
+    ./maint/release clean tag rcm-*.tar.gz
+    ./maint/release clean man_html rcm-*.tar.gz
 
-4. Build the Debian package:
-
-Only on Debian systems can you build the Debian package:
-
-    make NEWS.md
-    ./maint/release build deb rcm-*.tar.gz
-    ./maint/release push deb rcm-*.tar.gz
-    ./maint/release clean deb rcm-*.tar.gz
-
-This will create both a binary and a signed source package.
-
-Source packages go in the `deb-src` directory on the `gh-pages` branch.
-
-5. Contact package maintainers:
+4. Contact package maintainers:
 
 | OS       | Name                       | Email                         | PGP keyid          |
 | -------- | -------------------------- | ----------------------------- | ------------------ |

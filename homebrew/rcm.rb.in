@@ -11,6 +11,6 @@ class Rcm < Formula
   end
 
   test do
-    system "lsrc"
+    system "#{bin}/lsrc"
   end
 end
