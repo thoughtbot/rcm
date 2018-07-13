@@ -15,28 +15,16 @@ LSRC(1)</title>
 </head>
 <body>
 <div class="mandoc">
-<table class="head">
-<tbody>
-<tr>
-<td class="head-ltitle">
-LSRC(1)</td>
-<td class="head-vol">
-General Commands Manual</td>
-<td class="head-rtitle">
-LSRC(1)</td>
-</tr>
-</tbody>
-</table>
 <div class="section">
-<h1 id="NAME">NAME</h1> <b class="name">lsrc</b> &#8212; <span class="desc">show dotfiles files managed by rcm</span></div>
+<h1 id="x4e414d45">NAME</h1> <b class="name">lsrc</b> &#8212; <span class="desc">show dotfiles files managed by rcm</span></div>
 <div class="section">
-<h1 id="SYNOPSIS">SYNOPSIS</h1><table class="synopsis">
+<h1 id="x53594e4f50534953">SYNOPSIS</h1><table class="synopsis">
 <col style="width: 4.00ex;"/>
 <col/>
 <tbody>
 <tr>
 <td>
-<b class="name">lsrc</b></td>
+lsrc</td>
 <td>
 [<span class="opt"><b class="flag">-FhqVv</b></span>] [<span class="opt"><b class="flag">-B</b> <i class="arg">hostname</i></span>] [<span class="opt"><b class="flag">-d</b> <i class="arg">dir</i></span>] [<span class="opt"><b class="flag">-I</b> <i class="arg">excl_pat</i></span>] [<span class="opt"><b class="flag">-S</b> <i class="arg">excl_pat</i></span>] [<span class="opt"><b class="flag">-s</b> <i class="arg">excl_pat</i></span>] [<span class="opt"><b class="flag">-t</b> <i class="arg">tag</i></span>] [<span class="opt"><b class="flag">-U</b> <i class="arg">excl_pat</i></span>] [<span class="opt"><b class="flag">-u</b> <i class="arg">excl_pat</i></span>] [<span class="opt"><b class="flag">-x</b> <i class="arg">excl_pat</i></span>] [<span class="opt">files ...</span>]</td>
 </tr>
@@ -44,7 +32,7 @@ LSRC(1)</td>
 </table>
 </div>
 <div class="section">
-<h1 id="DESCRIPTION">DESCRIPTION</h1> This program lists all configuration files, both the sources in the dotfiles directories and the destinations in your home directory. See <a class="link-man" href="rcup.1.html">rcup(1)</a>, the <i class="link-sec"><a class="link-sec" href="#DIRECTORY_LAYOUT">DIRECTORY LAYOUT</a></i> section, for details on the directory layout. It supports these options:<dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
+<h1 id="x4445534352495054494f4e">DESCRIPTION</h1> This program lists all configuration files, both the sources in the dotfiles directories and the destinations in your home directory. See <a class="link-man" href="rcup.1.html">rcup(1)</a>, the <i class="link-sec"><a class="link-sec" href="#x4449524543544f5259204c41594f5554">DIRECTORY LAYOUT</a></i> section, for details on the directory layout. It supports these options:<dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">-B</b> <i class="arg">HOSTNAME</i></dt>
 <dd class="list-tag" style="margin-left: 11.00ex;">
@@ -64,15 +52,15 @@ show usage instructions.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">-I</b> <i class="arg">excl_pat</i></dt>
 <dd class="list-tag" style="margin-left: 11.00ex;">
-include the files that match the given pattern. This is applied after any <b class="flag">-x</b> options. It uses the same pattern language as <b class="flag">-x</b>; more details are in the <i class="link-sec"><a class="link-sec" href="#EXCLUDE_PATTERN">EXCLUDE PATTERN</a></i> section. Note that you may have to quote the exclude pattern so the shell does not evaluate the glob.</dd>
+include the files that match the given pattern. This is applied after any <b class="flag">-x</b> options. It uses the same pattern language as <b class="flag">-x</b>; more details are in the <i class="link-sec"><a class="link-sec" href="#x4558434c554445205041545445524e">EXCLUDE PATTERN</a></i> section. Note that you may have to quote the exclude pattern so the shell does not evaluate the glob.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">-S</b> <i class="arg">excl_pat</i></dt>
 <dd class="list-tag" style="margin-left: 11.00ex;">
-symlink the directories that match the given pattern. See <i class="link-sec"><a class="link-sec" href="#EXCLUDE_PATTERN">EXCLUDE PATTERN</a></i> for more details. This option can be repeated. You may need to quote the pattern to prevent the shell from swallowing the glob.</dd>
+symlink the directories that match the given pattern. See <i class="link-sec"><a class="link-sec" href="#x4558434c554445205041545445524e">EXCLUDE PATTERN</a></i> for more details. This option can be repeated. You may need to quote the pattern to prevent the shell from swallowing the glob.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">-s</b> <i class="arg">excl_pat</i></dt>
 <dd class="list-tag" style="margin-left: 11.00ex;">
-if a directory matches the given pattern, recur inside of it instead of symlinking. See <i class="link-sec"><a class="link-sec" href="#EXCLUDE_PATTERN">EXCLUDE PATTERN</a></i> for more details. This is the opposite of the <b class="flag">-S</b> option, and can be used to undo it or the <b class="var">SYMLINK_DIRS</b> setting in your <a class="link-man" href="rcrc.5.html">rcrc(5)</a> configuration. It can be repeated, and the pattern may need to be quoted to protect it from your shell.</dd>
+if a directory matches the given pattern, recur inside of it instead of symlinking. See <i class="link-sec"><a class="link-sec" href="#x4558434c554445205041545445524e">EXCLUDE PATTERN</a></i> for more details. This is the opposite of the <b class="flag">-S</b> option, and can be used to undo it or the <b class="var">SYMLINK_DIRS</b> setting in your <a class="link-man" href="rcrc.5.html">rcrc(5)</a> configuration. It can be repeated, and the pattern may need to be quoted to protect it from your shell.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">-t</b> <i class="arg">TAG</i></dt>
 <dd class="list-tag" style="margin-left: 11.00ex;">
@@ -80,11 +68,11 @@ list dotfiles according to TAG</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">-U</b> <i class="arg">excl_pat</i></dt>
 <dd class="list-tag" style="margin-left: 11.00ex;">
-the rc files or directories matching this pattern will not be symlinked or created with a leading dot. See <i class="link-sec"><a class="link-sec" href="#EXCLUDE_PATTERN">EXCLUDE PATTERN</a></i> for more details. This option can be repeated. You may need to quote the pattern to prevent the shell from swallowing the glob.</dd>
+the rc files or directories matching this pattern will not be symlinked or created with a leading dot. See <i class="link-sec"><a class="link-sec" href="#x4558434c554445205041545445524e">EXCLUDE PATTERN</a></i> for more details. This option can be repeated. You may need to quote the pattern to prevent the shell from swallowing the glob.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">-u</b> <i class="arg">excl_pat</i></dt>
 <dd class="list-tag" style="margin-left: 11.00ex;">
-if an rc file or directory matches the given pattern, it must be dotted. See <i class="link-sec"><a class="link-sec" href="#EXCLUDE_PATTERN">EXCLUDE PATTERN</a></i> for more details. This is the opposite of the <b class="flag">-U</b> option, and can be used to undo it or the <b class="var">UNDOTTED</b> setting in your <a class="link-man" href="rcrc.5.html">rcrc(5)</a> configuration. This option can be repeated. You may need to quote the pattern to prevent the shell from swallowing the glob.</dd>
+if an rc file or directory matches the given pattern, it must be dotted. See <i class="link-sec"><a class="link-sec" href="#x4558434c554445205041545445524e">EXCLUDE PATTERN</a></i> for more details. This is the opposite of the <b class="flag">-U</b> option, and can be used to undo it or the <b class="var">UNDOTTED</b> setting in your <a class="link-man" href="rcrc.5.html">rcrc(5)</a> configuration. This option can be repeated. You may need to quote the pattern to prevent the shell from swallowing the glob.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">-V</b></dt>
 <dd class="list-tag" style="margin-left: 11.00ex;">
@@ -100,7 +88,7 @@ decrease verbosity</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">-x</b> <i class="arg">excl_pat</i></dt>
 <dd class="list-tag" style="margin-left: 11.00ex;">
-exclude the files that match the given pattern. See <i class="link-sec"><a class="link-sec" href="#EXCLUDE_PATTERN">EXCLUDE PATTERN</a></i> for more details. This option can be repeated. Quote the pattern if it contains a valid shell glob.</dd>
+exclude the files that match the given pattern. See <i class="link-sec"><a class="link-sec" href="#x4558434c554445205041545445524e">EXCLUDE PATTERN</a></i> for more details. This option can be repeated. Quote the pattern if it contains a valid shell glob.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <i class="arg">files ...</i></dt>
 <dd class="list-tag" style="margin-left: 11.00ex;">
@@ -108,7 +96,7 @@ only list the specified file(s)</dd>
 </dl>
 </div>
 <div class="section">
-<h1 id="EXCLUDE_PATTERN">EXCLUDE PATTERN</h1> The exclude pattern specifies a colon-separated pair of dotfiles directory and file glob. The dotfiles directory is optional and, if omitted, defaults to <code class="lit">*</code>, which is a special token that matches any dotfiles directory. The file glob is relative to the dotfiles directory, ignoring meta directories. A colon combines them.<div class="spacer">
+<h1 id="x4558434c554445205041545445524e">EXCLUDE PATTERN</h1> The exclude pattern specifies a colon-separated pair of dotfiles directory and file glob. The dotfiles directory is optional and, if omitted, defaults to <code class="lit">*</code>, which is a special token that matches any dotfiles directory. The file glob is relative to the dotfiles directory, ignoring meta directories. A colon combines them.<div class="spacer">
 </div>
 For example, to ignore all emacs-related items from the <i class="file">thoughtbot-dotfiles</i> directory, use the exclude pattern:<div class="spacer">
 </div>
@@ -134,9 +122,9 @@ Or more simply:<div class="spacer">
 </blockquote>
 <div class="spacer">
 </div>
-Since exclude patterns are often valid shell globs, be sure to quote them. See the caveats noted in <i class="link-sec"><a class="link-sec" href="#BUGS">BUGS</a></i> when using an exclude pattern.</div>
+Since exclude patterns are often valid shell globs, be sure to quote them. See the caveats noted in <i class="link-sec"><a class="link-sec" href="#x42554753">BUGS</a></i> when using an exclude pattern.</div>
 <div class="section">
-<h1 id="ENVIRONMENT">ENVIRONMENT</h1><dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
+<h1 id="x454e5649524f4e4d454e54">ENVIRONMENT</h1><dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
 <dt class="list-tag" style="margin-top: 1.00em;">
 <span class="env">RCRC</span></dt>
 <dd class="list-tag" style="margin-left: 8.00ex;">
@@ -144,25 +132,15 @@ User configuration file. Defaults to <i class="file">~/.rcrc</i>.</dd>
 </dl>
 </div>
 <div class="section">
-<h1 id="FILES">FILES</h1> <i class="file">~/.dotfiles</i> <i class="file">~/.rcrc</i></div>
+<h1 id="x46494c4553">FILES</h1> <i class="file">~/.dotfiles</i> <i class="file">~/.rcrc</i></div>
 <div class="section">
-<h1 id="SEE_ALSO">SEE ALSO</h1> <a class="link-man" href="mkrc.1.html">mkrc(1)</a>, <a class="link-man" href="rcdn.1.html">rcdn(1)</a>, <a class="link-man" href="rcup.1.html">rcup(1)</a>, <a class="link-man" href="rcrc.5.html">rcrc(5)</a>, <a class="link-man" href="rcm.7.html">rcm(7)</a></div>
+<h1 id="x53454520414c534f">SEE ALSO</h1> <a class="link-man" href="mkrc.1.html">mkrc(1)</a>, <a class="link-man" href="rcdn.1.html">rcdn(1)</a>, <a class="link-man" href="rcup.1.html">rcup(1)</a>, <a class="link-man" href="rcrc.5.html">rcrc(5)</a>, <a class="link-man" href="rcm.7.html">rcm(7)</a></div>
 <div class="section">
-<h1 id="AUTHORS">AUTHORS</h1> <b class="name">lsrc</b> is maintained by <span class="author">Mike Burns</span> &lt;<a class="link-mail" href="mailto:mburns@thoughtbot.com">mburns@thoughtbot.com</a>&gt; and <a class="link-ext" href="http://thoughtbot.se">thoughtbot</a></div>
+<h1 id="x415554484f5253">AUTHORS</h1> <b class="name">lsrc</b> is maintained by <span class="author">Mike Burns</span> &lt;<a class="link-mail" href="mailto:mburns@thoughtbot.com">mburns@thoughtbot.com</a>&gt; and <a class="link-ext" href="http://thoughtbot.se">thoughtbot</a></div>
 <div class="section">
-<h1 id="BUGS">BUGS</h1> For OS X systems, we strongly encourage the use of the <b class="var">HOSTNAME</b> variable in your <a class="link-man" href="rcrc.5.html">rcrc(5)</a>. We use the <a class="link-man" href="hostname.1.html">hostname(1)</a> program to determine the unique identifier for the host. This program is not specified by POSIX and can vary by system. On OS X the hostname is unpredictable, and can even change as part of the DHCP handshake.<div class="spacer">
+<h1 id="x42554753">BUGS</h1> For macOS systems, we strongly encourage the use of the <b class="var">HOSTNAME</b> variable in your <a class="link-man" href="rcrc.5.html">rcrc(5)</a>. We use the <a class="link-man" href="hostname.1.html">hostname(1)</a> program to determine the unique identifier for the host. This program is not specified by POSIX and can vary by system. On macOS the hostname is unpredictable, and can even change as part of the DHCP handshake.<div class="spacer">
 </div>
 There are a few bugs around shell globs. Anything involving an exclude pattern is unpredictable, so use <b class="flag">-v</b> when dealing with patterns. Specifically, globs may expand at any time and remain expanded for the duration of the run, which means they cannot be applied more than once.</div>
-<table class="foot">
-<tbody>
-<tr>
-<td class="foot-date">
-December 23, 2016</td>
-<td class="foot-os">
-OpenBSD 6.0</td>
-</tr>
-</tbody>
-</table>
 </div>
 </body>
 </html>

@@ -15,28 +15,16 @@ MKRC(1)</title>
 </head>
 <body>
 <div class="mandoc">
-<table class="head">
-<tbody>
-<tr>
-<td class="head-ltitle">
-MKRC(1)</td>
-<td class="head-vol">
-General Commands Manual</td>
-<td class="head-rtitle">
-MKRC(1)</td>
-</tr>
-</tbody>
-</table>
 <div class="section">
-<h1 id="NAME">NAME</h1> <b class="name">mkrc</b> &#8212; <span class="desc">bless files into a dotfile managed by rcm</span></div>
+<h1 id="x4e414d45">NAME</h1> <b class="name">mkrc</b> &#8212; <span class="desc">bless files into a dotfile managed by rcm</span></div>
 <div class="section">
-<h1 id="SYNOPSIS">SYNOPSIS</h1><table class="synopsis">
+<h1 id="x53594e4f50534953">SYNOPSIS</h1><table class="synopsis">
 <col style="width: 4.00ex;"/>
 <col/>
 <tbody>
 <tr>
 <td>
-<b class="name">mkrc</b></td>
+mkrc</td>
 <td>
 [<span class="opt"><b class="flag">-ChoqSsVvUu</b></span>] [<span class="opt"><b class="flag">-t</b> <i class="arg">tag</i></span>] [<span class="opt"><b class="flag">-d</b> <i class="arg">dir</i></span>] [<span class="opt"><b class="flag">-B</b> <i class="arg">hostname</i></span>] <i class="arg">files ...</i></td>
 </tr>
@@ -44,7 +32,7 @@ MKRC(1)</td>
 </table>
 </div>
 <div class="section">
-<h1 id="DESCRIPTION">DESCRIPTION</h1> This program adds files to your dotfiles directory then installs it back into your home directory. It can install files under a tag or different source directory. It supports these options:<dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
+<h1 id="x4445534352495054494f4e">DESCRIPTION</h1> This program adds files to your dotfiles directory then installs it back into your home directory. It can install files under a tag or different source directory. It supports these options:<dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">-B</b> <i class="arg">HOSTNAME</i></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
@@ -76,7 +64,7 @@ treat the specified rc files as files to be symlinked, even if they are director
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">-s</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
-if the rc file is a file, symlink it; otherwise, make a directory structure as described in <a class="link-man" href="rcup.1.html">rcup(1)</a> in the section <i class="link-sec"><a class="link-sec" href="#ALGORITHM">ALGORITHM</a></i>. This is the default.</dd>
+if the rc file is a file, symlink it; otherwise, make a directory structure as described in <a class="link-man" href="rcup.1.html">rcup(1)</a> in the section <i class="link-sec"><a class="link-sec" href="#x414c474f524954484d">ALGORITHM</a></i>. This is the default.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">-t</b> <i class="arg">TAG</i></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
@@ -100,7 +88,7 @@ show the version number.</dd>
 </dl>
 </div>
 <div class="section">
-<h1 id="ENVIRONMENT">ENVIRONMENT</h1><dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
+<h1 id="x454e5649524f4e4d454e54">ENVIRONMENT</h1><dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
 <dt class="list-tag" style="margin-top: 1.00em;">
 <span class="env">RCRC</span></dt>
 <dd class="list-tag" style="margin-left: 8.00ex;">
@@ -108,9 +96,9 @@ User configuration file. Defaults to <i class="file">~/.rcrc</i>.</dd>
 </dl>
 </div>
 <div class="section">
-<h1 id="FILES">FILES</h1> <i class="file">~/.dotfiles</i> <i class="file">~/.rcrc</i></div>
+<h1 id="x46494c4553">FILES</h1> <i class="file">~/.dotfiles</i> <i class="file">~/.rcrc</i></div>
 <div class="section">
-<h1 id="EXAMPLES">EXAMPLES</h1><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<h1 id="x4558414d504c4553">EXAMPLES</h1><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
 <div class="display">
 <code class="lit">mkrc ~/.vimrc</code></div>
 </blockquote>
@@ -136,19 +124,9 @@ User configuration file. Defaults to <i class="file">~/.rcrc</i>.</dd>
 </blockquote>
 </div>
 <div class="section">
-<h1 id="SEE_ALSO">SEE ALSO</h1> <a class="link-man" href="lsrc.1.html">lsrc(1)</a>, <a class="link-man" href="rcdn.1.html">rcdn(1)</a>, <a class="link-man" href="rcup.1.html">rcup(1)</a>, <a class="link-man" href="rcrc.5.html">rcrc(5)</a>, <a class="link-man" href="rcm.7.html">rcm(7)</a></div>
+<h1 id="x53454520414c534f">SEE ALSO</h1> <a class="link-man" href="lsrc.1.html">lsrc(1)</a>, <a class="link-man" href="rcdn.1.html">rcdn(1)</a>, <a class="link-man" href="rcup.1.html">rcup(1)</a>, <a class="link-man" href="rcrc.5.html">rcrc(5)</a>, <a class="link-man" href="rcm.7.html">rcm(7)</a></div>
 <div class="section">
-<h1 id="AUTHORS">AUTHORS</h1> <b class="name">mkrc</b> is maintained by <span class="author">Mike Burns</span> &lt;<a class="link-mail" href="mailto:mburns@thoughtbot.com">mburns@thoughtbot.com</a>&gt; and <a class="link-ext" href="http://thoughtbot.se">thoughtbot</a></div>
-<table class="foot">
-<tbody>
-<tr>
-<td class="foot-date">
-July 28, 2013</td>
-<td class="foot-os">
-OpenBSD 6.0</td>
-</tr>
-</tbody>
-</table>
+<h1 id="x415554484f5253">AUTHORS</h1> <b class="name">mkrc</b> is maintained by <span class="author">Mike Burns</span> &lt;<a class="link-mail" href="mailto:mburns@thoughtbot.com">mburns@thoughtbot.com</a>&gt; and <a class="link-ext" href="http://thoughtbot.se">thoughtbot</a></div>
 </div>
 </body>
 </html>

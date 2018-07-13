@@ -15,28 +15,16 @@ RCM(7)</title>
 </head>
 <body>
 <div class="mandoc">
-<table class="head">
-<tbody>
-<tr>
-<td class="head-ltitle">
-RCM(7)</td>
-<td class="head-vol">
-Miscellaneous Information Manual</td>
-<td class="head-rtitle">
-RCM(7)</td>
-</tr>
-</tbody>
-</table>
 <div class="section">
-<h1 id="NAME">NAME</h1> <b class="name">rcm</b> &#8212; <span class="desc">dotfile management</span></div>
+<h1 id="x4e414d45">NAME</h1> <b class="name">rcm</b> &#8212; <span class="desc">dotfile management</span></div>
 <div class="section">
-<h1 id="SYNOPSIS">SYNOPSIS</h1><table class="synopsis">
-<col style="width: 4.00ex;"/>
+<h1 id="x53594e4f50534953">SYNOPSIS</h1><table class="synopsis">
+<col style="width: 3.00ex;"/>
 <col/>
 <tbody>
 <tr>
 <td>
-<b class="name">lsrc</b></td>
+lsrc</td>
 <td>
 </td>
 </tr>
@@ -44,12 +32,12 @@ RCM(7)</td>
 </table>
 <br/>
 <table class="synopsis">
-<col style="width: 4.00ex;"/>
+<col style="width: 3.00ex;"/>
 <col/>
 <tbody>
 <tr>
 <td>
-<b class="name">mkrc</b></td>
+mkrc</td>
 <td>
 </td>
 </tr>
@@ -57,12 +45,12 @@ RCM(7)</td>
 </table>
 <br/>
 <table class="synopsis">
-<col style="width: 4.00ex;"/>
+<col style="width: 3.00ex;"/>
 <col/>
 <tbody>
 <tr>
 <td>
-<b class="name">rcdn</b></td>
+rcdn</td>
 <td>
 </td>
 </tr>
@@ -70,12 +58,12 @@ RCM(7)</td>
 </table>
 <br/>
 <table class="synopsis">
-<col style="width: 4.00ex;"/>
+<col style="width: 3.00ex;"/>
 <col/>
 <tbody>
 <tr>
 <td>
-<b class="name">rcup</b></td>
+rcup</td>
 <td>
 </td>
 </tr>
@@ -83,13 +71,13 @@ RCM(7)</td>
 </table>
 </div>
 <div class="section">
-<h1 id="DESCRIPTION">DESCRIPTION</h1> The rcm suite of tools is for managing dotfiles directories. This is a directory containing all the <code class="lit">.*rc</code> files in your home directory (<i class="file">.zshrc</i>, <i class="file">.vimrc</i>, and so on). These files have gone by many names in history, such as &#8220;rc files&#8221; because they typically end in <code class="lit">rc</code> or &#8220;dotfiles&#8221; because they begin with a period.<div class="spacer">
+<h1 id="x4445534352495054494f4e">DESCRIPTION</h1> The rcm suite of tools is for managing dotfiles directories. This is a directory containing all the <code class="lit">.*rc</code> files in your home directory (<i class="file">.zshrc</i>, <i class="file">.vimrc</i>, and so on). These files have gone by many names in history, such as &#8220;rc files&#8221; because they typically end in <code class="lit">rc</code> or &#8220;dotfiles&#8221; because they begin with a period.<div class="spacer">
 </div>
 This suite is useful for committing your rc files to a central repository to share, but it also scales to a more complex situation such as multiple source directories shared between computers with some host-specific or task-specific files.<div class="spacer">
 </div>
-This guide serves as a tutorial motivating the suite. For a list of quick reference documentation see the <i class="link-sec"><a class="link-sec" href="#SEE_ALSO">SEE ALSO</a></i> section below.</div>
+This guide serves as a tutorial motivating the suite. For a list of quick reference documentation see the <i class="link-sec"><a class="link-sec" href="#x53454520414c534f">SEE ALSO</a></i> section below.</div>
 <div class="section">
-<h1 id="QUICK_START_FOR_EXISTING_DOTFILES_DIRECTORIES">QUICK START FOR EXISTING DOTFILES DIRECTORIES</h1> This section is for those who already have an existing dotfiles directory; this directory is <i class="file">~/.dotfiles</i>; the directory only contains rc files; and these rc filenames do not begin with a period. See the caveats below if this is not you.<ol style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-enum">
+<h1 id="x515549434b20535441525420464f52204558495354494e4720444f5446494c4553204449524543544f52494553">QUICK START FOR EXISTING DOTFILES DIRECTORIES</h1> This section is for those who already have an existing dotfiles directory; this directory is <i class="file">~/.dotfiles</i>; the directory only contains rc files; and these rc filenames do not begin with a period. See the caveats below if this is not you.<ol style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-enum">
 <li class="list-enum" style="margin-top: 1.00em;">
 Dry run with <a class="link-man" href="lsrc.1.html">lsrc(1)</a>. Look for anything unexpected in here, such as <i class="file">~/.install</i> or <i class="file">~/.Makefile</i>, or an empty list of dotfiles.<div class="spacer">
 </div>
@@ -124,7 +112,7 @@ In the other direction, you can use <a class="link-man" href="rcup.1.html">rcup(
 </li>
 </ol>
 <div class="subsection">
-<h2 id="COMMON_PROBLEM:_EXISTING_INSTALL_SCRIPTS">COMMON PROBLEM: EXISTING INSTALL SCRIPTS</h2> Many existing dotfile directories have scripts named <i class="file">install</i> or <i class="file">Makefile</i> in the directory. This will cause a <i class="file">~/.install</i> or <i class="file">~/.Makefile</i> symlink to be created in your home directory. Use an exclusion pattern to ignore these.<div class="spacer">
+<h2 id="x434f4d4d4f4e2050524f424c454d3a204558495354494e4720494e5354414c4c2053435249505453">COMMON PROBLEM: EXISTING INSTALL SCRIPTS</h2> Many existing dotfile directories have scripts named <i class="file">install</i> or <i class="file">Makefile</i> in the directory. This will cause a <i class="file">~/.install</i> or <i class="file">~/.Makefile</i> symlink to be created in your home directory. Use an exclusion pattern to ignore these.<div class="spacer">
 </div>
 <blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
 <div class="display">
@@ -132,7 +120,7 @@ In the other direction, you can use <a class="link-man" href="rcup.1.html">rcup(
 </blockquote>
 </div>
 <div class="subsection">
-<h2 id="COMMON_PROBLEM:_DOTTED_FILENAMES_IN_DOTFILES_DIRECTORY">COMMON PROBLEM: DOTTED FILENAMES IN DOTFILES DIRECTORY</h2> A less common situation is for all the filenames in your dotfiles directory to be prefixed with a period. These files are skipped by the rcm suite, and thus would result in nothing happening. The only option in this case is to rename all the files, for example by using a shell command like the following.<div class="spacer">
+<h2 id="x434f4d4d4f4e2050524f424c454d3a20444f545445442046494c454e414d455320494e20444f5446494c4553204449524543544f5259">COMMON PROBLEM: DOTTED FILENAMES IN DOTFILES DIRECTORY</h2> A less common situation is for all the filenames in your dotfiles directory to be prefixed with a period. These files are skipped by the rcm suite, and thus would result in nothing happening. The only option in this case is to rename all the files, for example by using a shell command like the following.<div class="spacer">
 </div>
 <blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
 <div class="display">
@@ -156,7 +144,7 @@ Note that this will break any existing symlinks. Those can be safely removed usi
 </blockquote>
 </div>
 <div class="subsection">
-<h2 id="COMMON_PROBLEM:_CONFIGURATION_FILES/DIRECTORIES_WITHOUT_DOTS">COMMON PROBLEM: CONFIGURATION FILES/DIRECTORIES WITHOUT DOTS</h2> By default, the rcm suite will prefix every file and directory it manages with a dot. If that is not desired, for example in the case of <i class="file">~/bin</i> or <i class="file">~/texmf</i>, you can add that file or directory to <span class="env">UNDOTTED</span> in <a class="link-man" href="rcrc.5.html">rcrc(5)</a> or use the <b class="flag">-U</b> option. For example:<div class="spacer">
+<h2 id="x434f4d4d4f4e2050524f424c454d3a20434f4e46494755524154494f4e2046494c45532f4449524543544f5249455320574954484f555420444f5453">COMMON PROBLEM: CONFIGURATION FILES/DIRECTORIES WITHOUT DOTS</h2> By default, the rcm suite will prefix every file and directory it manages with a dot. If that is not desired, for example in the case of <i class="file">~/bin</i> or <i class="file">~/texmf</i>, you can add that file or directory to <span class="env">UNDOTTED</span> in <a class="link-man" href="rcrc.5.html">rcrc(5)</a> or use the <b class="flag">-U</b> option. For example:<div class="spacer">
 </div>
 <blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
 <div class="display">
@@ -165,7 +153,7 @@ Note that this will break any existing symlinks. Those can be safely removed usi
 </div>
 </div>
 <div class="section">
-<h1 id="QUICK_START_FOR_EMPTY_DOTFILES_DIRECTORIES">QUICK START FOR EMPTY DOTFILES DIRECTORIES</h1> This section is for those who do not have an existing dotfiles directory and whose dotfiles are standard.<ol style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-enum">
+<h1 id="x515549434b20535441525420464f5220454d50545920444f5446494c4553204449524543544f52494553">QUICK START FOR EMPTY DOTFILES DIRECTORIES</h1> This section is for those who do not have an existing dotfiles directory and whose dotfiles are standard.<ol style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-enum">
 <li class="list-enum" style="margin-top: 1.00em;">
 Add your rc files to a dotfiles directory with <a class="link-man" href="mkrc.1.html">mkrc(1)</a>.<div class="spacer">
 </div>
@@ -187,7 +175,7 @@ Synchronize your home directory with <a class="link-man" href="rcup.1.html">rcup
 </div>
 This will give you a directory named <i class="file">~/.dotfiles</i> with your dotfiles in it. Your original dotfiles will be symlinks into this directory. For example, <i class="file">~/.zshrc</i> will be a symlink to <i class="file">~/.dotfiles/zshrc</i>.</div>
 <div class="section">
-<h1 id="TAGGED_DOTFILES">TAGGED DOTFILES</h1> This suite becomes more powerful if you share your dotfiles directory between computers, either because multiple people share the same directory or because you have multiple computers.<div class="spacer">
+<h1 id="x54414747454420444f5446494c4553">TAGGED DOTFILES</h1> This suite becomes more powerful if you share your dotfiles directory between computers, either because multiple people share the same directory or because you have multiple computers.<div class="spacer">
 </div>
 If you share the dotfiles directory between people, you may end up with some irrelevant or even incorrect rc files. For example, you may have a <i class="file">.zshrc</i> while your other contributor has a <i class="file">.bashrc</i>. This situation can be handled with tags.<ol style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-enum">
 <li class="list-enum" style="margin-top: 1.00em;">
@@ -209,7 +197,7 @@ When updating with <a class="link-man" href="rcup.1.html">rcup(1)</a> you can pa
 </ol>
 </div>
 <div class="section">
-<h1 id="MULTIPLE_DOTFILE_DIRECTORIES">MULTIPLE DOTFILE DIRECTORIES</h1> Another common situation is combining multiple dotfiles directories that people have shared with you. For this we have the <b class="flag">-d</b> flag or the <span class="env">DOTFILES_DIRS</span> option in <i class="file">.rcrc</i>.<div class="spacer">
+<h1 id="x4d554c5449504c4520444f5446494c45204449524543544f52494553">MULTIPLE DOTFILE DIRECTORIES</h1> Another common situation is combining multiple dotfiles directories that people have shared with you. For this we have the <b class="flag">-d</b> flag or the <span class="env">DOTFILES_DIRS</span> option in <i class="file">.rcrc</i>.<div class="spacer">
 </div>
 The following rcup invocation will go in sequence through the three dotfiles directories, updating any symlinks as needed. Any overlapping rc files will use the first result, not the last; that is, <i class="file">.dotfiles/vimrc</i> will take precedence over <i class="file">marriage-dotfiles/vimrc</i>.<div class="spacer">
 </div>
@@ -227,7 +215,7 @@ An exclusion pattern can be tied to a specific dotfiles directory.<div class="sp
 </blockquote>
 </div>
 <div class="section">
-<h1 id="HOST-SPECIFIC_DOTFILES">HOST-SPECIFIC DOTFILES</h1> You can also mark host-specific files. This will go by the hostname. The <a class="link-man" href="rcrc.5.html">rcrc(5)</a> configuration file is a popular candidate for a host-specific file, since the tags and dotfile directories listed in there are often specific to a single machine.<div class="spacer">
+<h1 id="x484f53541e535045434946494320444f5446494c4553">HOST-SPECIFIC DOTFILES</h1> You can also mark host-specific files. This will go by the hostname. The <a class="link-man" href="rcrc.5.html">rcrc(5)</a> configuration file is a popular candidate for a host-specific file, since the tags and dotfile directories listed in there are often specific to a single machine.<div class="spacer">
 </div>
 <blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
 <div class="display">
@@ -243,9 +231,9 @@ If your hostname is difficult to compute, or you otherwise want to use a differe
 </blockquote>
 <div class="spacer">
 </div>
-OS X users should see the <i class="link-sec"><a class="link-sec" href="#BUGS">BUGS</a></i> section for more details.</div>
+macOS users should see the <i class="link-sec"><a class="link-sec" href="#x42554753">BUGS</a></i> section for more details.</div>
 <div class="section">
-<h1 id="STANDALONE_INSTALLATION_SCRIPT">STANDALONE INSTALLATION SCRIPT</h1> The <a class="link-man" href="rcup.1.html">rcup(1)</a> tool can be used to generate a portable shell script. Instead of running a command such as <a class="link-man" href="ln.1.html">ln(1)</a> or <a class="link-man" href="rm.1.html">rm(1)</a>, it will print the command to <code class="lit">stdout</code>. This is controlled with the <b class="flag">-g</b> flag. Note that this will generate a script to create an exact replica of the synchronization, including tags, host-specific files, and dotfiles directories.<div class="spacer">
+<h1 id="x5354414e44414c4f4e4520494e5354414c4c4154494f4e20534352495054">STANDALONE INSTALLATION SCRIPT</h1> The <a class="link-man" href="rcup.1.html">rcup(1)</a> tool can be used to generate a portable shell script. Instead of running a command such as <a class="link-man" href="ln.1.html">ln(1)</a> or <a class="link-man" href="rm.1.html">rm(1)</a>, it will print the command to <code class="lit">stdout</code>. This is controlled with the <b class="flag">-g</b> flag. Note that this will generate a script to create an exact replica of the synchronization, including tags, host-specific files, and dotfiles directories.<div class="spacer">
 </div>
 <blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
 <div class="display">
@@ -255,19 +243,20 @@ OS X users should see the <i class="link-sec"><a class="link-sec" href="#BUGS">B
 </div>
 Using the above command, you can now run <code class="lit">install.sh</code> to install (or re-install) your rc files. The <code class="lit">install.sh</code> script can be stored in your dotfiles directory, copied between computers, and so on.</div>
 <div class="section">
-<h1 id="RATIONALE">RATIONALE</h1> The rcm suite was built as an abstraction over the shell, Ruby, Python, and make scripts people were writing and sharing. It is intended to run on any unix system and support the range from simple to complex dotfile directories.<div class="spacer">
+<h1 id="x524154494f4e414c45">RATIONALE</h1> The rcm suite was built as an abstraction over the shell, Ruby, Python, and make scripts people were writing and sharing. It is intended to run on any unix system and support the range from simple to complex dotfile directories.<div class="spacer">
 </div>
 As such, this suite is useful as a common base. Through this we can share tools and develop this further as a first-class entity. It is also our hope that a common set of tools will encourage others to share their dotfiles, too.</div>
 <div class="section">
-<h1 id="FILES">FILES</h1> <i class="file">~/.dotfiles</i> <i class="file">~/.rcrc</i></div>
+<h1 id="x46494c4553">FILES</h1> <i class="file">~/.dotfiles</i> <i class="file">~/.rcrc</i></div>
 <div class="section">
-<h1 id="SEE_ALSO">SEE ALSO</h1> <a class="link-man" href="lsrc.1.html">lsrc(1)</a>, <a class="link-man" href="mkrc.1.html">mkrc(1)</a>, <a class="link-man" href="rcdn.1.html">rcdn(1)</a>, <a class="link-man" href="rcup.1.html">rcup(1)</a>, <a class="link-man" href="rcrc.5.html">rcrc(5)</a></div>
+<h1 id="x53454520414c534f">SEE ALSO</h1> <a class="link-man" href="lsrc.1.html">lsrc(1)</a>, <a class="link-man" href="mkrc.1.html">mkrc(1)</a>, <a class="link-man" href="rcdn.1.html">rcdn(1)</a>, <a class="link-man" href="rcup.1.html">rcup(1)</a>, <a class="link-man" href="rcrc.5.html">rcrc(5)</a></div>
 <div class="section">
-<h1 id="AUTHORS">AUTHORS</h1> <b class="name">rcm</b> is maintained by <span class="author">Mike Burns</span> &lt;<a class="link-mail" href="mailto:mburns@thoughtbot.com">mburns@thoughtbot.com</a>&gt; and <a class="link-ext" href="http://thoughtbot.se">thoughtbot</a></div>
+<h1 id="x415554484f5253">AUTHORS</h1> <b class="name">rcm</b> is maintained by <span class="author">Mike Burns</span> &lt;<a class="link-mail" href="mailto:mburns@thoughtbot.com">mburns@thoughtbot.com</a>&gt; and <a class="link-ext" href="http://thoughtbot.se">thoughtbot</a></div>
 <div class="section">
-<h1 id="BUGS">BUGS</h1> For OS X systems, we strongly encourage the use of the <b class="var">HOSTNAME</b> variable in your <a class="link-man" href="rcrc.5.html">rcrc(5)</a>. We use the <a class="link-man" href="hostname.1.html">hostname(1)</a> program to determine the unique identifier for the host. This program is not specified by POSIX and can vary by system. On OS X the hostname is unpredictable, and can even change as part of the DHCP handshake.</div>
+<h1 id="x42554753">BUGS</h1> For macOS systems, we strongly encourage the use of the <b class="var">HOSTNAME</b> variable in your <a class="link-man" href="rcrc.5.html">rcrc(5)</a>. We use the <a class="link-man" href="hostname.1.html">hostname(1)</a> program to determine the unique identifier for the host. This program is not specified by POSIX and can vary by system. On macOS, the hostname is unpredictable, and can even change as part of the DHCP handshake.</div>
 <div class="section">
-<h1 id="CONTRIBUTORS">CONTRIBUTORS</h1><br/>
+<h1 id="x434f4e5452494255544f5253">CONTRIBUTORS</h1><br/>
+<span class="author">Alan Yee</span> &lt;<a class="link-mail" href="mailto:alyee@ucsd.edu">alyee@ucsd.edu</a>&gt;<br/>
 <span class="author">Andrei Dziahel</span> &lt;<a class="link-mail" href="mailto:develop7@develop7.info">develop7@develop7.info</a>&gt;<br/>
 <span class="author">Anton Ilin</span> &lt;<a class="link-mail" href="mailto:anton@ilin.dn.ua">anton@ilin.dn.ua</a>&gt;<br/>
 <span class="author">Ben Stephens</span> &lt;<a class="link-mail" href="mailto:BKStephens@outlook.com">BKStephens@outlook.com</a>&gt;<br/>
@@ -283,6 +272,8 @@ As such, this suite is useful as a common base. Through this we can share tools 
 <span class="author">Daniel Watson</span> &lt;<a class="link-mail" href="mailto:dwatson@thig.com">dwatson@thig.com</a>&gt;<br/>
 <span class="author">David Alexander</span> &lt;<a class="link-mail" href="mailto:davidpaulalexander@gmail.com">davidpaulalexander@gmail.com</a>&gt;<br/>
 <span class="author">Devraj Mehta</span> &lt;<a class="link-mail" href="mailto:devm33@gmail.com">devm33@gmail.com</a>&gt;<br/>
+<span class="author">Eric Collins</span> &lt;<a class="link-mail" href="mailto:eric@tabfugni.cc">eric@tabfugni.cc</a>&gt;<br/>
+<span class="author">Florian Tham</span> &lt;<a class="link-mail" href="mailto:fgtham@gmail.com">fgtham@gmail.com</a>&gt;<br/>
 <span class="author">George Brocklehurst</span> &lt;<a class="link-mail" href="mailto:george@thoughtbot.com">george@thoughtbot.com</a>&gt;<br/>
 <span class="author">Graham Bennett</span> &lt;<a class="link-mail" href="mailto:graham@simulcra.org">graham@simulcra.org</a>&gt;<br/>
 <span class="author">Jarkko Kniivil&#228;</span> &lt;<a class="link-mail" href="mailto:jkniiv@gmail.com">jkniiv@gmail.com</a>&gt;<br/>
@@ -292,6 +283,7 @@ As such, this suite is useful as a common base. Through this we can share tools 
 <span class="author">John Axel Eriksson</span> &lt;<a class="link-mail" href="mailto:john@insane.se">john@insane.se</a>&gt;<br/>
 <span class="author">Jordan Eldredge</span> &lt;<a class="link-mail" href="mailto:jordaneldredge@gmail.com">jordaneldredge@gmail.com</a>&gt;<br/>
 <span class="author">Martin Frost</span> &lt;<a class="link-mail" href="mailto:frost@ceri.se">frost@ceri.se</a>&gt;<br/>
+<span class="author">Matthew Horan</span> &lt;<a class="link-mail" href="mailto:matt@matthoran.com">matt@matthoran.com</a>&gt;<br/>
 <span class="author">Melissa Xie</span> &lt;<a class="link-mail" href="mailto:melissa@thoughtbot.com">melissa@thoughtbot.com</a>&gt;<br/>
 <span class="author">Michael Reed</span> &lt;<a class="link-mail" href="mailto:supertron421@gmail.com">supertron421@gmail.com</a>&gt;<br/>
 <span class="author">Mike Burns</span> &lt;<a class="link-mail" href="mailto:mburns@thoughtbot.com">mburns@thoughtbot.com</a>&gt;<br/>
@@ -300,21 +292,16 @@ As such, this suite is useful as a common base. Through this we can share tools 
 <span class="author">Pablo Olmos de Aguilera Corradini</span> &lt;<a class="link-mail" href="mailto:pablo@glatelier.org">pablo@glatelier.org</a>&gt;<br/>
 <span class="author">Patrick Brisbin</span> &lt;<a class="link-mail" href="mailto:pat@thoughtbot.com">pat@thoughtbot.com</a>&gt;<br/>
 <span class="author">Rafael Santos</span> &lt;<a class="link-mail" href="mailto:formigarafa@gmail.com">formigarafa@gmail.com</a>&gt;<br/>
+<span class="author">Rebecca Meritz</span> &lt;<a class="link-mail" href="mailto:rebecca@meritz.com">rebecca@meritz.com</a>&gt;<br/>
 <span class="author">Roberto Pedroso</span> &lt;<a class="link-mail" href="mailto:roberto@rpedroso.com">roberto@rpedroso.com</a>&gt;<br/>
 <span class="author">Scott Stevenson</span> &lt;<a class="link-mail" href="mailto:scott@stevenson.io">scott@stevenson.io</a>&gt;<br/>
 <span class="author">Teo Ljungberg</span> &lt;<a class="link-mail" href="mailto:teo@teoljungberg.com">teo@teoljungberg.com</a>&gt;<br/>
+<span class="author">Tyson Gach</span> &lt;<a class="link-mail" href="mailto:tyson@tysongach.com">tyson@tysongach.com</a>&gt;<br/>
 <span class="author">Vlad GURDIGA</span> &lt;<a class="link-mail" href="mailto:gurdiga@gmail.com">gurdiga@gmail.com</a>&gt;<br/>
-<span class="author">Zach Latta</span> &lt;<a class="link-mail" href="mailto:zach@zachlatta.com">zach@zachlatta.com</a>&gt;</div>
-<table class="foot">
-<tbody>
-<tr>
-<td class="foot-date">
-July 28, 2013</td>
-<td class="foot-os">
-OpenBSD 6.0</td>
-</tr>
-</tbody>
-</table>
+<span class="author">Yota Toyama</span> &lt;<a class="link-mail" href="mailto:raviqqe@gmail.com">raviqqe@gmail.com</a>&gt;<br/>
+<span class="author">Zach Latta</span> &lt;<a class="link-mail" href="mailto:zach@zachlatta.com">zach@zachlatta.com</a>&gt;<br/>
+<span class="author">kajisha</span> &lt;<a class="link-mail" href="mailto:kajisha@gmail.com">kajisha@gmail.com</a>&gt;<br/>
+<span class="author">maxice8</span> &lt;<a class="link-mail" href="mailto:thinkabit.ukim@gmail.com">thinkabit.ukim@gmail.com</a>&gt;</div>
 </div>
 </body>
 </html>
