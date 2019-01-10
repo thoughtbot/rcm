@@ -29,9 +29,8 @@ Debian-based:
     sudo apt-get update
     sudo apt-get install rcm
 
-Fedora 22, 23, 24, 25:
+Fedora:
 
-    sudo dnf copr enable seeitcoming/rcm
     sudo dnf install rcm
 
 FreeBSD:
