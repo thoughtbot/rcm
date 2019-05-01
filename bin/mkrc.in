@@ -121,6 +121,8 @@ for file in $files; do
     *) [ -e "$PWD/$file" ] && file="$PWD/$file" ;;
   esac
 
+  [ -h "$file" ] && continue
+
   dotless="$(de_dot "$file")"
   dest="$(destination "$DOTFILES_DIR" "$dotless" $in_host "$tag")"
   mkdir -p "$dest/$(dirname "$dotless")"
