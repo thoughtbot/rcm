@@ -144,7 +144,7 @@ handle_file() {
   elif is_excluded "$dotfiles_subdir/$file" "$exclude_file_globs" "$include_file_globs"; then
     $VERBOSE "skipping excluded file $file"
   elif [ -d "$file" ] && is_excluded "$dotfiles_subdir/$file" "$symlink_dirs_file_globs" "$mk_dirs_file_globs"; then
-    show_file "$file" "$dest_dir" "$dotfiles_dir" "$dotfiles_subdir" $dotted
+    show_file "$file" "$dest_dir" "$dotfiles_dir" "$dotfiles_subdir" $dotted "$symlink_dirs_file_globs"
   elif [ -d "$file" ]; then
     show_dir "$file" "$dest_dir" "$dotfiles_dir" "$dotfiles_subdir" $dotted "$exclude_file_globs" "$include_file_globs" "$symlink_dirs_file_globs" "$mk_dirs_file_globs"
   else

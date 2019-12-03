@@ -14,3 +14,12 @@ Should print X for files in COPY_ALWAYS
   $ COPY_ALWAYS=copy lsrc -F
   /*/.copy:/*/.dotfiles/copy:X (glob)
   /*/.example:/*/.dotfiles/example:@ (glob)
+
+Should print $ for directory links
+
+  $ mkdir .dotfiles/folder
+
+  $ SYMLINK_DIRS=folder COPY_ALWAYS=copy lsrc -F
+  /*/.copy:/*/.dotfiles/copy:X (glob)
+  /*/.example:/*/.dotfiles/example:@ (glob)
+  /*/.folder:/*/.dotfiles/folder:$ (glob)

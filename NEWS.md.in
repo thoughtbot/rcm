@@ -1,5 +1,6 @@
 rcm (@PACKAGE_VERSION@) unstable; urgency=low
 
+  * BUGFIX: Fix #237 - $ for symlinked dirs with lsrc -F (Mathias Michel).
   * Fix #144 and more: all symlinks in input are rejected (Mat M)
   
  -- Mike Burns <mburns@thoughtbot.com>  Fri, 13 Jul 2018 14:12:00 -0500
