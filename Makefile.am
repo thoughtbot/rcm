@@ -24,6 +24,7 @@ TESTS = \
 	test/mkrc-copy-file.t \
 	test/mkrc-host-file.t \
 	test/mkrc-hostname.t \
+	test/mkrc-no-symlinks.t \
 	test/mkrc-simple-output.t \
 	test/mkrc-spaces.t \
 	test/mkrc-symlink-dirs.t \

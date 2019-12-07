@@ -58,6 +58,10 @@ is_relative() {
   echo "$1" | grep -v '^/' >/dev/null
 }
 
+is_nested() {
+  echo "$1" | sed "s|$DEST_DIR/||" | grep '/' >/dev/null
+}
+
 version() {
   cat << EOV
 $1 (rcm) $VERSION

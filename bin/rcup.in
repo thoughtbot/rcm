@@ -121,10 +121,6 @@ replace_file() {
   link_file "$src" "$dest" "$sigil"
 }
 
-is_nested() {
-  echo "$1" | sed "s:$DEST_DIR/::" | grep '/' >/dev/null
-}
-
 is_identical() {
   diff -c "$1" "$2" > /dev/null 2>&1
 }

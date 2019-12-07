@@ -20,6 +20,28 @@ destination() {
   fi
 }
 
+exit_if_dangerous() {
+  local file="$1"
+
+  if [ -L "$file" ]; then
+      $ERROR 1 "'$file' is a symlink. Cannot process file."
+  elif is_nested "$file"; then
+    # Remove DEST_DIR in case $HOME is under a symlink
+    saved_ifs="$IFS"
+    IFS=/
+    set -- $(dirname "$file" | sed "s|$DEST_DIR/||")
+    IFS="$saved_ifs"
+
+    built_dir="$DEST_DIR"
+    for dir in $@; do
+      built_dir="$built_dir/$dir"
+      if [ -L "$built_dir" ]; then
+        $ERROR 1 "'$file' path contains a symlink ($dir). Cannot process file."
+      fi
+    done
+  fi
+}
+
 show_help() {
   local exit_code=${1:-0}
 
@@ -84,6 +106,7 @@ fi
 
 files=""
 for i; do
+  exit_if_dangerous "$i" 
   files="$(printf "$files\n$i")"
 done
 
