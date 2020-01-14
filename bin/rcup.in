@@ -122,7 +122,7 @@ replace_file() {
 }
 
 is_nested() {
-  echo "$1" | sed "s:$DEST_DIR/::" | grep '/' >/dev/null
+  echo "$1" | sed "s:$(get_target $1)/::" | grep '/' >/dev/null
 }
 
 is_identical() {
@@ -213,7 +213,7 @@ handle_command_line() {
   REPLACE_ALL=0
   GENERATE=
 
-  while getopts :CVqvfghikKI:x:S:s:U:u:t:d:B: opt; do
+  while getopts :CVqvfghikKI:x:S:s:U:u:t:d:B:T: opt; do
     case "$opt" in
       B) hostname="$OPTARG" ;;
       C) always_copy=1 ;;
@@ -227,6 +227,7 @@ handle_command_line() {
       K) run_hooks=0 ;;
       q) verbosity=$(($verbosity - 1)) ;;
       t) arg_tags="$arg_tags $OPTARG" ;;
+      T) TARGET=$(echo $OPTARG | envsubst) ;;
       S) symlink_dirs="$symlink_dirs $OPTARG";;
       s) never_symlink_dirs="$never_symlink_dirs $OPTARG";;
       U) undotted="$undotted $OPTARG";;
@@ -301,7 +302,7 @@ handle_command_line "$@"
 
 run_hooks pre up
 
-dests_and_srcs="$(lsrc $LS_ARGS)"
+dests_and_srcs="$(lsrc -T $TARGET $LS_ARGS)"
 
 saved_ifs="$IFS"
 IFS='

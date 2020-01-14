@@ -9,6 +9,12 @@ dist_man_MANS = man/lsrc.1 man/mkrc.1 man/rcdn.1 man/rcup.1 man/rcrc.5 man/rcm.7
 dist_pkgdata_DATA = share/rcm.sh
 
 TESTS = \
+	test/rcup-target.t \
+	test/rcup-target-subst.t \
+	test/rcrc-target.t \
+	test/rcup-link-files-target.t \
+	test/rcup-link-files-target-trailing.t \
+	test/rcup-link-files-target-subst.t \
 	test/lsrc-dotfiles-dirs.t \
 	test/lsrc-excludes.t \
 	test/lsrc-hostname.t \

@@ -19,7 +19,8 @@
 .Op files ...
 .Sh DESCRIPTION
 This program lists all configuration files, both the sources in the
-dotfiles directories and the destinations in your home directory.
+dotfiles directories and the destinations in the destination
+directory (by default your home directory).
 .
 See
 .Xr rcup 1 ,
@@ -90,6 +91,8 @@ protect it from your shell.
 .
 .It Fl t Ar TAG
 list dotfiles according to TAG
+.It Fl T Ar DIR
+consider dotfiles having destinations within target directory DIR
 .
 .It Fl U Ar excl_pat
 the rc files or directories matching this pattern will not be symlinked or

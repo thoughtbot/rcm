@@ -156,7 +156,7 @@ is_metafile() {
   host_portion="$(echo "$1" | sed -e 's/host-.*/host-/')"
   tag_portion="$(echo "$1" | sed -e 's/tag-.*/tag-/')"
 
-  [ "x$host_portion" = 'xhost-' -o "x$tag_portion" = 'xtag-' -o "x$1" = "xhooks" ]
+  [ "x$host_portion" = 'xhost-' -o "x$tag_portion" = 'xtag-' -o "x$1" = "xhooks" -o "x$1" = "xtarget" ]
 }
 
 dotfiles_dir_excludes() {
@@ -255,12 +255,13 @@ handle_command_line() {
   local undotted=
   local never_undotted=
 
-  while getopts :FVqvhI:x:B:S:s:U:u:t:d: opt; do
+  while getopts :FVqvhI:x:B:S:s:U:u:t:d:T: opt; do
     case "$opt" in
       F) show_sigils=1;;
       h) show_help ;;
       I) includes="$includes $OPTARG";;
       t) arg_tags="$arg_tags $OPTARG";;
+      T) TARGET=$(echo $OPTARG | envsubst) ;;
       v) verbosity=$(($verbosity + 1));;
       q) verbosity=$(($verbosity - 1));;
       d) dotfiles_dirs="$dotfiles_dirs $OPTARG";;
@@ -342,6 +343,7 @@ for DOTFILES_DIR in $DOTFILES_DIRS; do
   $DEBUG "undotted_file_globs: $undotted_file_globs"
   never_undotted_file_globs="$(dotfiles_dir_excludes "$DOTFILES_DIR" "$NEVER_UNDOTTED")"
   $DEBUG "never_undotted_file_globs: $never_undotted_file_globs"
+  current_dest_dir=$(get_target $DOTFILES_DIR)
 
   cd -- "$DOTFILES_DIR"
   DIR_STACK=":$DOTFILES_DIR"
@@ -356,7 +358,7 @@ for DOTFILES_DIR in $DOTFILES_DIRS; do
         dotted=1
       fi
 
-      handle_file "$file" "$DEST_DIR" "$host_files" . "$dotted" "$exclude_file_globs" "$include_file_globs" "$symlink_dirs_file_globs" "$mk_dirs_file_globs"
+      handle_file "$file" "$current_dest_dir" "$host_files" . "$dotted" "$exclude_file_globs" "$include_file_globs" "$symlink_dirs_file_globs" "$mk_dirs_file_globs"
     done
     popdir
   fi
@@ -373,7 +375,7 @@ for DOTFILES_DIR in $DOTFILES_DIRS; do
         if is_excluded "$file" "$undotted_file_globs" "$never_undotted_file_globs"; then
           dotted=1
         fi
-        handle_file "$file" "$DEST_DIR" "$DOTFILES_DIR/tag-$tag" . "$dotted" "$exclude_file_globs" "$include_file_globs" "$symlink_dirs_file_globs" "$mk_dirs_file_globs"
+        handle_file "$file" "$current_dest_dir" "$DOTFILES_DIR/tag-$tag" . "$dotted" "$exclude_file_globs" "$include_file_globs" "$symlink_dirs_file_globs" "$mk_dirs_file_globs"
       done
       popdir
     fi
@@ -392,6 +394,6 @@ for DOTFILES_DIR in $DOTFILES_DIRS; do
       dotted=1
     fi
 
-    handle_file "$file" "$DEST_DIR" "$DOTFILES_DIR" . "$dotted" "$exclude_file_globs" "$include_file_globs" "$symlink_dirs_file_globs" "$mk_dirs_file_globs"
+    handle_file "$file" "$current_dest_dir" "$DOTFILES_DIR" . "$dotted" "$exclude_file_globs" "$include_file_globs" "$symlink_dirs_file_globs" "$mk_dirs_file_globs"
   done
 done

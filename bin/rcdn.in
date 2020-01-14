@@ -10,7 +10,7 @@ remove_link() {
 
   $DEBUG "remove_link $1 $2 $3"
 
-  if [ "x$dest" = "x/" -o "x$dest" = "x$DEST_DIR" ]; then
+  if [ "x$dest" = "x/" -o "x$dest" = "x$TARGET" ]; then
     $VERBOSE "not a symlink, skipping: $original"
   elif [ -L "$dest" -o "x$sigil" = "xX" ]; then
     rm_v -rf "$dest"
@@ -44,7 +44,7 @@ handle_command_line() {
   local never_undotted=
   local hostname=
 
-  while getopts :VqvhIKk:x:S:s:U:u:t:d:B: opt; do
+  while getopts :VqvhIKk:x:S:s:U:u:t:d:B:T: opt; do
     case "$opt" in
       h) show_help ;;
       B) hostname="$OPTARG" ;;
@@ -52,6 +52,7 @@ handle_command_line() {
       k) run_hooks=1 ;;
       K) run_hooks=0 ;;
       t) arg_tags="$arg_tags $OPTARG" ;;
+      T) TARGET=$(echo $OPTARG | envsubst) ;;
       S) symlink_dirs="$symlink_dirs $OPTARG";;
       s) never_symlink_dirs="$never_symlink_dirs $OPTARG";;
       U) undotted="$undotted $OPTARG";;

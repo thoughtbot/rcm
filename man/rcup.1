@@ -93,6 +93,8 @@ This option can be repeated.
 .It Fl t Ar TAG
 install dotfiles according to
 .Ar TAG
+.It Fl T Ar DIR
+install dotfiles relative to target directory DIR
 .It Fl U Ar EXCL_PAT
 any rc file that matches
 .Ar EXCL_PAT
@@ -148,8 +150,8 @@ option in
 .Xr rcrc 5
 can be used to list files that must only be copied.
 .Pp
-Three meta files are supported: host-specific files, tagged files,
-hooks.
+Four meta files are supported: host-specific files, tagged files,
+hooks, targets.
 .Pp
 Host-specific files go in a directory named for the host, prefixed with
 .Pa host- .
@@ -192,6 +194,21 @@ and
 .Pa hooks/pre-up/4-eyes
 will run before
 .Pa hooks/post-up/2-u-nothing-compares .
+.Pp
+Target files go directly in the dotfiles directory, and are named
+.Pa target .
+The first line in the file that is non-empty and refers to an existant
+directory is selected to be the target for the dotfiles directory.
+If no lines satisfy these requirements, then rcm falls back to the
+default target.
+Lines in the target file can consist of environment variables, prefixed
+with $. E.g.
+
+.Dl Sx $XDG_CONFIG_HOME
+.Dl $HOME/.config
+
+Directs rcm to manage dotfiles in the standard XDG compliant configuration directory.
+
 .Sh ALGORITHM
 It is instructive to understand the process
 .Nm rcup
