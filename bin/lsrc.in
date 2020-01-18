@@ -166,7 +166,7 @@ dotfiles_dir_excludes() {
   $DEBUG "dotfiles_dir_excludes $dotfiles_dir"
   $DEBUG "  with excludes: $excludes"
 
-  for exclude in $excludes; do
+  for exclude in "$excludes"; do
     if echo "$exclude" | grep ':' >/dev/null; then
       dotfiles_dir_pat="$(echo "$exclude" | sed 's/:.*//')"
       file_glob="$(echo "$exclude" | sed 's/.*://')"
@@ -259,17 +259,17 @@ handle_command_line() {
     case "$opt" in
       F) show_sigils=1;;
       h) show_help ;;
-      I) includes="$includes $OPTARG";;
-      t) arg_tags="$arg_tags $OPTARG";;
+      I) includes="$(append_variable "$includes" "$OPTARG")" ;;
+      t) arg_tags="$(append_variable "$arg_tags" "$OPTARG")" ;;
       v) verbosity=$(($verbosity + 1));;
       q) verbosity=$(($verbosity - 1));;
-      d) dotfiles_dirs="$dotfiles_dirs $OPTARG";;
+      d) dotfiles_dirs="$(append_variable "$dotfiles_dirs" "$OPTARG")" ;;
       V) version=1;;
-      x) excludes="$excludes $OPTARG";;
-      S) symlink_dirs="$symlink_dirs $OPTARG";;
-      s) never_symlink_dirs="$never_symlink_dirs $OPTARG";;
-      U) undotted="$undotted $OPTARG";;
-      u) never_undotted="$never_undotted $OPTARG";;
+      x) excludes="$(append_variable "$excludes" "$OPTARG")" ;;
+      S) symlink_dirs="$(append_variable "$symlink_dirs" "$OPTARG")" ;;
+      s) never_symlink_dirs="$(append_variable "$never_symlink_dirs" "$OPTARG")" ;;
+      U) undotted="$(append_variable "$undotted" "$OPTARG")" ;;
+      u) never_undotted="$(append_variable "$never_undotted" "$OPTARG")" ;;
       B) hostname="$OPTARG";;
       ?) show_help 64 ;;
     esac

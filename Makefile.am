@@ -19,7 +19,9 @@ TESTS = \
 	test/lsrc-tags.t \
 	test/lsrc-usage.t \
 	test/lsrc-undotted.t \
+	test/lsrc-undotted-star.t \
 	test/lsrc-host-tags-default.t \
+	test/lsrc-globs.t \
 	test/mkrc-alternate-dotfiles-dir.t \
 	test/mkrc-copy-file.t \
 	test/mkrc-host-file.t \

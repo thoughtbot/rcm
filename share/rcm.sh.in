@@ -167,6 +167,14 @@ decode() {
   echo "$file" | tr "$DELIMITER" " "
 }
 
+append_variable() {
+  if [ -z "$1" ]; then
+    echo "$2"
+  else
+    echo "$1 $2"
+  fi
+}
+
 : ${RCRC:=$HOME/.rcrc}
 
 if [ -r "$RCRC" ]; then

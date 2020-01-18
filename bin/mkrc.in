@@ -64,7 +64,7 @@ while getopts :ChSsUuVvqot:d:B: opt; do
     B)
       in_host=1
       hostname="$OPTARG"
-      install_args="-B $hostname"
+      install_args=$(append_variable "$install_args" "-B $hostname")
       ;;
     ?) show_help 64 ;;
   esac
