@@ -213,23 +213,23 @@ handle_command_line() {
     case "$opt" in
       B) hostname="$OPTARG" ;;
       C) always_copy=1 ;;
-      d) dotfiles_dirs="$dotfiles_dirs $OPTARG" ;;
+      d) dotfiles_dirs="$(append_variable "$dotfiles_dirs" "$OPTARG")" ;;
       f) REPLACE_ALL=1 ;;
       g) generate=1 ;;
       h) show_help ;;
       i) REPLACE_ALL=0 ;;
-      I) includes="$includes $OPTARG" ;;
+      I) includes="$(append_variable "$includes" "$OPTARG")" ;;
       k) run_hooks=1 ;;
       K) run_hooks=0 ;;
       q) verbosity=$(($verbosity - 1)) ;;
-      t) arg_tags="$arg_tags $OPTARG" ;;
-      S) symlink_dirs="$symlink_dirs $OPTARG";;
-      s) never_symlink_dirs="$never_symlink_dirs $OPTARG";;
-      U) undotted="$undotted $OPTARG";;
-      u) never_undotted="$never_undotted $OPTARG";;
+      t) arg_tags="$(append_variable "$arg_tags" "$OPTARG")" ;;
+      S) symlink_dirs="$(append_variable "$symlink_dirs" "$OPTARG")" ;;
+      s) never_symlink_dirs="$(append_variable "$never_symlink_dirs" "$OPTARG")";;
+      U) undotted="$(append_variable "$undotted" "$OPTARG")" ;;
+      u) never_undotted="$(append_variable "$never_undotted" "$OPTARG")" ;;
       v) verbosity=$(($verbosity + 1)) ;;
       V) version=1 ;;
-      x) excludes="$excludes $OPTARG" ;;
+      x) excludes="$(append_variable "$excludes" "$OPTARG")" ;;
       ?) show_help 64 ;;
     esac
   done
@@ -261,31 +261,31 @@ handle_command_line() {
   done
 
   for tag in $tags; do
-    LS_ARGS="$LS_ARGS -t $tag"
+    LS_ARGS="$LS_ARGS -t \"$tag\""
   done
-  for dotfiles_dir in $DOTFILES_DIRS; do
-    LS_ARGS="$LS_ARGS -d $dotfiles_dir"
+  for dotfiles_dir in "$DOTFILES_DIRS"; do
+    LS_ARGS="$LS_ARGS -d \"$dotfiles_dir\""
   done
-  for exclude in $excludes; do
-    LS_ARGS="$LS_ARGS -x $exclude"
+  for exclude in "$excludes"; do
+    LS_ARGS="$LS_ARGS -x \"$exclude\""
   done
-  for include in $includes; do
-    LS_ARGS="$LS_ARGS -I $include"
+  for include in "$includes"; do
+    LS_ARGS="$LS_ARGS -I \"$include\""
   done
-  for symlink_dir in $symlink_dirs; do
-    LS_ARGS="$LS_ARGS -S $symlink_dir"
+  for symlink_dir in "$symlink_dirs"; do
+    LS_ARGS="$LS_ARGS -S \"$symlink_dir\""
   done
-  for never_symlink_dir in $never_symlink_dirs; do
-    LS_ARGS="$LS_ARGS -s $never_symlink_dir"
+  for never_symlink_dir in "$never_symlink_dirs"; do
+    LS_ARGS="$LS_ARGS -s \"$never_symlink_dir\""
   done
-  for undot in $undotted; do
-    LS_ARGS="$LS_ARGS -U $undot"
+  for undot in "$undotted"; do
+    LS_ARGS="$LS_ARGS -U \"$undot\""
   done
-  for never_undot in $never_undotted; do
-    LS_ARGS="$LS_ARGS -u $never_undot"
+  for never_undot in "$never_undotted"; do
+    LS_ARGS="$LS_ARGS -u \"$never_undot\""
   done
 
-  LS_ARGS="$LS_ARGS -B $hostname $files"
+  LS_ARGS="$LS_ARGS -B \"$hostname\" $files"
 
   $DEBUG "LS_ARGS: $LS_ARGS"
 }
@@ -297,7 +297,7 @@ handle_command_line "$@"
 
 run_hooks pre up
 
-dests_and_srcs="$(lsrc $LS_ARGS)"
+dests_and_srcs="$(eval "lsrc $LS_ARGS")"
 
 saved_ifs="$IFS"
 IFS='
