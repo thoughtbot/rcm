@@ -282,7 +282,7 @@ handle_command_line() {
   for never_symlink_dir in "$never_symlink_dirs"; do
     LS_ARGS="$LS_ARGS -s \"$never_symlink_dir\""
   done
-  for undot in $undotted; do
+  for undot in "$undotted"; do
     LS_ARGS="$LS_ARGS -U \"$undot\""
   done
   for never_undot in "$never_undotted"; do
