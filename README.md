@@ -78,6 +78,10 @@ Ubuntu:
 Void Linux:
 
     sudo xbps-install -S rcm
+    
+NixOS/Nix:
+    
+    nix-env -iA rcm
 
 Elsewhere:
 
