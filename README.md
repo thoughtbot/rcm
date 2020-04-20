@@ -56,7 +56,6 @@ Korora:
 
 macOS with Homebrew:
 
-    brew tap thoughtbot/formulae
     brew install rcm
 
 macOS with MacPorts:
