@@ -1,0 +1,10 @@
+!
+--- test/mkrc-no-dotfiles-dir-found.t
++++ test/mkrc-no-dotfiles-dir-found.t.err
+@@ -20,4 +20,5 @@
+ 
++  Failed assertion: should not be a symlink
+ 
+
+# Ran 1 tests, 0 skipped, 1 failed.
+FAIL test/mkrc-no-dotfiles-dir-found.t (exit status: 1)
