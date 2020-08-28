@@ -22,19 +22,7 @@ Arch Linux:
 
   https://aur.archlinux.org/packages/rcm/
 
-Ubuntu (19.04 or later):
-
-    sudo apt update
-    sudo apt install rcm
-
-Ubuntu (12.04, 14.04, 16.04, 18.04, or 18.10):
-
-    sudo apt-get install software-properties-common
-    sudo add-apt-repository ppa:martin-frost/thoughtbot-rcm
-    sudo apt-get update
-    sudo apt-get install rcm
-
-Debian-based:
+Debian (see further down for Ubuntu):
 
     wget -qO - https://apt.thoughtbot.com/thoughtbot.gpg.key | sudo apt-key add -
     echo "deb https://apt.thoughtbot.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/thoughtbot.list
@@ -80,6 +68,18 @@ OpenBSD:
     doas pkg_add rcm
 
 openSUSE/RHEL/CentOS: [instructions](http://software.opensuse.org/download.html?project=utilities&package=rcm)
+
+Ubuntu (19.04 or later):
+
+    sudo apt update
+    sudo apt install rcm
+
+Ubuntu (12.04, 14.04, 16.04, 18.04, or 18.10):
+
+    sudo apt-get install software-properties-common
+    sudo add-apt-repository ppa:martin-frost/thoughtbot-rcm
+    sudo apt-get update
+    sudo apt-get install rcm
 
 Void Linux:
 
