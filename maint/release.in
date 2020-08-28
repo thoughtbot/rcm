@@ -38,26 +38,6 @@ release_clean_tarball() {
   rm -rf $DIST_ARCHIVES
 }
 
-# Homebrew
-release_build_homebrew() {
-  ([ -d homebrew-formulae ] || git clone git@github.com:thoughtbot/homebrew-formulae.git homebrew-formulae) && \
-    generate_dist_sha && \
-    edit_package homebrew/$PACKAGE.rb.in > homebrew-formulae/Formula/$PACKAGE.rb && \
-    cd homebrew-formulae && \
-    git add Formula/$PACKAGE.rb && \
-    git commit -m "$PACKAGE: Release version $PACKAGE_VERSION"
-}
-
-release_push_homebrew() {
-  cd homebrew-formulae && \
-    git push
-}
-
-release_clean_homebrew() {
-  rm -rf homebrew-formulae
-  rm -rf $DIST_ARCHIVES
-}
-
 # Arch
 release_build_arch() {
   ([ -d gh-pages ] || git clone --branch gh-pages . gh-pages) && \
@@ -156,7 +136,7 @@ release_clean_man_html() {
 # Main:
 
 if [ $# -lt 3 ]; then
-  echo "Usage: release (build|push|clean) (tarball|homebrew|arch|deb|tag|man_html) DIST_ARCHIVES" >&2
+  echo "Usage: release (build|push|clean) (tarball|arch|deb|tag|man_html) DIST_ARCHIVES" >&2
   exit 64
 fi
 
