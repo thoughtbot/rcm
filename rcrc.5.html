@@ -1,101 +1,122 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8"/>
-<style>
-table.head, table.foot { width: 100%; }
-td.head-rtitle, td.foot-os { text-align: right; }
-td.head-vol { text-align: center; }
-table.foot td { width: 50%; }
-table.head td { width: 33%; }
-div.spacer { margin: 1em 0; }
-</style>
-<title>
-RCRC(5)</title>
+  <meta charset="utf-8"/>
+  <style>
+    table.head, table.foot { width: 100%; }
+    td.head-rtitle, td.foot-os { text-align: right; }
+    td.head-vol { text-align: center; }
+    div.Pp { margin: 1ex 0ex; }
+    div.Nd, div.Bf, div.Op { display: inline; }
+    span.Pa, span.Ad { font-style: italic; }
+    span.Ms { font-weight: bold; }
+    dl.Bl-diag > dt { font-weight: bold; }
+    code.Nm, code.Fl, code.Cm, code.Ic, code.In, code.Fd, code.Fn,
+    code.Cd { font-weight: bold; font-family: inherit; }
+  </style>
+  <title>RCRC(5)</title>
 </head>
 <body>
-<div class="mandoc">
-<div class="section">
-<h1 id="x4e414d45">NAME</h1> <b class="name">rcrc</b> &#8212; <span class="desc">configuration for rcm</span></div>
-<div class="section">
-<h1 id="x53594e4f50534953">SYNOPSIS</h1> <span class="env">X</span>=&#8220;<b class="var">a&#160;</b><b class="var">b&#160;</b><b class="var">c</b>&#8221;</div>
-<div class="section">
-<h1 id="x4445534352495054494f4e">DESCRIPTION</h1> The rcm dotfile manager can be configured using a <i class="file">.rcrc</i> file in your home directory. This location can be changed by setting the <i class="file">RCRC</i> environment variable. The format is POSIX shell. It is sourced in by the <a class="link-man" href="lsrc.1.html">lsrc(1)</a>, <a class="link-man" href="mkrc.1.html">mkrc(1)</a>, <a class="link-man" href="rcdn.1.html">rcdn(1)</a>, and <a class="link-man" href="rcup.1.html">rcup(1)</a> programs.<div class="spacer">
-</div>
-It supports these variables:<dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
-<dt class="list-tag" style="margin-top: 1.00em;">
-<b class="var">COPY_ALWAYS</b></dt>
-<dd class="list-tag" style="margin-left: 13.00ex;">
-always copy files that match the listed globs, never symlink them.</dd>
-<dt class="list-tag" style="margin-top: 1.00em;">
-<b class="var">DOTFILES_DIRS</b></dt>
-<dd class="list-tag" style="margin-left: 13.00ex;">
-the source directories for dotfiles. The first in the list is the source to which dotfiles created using <a class="link-man" href="mkrc.1.html">mkrc(1)</a> are installed. The default value is <i class="file">~/.dotfiles</i></dd>
-<dt class="list-tag" style="margin-top: 1.00em;">
-<b class="var">EXCLUDES</b></dt>
-<dd class="list-tag" style="margin-left: 13.00ex;">
-a space-separated list of exclude patterns. Exclude patterns are explained in detail in <a class="link-man" href="lsrc.1.html">lsrc(1)</a> under the section <i class="link-sec"><a class="link-sec" href="#x4558434c554445205041545445524e">EXCLUDE PATTERN</a></i>.</dd>
-<dt class="list-tag" style="margin-top: 1.00em;">
-<b class="var">HOSTNAME</b></dt>
-<dd class="list-tag" style="margin-left: 13.00ex;">
-the hostname for this computer. This is normally computed using the <a class="link-man" href="hostname.1.html">hostname(1)</a> command, but this command is non-standard and can prove unreliable. The <b class="var">HOSTNAME</b> variable forces a known hostname.</dd>
-<dt class="list-tag" style="margin-top: 1.00em;">
-<b class="var">TAGS</b></dt>
-<dd class="list-tag" style="margin-left: 13.00ex;">
-the default tags.</dd>
-<dt class="list-tag" style="margin-top: 1.00em;">
-<b class="var">SYMLINK_DIRS</b></dt>
-<dd class="list-tag" style="margin-left: 13.00ex;">
-a space-separated list of patterns. Directories matching a pattern are symlinked instead of descended. Patterns are explained in detail in <a class="link-man" href="lsrc.1.html">lsrc(1)</a> under the section <i class="link-sec"><a class="link-sec" href="#x4558434c554445205041545445524e">EXCLUDE PATTERN</a></i>.</dd>
-<dt class="list-tag" style="margin-top: 1.00em;">
-<b class="var">UNDOTTED</b></dt>
-<dd class="list-tag" style="margin-left: 13.00ex;">
-a space separated list of patterns. Files matching this pattern will be symlinked without a leading dot. If a file is also in <b class="var">SYMLINK_DIRS</b>, then the directory will be symlinked without a leading dot. Patterns are explained in detail in <a class="link-man" href="lsrc.1.html">lsrc(1)</a> under the section <i class="link-sec"><a class="link-sec" href="#x4558434c554445205041545445524e">EXCLUDE PATTERN</a></i>.</dd>
+<table class="head">
+  <tr>
+    <td class="head-ltitle">RCRC(5)</td>
+    <td class="head-vol">File Formats Manual</td>
+    <td class="head-rtitle">RCRC(5)</td>
+  </tr>
+</table>
+<div class="manual-text">
+<h1 class="Sh" title="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
+<code class="Nm" title="Nm">rcrc</code> &#x2014;
+<div class="Nd" title="Nd">configuration for rcm</div>
+<h1 class="Sh" title="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
+<code class="Ev" title="Ev">X</code>=&#x201C;<var class="Va" title="Va">a&#x00A0;</var><var class="Va" title="Va">b&#x00A0;</var><var class="Va" title="Va">c</var>&#x201D;
+<h1 class="Sh" title="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
+The rcm dotfile manager can be configured using a
+  <span class="Pa" title="Pa">.rcrc</span> file in your home directory. This
+  location can be changed by setting the <span class="Pa" title="Pa">RCRC</span>
+  environment variable. The format is POSIX shell. It is sourced in by the
+  <a class="Xr" title="Xr" href="lsrc.1.html">lsrc(1)</a>,
+  <a class="Xr" title="Xr" href="mkrc.1.html">mkrc(1)</a>,
+  <a class="Xr" title="Xr" href="rcdn.1.html">rcdn(1)</a>, and
+  <a class="Xr" title="Xr" href="rcup.1.html">rcup(1)</a> programs.
+<div class="Pp"></div>
+It supports these variables:
+<dl class="Bl-tag">
+  <dt><var class="Va" title="Va">COPY_ALWAYS</var></dt>
+  <dd>always copy files that match the listed globs, never symlink them.</dd>
+  <dt><var class="Va" title="Va">DOTFILES_DIRS</var></dt>
+  <dd>the source directories for dotfiles. The first in the list is the source
+      to which dotfiles created using
+      <a class="Xr" title="Xr" href="mkrc.1.html">mkrc(1)</a> are installed. The
+      default value is <span class="Pa" title="Pa">~/.dotfiles</span></dd>
+  <dt><var class="Va" title="Va">EXCLUDES</var></dt>
+  <dd>a space-separated list of exclude patterns. Exclude patterns are explained
+      in detail in <a class="Xr" title="Xr" href="lsrc.1.html">lsrc(1)</a> under
+      the section <a class="Sx" title="Sx" href="#EXCLUDE_PATTERN">EXCLUDE
+      PATTERN</a>.</dd>
+  <dt><var class="Va" title="Va">HOSTNAME</var></dt>
+  <dd>the hostname for this computer. This is normally computed using the
+      <a class="Xr" title="Xr" href="hostname.1.html">hostname(1)</a> command,
+      but this command is non-standard and can prove unreliable. The
+      <var class="Va" title="Va">HOSTNAME</var> variable forces a known
+      hostname.</dd>
+  <dt><var class="Va" title="Va">TAGS</var></dt>
+  <dd>the default tags.</dd>
+  <dt><var class="Va" title="Va">SYMLINK_DIRS</var></dt>
+  <dd>a space-separated list of patterns. Directories matching a pattern are
+      symlinked instead of descended. Patterns are explained in detail in
+      <a class="Xr" title="Xr" href="lsrc.1.html">lsrc(1)</a> under the section
+      <a class="Sx" title="Sx" href="#EXCLUDE_PATTERN">EXCLUDE PATTERN</a>.</dd>
+  <dt><var class="Va" title="Va">UNDOTTED</var></dt>
+  <dd>a space separated list of patterns. Files matching this pattern will be
+      symlinked without a leading dot. If a file is also in
+      <var class="Va" title="Va">SYMLINK_DIRS</var>, then the directory will be
+      symlinked without a leading dot. Patterns are explained in detail in
+      <a class="Xr" title="Xr" href="lsrc.1.html">lsrc(1)</a> under the section
+      <a class="Sx" title="Sx" href="#EXCLUDE_PATTERN">EXCLUDE PATTERN</a>.</dd>
 </dl>
-</div>
-<div class="section">
-<h1 id="x46494c4553">FILES</h1> <i class="file">~/.rcrc</i></div>
-<div class="section">
-<h1 id="x4558414d504c4553">EXAMPLES</h1><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
-<div class="display">
-<code class="lit">COPY_ALWAYS=&quot;ssh/id_* weechat/* netrc&quot;</code></div>
-</blockquote>
-<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
-<div class="display">
-<code class="lit">COPY_ALWAYS=&quot;*&quot;</code></div>
-</blockquote>
-<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
-<div class="display">
-<code class="lit">DOTFILES_DIRS=&quot;/home/mike/.dotfiles /usr/share/dotfiles&quot;</code></div>
-</blockquote>
-<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
-<div class="display">
-<code class="lit">EXCLUDES=&quot;irbrc *:*emacs* dotfiles:python*&quot;</code></div>
-</blockquote>
-<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
-<div class="display">
-<code class="lit">HOSTNAME=&quot;eggplant&quot;</code></div>
-</blockquote>
-<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
-<div class="display">
-<code class="lit">TAGS=&quot;freebsd development email git laptop gmail notmuch&quot;</code></div>
-</blockquote>
-<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
-<div class="display">
-<code class="lit">SYMLINK_DIRS=&quot;zprezto texmf&quot;</code></div>
-</blockquote>
-<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
-<div class="display">
-<code class="lit">UNDOTTED=&quot;texmf&quot;</code></div>
-</blockquote>
-</div>
-<div class="section">
-<h1 id="x53454520414c534f">SEE ALSO</h1> <a class="link-man" href="lsrc.1.html">lsrc(1)</a>, <a class="link-man" href="mkrc.1.html">mkrc(1)</a>, <a class="link-man" href="rcdn.1.html">rcdn(1)</a>, <a class="link-man" href="rcup.1.html">rcup(1)</a>, <a class="link-man" href="rcm.7.html">rcm(7)</a></div>
-<div class="section">
-<h1 id="x415554484f5253">AUTHORS</h1> <b class="name">rcrc</b> is maintained by <span class="author">Mike Burns</span> &lt;<a class="link-mail" href="mailto:mburns@thoughtbot.com">mburns@thoughtbot.com</a>&gt; and <a class="link-ext" href="http://thoughtbot.se">thoughtbot</a></div>
-<div class="section">
-<h1 id="x42554753">BUGS</h1> We only expand tilde inside <b class="var">DOTFILES_DIRS</b> and not inside any patterns. For more notes on the caution you should exercise around patterns, see the BUGS section of <a class="link-man" href="lsrc.1.html">lsrc(1)</a>.</div>
-</div>
+<h1 class="Sh" title="Sh" id="FILES"><a class="permalink" href="#FILES">FILES</a></h1>
+<span class="Pa" title="Pa">~/.rcrc</span>
+<h1 class="Sh" title="Sh" id="EXAMPLES"><a class="permalink" href="#EXAMPLES">EXAMPLES</a></h1>
+<div class="Bd Bd-indent"><code class="Li">COPY_ALWAYS=&quot;ssh/id_* weechat/*
+  netrc&quot;</code></div>
+<div class="Bd
+  Bd-indent"><code class="Li">COPY_ALWAYS=&quot;*&quot;</code></div>
+<div class="Bd
+  Bd-indent"><code class="Li">DOTFILES_DIRS=&quot;/home/mike/.dotfiles
+  /usr/share/dotfiles&quot;</code></div>
+<div class="Bd Bd-indent"><code class="Li">EXCLUDES=&quot;irbrc *:*emacs*
+  dotfiles:python*&quot;</code></div>
+<div class="Bd
+  Bd-indent"><code class="Li">HOSTNAME=&quot;eggplant&quot;</code></div>
+<div class="Bd Bd-indent"><code class="Li">TAGS=&quot;freebsd development email
+  git laptop gmail notmuch&quot;</code></div>
+<div class="Bd Bd-indent"><code class="Li">SYMLINK_DIRS=&quot;zprezto
+  texmf&quot;</code></div>
+<div class="Bd
+  Bd-indent"><code class="Li">UNDOTTED=&quot;texmf&quot;</code></div>
+<h1 class="Sh" title="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
+  ALSO</a></h1>
+<a class="Xr" title="Xr" href="lsrc.1.html">lsrc(1)</a>,
+  <a class="Xr" title="Xr" href="mkrc.1.html">mkrc(1)</a>,
+  <a class="Xr" title="Xr" href="rcdn.1.html">rcdn(1)</a>,
+  <a class="Xr" title="Xr" href="rcup.1.html">rcup(1)</a>,
+  <a class="Xr" title="Xr" href="rcm.7.html">rcm(7)</a>
+<h1 class="Sh" title="Sh" id="AUTHORS"><a class="permalink" href="#AUTHORS">AUTHORS</a></h1>
+<code class="Nm" title="Nm">rcrc</code> is maintained by
+  <span class="An" title="An">Mike Burns</span>
+  &lt;<a class="Mt" title="Mt" href="mailto:mburns@thoughtbot.com">mburns@thoughtbot.com</a>&gt;
+  and <a class="Lk" title="Lk" href="http://thoughtbot.se">thoughtbot</a>
+<h1 class="Sh" title="Sh" id="BUGS"><a class="permalink" href="#BUGS">BUGS</a></h1>
+We only expand tilde inside <var class="Va" title="Va">DOTFILES_DIRS</var> and
+  not inside any patterns. For more notes on the caution you should exercise
+  around patterns, see the BUGS section of
+  <a class="Xr" title="Xr" href="lsrc.1.html">lsrc(1)</a>.</div>
+<table class="foot">
+  <tr>
+    <td class="foot-date">July 28, 2013</td>
+    <td class="foot-os">Debian</td>
+  </tr>
+</table>
 </body>
 </html>
-
