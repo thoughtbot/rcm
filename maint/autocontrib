@@ -1,45 +1,58 @@
-#!/usr/bin/env ruby
+#!/usr/bin/env python
+# vim: ai:sw=4:ts=4
 
-begin
-  require 'mustache'
-rescue LoadError
-  $stderr.puts <<-HERE
-Error: This project requires the mustache Ruby gem in order to finish
+import sys
+import os
+import subprocess
+import re
+
+try:
+    import pystache
+except ImportError:
+    print(
+        '''
+Error: This project requires the pystache Python module in order to finish
 the maintainer setup. Please install it and re-run autocontrib.
 
-The mustache gem can be installed using gem:
+The pystache module can be installed using pip:
 
-    gem install mustache
-  HERE
-  exit 1
-end
-
-class ContributorView < Mustache
-  def contributors
-    @_contributors ||= raw_contributors
-  end
-
-  private
-
-  def raw_contributors
-    shortlog.map do |contributor_line|
-      if contributor_line =~ /\d+\s+(.+)\s+<(.+)>/
-        { :name => $1, :email => $2 }
-      end
-    end.compact
-  end
-
-  def shortlog
-    `git shortlog -es`.split("\n")
-  end
-end
+    pip install pystache
+'''
+    )
+    exit(1)
 
 
-contributor_view = ContributorView.new
+class BlockTemplate():
 
-ARGV.each do |template_filename|
-  output_filename = template_filename.sub(/\.mustache$/, '')
-  contributor_view.template_file = template_filename
-  output = contributor_view.render
-  File.write(output_filename, output)
-end
+    def __init__(self):
+        self.renderer = pystache.Renderer()
+        self.contribs = []
+        self.shortlog = ""
+
+    def raw_contributors(self):
+        patt = re.compile(r'\d+\s+(.+)\s+<(.+)>')
+        matches = patt.findall(self.shortlog)
+        for item in matches:
+            self.contribs.append({'name': item[0], 'email': item[1]})
+
+    def load_shortlog(self):
+        self.shortlog = subprocess.check_output(['git', 'shortlog', '-es'], universal_newlines = True)
+
+    def process_contribs(self, tpl_data):
+        self.load_shortlog()
+        self.raw_contributors()
+        return self.renderer.render(tpl_data, { 'contributors' : self.contribs })
+
+
+def main():
+    tpl_name = sys.argv[-1]
+    with open(tpl_name, 'r') as tpl_file:
+        tpl_contents = tpl_file.read()
+    contribs_tpl = BlockTemplate()
+    outfile_name = tpl_name.replace('.mustache','')
+    with open(outfile_name, 'w') as outfile:
+        outfile.write(contribs_tpl.process_contribs(tpl_contents))
+
+
+if __name__ == '__main__':
+    main()

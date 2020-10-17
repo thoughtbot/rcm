@@ -5,6 +5,7 @@ rcm (@PACKAGE_VERSION@) unstable; urgency=low
   * BUGFIX: all symlinks in mkrc input are rejected (Mat M).
   * BUGFIX: messages for -C being a copy so can't update (Mat M).
   * BUGFIX: expect at least one existing dotfiles directory (Mat M).
+  * Feature: Move from ruby to python to handle mustache templating (Mat M).
   * Feature: All symlinks in input are rejected (Mat M).
   * Packaging improvements (Stephen Groat, Martin Frost, Link Dupont).
   

@@ -40,10 +40,8 @@ Setup
 
 1. Fork the repo.
 2. Install dependencies
-
-  - Cram is used for tests: `pip install cram`
-  - The mustache gem for building the HTML pages: `gem install mustache`
-
+   - Cram is used for tests: `pip install cram`
+   - We rely on mustache to build the HTML pages; pystache is used : `pip install pystache`
 3. Prepare the build system: `./autogen.sh`. (This depends on GNU
    autoconf and GNU automake.)
 4. Configure the package: `./configure`.
@@ -62,11 +60,11 @@ The test suite requires Perl with the `Cwd` module. It expects to find Perl as
 
 All tests can be run like so:
 
-    $ make check
+    make check
 
 Individual tests can be run like so:
 
-    $ env TESTS=test/lsrc-dotfiles-dirs.t make -e check
+    env TESTS=test/lsrc-dotfiles-dirs.t make -e check
 
 If you intend to write a new test:
 

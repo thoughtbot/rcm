@@ -20,7 +20,7 @@ Alpine Linux:
 
 Arch Linux:
 
-  https://aur.archlinux.org/packages/rcm/
+    https://aur.archlinux.org/packages/rcm/
 
 Debian (see further down for Ubuntu):
 
@@ -133,7 +133,8 @@ License
 Copyright 2013 Mike Burns. BSD license.
 Copyright 2014-2015 thoughtbot. BSD license.
 
-## About thoughtbot
+About thoughtbot
+----------------
 
 ![thoughtbot](http://presskit.thoughtbot.com/images/thoughtbot-logo-for-readmes.svg)
 
