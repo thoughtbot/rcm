@@ -10,35 +10,35 @@ Making a release
 
 3. Build the trivial packages:
 
-This all depends on a `gh-pages` branch:
+   This all depends on a `gh-pages` branch:
 
-    git branch gh-pages origin/gh-pages
+        git branch gh-pages origin/gh-pages
 
-First build the distribution:
+    First build the distribution:
 
-    ./configure
-    make distcheck
+        ./configure
+        make distcheck
 
-On any system you can build the tarball and tag:
+    On any system you can build the tarball and tag:
 
-    ./maint/release build tarball rcm-*.tar.gz
-    ./maint/release build tag rcm-*.tar.gz
+        ./maint/release build tarball rcm-*.tar.gz
+        ./maint/release build tag rcm-*.tar.gz
 
-You need mdocml to tranform the manpages into HTML:
+    You need mdocml to tranform the manpages into HTML:
 
-    ./maint/release build man_html rcm-*.tar.gz
+        ./maint/release build man_html rcm-*.tar.gz
 
-Once built, you can push it live:
+    Once built, you can push it live:
 
-    ./maint/release push tarball rcm-*.tar.gz
-    ./maint/release push tag rcm-*.tar.gz
-    ./maint/release push man_html rcm-*.tar.gz
+        ./maint/release push tarball rcm-*.tar.gz
+        ./maint/release push tag rcm-*.tar.gz
+        ./maint/release push man_html rcm-*.tar.gz
 
-And once pushed, you should clean up
+    And once pushed, you should clean up
 
-    ./maint/release clean tarball rcm-*.tar.gz
-    ./maint/release clean tag rcm-*.tar.gz
-    ./maint/release clean man_html rcm-*.tar.gz
+        ./maint/release clean tarball rcm-*.tar.gz
+        ./maint/release clean tag rcm-*.tar.gz
+        ./maint/release clean man_html rcm-*.tar.gz
 
 4. Contact package maintainers:
 
