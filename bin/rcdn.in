@@ -66,7 +66,7 @@ handle_command_line() {
   done
   shift $(($OPTIND-1))
 
-  handle_common_flags rcup $version $verbosity
+  handle_common_flags rcdn $version $verbosity
   hostname="$(determine_hostname "$hostname")"
 
   tags="${arg_tags:-$TAGS}"
