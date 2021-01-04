@@ -76,7 +76,7 @@ force_symlink=50
 undotted=50
 install_args=
 
-while getopts :ChSsUuVvqot:d:B: opt; do
+while getopts :ChSsUuVvqot:d:B:kK opt; do
   case "$opt" in
     C) always_copy=1 ;;
     h) show_help ;;
@@ -94,6 +94,12 @@ while getopts :ChSsUuVvqot:d:B: opt; do
       in_host=1
       hostname="$OPTARG"
       install_args=$(append_variable "$install_args" "-B $hostname")
+      ;;
+    k)
+      install_args=$(append_variable "$install_args" "-k")
+      ;;
+    K)
+      install_args=$(append_variable "$install_args" "-K")
       ;;
     ?) show_help 64 ;;
   esac
