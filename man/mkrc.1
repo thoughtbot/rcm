@@ -6,7 +6,7 @@
 .Nd bless files into a dotfiles managed by rcm
 .Sh SYNOPSIS
 .Nm mkrc
-.Op Fl ChoqSsVvUu
+.Op Fl ChoqSsVvUukK
 .Op Fl t Ar tag
 .Op Fl d Ar dir
 .Op Fl B Ar hostname
@@ -62,6 +62,18 @@ is the default.
 increase verbosity. This can be repeated for extra verbosity.
 .It Fl V
 show the version number.
+.It Fl k
+pass -k to rcup when installing the made rc file. This option enables pre- and
+post-hooks, which is the default, making this effectively a no-op. See the
+.Sx ALGORITHM
+section in
+.Xr rcup 1 .
+.It Fl K
+pass -K to rcup when installing the made rc file. This option prevents pre- and
+post-up hooks from running as part of creating the rc file. See the
+.Sx ALGORITHM
+section in
+.Xr rcup 1 .
 .El
 .Sh ENVIRONMENT
 .Bl -tag -width ".Ev RCRC"
