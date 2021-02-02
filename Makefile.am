@@ -39,6 +39,7 @@ TESTS = \
 	test/rcrc-custom.t \
 	test/rcrc-tilde.t \
 	test/rcrc-hostname.t \
+	test/rcrc-lsrc-excludes.t \
 	test/rcrc.t \
 	test/rcup-link-files.t \
 	test/rcup-hostname.t \
