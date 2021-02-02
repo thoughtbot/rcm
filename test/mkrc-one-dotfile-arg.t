@@ -13,7 +13,7 @@ Giving 2 dotfiles dir should result in an error and exit EX_USAGE
 
   $ mkrc -d .dotfiles -d .other-dotfiles rcfile
   Only one '-d' option is allowed in mkrc.
-  Usage: mkrc [-ChSsUuVvqo] [-t TAG] [-d DIR] [-B HOSTNAME] FILES ...
+  Usage: mkrc * (glob)
   see mkrc(1) and rcm(7) for more details
   [64]
 

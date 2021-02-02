@@ -1,5 +1,5 @@
 AC_PREREQ([2.69])
-AC_INIT(rcm, 1.3.4, mburns@thoughtbot.com)
+AC_INIT([rcm],[1.3.4],[mburns@thoughtbot.com])
 AM_INIT_AUTOMAKE([subdir-objects])
 
 # /bin/sh on Solaris is not POSIX, so try to find another one.
@@ -11,4 +11,5 @@ solaris*)
 esac
 AC_SUBST([SHELL])
 
-AC_OUTPUT(Makefile share/rcm.sh arch/git-PKGBUILD NEWS.md bin/lsrc bin/mkrc bin/rcdn bin/rcup maint/release)
+AC_CONFIG_FILES([Makefile share/rcm.sh arch/git-PKGBUILD NEWS.md bin/lsrc bin/mkrc bin/rcdn bin/rcup maint/release])
+AC_OUTPUT
