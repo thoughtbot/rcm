@@ -1,5 +1,6 @@
 rcm (@PACKAGE_VERSION@) unstable; urgency=low
 
+  * BUGFIX: *:*~ exclude paterns work again (Alexander Goldstein)
   * BUGFIX: Globs no longer expand permanently (Edd Salkield).
   * BUGFIX: Show $ for symlinked dirs in `lsrc -F` (Mathias Michel).
   * BUGFIX: all symlinks in mkrc input are rejected (Mat M).
