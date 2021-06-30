@@ -26,7 +26,7 @@ exit_if_dangerous() {
   if [ -L "$file" ]; then
       $ERROR 1 "'$file' is a symlink. Cannot process file."
   elif is_nested "$file"; then
-    # Remove DEST_DIR in case $HOME is under a symlink
+    # Remove DEST_DIR in case one folder of $HOME is a symlink
     saved_ifs="$IFS"
     IFS=/
     set -- $(dirname "$file" | sed "s|$DEST_DIR/||")
@@ -42,10 +42,21 @@ exit_if_dangerous() {
   fi
 }
 
+only_one_dir() {
+  local dotfiles="$1"
+
+  if [ ! -z "$OPT_DOTFILES_DIR" ]; then
+    echo_stderr "Only one '-d' option is allowed in mkrc."
+    show_help 64
+  else
+    OPT_DOTFILES_DIR="$dotfiles"
+  fi
+}
+
 show_help() {
   local exit_code=${1:-0}
 
-  $PRINT "Usage: mkrc [-ChSsUuVvqo] [-t TAG] [-d DIR] [-B HOSTNAME] FILES ..."
+  $PRINT "Usage: mkrc [-ChSsUuVvqokK] [-t TAG] [-d DIR] [-B HOSTNAME] FILES ..."
   $PRINT "see mkrc(1) and rcm(7) for more details"
 
   exit $exit_code
@@ -54,10 +65,6 @@ show_help() {
 if [ $# -eq 0 ]; then
   show_help 64
 fi
-
-for DOTFILES_DIR in $DOTFILES_DIRS $DEFAULT_DOTFILES_DIR; do
-  break
-done
 
 tag=
 hostname=
@@ -69,7 +76,7 @@ force_symlink=50
 undotted=50
 install_args=
 
-while getopts :ChSsUuVvqot:d:B: opt; do
+while getopts :ChSsUuVvqot:d:B:kK opt; do
   case "$opt" in
     C) always_copy=1 ;;
     h) show_help ;;
@@ -77,7 +84,7 @@ while getopts :ChSsUuVvqot:d:B: opt; do
     v) verbosity=$(($verbosity + 1)) ;;
     q) verbosity=$(($verbosity - 1)) ;;
     o) in_host=1 ;;
-    d) DOTFILES_DIR="$OPTARG" ;;
+    d) only_one_dir "$OPTARG" ;;
     V) version=1 ;;
     S) force_symlink=1 ;;
     s) force_symlink=0 ;;
@@ -87,6 +94,12 @@ while getopts :ChSsUuVvqot:d:B: opt; do
       in_host=1
       hostname="$OPTARG"
       install_args=$(append_variable "$install_args" "-B $hostname")
+      ;;
+    k)
+      install_args=$(append_variable "$install_args" "-k")
+      ;;
+    K)
+      install_args=$(append_variable "$install_args" "-K")
       ;;
     ?) show_help 64 ;;
   esac
@@ -109,6 +122,18 @@ for i; do
   exit_if_dangerous "$i" 
   files="$(printf "$files\n$i")"
 done
+
+for DOTFILES_DIR in "$OPT_DOTFILES_DIR" $DOTFILES_DIRS "$DEFAULT_DOTFILES_DIR"; do
+  if [ -d "$DOTFILES_DIR" ]; then
+    break
+  else
+    unset DOTFILES_DIR
+  fi
+done
+
+if [ -z "$DOTFILES_DIR" ]; then
+  $ERROR 1 "No dotfiles directories found in $OPT_DOTFILES_DIR${OPT_DOTFILES_DIR:+ }$DEFAULT_DOTFILES_DIR"
+fi
 
 if [ $force_symlink -eq 1 ]; then
   for file in $files; do

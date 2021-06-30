@@ -1,20 +1,25 @@
-.Dd July 28, 2013
+.Dd April 13, 2020
 .Dt MKRC 1
 .Os
 .Sh NAME
 .Nm mkrc
-.Nd bless files into a dotfile managed by rcm
+.Nd bless files into a dotfiles managed by rcm
 .Sh SYNOPSIS
 .Nm mkrc
-.Op Fl ChoqSsVvUu
+.Op Fl ChoqSsVvUukK
 .Op Fl t Ar tag
 .Op Fl d Ar dir
 .Op Fl B Ar hostname
 .Ar files ...
 .Sh DESCRIPTION
-This program adds files to your dotfiles directory then installs it
+This program adds files to your dotfiles directory then update them
 back into your home directory. It can install files under a tag or
-different source directory.
+install them in a different source directory. Remember to first create
+standard rc files, then use
+.Nm
+on them.
+.
+.Pp
 .
 It supports these options:
 .
@@ -24,24 +29,25 @@ use the supplied hostname instead of computing one. Implies
 .Fl o .
 .It Fl C
 copy instead of symlinking when installing the rc file back into your
-home directory
+home directory. This will prevent future updates in the dotfiles directory for
+added element, and its contents if it is a directory.
 .It Fl d Ar DIR
-install dotfiles under the specified directory. This can be specified
-multiple times.
+install dotfiles under the specified directory. Use only once to override
+DOTFILES_DIRS value from RCRC and the absolute default value.
 .It Fl h
 show usage instructions.
 .It Fl o
-install dotfiles into the host-specific directory
+install dotfiles into the host-specific directory.
 .It Fl q
-decrease verbosity
+decrease verbosity.
 .It Fl S
 treat the specified rc files as files to be symlinked, even if they are
-directories
+directories.
 .It Fl s
 if the rc file is a file, symlink it; otherwise, make a directory
 structure as described in
-.Xr rcup 1
-in the section
+.Xr rcup 1 
+in the section 
 .Sx ALGORITHM .
 This is the default.
 .It Fl t Ar TAG
@@ -56,6 +62,18 @@ is the default.
 increase verbosity. This can be repeated for extra verbosity.
 .It Fl V
 show the version number.
+.It Fl k
+pass -k to rcup when installing the made rc file. This option enables pre- and
+post-hooks, which is the default, making this effectively a no-op. See the
+.Sx ALGORITHM
+section in
+.Xr rcup 1 .
+.It Fl K
+pass -K to rcup when installing the made rc file. This option prevents pre- and
+post-up hooks from running as part of creating the rc file. See the
+.Sx ALGORITHM
+section in
+.Xr rcup 1 .
 .El
 .Sh ENVIRONMENT
 .Bl -tag -width ".Ev RCRC"
