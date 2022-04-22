@@ -1,16 +1,22 @@
 rcm (@PACKAGE_VERSION@) unstable; urgency=low
 
   * BUGFIX: *:*~ exclude paterns work again (Alexander Goldstein)
-  * BUGFIX: Globs no longer expand permanently (Edd Salkield).
-  * BUGFIX: Show $ for symlinked dirs in `lsrc -F` (Mathias Michel).
-  * BUGFIX: all symlinks in mkrc input are rejected (Mat M).
   * BUGFIX: messages for -C being a copy so can't update (Mat M).
   * BUGFIX: expect at least one existing dotfiles directory (Mat M).
   * BUGFIX: fix program name in rcdn -V (Ivan Tkachenko)
   * Feature: mkrc hooks via -k/-K (Patrick Brisbin)
   * Feature: All symlinks in input are rejected (Mat M).
-  * Packaging improvements (Stephen Groat, Martin Frost, Link Dupont,
-      Eric Collins, Mat M, Darcy Parker).
+  * Package and maintenance improvements (Alexander Goldstein, Eric Collins,
+      Mat M, Darcy Parker).
+  
+ -- Mike Burns <mburns@thoughtbot.com>  Fri, 13 Jul 2018 14:12:00 -0500
+
+rcm (1.3.4) unstable; urgency=low
+
+  * BUGFIX: Globs no longer expand permanently (Edd Salkield).
+  * BUGFIX: Show $ for symlinked dirs in `lsrc -F` (Mathias Michel).
+  * BUGFIX: all symlinks in mkrc input are rejected (Mat M).
+  * Packaging improvements (Stephen Groat, Martin Frost, Link Dupont)
   
  -- Mike Burns <mburns@thoughtbot.com>  Fri, 13 Jul 2018 14:12:00 -0500
 
