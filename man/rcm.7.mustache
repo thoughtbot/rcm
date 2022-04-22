@@ -307,9 +307,10 @@ variable in your
 .Xr rcrc 5 .
 We use the
 .Xr hostname 1
-program to determine the unique identifier for the host. This program is
-not specified by POSIX and can vary by system. On macOS, the hostname is
-unpredictable, and can even change as part of the DHCP handshake.
+program to determine the unique identifier for the host. If 
+.Xr scutil 8
+program is avaiable that is used instead. Both programs are 
+not specified by POSIX and can vary by system. 
 .Sh CONTRIBUTORS
 .An -split
 {{#contributors}}

@@ -8,6 +8,7 @@ rcm (@PACKAGE_VERSION@) unstable; urgency=low
   * BUGFIX: expect at least one existing dotfiles directory (Mat M).
   * Feature: Move from ruby to python to handle mustache templating (Mat M).
   * Feature: All symlinks in input are rejected (Mat M).
+  * Feature: Hostname is now determined correctly on macOS too.
   * Packaging improvements (Stephen Groat, Martin Frost, Link Dupont).
   
  -- Mike Burns <mburns@thoughtbot.com>  Fri, 13 Jul 2018 14:12:00 -0500

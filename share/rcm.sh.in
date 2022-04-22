@@ -111,7 +111,11 @@ determine_hostname() {
   elif [ -n "$HOSTNAME" ]; then
     echo "$HOSTNAME"
   else
-    echo "$(hostname | sed -e 's/\..*//')"
+    if command -v scutil > /dev/null 2>&1; then
+      scutil --get LocalHostName
+    else
+      hostname | sed -e 's/\..*//'
+    fi
   fi
 }
 
