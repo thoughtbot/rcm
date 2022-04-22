@@ -9,15 +9,6 @@ srcdir='@srcdir@'
 abs_top_builddir='@abs_top_builddir@'
 dist_man_MANS='lsrc.1 mkrc.1 rcdn.1 rcup.1 rcrc.5 rcm.7'
 
-edit_package() {
-  sed \
-    -e "s|@PACKAGE[@]|$PACKAGE|g" \
-    -e "s|@PACKAGE_VERSION[@]|$PACKAGE_VERSION|g" \
-    -e "s|@DIST_ARCHIVES[@]|$DIST_ARCHIVES|g" \
-    -e "s|@DIST_SHA[@]|$DIST_SHA|g" \
-    "$1"
-}
-
 # Tarball
 release_build_tarball() {
   ([ -d gh-pages ] || git clone --branch gh-pages . gh-pages) && \
@@ -57,6 +48,19 @@ release_push_arch() {
 release_clean_arch() {
   rm -rf gh-pages
   rm -rf $DIST_ARCHIVES
+}
+
+generate_dist_sha() {
+  export DIST_SHA=$(openssl sha256 $srcdir/$DIST_ARCHIVES | cut -d' ' -f2)
+}
+
+edit_package() {
+  sed \
+    -e "s|@PACKAGE[@]|$PACKAGE|g" \
+    -e "s|@PACKAGE_VERSION[@]|$PACKAGE_VERSION|g" \
+    -e "s|@DIST_ARCHIVES[@]|$DIST_ARCHIVES|g" \
+    -e "s|@DIST_SHA[@]|$DIST_SHA|g" \
+    "$1"
 }
 
 # Deb
@@ -108,10 +112,6 @@ release_clean_tag() {
   :
 }
 
-generate_dist_sha() {
-  export DIST_SHA=$(openssl sha256 $srcdir/$DIST_ARCHIVES | cut -d' ' -f2)
-}
-
 # manpages as HTML
 release_build_man_html() {
   ([ -d gh-pages ] || git clone --branch gh-pages . gh-pages) && \
@@ -138,6 +138,16 @@ release_clean_man_html() {
 if [ $# -lt 3 ]; then
   echo "Usage: release (build|push|clean) (tarball|arch|deb|tag|man_html) DIST_ARCHIVES" >&2
   exit 64
+fi
+
+if ! command -v git >/dev/null; then
+  echo >&2 "release: missing dependency: git"
+  exit 1
+fi
+
+if ! command -v mandoc >/dev/null; then
+  echo >&2 "release: missing dependency: git"
+  exit 1
 fi
 
 verb="$1"
