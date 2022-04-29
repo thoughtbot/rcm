@@ -25,176 +25,176 @@
   </tr>
 </table>
 <div class="manual-text">
-<h1 class="Sh" title="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
-<code class="Nm" title="Nm">lsrc</code> &#x2014;
-<div class="Nd" title="Nd">show dotfiles files managed by rcm</div>
-<h1 class="Sh" title="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
+<section class="Sh">
+<h1 class="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
+<code class="Nm">lsrc</code> &#x2014;
+<div class="Nd">show dotfiles files managed by rcm</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
 <table class="Nm">
   <tr>
-    <td><code class="Nm" title="Nm">lsrc</code></td>
-    <td>[<div class="Op"><code class="Fl" title="Fl">-FhqVv</code></div>]
-      [<div class="Op"><code class="Fl" title="Fl">-B</code>
-      <var class="Ar" title="Ar">hostname</var></div>]
-      [<div class="Op"><code class="Fl" title="Fl">-d</code>
-      <var class="Ar" title="Ar">dir</var></div>]
-      [<div class="Op"><code class="Fl" title="Fl">-I</code>
-      <var class="Ar" title="Ar">excl_pat</var></div>]
-      [<div class="Op"><code class="Fl" title="Fl">-S</code>
-      <var class="Ar" title="Ar">excl_pat</var></div>]
-      [<div class="Op"><code class="Fl" title="Fl">-s</code>
-      <var class="Ar" title="Ar">excl_pat</var></div>]
-      [<div class="Op"><code class="Fl" title="Fl">-t</code>
-      <var class="Ar" title="Ar">tag</var></div>]
-      [<div class="Op"><code class="Fl" title="Fl">-U</code>
-      <var class="Ar" title="Ar">excl_pat</var></div>]
-      [<div class="Op"><code class="Fl" title="Fl">-u</code>
-      <var class="Ar" title="Ar">excl_pat</var></div>]
-      [<div class="Op"><code class="Fl" title="Fl">-x</code>
-      <var class="Ar" title="Ar">excl_pat</var></div>] [<div class="Op">files
-      ...</div>]</td>
+    <td><code class="Nm">lsrc</code></td>
+    <td>[<code class="Fl">-FhqVv</code>] [<code class="Fl">-B</code>
+      <var class="Ar">hostname</var>] [<code class="Fl">-d</code>
+      <var class="Ar">dir</var>] [<code class="Fl">-I</code>
+      <var class="Ar">excl_pat</var>] [<code class="Fl">-S</code>
+      <var class="Ar">excl_pat</var>] [<code class="Fl">-s</code>
+      <var class="Ar">excl_pat</var>] [<code class="Fl">-t</code>
+      <var class="Ar">tag</var>] [<code class="Fl">-U</code>
+      <var class="Ar">excl_pat</var>] [<code class="Fl">-u</code>
+      <var class="Ar">excl_pat</var>] [<code class="Fl">-x</code>
+      <var class="Ar">excl_pat</var>] [files ...]</td>
   </tr>
 </table>
-<h1 class="Sh" title="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
 This program lists all configuration files, both the sources in the dotfiles
   directories and the destinations in your home directory. See
-  <a class="Xr" title="Xr" href="rcup.1.html">rcup(1)</a>, the
-  <a class="Sx" title="Sx" href="#DIRECTORY_LAYOUT">DIRECTORY LAYOUT</a>
-  section, for details on the directory layout. It supports these options:
+  <a class="Xr" href="rcup.1.html">rcup(1)</a>, the
+  <a class="Sx" href="#DIRECTORY_LAYOUT">DIRECTORY LAYOUT</a> section, for
+  details on the directory layout. It supports these options:
 <dl class="Bl-tag">
-  <dt><a class="permalink" href="#B"><code class="Fl" title="Fl" id="B">-B</code></a>
-    <var class="Ar" title="Ar">HOSTNAME</var></dt>
-  <dd>treat <span class="Pa" title="Pa">host-HOSTNAME</span> as the
-      host-specific directory instead of computing it based on the computer's
-      hostname</dd>
-  <dt><a class="permalink" href="#d"><code class="Fl" title="Fl" id="d">-d</code></a>
-    <var class="Ar" title="Ar">DIR</var></dt>
+  <dt><a class="permalink" href="#B"><code class="Fl" id="B">-B</code></a>
+    <var class="Ar">HOSTNAME</var></dt>
+  <dd>treat <span class="Pa">host-HOSTNAME</span> as the host-specific directory
+      instead of computing it based on the computer's hostname</dd>
+  <dt><a class="permalink" href="#d"><code class="Fl" id="d">-d</code></a>
+    <var class="Ar">DIR</var></dt>
   <dd>list dotfiles from the DIR. This can be specified multiple times.</dd>
-  <dt><a class="permalink" href="#F"><code class="Fl" title="Fl" id="F">-F</code></a></dt>
+  <dt><a class="permalink" href="#F"><code class="Fl" id="F">-F</code></a></dt>
   <dd>show symbols next to each file indicating status information. Supported
       symbols are <code class="Li">@</code> which indicates that the file is a
       symlink, <code class="Li">$</code> which indicates it's a symlinked
       directory, and <code class="Li">X</code> to indicate that the file is a
       copy. More details on copied files and symlinked directories can be found
-      in <a class="Xr" title="Xr" href="rcrc.5.html">rcrc(5)</a> under the
-      documentation on <var class="Va" title="Va">COPY_ALWAYS</var> and
-      <var class="Va" title="Va">SYMLINK_DIRS</var>, respectively.</dd>
-  <dt><a class="permalink" href="#h"><code class="Fl" title="Fl" id="h">-h</code></a></dt>
+      in <a class="Xr" href="rcrc.5.html">rcrc(5)</a> under the documentation on
+      <var class="Va">COPY_ALWAYS</var> and <var class="Va">SYMLINK_DIRS</var>,
+      respectively.</dd>
+  <dt><a class="permalink" href="#h"><code class="Fl" id="h">-h</code></a></dt>
   <dd>show usage instructions.</dd>
-  <dt><a class="permalink" href="#I"><code class="Fl" title="Fl" id="I">-I</code></a>
-    <var class="Ar" title="Ar">excl_pat</var></dt>
+  <dt><a class="permalink" href="#I"><code class="Fl" id="I">-I</code></a>
+    <var class="Ar">excl_pat</var></dt>
   <dd>include the files that match the given pattern. This is applied after any
-      <code class="Fl" title="Fl">-x</code> options. It uses the same pattern
-      language as <code class="Fl" title="Fl">-x</code>; more details are in the
-      <a class="Sx" title="Sx" href="#EXCLUDE_PATTERN">EXCLUDE PATTERN</a>
-      section. Note that you may have to quote the exclude pattern so the shell
-      does not evaluate the glob.</dd>
-  <dt><a class="permalink" href="#S"><code class="Fl" title="Fl" id="S">-S</code></a>
-    <var class="Ar" title="Ar">excl_pat</var></dt>
+      <code class="Fl">-x</code> options. It uses the same pattern language as
+      <code class="Fl">-x</code>; more details are in the
+      <a class="Sx" href="#EXCLUDE_PATTERN">EXCLUDE PATTERN</a> section. Note
+      that you may have to quote the exclude pattern so the shell does not
+      evaluate the glob.</dd>
+  <dt><a class="permalink" href="#S"><code class="Fl" id="S">-S</code></a>
+    <var class="Ar">excl_pat</var></dt>
   <dd>symlink the directories that match the given pattern. See
-      <a class="Sx" title="Sx" href="#EXCLUDE_PATTERN">EXCLUDE PATTERN</a> for
-      more details. This option can be repeated. You may need to quote the
-      pattern to prevent the shell from swallowing the glob.</dd>
-  <dt><a class="permalink" href="#s"><code class="Fl" title="Fl" id="s">-s</code></a>
-    <var class="Ar" title="Ar">excl_pat</var></dt>
+      <a class="Sx" href="#EXCLUDE_PATTERN">EXCLUDE PATTERN</a> for more
+      details. This option can be repeated. You may need to quote the pattern to
+      prevent the shell from swallowing the glob.</dd>
+  <dt><a class="permalink" href="#s"><code class="Fl" id="s">-s</code></a>
+    <var class="Ar">excl_pat</var></dt>
   <dd>if a directory matches the given pattern, recur inside of it instead of
-      symlinking. See <a class="Sx" title="Sx" href="#EXCLUDE_PATTERN">EXCLUDE
-      PATTERN</a> for more details. This is the opposite of the
-      <code class="Fl" title="Fl">-S</code> option, and can be used to undo it
-      or the <var class="Va" title="Va">SYMLINK_DIRS</var> setting in your
-      <a class="Xr" title="Xr" href="rcrc.5.html">rcrc(5)</a> configuration. It
-      can be repeated, and the pattern may need to be quoted to protect it from
-      your shell.</dd>
-  <dt><a class="permalink" href="#t"><code class="Fl" title="Fl" id="t">-t</code></a>
-    <var class="Ar" title="Ar">TAG</var></dt>
+      symlinking. See <a class="Sx" href="#EXCLUDE_PATTERN">EXCLUDE PATTERN</a>
+      for more details. This is the opposite of the <code class="Fl">-S</code>
+      option, and can be used to undo it or the
+      <var class="Va">SYMLINK_DIRS</var> setting in your
+      <a class="Xr" href="rcrc.5.html">rcrc(5)</a> configuration. It can be
+      repeated, and the pattern may need to be quoted to protect it from your
+      shell.</dd>
+  <dt><a class="permalink" href="#t"><code class="Fl" id="t">-t</code></a>
+    <var class="Ar">TAG</var></dt>
   <dd>list dotfiles according to TAG</dd>
-  <dt><a class="permalink" href="#U"><code class="Fl" title="Fl" id="U">-U</code></a>
-    <var class="Ar" title="Ar">excl_pat</var></dt>
+  <dt><a class="permalink" href="#U"><code class="Fl" id="U">-U</code></a>
+    <var class="Ar">excl_pat</var></dt>
   <dd>the rc files or directories matching this pattern will not be symlinked or
       created with a leading dot. See
-      <a class="Sx" title="Sx" href="#EXCLUDE_PATTERN">EXCLUDE PATTERN</a> for
-      more details. This option can be repeated. You may need to quote the
-      pattern to prevent the shell from swallowing the glob.</dd>
-  <dt><a class="permalink" href="#u"><code class="Fl" title="Fl" id="u">-u</code></a>
-    <var class="Ar" title="Ar">excl_pat</var></dt>
+      <a class="Sx" href="#EXCLUDE_PATTERN">EXCLUDE PATTERN</a> for more
+      details. This option can be repeated. You may need to quote the pattern to
+      prevent the shell from swallowing the glob.</dd>
+  <dt><a class="permalink" href="#u"><code class="Fl" id="u">-u</code></a>
+    <var class="Ar">excl_pat</var></dt>
   <dd>if an rc file or directory matches the given pattern, it must be dotted.
-      See <a class="Sx" title="Sx" href="#EXCLUDE_PATTERN">EXCLUDE PATTERN</a>
-      for more details. This is the opposite of the
-      <code class="Fl" title="Fl">-U</code> option, and can be used to undo it
-      or the <var class="Va" title="Va">UNDOTTED</var> setting in your
-      <a class="Xr" title="Xr" href="rcrc.5.html">rcrc(5)</a> configuration.
-      This option can be repeated. You may need to quote the pattern to prevent
-      the shell from swallowing the glob.</dd>
-  <dt><a class="permalink" href="#V"><code class="Fl" title="Fl" id="V">-V</code></a></dt>
+      See <a class="Sx" href="#EXCLUDE_PATTERN">EXCLUDE PATTERN</a> for more
+      details. This is the opposite of the <code class="Fl">-U</code> option,
+      and can be used to undo it or the <var class="Va">UNDOTTED</var> setting
+      in your <a class="Xr" href="rcrc.5.html">rcrc(5)</a> configuration. This
+      option can be repeated. You may need to quote the pattern to prevent the
+      shell from swallowing the glob.</dd>
+  <dt><a class="permalink" href="#V"><code class="Fl" id="V">-V</code></a></dt>
   <dd>show the version number.</dd>
-  <dt><a class="permalink" href="#v"><code class="Fl" title="Fl" id="v">-v</code></a></dt>
+  <dt><a class="permalink" href="#v"><code class="Fl" id="v">-v</code></a></dt>
   <dd>increase verbosity. This can be repeated for extra verbosity.</dd>
-  <dt><a class="permalink" href="#q"><code class="Fl" title="Fl" id="q">-q</code></a></dt>
+  <dt><a class="permalink" href="#q"><code class="Fl" id="q">-q</code></a></dt>
   <dd>decrease verbosity</dd>
-  <dt><a class="permalink" href="#x"><code class="Fl" title="Fl" id="x">-x</code></a>
-    <var class="Ar" title="Ar">excl_pat</var></dt>
+  <dt><a class="permalink" href="#x"><code class="Fl" id="x">-x</code></a>
+    <var class="Ar">excl_pat</var></dt>
   <dd>exclude the files that match the given pattern. See
-      <a class="Sx" title="Sx" href="#EXCLUDE_PATTERN">EXCLUDE PATTERN</a> for
-      more details. This option can be repeated. Quote the pattern if it
-      contains a valid shell glob.</dd>
-  <dt><var class="Ar" title="Ar">files ...</var></dt>
+      <a class="Sx" href="#EXCLUDE_PATTERN">EXCLUDE PATTERN</a> for more
+      details. This option can be repeated. Quote the pattern if it contains a
+      valid shell glob.</dd>
+  <dt><var class="Ar">files ...</var></dt>
   <dd>only list the specified file(s)</dd>
 </dl>
-<h1 class="Sh" title="Sh" id="EXCLUDE_PATTERN"><a class="permalink" href="#EXCLUDE_PATTERN">EXCLUDE
+</section>
+<section class="Sh">
+<h1 class="Sh" id="EXCLUDE_PATTERN"><a class="permalink" href="#EXCLUDE_PATTERN">EXCLUDE
   PATTERN</a></h1>
 The exclude pattern specifies a colon-separated pair of dotfiles directory and
   file glob. The dotfiles directory is optional and, if omitted, defaults to
   <code class="Li">*</code>, which is a special token that matches any dotfiles
   directory. The file glob is relative to the dotfiles directory, ignoring meta
   directories. A colon combines them.
-<div class="Pp"></div>
-For example, to ignore all emacs-related items from the
-  <span class="Pa" title="Pa">thoughtbot-dotfiles</span> directory, use the
-  exclude pattern:
-<div class="Pp"></div>
+<p class="Pp">For example, to ignore all emacs-related items from the
+    <span class="Pa">thoughtbot-dotfiles</span> directory, use the exclude
+    pattern:</p>
+<p class="Pp"></p>
 <div class="Bd
   Bd-indent"><code class="Li">thoughtbot-dotfiles:*emacs*</code></div>
-<div class="Pp"></div>
-To ignore any <span class="Pa" title="Pa">bash_profile</span> file, use the
-  pattern:
-<div class="Pp"></div>
+<p class="Pp">To ignore any <span class="Pa">bash_profile</span> file, use the
+    pattern:</p>
+<p class="Pp"></p>
 <div class="Bd Bd-indent"><code class="Li">*:bash_profile</code></div>
-<div class="Pp"></div>
-Or more simply:
-<div class="Pp"></div>
+<p class="Pp">Or more simply:</p>
+<p class="Pp"></p>
 <div class="Bd Bd-indent"><code class="Li">bash_profile</code></div>
-<div class="Pp"></div>
-Since exclude patterns are often valid shell globs, be sure to quote them. See
-  the caveats noted in <a class="Sx" title="Sx" href="#BUGS">BUGS</a> when using
-  an exclude pattern.
-<h1 class="Sh" title="Sh" id="ENVIRONMENT"><a class="permalink" href="#ENVIRONMENT">ENVIRONMENT</a></h1>
+<p class="Pp">Since exclude patterns are often valid shell globs, be sure to
+    quote them. See the caveats noted in <a class="Sx" href="#BUGS">BUGS</a>
+    when using an exclude pattern.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="ENVIRONMENT"><a class="permalink" href="#ENVIRONMENT">ENVIRONMENT</a></h1>
 <dl class="Bl-tag">
-  <dt><a class="permalink" href="#RCRC"><code class="Ev" title="Ev" id="RCRC">RCRC</code></a></dt>
-  <dd>User configuration file. Defaults to
-      <span class="Pa" title="Pa">~/.rcrc</span>.</dd>
+  <dt><a class="permalink" href="#RCRC"><code class="Ev" id="RCRC">RCRC</code></a></dt>
+  <dd>User configuration file. Defaults to <span class="Pa">~/.rcrc</span>.</dd>
 </dl>
-<h1 class="Sh" title="Sh" id="FILES"><a class="permalink" href="#FILES">FILES</a></h1>
-<span class="Pa" title="Pa">~/.dotfiles</span>
-  <span class="Pa" title="Pa">~/.rcrc</span>
-<h1 class="Sh" title="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
+</section>
+<section class="Sh">
+<h1 class="Sh" id="FILES"><a class="permalink" href="#FILES">FILES</a></h1>
+<span class="Pa">~/.dotfiles</span> <span class="Pa">~/.rcrc</span>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
   ALSO</a></h1>
-<a class="Xr" title="Xr" href="mkrc.1.html">mkrc(1)</a>,
-  <a class="Xr" title="Xr" href="rcdn.1.html">rcdn(1)</a>,
-  <a class="Xr" title="Xr" href="rcup.1.html">rcup(1)</a>,
-  <a class="Xr" title="Xr" href="rcrc.5.html">rcrc(5)</a>,
-  <a class="Xr" title="Xr" href="rcm.7.html">rcm(7)</a>
-<h1 class="Sh" title="Sh" id="AUTHORS"><a class="permalink" href="#AUTHORS">AUTHORS</a></h1>
-<code class="Nm" title="Nm">lsrc</code> is maintained by
-  <span class="An" title="An">Mike Burns</span>
-  &lt;<a class="Mt" title="Mt" href="mailto:mburns@thoughtbot.com">mburns@thoughtbot.com</a>&gt;
-  and <a class="Lk" title="Lk" href="http://thoughtbot.se">thoughtbot</a>
-<h1 class="Sh" title="Sh" id="BUGS"><a class="permalink" href="#BUGS">BUGS</a></h1>
+<a class="Xr" href="mkrc.1.html">mkrc(1)</a>,
+  <a class="Xr" href="rcdn.1.html">rcdn(1)</a>,
+  <a class="Xr" href="rcup.1.html">rcup(1)</a>,
+  <a class="Xr" href="rcrc.5.html">rcrc(5)</a>,
+  <a class="Xr" href="rcm.7.html">rcm(7)</a>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="AUTHORS"><a class="permalink" href="#AUTHORS">AUTHORS</a></h1>
+<code class="Nm">lsrc</code> is maintained by <span class="An">Mike Burns</span>
+  &lt;<a class="Mt" href="mailto:mburns@thoughtbot.com">mburns@thoughtbot.com</a>&gt;
+  and <a class="Lk" href="http://thoughtbot.se">thoughtbot</a>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="BUGS"><a class="permalink" href="#BUGS">BUGS</a></h1>
 For macOS systems, we strongly encourage the use of the
-  <var class="Va" title="Va">HOSTNAME</var> variable in your
-  <a class="Xr" title="Xr" href="rcrc.5.html">rcrc(5)</a>. We use the
-  <a class="Xr" title="Xr" href="hostname.1.html">hostname(1)</a> program to
-  determine the unique identifier for the host. This program is not specified by
-  POSIX and can vary by system. On macOS the hostname is unpredictable, and can
-  even change as part of the DHCP handshake.</div>
+  <var class="Va">HOSTNAME</var> variable in your
+  <a class="Xr" href="rcrc.5.html">rcrc(5)</a>. We use the
+  <a class="Xr" href="hostname.1.html">hostname(1)</a> program to determine the
+  unique identifier for the host. This program is not specified by POSIX and can
+  vary by system. On macOS the hostname is unpredictable, and can even change as
+  part of the DHCP handshake.
+</section>
+</div>
 <table class="foot">
   <tr>
     <td class="foot-date">December 23, 2016</td>

@@ -25,59 +25,64 @@
   </tr>
 </table>
 <div class="manual-text">
-<h1 class="Sh" title="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
-<code class="Nm" title="Nm">rcrc</code> &#x2014;
-<div class="Nd" title="Nd">configuration for rcm</div>
-<h1 class="Sh" title="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
-<code class="Ev" title="Ev">X</code>=&#x201C;<var class="Va" title="Va">a&#x00A0;</var><var class="Va" title="Va">b&#x00A0;</var><var class="Va" title="Va">c</var>&#x201D;
-<h1 class="Sh" title="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
-The rcm dotfile manager can be configured using a
-  <span class="Pa" title="Pa">.rcrc</span> file in your home directory. This
-  location can be changed by setting the <span class="Pa" title="Pa">RCRC</span>
-  environment variable. The format is POSIX shell. It is sourced in by the
-  <a class="Xr" title="Xr" href="lsrc.1.html">lsrc(1)</a>,
-  <a class="Xr" title="Xr" href="mkrc.1.html">mkrc(1)</a>,
-  <a class="Xr" title="Xr" href="rcdn.1.html">rcdn(1)</a>, and
-  <a class="Xr" title="Xr" href="rcup.1.html">rcup(1)</a> programs.
-<div class="Pp"></div>
-It supports these variables:
+<section class="Sh">
+<h1 class="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
+<code class="Nm">rcrc</code> &#x2014;
+<div class="Nd">configuration for rcm</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
+<code class="Ev">X</code>=&#x201C;<var class="Va">a&#x00A0;</var><var class="Va">b&#x00A0;</var><var class="Va">c</var>&#x201D;
+</section>
+<section class="Sh">
+<h1 class="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
+The rcm dotfile manager can be configured using a <span class="Pa">.rcrc</span>
+  file in your home directory. This location can be changed by setting the
+  <span class="Pa">RCRC</span> environment variable. The format is POSIX shell.
+  It is sourced in by the <a class="Xr" href="lsrc.1.html">lsrc(1)</a>,
+  <a class="Xr" href="mkrc.1.html">mkrc(1)</a>,
+  <a class="Xr" href="rcdn.1.html">rcdn(1)</a>, and
+  <a class="Xr" href="rcup.1.html">rcup(1)</a> programs.
+<p class="Pp">It supports these variables:</p>
 <dl class="Bl-tag">
-  <dt><var class="Va" title="Va">COPY_ALWAYS</var></dt>
+  <dt><var class="Va">COPY_ALWAYS</var></dt>
   <dd>always copy files that match the listed globs, never symlink them.</dd>
-  <dt><var class="Va" title="Va">DOTFILES_DIRS</var></dt>
+  <dt><var class="Va">DOTFILES_DIRS</var></dt>
   <dd>the source directories for dotfiles. The first in the list is the source
       to which dotfiles created using
-      <a class="Xr" title="Xr" href="mkrc.1.html">mkrc(1)</a> are installed. The
-      default value is <span class="Pa" title="Pa">~/.dotfiles</span></dd>
-  <dt><var class="Va" title="Va">EXCLUDES</var></dt>
+      <a class="Xr" href="mkrc.1.html">mkrc(1)</a> are installed. The default
+      value is <span class="Pa">~/.dotfiles</span></dd>
+  <dt><var class="Va">EXCLUDES</var></dt>
   <dd>a space-separated list of exclude patterns. Exclude patterns are explained
-      in detail in <a class="Xr" title="Xr" href="lsrc.1.html">lsrc(1)</a> under
-      the section <a class="Sx" title="Sx" href="#EXCLUDE_PATTERN">EXCLUDE
-      PATTERN</a>.</dd>
-  <dt><var class="Va" title="Va">HOSTNAME</var></dt>
+      in detail in <a class="Xr" href="lsrc.1.html">lsrc(1)</a> under the
+      section <a class="Sx" href="#EXCLUDE_PATTERN">EXCLUDE PATTERN</a>.</dd>
+  <dt><var class="Va">HOSTNAME</var></dt>
   <dd>the hostname for this computer. This is normally computed using the
-      <a class="Xr" title="Xr" href="hostname.1.html">hostname(1)</a> command,
-      but this command is non-standard and can prove unreliable. The
-      <var class="Va" title="Va">HOSTNAME</var> variable forces a known
-      hostname.</dd>
-  <dt><var class="Va" title="Va">TAGS</var></dt>
+      <a class="Xr" href="hostname.1.html">hostname(1)</a> command, but this
+      command is non-standard and can prove unreliable. The
+      <var class="Va">HOSTNAME</var> variable forces a known hostname.</dd>
+  <dt><var class="Va">TAGS</var></dt>
   <dd>the default tags.</dd>
-  <dt><var class="Va" title="Va">SYMLINK_DIRS</var></dt>
+  <dt><var class="Va">SYMLINK_DIRS</var></dt>
   <dd>a space-separated list of patterns. Directories matching a pattern are
       symlinked instead of descended. Patterns are explained in detail in
-      <a class="Xr" title="Xr" href="lsrc.1.html">lsrc(1)</a> under the section
-      <a class="Sx" title="Sx" href="#EXCLUDE_PATTERN">EXCLUDE PATTERN</a>.</dd>
-  <dt><var class="Va" title="Va">UNDOTTED</var></dt>
+      <a class="Xr" href="lsrc.1.html">lsrc(1)</a> under the section
+      <a class="Sx" href="#EXCLUDE_PATTERN">EXCLUDE PATTERN</a>.</dd>
+  <dt><var class="Va">UNDOTTED</var></dt>
   <dd>a space separated list of patterns. Files matching this pattern will be
       symlinked without a leading dot. If a file is also in
-      <var class="Va" title="Va">SYMLINK_DIRS</var>, then the directory will be
-      symlinked without a leading dot. Patterns are explained in detail in
-      <a class="Xr" title="Xr" href="lsrc.1.html">lsrc(1)</a> under the section
-      <a class="Sx" title="Sx" href="#EXCLUDE_PATTERN">EXCLUDE PATTERN</a>.</dd>
+      <var class="Va">SYMLINK_DIRS</var>, then the directory will be symlinked
+      without a leading dot. Patterns are explained in detail in
+      <a class="Xr" href="lsrc.1.html">lsrc(1)</a> under the section
+      <a class="Sx" href="#EXCLUDE_PATTERN">EXCLUDE PATTERN</a>.</dd>
 </dl>
-<h1 class="Sh" title="Sh" id="FILES"><a class="permalink" href="#FILES">FILES</a></h1>
-<span class="Pa" title="Pa">~/.rcrc</span>
-<h1 class="Sh" title="Sh" id="EXAMPLES"><a class="permalink" href="#EXAMPLES">EXAMPLES</a></h1>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="FILES"><a class="permalink" href="#FILES">FILES</a></h1>
+<span class="Pa">~/.rcrc</span>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="EXAMPLES"><a class="permalink" href="#EXAMPLES">EXAMPLES</a></h1>
 <div class="Bd Bd-indent"><code class="Li">COPY_ALWAYS=&quot;ssh/id_* weechat/*
   netrc&quot;</code></div>
 <div class="Bd
@@ -95,23 +100,30 @@ It supports these variables:
   texmf&quot;</code></div>
 <div class="Bd
   Bd-indent"><code class="Li">UNDOTTED=&quot;texmf&quot;</code></div>
-<h1 class="Sh" title="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
   ALSO</a></h1>
-<a class="Xr" title="Xr" href="lsrc.1.html">lsrc(1)</a>,
-  <a class="Xr" title="Xr" href="mkrc.1.html">mkrc(1)</a>,
-  <a class="Xr" title="Xr" href="rcdn.1.html">rcdn(1)</a>,
-  <a class="Xr" title="Xr" href="rcup.1.html">rcup(1)</a>,
-  <a class="Xr" title="Xr" href="rcm.7.html">rcm(7)</a>
-<h1 class="Sh" title="Sh" id="AUTHORS"><a class="permalink" href="#AUTHORS">AUTHORS</a></h1>
-<code class="Nm" title="Nm">rcrc</code> is maintained by
-  <span class="An" title="An">Mike Burns</span>
-  &lt;<a class="Mt" title="Mt" href="mailto:mburns@thoughtbot.com">mburns@thoughtbot.com</a>&gt;
-  and <a class="Lk" title="Lk" href="http://thoughtbot.se">thoughtbot</a>
-<h1 class="Sh" title="Sh" id="BUGS"><a class="permalink" href="#BUGS">BUGS</a></h1>
-We only expand tilde inside <var class="Va" title="Va">DOTFILES_DIRS</var> and
-  not inside any patterns. For more notes on the caution you should exercise
-  around patterns, see the BUGS section of
-  <a class="Xr" title="Xr" href="lsrc.1.html">lsrc(1)</a>.</div>
+<a class="Xr" href="lsrc.1.html">lsrc(1)</a>,
+  <a class="Xr" href="mkrc.1.html">mkrc(1)</a>,
+  <a class="Xr" href="rcdn.1.html">rcdn(1)</a>,
+  <a class="Xr" href="rcup.1.html">rcup(1)</a>,
+  <a class="Xr" href="rcm.7.html">rcm(7)</a>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="AUTHORS"><a class="permalink" href="#AUTHORS">AUTHORS</a></h1>
+<code class="Nm">rcrc</code> is maintained by <span class="An">Mike Burns</span>
+  &lt;<a class="Mt" href="mailto:mburns@thoughtbot.com">mburns@thoughtbot.com</a>&gt;
+  and <a class="Lk" href="http://thoughtbot.se">thoughtbot</a>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="BUGS"><a class="permalink" href="#BUGS">BUGS</a></h1>
+We only expand tilde inside <var class="Va">DOTFILES_DIRS</var> and not inside
+  any patterns. For more notes on the caution you should exercise around
+  patterns, see the BUGS section of
+  <a class="Xr" href="lsrc.1.html">lsrc(1)</a>.
+</section>
+</div>
 <table class="foot">
   <tr>
     <td class="foot-date">July 28, 2013</td>

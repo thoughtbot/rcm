@@ -25,227 +25,217 @@
   </tr>
 </table>
 <div class="manual-text">
-<h1 class="Sh" title="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
-<code class="Nm" title="Nm">rcup</code> &#x2014;
-<div class="Nd" title="Nd">update and install dotfiles managed by rcm</div>
-<h1 class="Sh" title="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
+<section class="Sh">
+<h1 class="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
+<code class="Nm">rcup</code> &#x2014;
+<div class="Nd">update and install dotfiles managed by rcm</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
 <table class="Nm">
   <tr>
-    <td><code class="Nm" title="Nm">rcup</code></td>
-    <td>[<div class="Op"><code class="Fl" title="Fl">-CfhiKkqVv</code></div>]
-      [<div class="Op"><code class="Fl" title="Fl">-B</code>
-      <var class="Ar" title="Ar">hostname</var></div>]
-      [<div class="Op"><code class="Fl" title="Fl">-d</code>
-      <var class="Ar" title="Ar">dir</var></div>]
-      [<div class="Op"><code class="Fl" title="Fl">-g</code></div>]
-      [<div class="Op"><code class="Fl" title="Fl">-I</code>
-      <var class="Ar" title="Ar">excl_pat</var></div>]
-      [<div class="Op"><code class="Fl" title="Fl">-S</code>
-      <var class="Ar" title="Ar">excl_pat</var></div>]
-      [<div class="Op"><code class="Fl" title="Fl">-s</code>
-      <var class="Ar" title="Ar">excl_pat</var></div>]
-      [<div class="Op"><code class="Fl" title="Fl">-t</code>
-      <var class="Ar" title="Ar">tag</var></div>]
-      [<div class="Op"><code class="Fl" title="Fl">-U</code>
-      <var class="Ar" title="Ar">excl_pat</var></div>]
-      [<div class="Op"><code class="Fl" title="Fl">-u</code>
-      <var class="Ar" title="Ar">excl_pat</var></div>]
-      [<div class="Op"><code class="Fl" title="Fl">-x</code>
-      <var class="Ar" title="Ar">excl_pat</var></div>]
-      [<div class="Op"><var class="Ar" title="Ar">files ...</var></div>]</td>
+    <td><code class="Nm">rcup</code></td>
+    <td>[<code class="Fl">-CfhiKkqVv</code>] [<code class="Fl">-B</code>
+      <var class="Ar">hostname</var>] [<code class="Fl">-d</code>
+      <var class="Ar">dir</var>] [<code class="Fl">-g</code>]
+      [<code class="Fl">-I</code> <var class="Ar">excl_pat</var>]
+      [<code class="Fl">-S</code> <var class="Ar">excl_pat</var>]
+      [<code class="Fl">-s</code> <var class="Ar">excl_pat</var>]
+      [<code class="Fl">-t</code> <var class="Ar">tag</var>]
+      [<code class="Fl">-U</code> <var class="Ar">excl_pat</var>]
+      [<code class="Fl">-u</code> <var class="Ar">excl_pat</var>]
+      [<code class="Fl">-x</code> <var class="Ar">excl_pat</var>]
+      [<var class="Ar">files ...</var>]</td>
   </tr>
 </table>
-<h1 class="Sh" title="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
 This is a program to update and install personal dotfiles. These dotfiles are
-  managed in a separate directory. Use <code class="Nm" title="Nm">rcup</code>
-  to install files from your dotfiles directories or from host- or tag-specific
-  directories within.
-<div class="Pp"></div>
-See <a class="Sx" title="Sx" href="#DIRECTORY_LAYOUT">DIRECTORY LAYOUT</a> for
-  details on the directory layout.
-<div class="Pp"></div>
-It supports these options:
+  managed in a separate directory. Use <code class="Nm">rcup</code> to install
+  files from your dotfiles directories or from host- or tag-specific directories
+  within.
+<p class="Pp">See <a class="Sx" href="#DIRECTORY_LAYOUT">DIRECTORY LAYOUT</a>
+    for details on the directory layout.</p>
+<p class="Pp">It supports these options:</p>
 <dl class="Bl-tag">
-  <dt><a class="permalink" href="#B"><code class="Fl" title="Fl" id="B">-B</code></a>
-    <var class="Ar" title="Ar">HOSTNAME</var></dt>
-  <dd>treat <span class="Pa" title="Pa">host-HOSTNAME</span> as the
-      host-specific directory instead of computing it</dd>
-  <dt><a class="permalink" href="#C"><code class="Fl" title="Fl" id="C">-C</code></a></dt>
-  <dd>copy the files instead of symlinking them</dd>
-  <dt><a class="permalink" href="#d"><code class="Fl" title="Fl" id="d">-d</code></a>
-    <var class="Ar" title="Ar">DIR</var></dt>
-  <dd>install dotfiles from the <var class="Ar" title="Ar">DIR</var>. This can
-      be specified multiple times.</dd>
-  <dt><a class="permalink" href="#f"><code class="Fl" title="Fl" id="f">-f</code></a></dt>
+  <dt><a class="permalink" href="#B"><code class="Fl" id="B">-B</code></a>
+    <var class="Ar">HOSTNAME</var></dt>
+  <dd>treat <span class="Pa">host-HOSTNAME</span> as the host-specific directory
+      instead of computing it.</dd>
+  <dt><a class="permalink" href="#C"><code class="Fl" id="C">-C</code></a></dt>
+  <dd>copy the files instead of symlinking them.</dd>
+  <dt><a class="permalink" href="#d"><code class="Fl" id="d">-d</code></a>
+    <var class="Ar">DIR</var></dt>
+  <dd>install dotfiles from the <var class="Ar">DIR</var>. This can be specified
+      multiple times.</dd>
+  <dt><a class="permalink" href="#f"><code class="Fl" id="f">-f</code></a></dt>
   <dd>if the rc file already exists in your home directory but does not match
       the file in your dotfiles directory, remove the rc file then create the
-      symlink</dd>
-  <dt><a class="permalink" href="#g"><code class="Fl" title="Fl" id="g">-g</code></a></dt>
+      symlink.</dd>
+  <dt><a class="permalink" href="#g"><code class="Fl" id="g">-g</code></a></dt>
   <dd>print to <code class="Li">stdout</code> a standalone shell script that
-      will run the <code class="Nm" title="Nm">rcup</code> command as specified.
-      Nothing on your filesystem will be modified by
-      <code class="Nm" title="Nm">rcup</code> when this flag is passed.</dd>
-  <dt><a class="permalink" href="#h"><code class="Fl" title="Fl" id="h">-h</code></a></dt>
+      will run the <code class="Nm">rcup</code> command as specified. Nothing on
+      your filesystem will be modified by <code class="Nm">rcup</code> when this
+      flag is passed.</dd>
+  <dt><a class="permalink" href="#h"><code class="Fl" id="h">-h</code></a></dt>
   <dd>show usage instructions.</dd>
-  <dt><a class="permalink" href="#I"><code class="Fl" title="Fl" id="I">-I</code></a>
-    <var class="Ar" title="Ar">EXCL_PAT</var></dt>
-  <dd>install rc files that match <var class="Ar" title="Ar">EXCL_PAT</var>
-      despite being excluded by the <code class="Fl" title="Fl">-x</code> flag
-      or a setting in <a class="Xr" title="Xr" href="rcrc.5.html">rcrc(5)</a>.
-      This can be repeated with additional patterns. See
-      <a class="Xr" title="Xr" href="lsrc.1.html">lsrc(1)</a>,
-      <a class="Sx" title="Sx" href="#EXCLUDE_PATTERN">EXCLUDE PATTERN</a>, for
-      more details.</dd>
-  <dt><a class="permalink" href="#i"><code class="Fl" title="Fl" id="i">-i</code></a></dt>
+  <dt><a class="permalink" href="#I"><code class="Fl" id="I">-I</code></a>
+    <var class="Ar">EXCL_PAT</var></dt>
+  <dd>install rc files that match <var class="Ar">EXCL_PAT</var> despite being
+      excluded by the <code class="Fl">-x</code> flag or a setting in
+      <a class="Xr" href="rcrc.5.html">rcrc(5)</a>. This can be repeated with
+      additional patterns. See <a class="Xr" href="lsrc.1.html">lsrc(1)</a>,
+      <a class="Sx" href="#EXCLUDE_PATTERN">EXCLUDE PATTERN</a>, for more
+      details.</dd>
+  <dt><a class="permalink" href="#i"><code class="Fl" id="i">-i</code></a></dt>
   <dd>if the rc file already exists in your home directory but does not match
       the file in your dotfiles directory, prompt for how to handle it. This is
-      the default</dd>
-  <dt><a class="permalink" href="#K"><code class="Fl" title="Fl" id="K">-K</code></a></dt>
-  <dd>skip pre- and post-hooks</dd>
-  <dt><a class="permalink" href="#k"><code class="Fl" title="Fl" id="k">-k</code></a></dt>
+      the default.</dd>
+  <dt><a class="permalink" href="#K"><code class="Fl" id="K">-K</code></a></dt>
+  <dd>skip pre- and post-hooks.</dd>
+  <dt><a class="permalink" href="#k"><code class="Fl" id="k">-k</code></a></dt>
   <dd>run pre- and post-hooks (see
-      <a class="Sx" title="Sx" href="#DIRECTORY_LAYOUT">DIRECTORY LAYOUT</a> for
-      more details on hooks). This is the default.</dd>
-  <dt><a class="permalink" href="#S"><code class="Fl" title="Fl" id="S">-S</code></a>
-    <var class="Ar" title="Ar">EXCL_PAT</var></dt>
-  <dd>any rc file that matches <var class="Ar" title="Ar">EXCL_PAT</var> is
-      installed as if it were a file (using a symlink) instead of as if it were
-      a directory (by making a directory). This option can be repeated.</dd>
-  <dt><a class="permalink" href="#s"><code class="Fl" title="Fl" id="s">-s</code></a>
-    <var class="Ar" title="Ar">EXCL_PAT</var></dt>
-  <dd>any file that matches <var class="Ar" title="Ar">EXCL_PAT</var> is
-      installed as normal, in accordance with the
-      <a class="Sx" title="Sx" href="#ALGORITHM">ALGORITHM</a> section below.
-      This is the opposite of <code class="Fl" title="Fl">-S</code>. This option
-      can be repeated.</dd>
-  <dt><a class="permalink" href="#t"><code class="Fl" title="Fl" id="t">-t</code></a>
-    <var class="Ar" title="Ar">TAG</var></dt>
-  <dd>install dotfiles according to <var class="Ar" title="Ar">TAG</var></dd>
-  <dt><a class="permalink" href="#U"><code class="Fl" title="Fl" id="U">-U</code></a>
-    <var class="Ar" title="Ar">EXCL_PAT</var></dt>
-  <dd>any rc file that matches <var class="Ar" title="Ar">EXCL_PAT</var> is
-      installed without a leading dot. This option can be repeated. See the
-      documentation of the <code class="Fl" title="Fl">-U</code> option in
-      <a class="Xr" title="Xr" href="lsrc.1.html">lsrc(1)</a> for more
-      information.</dd>
-  <dt><a class="permalink" href="#u"><code class="Fl" title="Fl" id="u">-u</code></a>
-    <var class="Ar" title="Ar">EXCL_PAT</var></dt>
-  <dd>any rc file that matches <var class="Ar" title="Ar">EXCL_PAT</var> is
-      installed with a leading dot. This is the opposite of
-      <code class="Fl" title="Fl">-U</code>. This option can be repeated. This
-      is the default. See the documentation of the
-      <code class="Fl" title="Fl">-u</code> option in
-      <a class="Xr" title="Xr" href="lsrc.1.html">lsrc(1)</a> for more
-      information.</dd>
-  <dt><a class="permalink" href="#q"><code class="Fl" title="Fl" id="q">-q</code></a></dt>
-  <dd>decrease verbosity</dd>
-  <dt><a class="permalink" href="#V"><code class="Fl" title="Fl" id="V">-V</code></a></dt>
+      <a class="Sx" href="#DIRECTORY_LAYOUT">DIRECTORY LAYOUT</a> for more
+      details on hooks). This is the default.</dd>
+  <dt><a class="permalink" href="#S"><code class="Fl" id="S">-S</code></a>
+    <var class="Ar">EXCL_PAT</var></dt>
+  <dd>any rc file that matches <var class="Ar">EXCL_PAT</var> is installed using
+      a symlink even if it is a directory. This option can be repeated.</dd>
+  <dt><a class="permalink" href="#s"><code class="Fl" id="s">-s</code></a>
+    <var class="Ar">EXCL_PAT</var></dt>
+  <dd>any file that matches <var class="Ar">EXCL_PAT</var> is installed as
+      normal, in accordance with the
+      <a class="Sx" href="#ALGORITHM">ALGORITHM</a> section below. This is the
+      opposite of <code class="Fl">-S</code>. This option can be repeated.</dd>
+  <dt><a class="permalink" href="#t"><code class="Fl" id="t">-t</code></a>
+    <var class="Ar">TAG</var></dt>
+  <dd>install dotfiles according to <var class="Ar">TAG</var>.</dd>
+  <dt><a class="permalink" href="#U"><code class="Fl" id="U">-U</code></a>
+    <var class="Ar">EXCL_PAT</var></dt>
+  <dd>any rc file that matches <var class="Ar">EXCL_PAT</var> is installed
+      without a leading dot. This option can be repeated. See the documentation
+      of the <code class="Fl">-U</code> option in
+      <a class="Xr" href="lsrc.1.html">lsrc(1)</a> for more information.</dd>
+  <dt><a class="permalink" href="#u"><code class="Fl" id="u">-u</code></a>
+    <var class="Ar">EXCL_PAT</var></dt>
+  <dd>any rc file that matches <var class="Ar">EXCL_PAT</var> is installed with
+      a leading dot. This is the opposite of <code class="Fl">-U</code>. This
+      option can be repeated. This is the default. See the documentation of the
+      <code class="Fl">-u</code> option in
+      <a class="Xr" href="lsrc.1.html">lsrc(1)</a> for more information.</dd>
+  <dt><a class="permalink" href="#q"><code class="Fl" id="q">-q</code></a></dt>
+  <dd>decrease verbosity.</dd>
+  <dt><a class="permalink" href="#V"><code class="Fl" id="V">-V</code></a></dt>
   <dd>show the version number.</dd>
-  <dt><a class="permalink" href="#v"><code class="Fl" title="Fl" id="v">-v</code></a></dt>
+  <dt><a class="permalink" href="#v"><code class="Fl" id="v">-v</code></a></dt>
   <dd>increase verbosity. This can be repeated for extra verbosity. Verbose
       messages are printed to <code class="Li">stderr</code>.</dd>
-  <dt><a class="permalink" href="#x"><code class="Fl" title="Fl" id="x">-x</code></a>
-    <var class="Ar" title="Ar">EXCL_PAT</var></dt>
-  <dd>do not install rc files that match
-      <var class="Ar" title="Ar">EXCL_PAT</var>. This can be repeated with
-      additional patterns. See
-      <a class="Xr" title="Xr" href="lsrc.1.html">lsrc(1)</a>,
-      <a class="Sx" title="Sx" href="#EXCLUDE_PATTERN">EXCLUDE PATTERN</a>, for
-      more details.</dd>
-  <dt><var class="Ar" title="Ar">files</var></dt>
+  <dt><a class="permalink" href="#x"><code class="Fl" id="x">-x</code></a>
+    <var class="Ar">EXCL_PAT</var></dt>
+  <dd>do not install rc files that match <var class="Ar">EXCL_PAT</var>. This
+      can be repeated with additional patterns. See
+      <a class="Xr" href="lsrc.1.html">lsrc(1)</a>,
+      <a class="Sx" href="#EXCLUDE_PATTERN">EXCLUDE PATTERN</a>, for more
+      details.</dd>
+  <dt><var class="Ar">files</var></dt>
   <dd>only install the specified file(s)</dd>
 </dl>
-<h1 class="Sh" title="Sh" id="DIRECTORY_LAYOUT"><a class="permalink" href="#DIRECTORY_LAYOUT">DIRECTORY
+</section>
+<section class="Sh">
+<h1 class="Sh" id="DIRECTORY_LAYOUT"><a class="permalink" href="#DIRECTORY_LAYOUT">DIRECTORY
   LAYOUT</a></h1>
 Any non-dot non-meta file or directory under your dotfiles directory will be
-  installed as a dotfile. For example,
-  <span class="Pa" title="Pa">.dotfiles/zshrc</span> will be installed into
-  <span class="Pa" title="Pa">~/.zshrc</span> .
-<div class="Pp"></div>
-Files are installed as symlinks. Directories are installed by making
-  directories. The <code class="Fl" title="Fl">-C</code> flag causes files to be
-  installed as copies instead of symlinks. The
-  <var class="Va" title="Va">COPY_ALWAYS</var> option in
-  <a class="Xr" title="Xr" href="rcrc.5.html">rcrc(5)</a> can be used to list
-  files that must only be copied.
-<div class="Pp"></div>
-Three meta files are supported: host-specific files, tagged files, hooks.
-<div class="Pp"></div>
-Host-specific files go in a directory named for the host, prefixed with
-  <span class="Pa" title="Pa">host-</span>. For example,
-  <span class="Pa" title="Pa">.dotfiles/host-scarlett</span> contains files
-  specific to the computer with hostname
-  <span class="Pa" title="Pa">scarlett</span>, and these files will only be
-  installed on the computer with hostname
-  <span class="Pa" title="Pa">scarlett</span>.
-<div class="Pp"></div>
-Tagged files go in a directory named for the tag, prefixed with
-  <code class="Li">tag-</code>. Therefore, files under
-  <span class="Pa" title="Pa">.dotfiles/tag-git</span> are only installed when
-  installing using the <code class="Li">git</code> tag.
-<div class="Pp"></div>
-Hooks go in a directory named <span class="Pa" title="Pa">hooks</span>. Two
-  hooks are supported by <code class="Nm" title="Nm">rcup</code>: pre-up and
-  post-up. These go in files or directories with predictable filenames:
-  <span class="Pa" title="Pa">.dotfiles/hooks/pre-up</span> and
-  <span class="Pa" title="Pa">.dotfiles/hooks/post-up</span>, or
-  <span class="Pa" title="Pa">.dotfiles/hooks/pre-up/*</span> and
-  <span class="Pa" title="Pa">.dotfiles/hooks/post-up/*</span>. These files must
-  be executable. They are run every time <code class="Nm" title="Nm">rcup</code>
-  is run, and therefore must be idempotent.
-<div class="Pp"></div>
-Hooks will be executed one at a time, sorted alphabetically. For instance,
-  <span class="Pa" title="Pa">hooks/pre-up/animals</span> will run before
-  <span class="Pa" title="Pa">hooks/pre-up/aquariums</span>, and
-  <span class="Pa" title="Pa">hooks/pre-up/4-eyes</span> will run before
-  <span class="Pa" title="Pa">hooks/post-up/2-u-nothing-compares</span>.
-<h1 class="Sh" title="Sh" id="ALGORITHM"><a class="permalink" href="#ALGORITHM">ALGORITHM</a></h1>
-It is instructive to understand the process
-  <code class="Nm" title="Nm">rcup</code> uses when synchronizing your rc files:
+  installed as a dotfile. For example, <span class="Pa">.dotfiles/zshrc</span>
+  will be installed into <span class="Pa">~/.zshrc</span> .
+<p class="Pp">Files are installed as symlinks. Directories are installed by
+    making directories. The <code class="Fl">-C</code> flag causes files to be
+    installed as copies instead of symlinks. The
+    <var class="Va">COPY_ALWAYS</var> option in
+    <a class="Xr" href="rcrc.5.html">rcrc(5)</a> can be used to list files that
+    must only be copied. Copied files are not updated in your dotfiles
+    directory.</p>
+<p class="Pp">Three meta files are supported: host-specific files, tagged files,
+    hooks.</p>
+<p class="Pp">Host-specific files go in a directory named for the host, prefixed
+    with <span class="Pa">host-</span>. For example,
+    <span class="Pa">.dotfiles/host-scarlett</span> contains files specific to
+    the computer with hostname <span class="Pa">scarlett</span>, and these files
+    will only be installed on the computer with hostname
+    <span class="Pa">scarlett</span>.</p>
+<p class="Pp">Tagged files go in a directory named for the tag, prefixed with
+    <code class="Li">tag-</code>. Therefore, files under
+    <span class="Pa">.dotfiles/tag-git</span> are only installed when installing
+    using the <code class="Li">git</code> tag.</p>
+<p class="Pp">Hooks go in a directory named <span class="Pa">hooks</span>. Two
+    hooks are supported by <code class="Nm">rcup</code>: pre-up and post-up.
+    These go in files or directories with predictable filenames:
+    <span class="Pa">.dotfiles/hooks/pre-up</span> and
+    <span class="Pa">.dotfiles/hooks/post-up</span>, or
+    <span class="Pa">.dotfiles/hooks/pre-up/*</span> and
+    <span class="Pa">.dotfiles/hooks/post-up/*</span>. These files must be
+    executable. They are run every time <code class="Nm">rcup</code> is run, and
+    therefore must be idempotent.</p>
+<p class="Pp">Hooks will be executed one at a time, sorted alphabetically. For
+    instance, <span class="Pa">hooks/pre-up/animals</span> will run before
+    <span class="Pa">hooks/pre-up/aquariums</span>, and
+    <span class="Pa">hooks/pre-up/4-eyes</span> will run before
+    <span class="Pa">hooks/post-up/2-u-nothing-compares</span>.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="ALGORITHM"><a class="permalink" href="#ALGORITHM">ALGORITHM</a></h1>
+It is instructive to understand the process <code class="Nm">rcup</code> uses
+  when synchronizing your rc files:
 <ol class="Bl-enum">
   <li>The pre-up hook is run.</li>
   <li>All non-host, non-tag files without a dot prefix are symlinked to the
       dotted filename in your home directory. So,
-      <span class="Pa" title="Pa">.dotfiles/tigrc</span> is symlinked to
-      <span class="Pa" title="Pa">~/.tigrc</span>.</li>
+      <span class="Pa">.dotfiles/tigrc</span> is symlinked to
+      <span class="Pa">~/.tigrc</span>.</li>
   <li>All non-host, non-tag directories have their structure copied to your home
       directory, then a non-dotted symlink is created within. So for example,
-      <span class="Pa" title="Pa">.dotfiles/vim/autoload/haskell.vim</span>
-      causes the <span class="Pa" title="Pa">~/.vim/autoload</span> directory to
-      be created, then <span class="Pa" title="Pa">haskell.vim</span> is
-      symlinked within.</li>
+      <span class="Pa">.dotfiles/vim/autoload/haskell.vim</span> causes the
+      <span class="Pa">~/.vim/autoload</span> directory to be created, then
+      <span class="Pa">haskell.vim</span> is symlinked within.</li>
   <li>Steps (2) and (3) are applied to host-specific files. These are files
       under a directory named
-      <span class="Pa" title="Pa">host-</span><var class="Va" title="Va">$HOSTNAME</var>.</li>
+      <span class="Pa">host-</span><var class="Va">$HOSTNAME</var>.</li>
   <li>Steps (2) and (3) are applied to tag-specific files. These are files under
       directories named
-      <span class="Pa" title="Pa">tag-</span><var class="Va" title="Va">$TAG_NAME</var>,
-      where <var class="Va" title="Va">$TAG_NAME</var> is the name of each
-      specified tag in turn, taken from the command line or from
-      <a class="Xr" title="Xr" href="rcrc.5.html">rcrc(5)</a>.</li>
+      <span class="Pa">tag-</span><var class="Va">$TAG_NAME</var>, where
+      <var class="Va">$TAG_NAME</var> is the name of each specified tag in turn,
+      taken from the command line or from
+      <a class="Xr" href="rcrc.5.html">rcrc(5)</a>.</li>
   <li>The post-up hook is run.</li>
 </ol>
-<h1 class="Sh" title="Sh" id="ENVIRONMENT"><a class="permalink" href="#ENVIRONMENT">ENVIRONMENT</a></h1>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="ENVIRONMENT"><a class="permalink" href="#ENVIRONMENT">ENVIRONMENT</a></h1>
 <dl class="Bl-tag">
-  <dt><a class="permalink" href="#RCRC"><code class="Ev" title="Ev" id="RCRC">RCRC</code></a></dt>
-  <dd>User configuration file. Defaults to
-      <span class="Pa" title="Pa">~/.rcrc</span>.</dd>
+  <dt><a class="permalink" href="#RCRC"><code class="Ev" id="RCRC">RCRC</code></a></dt>
+  <dd>User configuration file. Defaults to <span class="Pa">~/.rcrc</span>.</dd>
 </dl>
-<h1 class="Sh" title="Sh" id="FILES"><a class="permalink" href="#FILES">FILES</a></h1>
-<span class="Pa" title="Pa">~/.dotfiles</span>
-  <span class="Pa" title="Pa">~/.rcrc</span>
-<h1 class="Sh" title="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
+</section>
+<section class="Sh">
+<h1 class="Sh" id="FILES"><a class="permalink" href="#FILES">FILES</a></h1>
+<span class="Pa">~/.dotfiles</span> <span class="Pa">~/.rcrc</span>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
   ALSO</a></h1>
-<a class="Xr" title="Xr" href="lsrc.1.html">lsrc(1)</a>,
-  <a class="Xr" title="Xr" href="mkrc.1.html">mkrc(1)</a>,
-  <a class="Xr" title="Xr" href="rcdn.1.html">rcdn(1)</a>,
-  <a class="Xr" title="Xr" href="rcrc.5.html">rcrc(5)</a>,
-  <a class="Xr" title="Xr" href="rcm.7.html">rcm(7)</a>
-<h1 class="Sh" title="Sh" id="AUTHORS"><a class="permalink" href="#AUTHORS">AUTHORS</a></h1>
-<code class="Nm" title="Nm">rcup</code> is maintained by
-  <span class="An" title="An">Mike Burns</span>
-  &lt;<a class="Mt" title="Mt" href="mailto:mburns@thoughtbot.com">mburns@thoughtbot.com</a>&gt;
-  and <a class="Lk" title="Lk" href="http://thoughtbot.se">thoughtbot</a></div>
+<a class="Xr" href="lsrc.1.html">lsrc(1)</a>,
+  <a class="Xr" href="mkrc.1.html">mkrc(1)</a>,
+  <a class="Xr" href="rcdn.1.html">rcdn(1)</a>,
+  <a class="Xr" href="rcrc.5.html">rcrc(5)</a>,
+  <a class="Xr" href="rcm.7.html">rcm(7)</a>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="AUTHORS"><a class="permalink" href="#AUTHORS">AUTHORS</a></h1>
+<code class="Nm">rcup</code> is maintained by <span class="An">Mike Burns</span>
+  &lt;<a class="Mt" href="mailto:mburns@thoughtbot.com">mburns@thoughtbot.com</a>&gt;
+  and <a class="Lk" href="http://thoughtbot.se">thoughtbot</a>
+</section>
+</div>
 <table class="foot">
   <tr>
     <td class="foot-date">July 28, 2013</td>

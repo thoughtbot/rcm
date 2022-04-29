@@ -25,78 +25,95 @@
   </tr>
 </table>
 <div class="manual-text">
-<h1 class="Sh" title="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
-<code class="Nm" title="Nm">mkrc</code> &#x2014;
-<div class="Nd" title="Nd">bless files into a dotfile managed by rcm</div>
-<h1 class="Sh" title="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
+<section class="Sh">
+<h1 class="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
+<code class="Nm">mkrc</code> &#x2014;
+<div class="Nd">bless files into a dotfiles managed by rcm</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
 <table class="Nm">
   <tr>
-    <td><code class="Nm" title="Nm">mkrc</code></td>
-    <td>[<div class="Op"><code class="Fl" title="Fl">-ChoqSsVvUu</code></div>]
-      [<div class="Op"><code class="Fl" title="Fl">-t</code>
-      <var class="Ar" title="Ar">tag</var></div>]
-      [<div class="Op"><code class="Fl" title="Fl">-d</code>
-      <var class="Ar" title="Ar">dir</var></div>]
-      [<div class="Op"><code class="Fl" title="Fl">-B</code>
-      <var class="Ar" title="Ar">hostname</var></div>]
-      <var class="Ar" title="Ar">files ...</var></td>
+    <td><code class="Nm">mkrc</code></td>
+    <td>[<code class="Fl">-ChoqSsVvUukK</code>] [<code class="Fl">-t</code>
+      <var class="Ar">tag</var>] [<code class="Fl">-d</code>
+      <var class="Ar">dir</var>] [<code class="Fl">-B</code>
+      <var class="Ar">hostname</var>] <var class="Ar">files ...</var></td>
   </tr>
 </table>
-<h1 class="Sh" title="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
-This program adds files to your dotfiles directory then installs it back into
-  your home directory. It can install files under a tag or different source
-  directory. It supports these options:
+</section>
+<section class="Sh">
+<h1 class="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
+This program adds files to your dotfiles directory then update them back into
+  your home directory. It can install files under a tag or install them in a
+  different source directory. Remember to first create standard rc files, then
+  use <code class="Nm">mkrc</code> on them.
+<p class="Pp">It supports these options:</p>
 <dl class="Bl-tag">
-  <dt><a class="permalink" href="#B"><code class="Fl" title="Fl" id="B">-B</code></a>
-    <var class="Ar" title="Ar">HOSTNAME</var></dt>
+  <dt><a class="permalink" href="#B"><code class="Fl" id="B">-B</code></a>
+    <var class="Ar">HOSTNAME</var></dt>
   <dd>use the supplied hostname instead of computing one. Implies
-      <code class="Fl" title="Fl">-o</code>.</dd>
-  <dt><a class="permalink" href="#C"><code class="Fl" title="Fl" id="C">-C</code></a></dt>
+      <code class="Fl">-o</code>.</dd>
+  <dt><a class="permalink" href="#C"><code class="Fl" id="C">-C</code></a></dt>
   <dd>copy instead of symlinking when installing the rc file back into your home
-      directory</dd>
-  <dt><a class="permalink" href="#d"><code class="Fl" title="Fl" id="d">-d</code></a>
-    <var class="Ar" title="Ar">DIR</var></dt>
-  <dd>install dotfiles under the specified directory. This can be specified
-      multiple times.</dd>
-  <dt><a class="permalink" href="#h"><code class="Fl" title="Fl" id="h">-h</code></a></dt>
+      directory. This will prevent future updates in the dotfiles directory for
+      added element, and its contents if it is a directory.</dd>
+  <dt><a class="permalink" href="#d"><code class="Fl" id="d">-d</code></a>
+    <var class="Ar">DIR</var></dt>
+  <dd>install dotfiles under the specified directory. Use only once to override
+      DOTFILES_DIRS value from RCRC and the absolute default value.</dd>
+  <dt><a class="permalink" href="#h"><code class="Fl" id="h">-h</code></a></dt>
   <dd>show usage instructions.</dd>
-  <dt><a class="permalink" href="#o"><code class="Fl" title="Fl" id="o">-o</code></a></dt>
-  <dd>install dotfiles into the host-specific directory</dd>
-  <dt><a class="permalink" href="#q"><code class="Fl" title="Fl" id="q">-q</code></a></dt>
-  <dd>decrease verbosity</dd>
-  <dt><a class="permalink" href="#S"><code class="Fl" title="Fl" id="S">-S</code></a></dt>
+  <dt><a class="permalink" href="#o"><code class="Fl" id="o">-o</code></a></dt>
+  <dd>install dotfiles into the host-specific directory.</dd>
+  <dt><a class="permalink" href="#q"><code class="Fl" id="q">-q</code></a></dt>
+  <dd>decrease verbosity.</dd>
+  <dt><a class="permalink" href="#S"><code class="Fl" id="S">-S</code></a></dt>
   <dd>treat the specified rc files as files to be symlinked, even if they are
-      directories</dd>
-  <dt><a class="permalink" href="#s"><code class="Fl" title="Fl" id="s">-s</code></a></dt>
+      directories.</dd>
+  <dt><a class="permalink" href="#s"><code class="Fl" id="s">-s</code></a></dt>
   <dd>if the rc file is a file, symlink it; otherwise, make a directory
-      structure as described in
-      <a class="Xr" title="Xr" href="rcup.1.html">rcup(1)</a> in the section
-      <a class="Sx" title="Sx" href="#ALGORITHM">ALGORITHM</a>. This is the
+      structure as described in <a class="Xr" href="rcup.1.html">rcup(1)</a> in
+      the section <a class="Sx" href="#ALGORITHM">ALGORITHM</a>. This is the
       default.</dd>
-  <dt><a class="permalink" href="#t"><code class="Fl" title="Fl" id="t">-t</code></a>
-    <var class="Ar" title="Ar">TAG</var></dt>
+  <dt><a class="permalink" href="#t"><code class="Fl" id="t">-t</code></a>
+    <var class="Ar">TAG</var></dt>
   <dd>install dotfiles according to tag</dd>
-  <dt><a class="permalink" href="#U"><code class="Fl" title="Fl" id="U">-U</code></a></dt>
+  <dt><a class="permalink" href="#U"><code class="Fl" id="U">-U</code></a></dt>
   <dd>the specified files or directories are to be installed without a leading
       dot.</dd>
-  <dt><a class="permalink" href="#u"><code class="Fl" title="Fl" id="u">-u</code></a></dt>
+  <dt><a class="permalink" href="#u"><code class="Fl" id="u">-u</code></a></dt>
   <dd>the specified files or directories are to be installed with a leading dot.
       This is the default.</dd>
-  <dt><a class="permalink" href="#v"><code class="Fl" title="Fl" id="v">-v</code></a></dt>
+  <dt><a class="permalink" href="#v"><code class="Fl" id="v">-v</code></a></dt>
   <dd>increase verbosity. This can be repeated for extra verbosity.</dd>
-  <dt><a class="permalink" href="#V"><code class="Fl" title="Fl" id="V">-V</code></a></dt>
+  <dt><a class="permalink" href="#V"><code class="Fl" id="V">-V</code></a></dt>
   <dd>show the version number.</dd>
+  <dt><a class="permalink" href="#k"><code class="Fl" id="k">-k</code></a></dt>
+  <dd>pass -k to rcup when installing the made rc file. This option enables pre-
+      and post-hooks, which is the default, making this effectively a no-op. See
+      the <a class="Sx" href="#ALGORITHM">ALGORITHM</a> section in
+      <a class="Xr" href="rcup.1.html">rcup(1)</a>.</dd>
+  <dt><a class="permalink" href="#K"><code class="Fl" id="K">-K</code></a></dt>
+  <dd>pass -K to rcup when installing the made rc file. This option prevents
+      pre- and post-up hooks from running as part of creating the rc file. See
+      the <a class="Sx" href="#ALGORITHM">ALGORITHM</a> section in
+      <a class="Xr" href="rcup.1.html">rcup(1)</a>.</dd>
 </dl>
-<h1 class="Sh" title="Sh" id="ENVIRONMENT"><a class="permalink" href="#ENVIRONMENT">ENVIRONMENT</a></h1>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="ENVIRONMENT"><a class="permalink" href="#ENVIRONMENT">ENVIRONMENT</a></h1>
 <dl class="Bl-tag">
-  <dt><a class="permalink" href="#RCRC"><code class="Ev" title="Ev" id="RCRC">RCRC</code></a></dt>
-  <dd>User configuration file. Defaults to
-      <span class="Pa" title="Pa">~/.rcrc</span>.</dd>
+  <dt><a class="permalink" href="#RCRC"><code class="Ev" id="RCRC">RCRC</code></a></dt>
+  <dd>User configuration file. Defaults to <span class="Pa">~/.rcrc</span>.</dd>
 </dl>
-<h1 class="Sh" title="Sh" id="FILES"><a class="permalink" href="#FILES">FILES</a></h1>
-<span class="Pa" title="Pa">~/.dotfiles</span>
-  <span class="Pa" title="Pa">~/.rcrc</span>
-<h1 class="Sh" title="Sh" id="EXAMPLES"><a class="permalink" href="#EXAMPLES">EXAMPLES</a></h1>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="FILES"><a class="permalink" href="#FILES">FILES</a></h1>
+<span class="Pa">~/.dotfiles</span> <span class="Pa">~/.rcrc</span>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="EXAMPLES"><a class="permalink" href="#EXAMPLES">EXAMPLES</a></h1>
 <div class="Bd Bd-indent"><code class="Li">mkrc ~/.vimrc</code></div>
 <div class="Bd Bd-indent"><code class="Li">mkrc -t zsh -d company-dotfiles
   ~/.zshrc ~/.zlogin</code></div>
@@ -104,21 +121,26 @@ This program adds files to your dotfiles directory then installs it back into
 <div class="Bd Bd-indent"><code class="Li">mkrc -C .ssh</code></div>
 <div class="Bd Bd-indent"><code class="Li">mkrc -S .zpretzo</code></div>
 <div class="Bd Bd-indent"><code class="Li">mkrc -U bin</code></div>
-<h1 class="Sh" title="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
   ALSO</a></h1>
-<a class="Xr" title="Xr" href="lsrc.1.html">lsrc(1)</a>,
-  <a class="Xr" title="Xr" href="rcdn.1.html">rcdn(1)</a>,
-  <a class="Xr" title="Xr" href="rcup.1.html">rcup(1)</a>,
-  <a class="Xr" title="Xr" href="rcrc.5.html">rcrc(5)</a>,
-  <a class="Xr" title="Xr" href="rcm.7.html">rcm(7)</a>
-<h1 class="Sh" title="Sh" id="AUTHORS"><a class="permalink" href="#AUTHORS">AUTHORS</a></h1>
-<code class="Nm" title="Nm">mkrc</code> is maintained by
-  <span class="An" title="An">Mike Burns</span>
-  &lt;<a class="Mt" title="Mt" href="mailto:mburns@thoughtbot.com">mburns@thoughtbot.com</a>&gt;
-  and <a class="Lk" title="Lk" href="http://thoughtbot.se">thoughtbot</a></div>
+<a class="Xr" href="lsrc.1.html">lsrc(1)</a>,
+  <a class="Xr" href="rcdn.1.html">rcdn(1)</a>,
+  <a class="Xr" href="rcup.1.html">rcup(1)</a>,
+  <a class="Xr" href="rcrc.5.html">rcrc(5)</a>,
+  <a class="Xr" href="rcm.7.html">rcm(7)</a>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="AUTHORS"><a class="permalink" href="#AUTHORS">AUTHORS</a></h1>
+<code class="Nm">mkrc</code> is maintained by <span class="An">Mike Burns</span>
+  &lt;<a class="Mt" href="mailto:mburns@thoughtbot.com">mburns@thoughtbot.com</a>&gt;
+  and <a class="Lk" href="http://thoughtbot.se">thoughtbot</a>
+</section>
+</div>
 <table class="foot">
   <tr>
-    <td class="foot-date">July 28, 2013</td>
+    <td class="foot-date">April 13, 2020</td>
     <td class="foot-os">Debian</td>
   </tr>
 </table>
