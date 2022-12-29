@@ -296,6 +296,11 @@ handle_command_line "$@"
 : ${DOTFILES_DIRS:=$DOTFILES_DIRS $DEFAULT_DOTFILES_DIR}
 
 run_hooks pre up
+pre_up_ret=$?
+
+if [ "$pre_up_ret" -ne 0 ]; then
+  exit "$pre_up_ret"
+fi
 
 dests_and_srcs="$(eval "lsrc $LS_ARGS")"
 

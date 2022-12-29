@@ -110,6 +110,11 @@ handle_command_line "$@"
 : ${DOTFILES_DIRS:=$DOTFILES_DIRS $DEFAULT_DOTFILES_DIR}
 
 run_hooks pre down
+pre_dn_ret=$?
+
+if [ "$pre_dn_ret" -ne 0 ]; then
+  exit "$pre_dn_ret"
+fi
 
 dests_and_srcs="$(eval "lsrc $LS_ARGS")"
 

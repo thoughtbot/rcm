@@ -48,9 +48,11 @@ TESTS = \
 	test/rcup-symlink-existing.t \
 	test/rcup-usage.t \
 	test/rcdn-hooks.t \
+	test/rcdn-hooks-failure.t \
 	test/rcdn-hooks-run-in-situ.t \
 	test/rcdn-hooks-run-in-order.t \
 	test/rcup-hooks.t \
+	test/rcup-hooks-failure.t \
 	test/rcup-hooks-run-in-situ.t \
 	test/rcup-hooks-run-in-order.t \
 	test/rcup-spaces.t
