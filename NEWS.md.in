@@ -1,5 +1,12 @@
 rcm (@PACKAGE_VERSION@) unstable; urgency=low
 
+  * Feature: rcup/rcdn hooks can bail early (Patrick Brisbin)
+  * Documentation improvement (Teo Ljungberg)
+  
+ -- Mike Burns <mburns@thoughtbot.com>  Fri, 30 Dec 2022 11:43:00 -0500
+
+rcm (1.3.5) unstable; urgency=low
+
   * BUGFIX: *:*~ exclude paterns work again (Alexander Goldstein)
   * BUGFIX: messages for -C being a copy so can't update (Mat M).
   * BUGFIX: expect at least one existing dotfiles directory (Mat M).
@@ -9,7 +16,7 @@ rcm (@PACKAGE_VERSION@) unstable; urgency=low
   * Package and maintenance improvements (Alexander Goldstein, Eric Collins,
       Mat M, Darcy Parker).
   
- -- Mike Burns <mburns@thoughtbot.com>  Fri, 13 Jul 2018 14:12:00 -0500
+ -- Mike Burns <mburns@thoughtbot.com>  Fri, 22 Apr 2022 15:59:43 -0400
 
 rcm (1.3.4) unstable; urgency=low
 
@@ -18,7 +25,7 @@ rcm (1.3.4) unstable; urgency=low
   * BUGFIX: all symlinks in mkrc input are rejected (Mat M).
   * Packaging improvements (Stephen Groat, Martin Frost, Link Dupont)
   
- -- Mike Burns <mburns@thoughtbot.com>  Fri, 13 Jul 2018 14:12:00 -0500
+ -- Mike Burns <mburns@thoughtbot.com>  Fri, 28 Aug 2022 16:38:25 -0400
 
 rcm (1.3.3) unstable; urgency=low
 
@@ -37,7 +44,7 @@ rcm (1.3.2) unstable; urgency=low
 	    Matthew Horan, maxice8, Mike Burns, Rebecca Meritz, Scott Stevenson,
 	    Tyson Gach, Yota Toyama).
 
- -- Mike Burns <mburns@thoughtbot.com>  Fri, 06 Jul 2018 11:00:00 -0500
+ -- Mike Burns <mburns@thoughtbot.com>  Fri, 06 Jul 2018 11:00:00 -0400
 
 rcm (1.3.1) unstable; urgency=low
 
