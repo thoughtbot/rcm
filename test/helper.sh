@@ -3,6 +3,8 @@ for bin in lsrc mkrc rcup rcdn; do
 done
 
 export HOME="$PWD"
+export XDG_CONFIG_HOME="$PWD/.config"
+export XDG_DATA_HOME="$PWD/.local/share"
 export PATH="$TESTDIR/../bin:$PATH"
 export RCRC="$HOME/.rcrc"
 export RCM_LIB="$TESTDIR/../share"

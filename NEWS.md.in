@@ -1,6 +1,7 @@
 rcm (@PACKAGE_VERSION@) unstable; urgency=low
 
   * Feature: rcup/rcdn hooks can bail early (Patrick Brisbin)
+  * Feature: XDG-compliance ~/.config/rcm/rcrc and ~/local/share/rcm/dotfiles
   * Documentation improvement (Teo Ljungberg)
   
  -- Mike Burns <mburns@thoughtbot.com>  Fri, 30 Dec 2022 11:43:00 -0500
