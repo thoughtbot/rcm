@@ -6,7 +6,7 @@
 Trying to fool should result in no dir found error
 
   $ mkrc -d ".other-dotfiles .another-dotfiles" rcfile
-  No dotfiles directories found in .other-dotfiles .another-dotfiles /*/.dotfiles (glob)
+  No dotfiles directories found in .other-dotfiles .another-dotfiles /*/share/rcm/dotfiles (glob)
   [1]
 
 Giving 2 dotfiles dir should result in an error and exit EX_USAGE

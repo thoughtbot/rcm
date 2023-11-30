@@ -140,9 +140,12 @@ only remove the specified file(s)
 .Bl -tag -width ".Ev RCRC"
 .It Ev RCRC
 User configuration file. Defaults to
-.Pa ~/.rcrc .
+.Pa ${XDG_CONFIG_HOME}/rcm/rcrc .
 .El
 .Sh FILES
+.Pp
+.Pa ${XDG_CONFIG_HOME}/rcm/rcrc
+or
 .Pa ~/.rcrc
 .Sh EXAMPLES
 .Dl rcdn -v

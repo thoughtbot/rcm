@@ -247,10 +247,16 @@ The post-up hook is run.
 .Bl -tag -width ".Ev RCRC"
 .It Ev RCRC
 User configuration file. Defaults to
-.Pa ~/.rcrc .
+.Pa ${XDG_CONFIG_HOME}/rcm/rcrc .
 .El
 .Sh FILES
+.Pp
+.Pa ${XDG_DATA_HOME}/rcm/dotfiles
+or
 .Pa ~/.dotfiles
+.Pp
+.Pa ${XDG_CONFIG_HOME}/rcm/rcrc
+or
 .Pa ~/.rcrc
 .Sh SEE ALSO
 .Xr lsrc 1 ,
