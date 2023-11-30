@@ -55,7 +55,10 @@ TESTS = \
 	test/rcup-hooks-failure.t \
 	test/rcup-hooks-run-in-situ.t \
 	test/rcup-hooks-run-in-order.t \
-	test/rcup-spaces.t
+	test/rcup-spaces.t \
+	test/rcup-target.t \
+	test/rcup-target-subst.t \
+	test/rcrc-target.t
 
 dist_check_SCRIPTS = $(TESTS)
 dist_check_DATA = test/helper.sh
