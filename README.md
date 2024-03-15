@@ -132,7 +132,7 @@ License
 -------
 
 Copyright 2013 Mike Burns. BSD license.
-Copyright 2014-2015 thoughtbot. BSD license.
+Copyright 2014 thoughtbot. BSD license.
 
 <!-- START /templates/footer.md -->
 <!-- END /templates/footer.md -->
