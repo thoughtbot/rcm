@@ -139,6 +139,22 @@ option. For example:
 .Pp
 .Dl mkrc -U bin
 .
+.Ss COMMON PROBLEM: CHANGING THE TARGET LOCATION DEPENDENT ON THE VALUE OF AN ENVIRONMENT VARIABLE
+By default, the rcm suite will assume that all dotfiles are installed relative to
+.Pa $HOME .
+If instead, the dotfiles are to be installed to, say,
+.Pa $XDG_CONFIG_HOME ,
+there are two options:
+
+The default target can be redefined by using
+.Va TARGET
+location in the rcrc file, or by using the
+.Fl T
+flag.  References to environment variables can be specified in any of these,
+e.g.
+.Pp
+.Dl rcup -T $XDG_CONFIG_HOME
+.
 .Sh QUICK START FOR EMPTY DOTFILES DIRECTORIES
 This section is for those who do not have an existing dotfiles
 directory and whose dotfiles are standard.
@@ -249,6 +265,35 @@ macOS users should see the
 .Sx BUGS
 section for more details.
 .
+.Sh ALTERNATIVE TARGET INSTALL LOCATIONS
+.
+Sometimes it is useful to instruct rcm to install dotfiles to a location
+other than
+.Sx $HOME .
+
+The default target directory is taken to be the first specified by:
+.Bl -enum offset indent -compact
+.It
+command-line flag
+.Fl T ,
+for an invocation of rcup, rcdn, or lsrc.
+.It
+Variable
+.Va TARGET
+in the rcrc file. (see
+.Xr rcrc 5
+and the
+.Sx FILES
+section below)
+.It
+$HOME
+.El
+
+A target location can also be specified on a per dotfiles directory basis.
+This is achieved by placing meta-file
+.Pa target
+in the root, which contains a single line denoting the desired target directory.
+
 .Sh STANDALONE INSTALLATION SCRIPT
 .
 The
