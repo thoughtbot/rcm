@@ -189,4 +189,5 @@ append_variable() {
 
 if [ -r "$RCRC" ]; then
   . "$RCRC"
+  DEST_DIR="${TARGET:-$DEST_DIR}"
 fi

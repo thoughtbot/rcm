@@ -23,7 +23,7 @@ remove_link() {
 show_help() {
   local exit_code=${1:-0}
 
-  $PRINT "Usage: rcdn [-hqVv] [-B HOSTNAME] [-d DOT_DIR] [-I EXCL_PAT] [-S EXCL_PAT] [-s EXCL_PAT] [-t TAG] [-U EXCL_PAT] [-u EXCL_PAT] [-x EXCL_PAT]"
+  $PRINT "Usage: rcdn [-hqVv] [-B HOSTNAME] [-d DOT_DIR] [-I EXCL_PAT] [-S EXCL_PAT] [-s EXCL_PAT] [-T DIR] [-t TAG] [-U EXCL_PAT] [-u EXCL_PAT] [-x EXCL_PAT]"
   $PRINT "see rcdn(1) and rcm(7) for more details"
 
   exit $exit_code
@@ -44,13 +44,14 @@ handle_command_line() {
   local never_undotted=
   local hostname=
 
-  while getopts :VqvhIKk:x:S:s:U:u:t:d:B: opt; do
+  while getopts :VqvhIKk:x:S:s:U:u:t:d:B:T: opt; do
     case "$opt" in
       h) show_help ;;
       B) hostname="$OPTARG" ;;
       I) includes="$(append_variable "$includes" "$OPTARG")" ;;
       k) run_hooks=1 ;;
       K) run_hooks=0 ;;
+      T) DEST_DIR="$OPTARG" ;;
       t) arg_tags="$(append_variable "$arg_tags" "$OPTARG")" ;;
       S) symlink_dirs="$(append_variable "$symlink_dirs" "$OPTARG")" ;;
       s) never_symlink_dirs="$(append_variable "$never_symlink_dirs" "$OPTARG")" ;;
