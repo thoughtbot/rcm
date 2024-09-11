@@ -55,7 +55,12 @@ TESTS = \
 	test/rcup-hooks-failure.t \
 	test/rcup-hooks-run-in-situ.t \
 	test/rcup-hooks-run-in-order.t \
-	test/rcup-spaces.t
+	test/rcup-spaces.t \
+	test/xdg.t \
+	test/xdg-compatibilty-rcrc-symlink.t \
+	test/xdg-config-with-dotfiles.t \
+	test/xdg-error-both-config.t \
+	test/xdg-favor-rcm_dotfiles-over-tilde_dotfiles.t
 
 dist_check_SCRIPTS = $(TESTS)
 dist_check_DATA = test/helper.sh

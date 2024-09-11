@@ -8,10 +8,16 @@ PRINT=echo
 PROMPT=echo_n
 ERROR=echo_error
 VERBOSE=:
-DEFAULT_DOTFILES_DIR="$HOME/.dotfiles"
+DEFAULT_DOTFILES_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/rcm/dotfiles"
 MKDIR=mkdir
 INSTALL=rcup
 ROOT_DIR="$HOME"
+
+# Default is XDG-style
+if [ ! -d "$DEFAULT_DOTFILES_DIR" ] &&
+    [ -d "$HOME/.dotfiles" ]; then
+  DEFAULT_DOTFILES_DIR="$HOME/.dotfiles"
+fi
 
 if [ -z "$LOGNAME" ]; then
   LOGNAME=$(whoami)
@@ -101,6 +107,8 @@ handle_common_flags() {
     PRINT=:
     INSTALL="$INSTALL -q"
   fi
+
+  $DEBUG "Default dotfiles dir is $DEFAULT_DOTFILES_DIR"
 }
 
 determine_hostname() {
@@ -185,7 +193,33 @@ append_variable() {
   fi
 }
 
-: ${RCRC:=$HOME/.rcrc}
+if [ -z "$RCRC" ]; then
+
+  # Error to have 2 possible conflicting rcrc files
+
+  if [ -r  "$HOME/.rcrc" ] &&
+    [ -r  "${XDG_CONFIG_HOME:-${HOME}/.config}/rcm/rcrc" ] &&
+    [ -h "$HOME/.rcrc" ] &&
+    diff -q "$HOME/.rcrc" "${XDG_CONFIG_HOME:-${HOME}/.config}/rcm/rcrc" >/dev/null 2>&1; then
+
+    # Allow ~/.rcrc to be a link to ~/.config/rcm/rcrc for compatibility
+    RCRC="${XDG_CONFIG_HOME:-${HOME}/.config}/rcm/rcrc"
+
+  elif [ -r  "$HOME/.rcrc" ] &&
+    [ -r  "${XDG_CONFIG_HOME:-${HOME}/.config}/rcm/rcrc" ]; then
+
+    echo "Both $HOME/.rcrc and ${XDG_CONFIG_HOME:-${HOME}/.config}/rcm/rcrc exists. Please remove one to use rcm" >&2
+    exit 1
+  else
+
+    # To be more XDG-compliant favor ~/.config/rcm/rcrc and set it as `default`
+    RCRC="${XDG_CONFIG_HOME:-${HOME}/.config}/rcm/rcrc"
+    if [ -r "${HOME}/.rcrc" ]; then
+      RCRC="${HOME}/.rcrc"
+    fi
+  fi
+
+fi
 
 if [ -r "$RCRC" ]; then
   . "$RCRC"
