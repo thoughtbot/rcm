@@ -26,6 +26,29 @@ link_or_copy() {
   fi
 }
 
+display_file() {
+  local file="$1"
+  echo "$file" | sed -e "s|^$HOME|~|"
+}
+
+print_link_or_copy() {
+  local src="$1"
+  local dest="$2"
+  local sigil="$3"
+
+  local action
+  if [ "x$sigil" = "xX" ]; then
+    action=cp
+  else
+    action=ln
+  fi
+
+  src="$(display_file "$src")"
+  dest="$(display_file "$dest")"
+
+  $PRINT "$action $src $dest"
+}
+
 print_generated_preface() {
   cat <<PREFACE
 #!/bin/sh
@@ -107,6 +130,7 @@ link_file() {
 
   action="$(link_or_copy "$sigil")"
   $DEBUG "$action $src $dest"
+  print_link_or_copy "$src" "$dest" "$sigil"
   $action "$src" "$dest"
 }
 
