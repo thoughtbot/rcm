@@ -130,7 +130,7 @@ is_linked() {
   local dest="$2"
 
   if [ -h "$dest" ]; then
-    local link_dest=$(readlink $dest)
+    local link_dest=$(readlink "$dest")
     [ "$link_dest" = "$src" ]
   else
     return 1
