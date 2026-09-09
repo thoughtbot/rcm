@@ -20,10 +20,156 @@ remove_link() {
   fi
 }
 
+is_selected_file() {
+  local dest="$1"
+  local selected_file
+  local IFS='
+'
+  local rc_file="$(de_dot "$dest")"
+
+  if [ -z "$FILES" ]; then
+    return 0
+  fi
+
+  for selected_file in $FILES; do
+    if [ "x$selected_file" = "x$rc_file" ]; then
+      return 0
+    fi
+  done
+
+  return 1
+}
+
+is_managed_target() {
+  local target="$1"
+  local dotfiles_dir
+  local source_file
+  local tag
+  local selected_tag
+  local exclude_file_globs
+  local include_file_globs
+  local selection_path
+
+  case "$target" in
+    /*) ;;
+    *) return 1 ;;
+  esac
+
+  for dotfiles_dir in $RESOLVED_DOTFILES_DIRS; do
+    case "$target" in
+      "$dotfiles_dir"/*) ;;
+      *) continue ;;
+    esac
+
+    source_file="${target#"$dotfiles_dir"/}"
+    # Preserve ambiguous paths rather than treating them as managed sources.
+    case "$source_file" in
+      /*|*//*|.|./*|*/./*|*/.|..|../*|*/../*|*/..) continue ;;
+    esac
+    case "$source_file" in
+      host-"$HOSTNAME"/*) source_file="${source_file#*/}" ;;
+      host-*|hooks|hooks/*) continue ;;
+      tag-*)
+        selected_tag=0
+        for tag in $TAGS; do
+          case "$source_file" in
+            tag-"$tag"/*) selected_tag=1; break ;;
+          esac
+        done
+        [ "$selected_tag" -eq 1 ] || continue
+        source_file="${source_file#*/}"
+        ;;
+    esac
+
+    exclude_file_globs="$(dotfiles_dir_excludes "$dotfiles_dir" "$EXCLUDES")"
+    include_file_globs="$(dotfiles_dir_excludes "$dotfiles_dir" "$INCLUDES")"
+    # lsrc skips whole excluded directories before visiting their children.
+    while [ "x$source_file" != x. ]; do
+      case "$source_file" in
+        */*) selection_path="$source_file" ;;
+        *) selection_path="./$source_file" ;;
+      esac
+      if [ -n "$FILES" ]; then
+        selection_path="./$source_file"
+      fi
+      if (set -f; is_excluded "$selection_path" "$exclude_file_globs" "$include_file_globs"); then
+        break
+      fi
+      source_file="$(dirname "$source_file")"
+    done
+    [ "x$source_file" = x. ] && return 0
+  done
+
+  return 1
+}
+
+is_dotfiles_path() {
+  local file="$1"
+  local dotfiles_dir
+
+  for dotfiles_dir in $RESOLVED_DOTFILES_DIRS; do
+    if [ "x$file" = "x$dotfiles_dir" ]; then
+      return 0
+    fi
+
+    case "$file" in
+      "$dotfiles_dir"/*) return 0 ;;
+    esac
+  done
+
+  return 1
+}
+
+resolve_dotfiles_dirs() {
+  local relative_root_dir="$PWD"
+  local dotfiles_dir
+  local selected_dirs="${SELECTED_DOTFILES_DIRS:-$DOTFILES_DIRS}"
+
+  for dotfiles_dir in $selected_dirs; do
+    cd -- "$relative_root_dir"
+    dotfiles_dir="$(eval echo "$dotfiles_dir")"
+
+    if is_relative "$dotfiles_dir"; then
+      dotfiles_dir="$PWD/$dotfiles_dir"
+    fi
+
+    RESOLVED_DOTFILES_DIRS="$(append_variable "$RESOLVED_DOTFILES_DIRS" "$dotfiles_dir")"
+  done
+
+  cd -- "$relative_root_dir"
+}
+
+remove_dangling_links() {
+  local dangling_link
+  local target
+
+  resolve_dotfiles_dirs
+  $DEBUG "resolved dotfiles dirs: $RESOLVED_DOTFILES_DIRS"
+
+  find "$DEST_DIR" -type l ! -exec test -e {} \; -print |
+  while IFS= read -r dangling_link; do
+    target="$(readlink "$dangling_link")"
+
+    if is_dotfiles_path "$dangling_link"; then
+      continue
+    fi
+
+    if ! is_managed_target "$target"; then
+      continue
+    fi
+
+    if ! is_selected_file "$dangling_link"; then
+      continue
+    fi
+
+    remove_link "$dangling_link" "$dangling_link"
+  done
+}
+
 show_help() {
   local exit_code=${1:-0}
 
-  $PRINT "Usage: rcdn [-hqVv] [-B HOSTNAME] [-d DOT_DIR] [-I EXCL_PAT] [-S EXCL_PAT] [-s EXCL_PAT] [-t TAG] [-U EXCL_PAT] [-u EXCL_PAT] [-x EXCL_PAT]"
+  $PRINT "Usage: rcdn [-DhqVv] [-B HOSTNAME] [-d DOT_DIR] [-I EXCL_PAT] [-S EXCL_PAT] [-s EXCL_PAT] [-t TAG] [-U EXCL_PAT] [-u EXCL_PAT] [-x EXCL_PAT]"
   $PRINT "see rcdn(1) and rcm(7) for more details"
 
   exit $exit_code
@@ -43,9 +189,11 @@ handle_command_line() {
   local undotted=
   local never_undotted=
   local hostname=
+  local remove_dangling=0
 
-  while getopts :VqvhIKk:x:S:s:U:u:t:d:B: opt; do
+  while getopts :DVqvhI:Kk:x:S:s:U:u:t:d:B: opt; do
     case "$opt" in
+      D) remove_dangling=1 ;;
       h) show_help ;;
       B) hostname="$OPTARG" ;;
       I) includes="$(append_variable "$includes" "$OPTARG")" ;;
@@ -73,6 +221,13 @@ handle_command_line() {
   dotfiles_dirs="${dotfiles_dirs:-$DOTFILES_DIRS}"
   files="$@"
   RUN_HOOKS="$run_hooks"
+  FILES="$(printf '%s\n' "$@")"
+  REMOVE_DANGLING=$remove_dangling
+  SELECTED_DOTFILES_DIRS="$dotfiles_dirs"
+  HOSTNAME="$hostname"
+  TAGS="$tags"
+  EXCLUDES="${excludes:-$EXCLUDES}"
+  INCLUDES="${includes:-$INCLUDES}"
 
   for tag in "$tags"; do
     LS_ARGS="$LS_ARGS -t \"$tag\""
@@ -105,9 +260,13 @@ handle_command_line() {
 }
 
 LS_ARGS=-F
+RESOLVED_DOTFILES_DIRS=
 
 handle_command_line "$@"
 : ${DOTFILES_DIRS:=$DOTFILES_DIRS $DEFAULT_DOTFILES_DIR}
+if [ -z "$SELECTED_DOTFILES_DIRS" ]; then
+  SELECTED_DOTFILES_DIRS="$DOTFILES_DIRS"
+fi
 
 run_hooks pre down
 pre_dn_ret=$?
@@ -132,4 +291,7 @@ for dest_and_src in $dests_and_srcs; do
 done
 
 IFS="$saved_ifs"
+if [ $REMOVE_DANGLING -eq 1 ]; then
+  remove_dangling_links
+fi
 run_hooks post down

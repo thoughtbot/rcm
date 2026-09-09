@@ -1,5 +1,7 @@
 rcm (@PACKAGE_VERSION@) unstable; urgency=low
 
+  * Feature: Remove dangling managed symlinks with `rcdn -D`, respecting
+    exclusions and tag/host selection (Alexander Goldstein).
   * Feature: rcup/rcdn hooks can bail early (Patrick Brisbin)
   * Documentation improvement (Teo Ljungberg)
   

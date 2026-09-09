@@ -6,7 +6,7 @@
 .Nd remove dotfiles as managed by rcm
 .Sh SYNOPSIS
 .Nm rcdn
-.Op Fl hKkqVv
+.Op Fl DhKkqVv
 .Op Fl B Ar hostname
 .Op Fl d Ar dir
 .Op Fl I Ar excl_pat
@@ -65,6 +65,14 @@ as the host-specific directory instead of computing it
 remove rc files from the
 .Ar DIR .
 This can be specified multiple times.
+.It Fl D
+remove dangling symlinks that are managed by
+.Xr rcm 7 .
+Managed dangling symlinks are symlinks in
+the destination directory
+whose targets are inside the selected dotfiles directories. When
+.Ar files
+are provided, only dangling symlinks matching those files are removed.
 .It Fl h
 show usage instructions.
 .It Fl I Ar EXCL_PAT

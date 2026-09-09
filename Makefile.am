@@ -51,6 +51,7 @@ TESTS = \
 	test/rcdn-hooks-failure.t \
 	test/rcdn-hooks-run-in-situ.t \
 	test/rcdn-hooks-run-in-order.t \
+	test/rcdn-dangling-symlinks.t \
 	test/rcup-hooks.t \
 	test/rcup-hooks-failure.t \
 	test/rcup-hooks-run-in-situ.t \
